@@ -6,6 +6,8 @@
 
 ---
 
+[English](README.md) | [中文说明](README.zh-CN.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform Support](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-orange.svg)](skill.json)
 [![Architecture](https://img.shields.io/badge/Architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-success.svg)](SKILL.md)
@@ -142,9 +144,14 @@ All visual parameters are concentrated in `:root` variables inside `workspace/re
 
 ---
 
-## 6. Multi-Platform CLI Commands
+## 6. Installation & Multi-Platform CLI Commands
 
 ```bash
+# 0. Clone repository
+git clone https://github.com/Max-Samson/knowme-careerforge-skill.git
+cd knowme-careerforge-skill
+npm install
+
 # 1. Install Skill for your favorite AI Agent
 npx ts-node cli/src/index.ts init --ai cursor
 npx ts-node cli/src/index.ts init --ai claude

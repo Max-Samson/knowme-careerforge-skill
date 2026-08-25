@@ -23,8 +23,16 @@
     "playwright-pdf",
     "ats-friendly"
   ],
-  "author": "KnowMe CareerForge Team",
+  "author": "Miles <https://github.com/Max-Samson>",
   "license": "MIT",
+  "homepage": "https://github.com/Max-Samson/knowme-careerforge-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Max-Samson/knowme-careerforge-skill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Max-Samson/knowme-careerforge-skill/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^22.0.0",

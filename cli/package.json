@@ -18,8 +18,14 @@
     "cursor",
     "codex"
   ],
-  "author": "KnowMe CareerForge Team",
+  "author": "Max Samson <https://github.com/Max-Samson>",
   "license": "MIT",
+  "homepage": "https://github.com/Max-Samson/knowme-careerforge-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Max-Samson/knowme-careerforge-skill.git",
+    "directory": "cli"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^22.0.0",

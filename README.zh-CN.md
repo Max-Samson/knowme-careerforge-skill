@@ -8,6 +8,8 @@
 
 ---
 
+[中文说明](README.zh-CN.md) | [English Documentation](README.md)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Platform Support](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-orange.svg)](skill.json)
 [![Architecture](https://img.shields.io/badge/Architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-success.svg)](SKILL.md)
@@ -142,11 +144,14 @@ sequenceDiagram
 | `--resume-color-accent` | `#2563eb` | 自定义 Hex 色值 | 自定义 Hex 色值 | 主题强调色 (科技蓝/松石绿/经典深蓝) |
 | `--resume-sidebar-width` | `32%` | `30%` | `35%` | 侧边栏占比 (双栏/高管模板有效) |
 
----
-
-## 6. 多平台 CLI 与工具链命令总览
+## 6. 安装与多平台 CLI 命令总览
 
 ```bash
+# 0. 克隆项目仓库
+git clone https://github.com/Max-Samson/knowme-careerforge-skill.git
+cd knowme-careerforge-skill
+npm install
+
 # 1. 为主流 AI Agent 平台一键初始化配置
 npx ts-node cli/src/index.ts init --ai cursor
 npx ts-node cli/src/index.ts init --ai claude
