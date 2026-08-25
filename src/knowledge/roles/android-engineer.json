@@ -1,0 +1,45 @@
+{
+  "id": "android-engineer",
+  "name": "Android 客户端开发工程师 / 资深移动专家",
+  "category": "engineering-ai",
+  "seniorityLevels": ["junior", "mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "Kotlin / Java 核心原理与协程 (Coroutines/Flow)",
+    "Android Jetpack 套件 (Compose, ViewModel, Room, Navigation)",
+    "Android 系统架构 (Handler, Binder IPC, Activity 生命周期)",
+    "性能与内存优化 (Memory Leak, MAT, Systrace, ANR 治理)",
+    "网络与缓存架构 (Retrofit, OkHttp, MMKV, Room)",
+    "架构设计模式 (MVVM, MVI, 组件化/插件化)"
+  ],
+  "niceToHaveSkills": [
+    "NDK / JNI C++ 底层音视频或图像处理",
+    "Flutter / React Native 跨端开发",
+    "Gradle 编译提速与自定义 Plugin 研发",
+    "热修复与动态化技术方案",
+    "自动化测试与 CI/CD 交付流水线"
+  ],
+  "evidenceSignals": [
+    "主导千万级用户 App 核心业务线研发与架构演进",
+    "系统性治理 ANR 与 Crash，核心页面卡顿率下降 70%",
+    "APK 瘦身 (通过资源混淆、动态下发缩减包体积 45%)",
+    "主导构建全链路日志埋点与 APM 线上性能监控体系",
+    "基于 Jetpack Compose 实现全新设计语言与复杂动效"
+  ],
+  "sectionPriority": [
+    "skills",
+    "projects",
+    "experience",
+    "education"
+  ],
+  "keywords": [
+    "Kotlin",
+    "Android Jetpack",
+    "Jetpack Compose",
+    "Coroutines",
+    "Performance Optimization",
+    "ANR Governance",
+    "Retrofit",
+    "Componentization",
+    "NDK"
+  ]
+}

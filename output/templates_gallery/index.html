@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowMe CareerForge — 核心基准模板画廊</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --accent: #38bdf8;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 32px 20px;
+    }
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    h1 { font-size: 26px; color: var(--accent); margin-bottom: 8px; font-weight: 800; }
+    p.subtitle { color: var(--muted); font-size: 14px; max-width: 680px; margin: 0 auto; line-height: 1.5; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 12px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .meta-item strong {
+      color: var(--text);
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      background: #334155;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+    .frame-wrapper {
+      width: 100%;
+      height: 480px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+      position: relative;
+    }
+    iframe {
+      width: 210mm;
+      height: 297mm;
+      border: none;
+      transform: scale(0.48);
+      transform-origin: top left;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .btn {
+      display: inline-block;
+      text-align: center;
+      background: var(--accent);
+      color: #0f172a;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>KnowMe CareerForge — 核心基准模板画廊</h1>
+      <p class="subtitle">面向 AI Agent 的确定性 HTML 简历设计工作场。所有模板均遵循 A4 绝对印刷几何与 CSS Design Tokens 规范。</p>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Table Structured Modern</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">ID: <code>classic</code></div>
+          </div>
+          <span class="badge">table-structured</span>
+        </div>
+        <div class="meta-list">
+          <div class="meta-item"><strong>类别：</strong>engineering-ai | <strong>页数：</strong>1 页 | <strong>密度：</strong>high</div>
+          <div class="meta-item"><strong>支持岗位：</strong></div>
+          <div class="tags"><span class="tag">frontend</span><span class="tag">backend</span><span class="tag">fullstack</span><span class="tag">hardware</span><span class="tag">civil-servant</span></div>
+        </div>
+        <div class="frame-wrapper">
+          <iframe src="classic.html"></iframe>
+        </div>
+        <a href="classic.html" target="_blank" class="btn">打开独立预览 (A4 全尺寸)</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Executive Modern Split</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">ID: <code>executive</code></div>
+          </div>
+          <span class="badge">two-column-split</span>
+        </div>
+        <div class="meta-list">
+          <div class="meta-item"><strong>类别：</strong>management-product | <strong>页数：</strong>1 页 | <strong>密度：</strong>balanced</div>
+          <div class="meta-item"><strong>支持岗位：</strong></div>
+          <div class="tags"><span class="tag">architect</span><span class="tag">tech-director</span><span class="tag">product-manager</span><span class="tag">engineering-lead</span><span class="tag">cto</span></div>
+        </div>
+        <div class="frame-wrapper">
+          <iframe src="executive.html"></iframe>
+        </div>
+        <a href="executive.html" target="_blank" class="btn">打开独立预览 (A4 全尺寸)</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Minimal Tech</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">ID: <code>minimal</code></div>
+          </div>
+          <span class="badge">single-column-minimal</span>
+        </div>
+        <div class="meta-list">
+          <div class="meta-item"><strong>类别：</strong>engineering-ai | <strong>页数：</strong>1 页 | <strong>密度：</strong>high</div>
+          <div class="meta-item"><strong>支持岗位：</strong></div>
+          <div class="tags"><span class="tag">frontend</span><span class="tag">backend</span><span class="tag">java-backend</span><span class="tag">node-fullstack</span><span class="tag">ai-agent-engineer</span></div>
+        </div>
+        <div class="frame-wrapper">
+          <iframe src="minimal.html"></iframe>
+        </div>
+        <a href="minimal.html" target="_blank" class="btn">打开独立预览 (A4 全尺寸)</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Modern Split Sidebar</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 2px;">ID: <code>modern</code></div>
+          </div>
+          <span class="badge">two-column-split</span>
+        </div>
+        <div class="meta-list">
+          <div class="meta-item"><strong>类别：</strong>engineering-ai | <strong>页数：</strong>1 页 | <strong>密度：</strong>balanced</div>
+          <div class="meta-item"><strong>支持岗位：</strong></div>
+          <div class="tags"><span class="tag">frontend</span><span class="tag">backend</span><span class="tag">fullstack</span><span class="tag">node-fullstack</span><span class="tag">ai-agent-engineer</span></div>
+        </div>
+        <div class="frame-wrapper">
+          <iframe src="modern.html"></iframe>
+        </div>
+        <a href="modern.html" target="_blank" class="btn">打开独立预览 (A4 全尺寸)</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

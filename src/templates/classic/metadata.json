@@ -1,0 +1,34 @@
+{
+  "id": "classic",
+  "name": "Table Structured Modern",
+  "version": "1.0.0",
+  "style": "table-structured",
+  "roleCategory": "engineering-ai",
+  "layout": {
+    "type": "table-grid",
+    "targetPages": 1,
+    "maxPages": 1,
+    "density": "high"
+  },
+  "visualStyle": {
+    "tone": "structured-formal",
+    "accentColor": "#1d4ed8",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "frontend",
+    "backend",
+    "fullstack",
+    "hardware",
+    "civil-servant",
+    "corporate"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-cell-padding",
+    "--resume-color-accent",
+    "--resume-color-label-bg"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "ai-agent-engineer",
+  "name": "AI Agent / LLM 算法与应用工程师",
+  "category": "engineering-ai",
+  "seniorityLevels": ["mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "Python",
+    "LLM Orchestration",
+    "RAG 架构与向量检索",
+    "Function / Tool Calling",
+    "FastAPI / Asyncio",
+    "VectorDB (Qdrant / Milvus / Pinecone)"
+  ],
+  "niceToHaveSkills": [
+    "LangGraph / LangChain",
+    "LlamaIndex",
+    "Prompt Optimization / DSPy",
+    "模型微调与评测 (Eval)",
+    "Docker / K8s / 云原生",
+    "TypeScript / Node.js"
+  ],
+  "evidenceSignals": [
+    "多 Agent 协同工作流编排",
+    "检索增强生成 RAG 管道优化",
+    "Prompt 动态剪枝与 Token 降本",
+    "长上下文窗口治理与防幻觉",
+    "企业级智能知识库落地",
+    "高并发模型网关与流式响应"
+  ],
+  "sectionPriority": [
+    "skills",
+    "projects",
+    "experience",
+    "education"
+  ],
+  "keywords": [
+    "Python",
+    "LLM Orchestration",
+    "RAG",
+    "LangGraph",
+    "LangChain",
+    "Tool Calling",
+    "FastAPI",
+    "VectorDB",
+    "Qdrant",
+    "Milvus",
+    "Prompt Engineering",
+    "Embedding",
+    "Model Evaluation",
+    "Docker"
+  ]
+}

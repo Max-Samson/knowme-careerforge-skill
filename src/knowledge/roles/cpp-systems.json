@@ -1,0 +1,47 @@
+{
+  "id": "cpp-systems",
+  "name": "C/C++ 底层与系统研发工程师",
+  "category": "engineering-ai",
+  "seniorityLevels": ["mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "C/C++ (C++11/14/17/20 现代特性)",
+    "Linux 系统编程与内核机制 (epoll, 内存管理)",
+    "多线程并发编程与锁优化 (无锁队列, CAS)",
+    "网络通信与高性能服务架构 (TCP/UDP, RDMA)",
+    "性能剖析与调优 (Perf, Valgrind, GDB, eBPF)",
+    "数据结构与算法深度功底"
+  ],
+  "niceToHaveSkills": [
+    "GPU / CUDA 异构计算与并行加速",
+    "存储引擎 (LSM-Tree, B+Tree, RocksDB 源码)",
+    "嵌入式开发与音视频编解码 (FFmpeg, WebRTC)",
+    "量化高频交易低延迟架构 (微秒级优化)",
+    "开源项目源码深度定制与贡献",
+    "Rust 语言系统级开发"
+  ],
+  "evidenceSignals": [
+    "核心网络中间件吞吐量调优 (突破百万 QPS)",
+    "内存泄漏、死锁与段错误 (Core Dump) 根因定位与攻坚",
+    "基于 SIMD / CUDA 的核心算法加速 10x+",
+    "自研高性能 RPC 框架或底层存储引擎",
+    "跨平台 SDK 架构设计与性能压榨"
+  ],
+  "sectionPriority": [
+    "skills",
+    "experience",
+    "projects",
+    "education"
+  ],
+  "keywords": [
+    "C++",
+    "Linux Systems",
+    "High Performance",
+    "Multi-threading",
+    "Networking",
+    "CUDA",
+    "Low Latency",
+    "Perf",
+    "GDB",
+    "Memory Optimization"
+  ]
+}

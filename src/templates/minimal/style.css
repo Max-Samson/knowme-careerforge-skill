@@ -1,0 +1,219 @@
+:root {
+  /* 页面绝对 A4 尺寸 */
+  --resume-page-width: 210mm;
+  --resume-page-min-height: 297mm;
+  --resume-page-padding: 14mm 16mm;
+
+  /* 现代科技色系 */
+  --resume-color-primary: #0f172a;       /* Slate 900 */
+  --resume-color-secondary: #334155;     /* Slate 700 */
+  --resume-color-muted: #64748b;         /* Slate 500 */
+  --resume-color-accent: #2563eb;        /* Tech Blue 600 */
+  --resume-color-accent-bg: #eff6ff;     /* Blue 50 */
+  --resume-color-border: #e2e8f0;        /* Slate 200 */
+  --resume-color-tag-bg: #f1f5f9;        /* Slate 100 */
+
+  /* 字阶系统 */
+  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --resume-font-size-name: 20pt;
+  --resume-font-size-target: 10.5pt;
+  --resume-font-size-h2: 12pt;
+  --resume-font-size-body: 9.2pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.45;
+
+  /* 间距 Tokens (Agent 自愈关键参数) */
+  --resume-space-header-bottom: 11pt;
+  --resume-space-section: 11pt;
+  --resume-space-item: 7.5pt;
+  --resume-space-bullet: 2.5pt;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #f1f5f9;
+  font-family: var(--resume-font-body);
+  color: var(--resume-color-primary);
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.resume-page {
+  width: var(--resume-page-width);
+  min-height: var(--resume-page-min-height);
+  background: #ffffff;
+  padding: var(--resume-page-padding);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Header 模块 */
+.resume-header {
+  border-bottom: 1.5px solid var(--resume-color-accent);
+  padding-bottom: var(--resume-space-header-bottom);
+  margin-bottom: var(--resume-space-section);
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6pt;
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  letter-spacing: 1px;
+}
+
+.job-target {
+  font-size: var(--resume-font-size-target);
+  font-weight: 600;
+  color: var(--resume-color-accent);
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6pt 16pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3pt;
+}
+
+/* Section 结构 */
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  display: flex;
+  align-items: center;
+  margin-bottom: 6pt;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--resume-color-border);
+  margin-left: 8pt;
+}
+
+/* 技能行 */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5pt;
+  font-size: var(--resume-font-size-body);
+}
+
+.skill-row {
+  line-height: var(--resume-line-height-body);
+}
+
+.skill-category {
+  font-weight: 600;
+  color: var(--resume-color-primary);
+}
+
+.skill-items {
+  color: var(--resume-color-secondary);
+}
+
+/* 经历条目 (Experience & Projects) */
+.experience-item, .project-item, .education-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2.5pt;
+}
+
+.item-title-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8pt;
+}
+
+.org-name, .project-name {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.role-badge {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--resume-color-accent);
+}
+
+.tech-tags {
+  font-size: 8pt;
+  color: var(--resume-color-muted);
+  background: var(--resume-color-tag-bg);
+  padding: 1.5pt 5pt;
+  border-radius: 3pt;
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bullet 清单 */
+.bullet-list {
+  margin-left: 14pt;
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+}
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.bullet-list strong {
+  color: var(--resume-color-primary);
+  font-weight: 600;
+}
+
+.edu-detail {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+}
+
+@media print {
+  body { background: transparent; padding: 0; }
+  .resume-page {
+    box-shadow: none;
+    margin: 0;
+    width: var(--resume-page-width);
+    min-height: var(--resume-page-min-height);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}

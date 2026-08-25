@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "atsStandards": {
+    "standardSectionHeadings": {
+      "experience": ["工作经历", "工作经验", "Work Experience", "Professional Experience", "Experience", "重大经历与管理落地"],
+      "projects": ["项目经历", "核心项目", "Projects", "Key Projects", "Selected Projects", "开源项目"],
+      "skills": ["专业技能", "核心技能", "Technical Skills", "Skills", "技术栈体系", "核心能力"],
+      "education": ["教育背景", "教育经历", "Education", "Academic Background"],
+      "summary": ["个人优势", "核心概述", "Summary", "Professional Summary", "核心领导力"],
+      "certificates": ["资质与证书", "荣誉奖励", "Certifications", "Honors & Awards"]
+    },
+    "forbiddenPatterns": [
+      "图片化文字 (Text baked into images)",
+      "不可选中的 Canvas 文字",
+      "CSS opacity: 0 或 display: none 恶意隐藏关键词",
+      "非标准 Unicode 乱码字符",
+      "嵌套层级过深的非语义 div 汤"
+    ],
+    "requiredContactFields": [
+      { "field": "name", "selector": ".candidate-name, h1", "required": true },
+      { "field": "phone", "pattern": "^(?:(?:\\+|00)86)?1[3-9]\\d{9}$", "required": true },
+      { "field": "email", "pattern": "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", "required": true }
+    ],
+    "pageDensityThresholds": {
+      "singlePage": {
+        "minVisibleChars": 400,
+        "maxVisibleChars": 1600,
+        "optimalRange": [800, 1300]
+      },
+      "twoPages": {
+        "minVisibleChars": 1200,
+        "maxVisibleChars": 3200,
+        "optimalRange": [1800, 2600]
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "styles": [
+    {
+      "id": "geek-minimal",
+      "name": "极客极简科技风 (Geek Minimal Tech)",
+      "accentColor": "#2563eb",
+      "palette": {
+        "--resume-color-primary": "#0f172a",
+        "--resume-color-secondary": "#334155",
+        "--resume-color-muted": "#64748b",
+        "--resume-color-accent": "#2563eb",
+        "--resume-color-accent-bg": "#eff6ff",
+        "--resume-color-border": "#e2e8f0",
+        "--resume-color-tag-bg": "#f1f5f9"
+      },
+      "tone": "minimal-tech",
+      "targetAudiences": ["互联网大厂", "AI 创业公司", "硅谷科技企业", "开源极客团队"]
+    },
+    {
+      "id": "modern-deep-navy",
+      "name": "现代深海蓝全栈风 (Modern Deep Navy)",
+      "accentColor": "#254665",
+      "palette": {
+        "--resume-color-sidebar-bg": "#254665",
+        "--resume-color-sidebar-text": "#f8fafc",
+        "--resume-color-sidebar-muted": "#94a3b8",
+        "--resume-color-sidebar-accent": "#38bdf8",
+        "--resume-color-primary": "#0f172a",
+        "--resume-color-secondary": "#334155",
+        "--resume-color-muted": "#64748b",
+        "--resume-color-accent": "#254665",
+        "--resume-color-border": "#e2e8f0"
+      },
+      "tone": "modern-split",
+      "targetAudiences": ["跨国研发团队", "海外远程求职", "AI 算法团队", "全栈研发岗位"]
+    },
+    {
+      "id": "executive-formal",
+      "name": "沉稳高管松石绿 (Executive Teal Slate)",
+      "accentColor": "#0f766e",
+      "palette": {
+        "--resume-color-banner-bg": "#1e293b",
+        "--resume-color-banner-text": "#f8fafc",
+        "--resume-color-banner-muted": "#94a3b8",
+        "--resume-color-primary": "#0f172a",
+        "--resume-color-secondary": "#334155",
+        "--resume-color-muted": "#64748b",
+        "--resume-color-accent": "#0f766e",
+        "--resume-color-tag-bg": "#f0fdfa",
+        "--resume-color-border": "#e2e8f0"
+      },
+      "tone": "executive-formal",
+      "targetAudiences": ["技术总监 / CTO", "首席架构师", "AI 创新业务负责人", "中高层技术管理"]
+    },
+    {
+      "id": "structured-formal",
+      "name": "严谨商务国企蓝 (Structured Classic Corporate)",
+      "accentColor": "#1d4ed8",
+      "palette": {
+        "--resume-color-primary": "#0f172a",
+        "--resume-color-secondary": "#334155",
+        "--resume-color-muted": "#64748b",
+        "--resume-color-accent": "#1d4ed8",
+        "--resume-color-border": "#cbd5e1",
+        "--resume-color-header-bg": "#f8fafc",
+        "--resume-color-label-bg": "#f1f5f9"
+      },
+      "tone": "structured-formal",
+      "targetAudiences": ["国有企业", "金融机构 / 银行科技", "军工科研院所", "政府事业单位"]
+    }
+  ]
+}

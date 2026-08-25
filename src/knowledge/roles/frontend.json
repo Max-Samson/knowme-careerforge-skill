@@ -1,0 +1,49 @@
+{
+  "id": "frontend",
+  "name": "Web 前端开发工程师 / 前端架构师",
+  "category": "engineering-ai",
+  "seniorityLevels": ["junior", "mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "JavaScript / TypeScript",
+    "React / Vue 3",
+    "HTML5 / CSS3 / Modern Layout",
+    "前端工程化 (Vite / Webpack / Turbopack)",
+    "性能优化 (FCP, LCP, INP, 内存治理)",
+    "状态管理 (Zustand / Redux / Pinia)"
+  ],
+  "niceToHaveSkills": [
+    "Next.js / SSR / SSG",
+    "Node.js 全栈能力",
+    "WebAssembly / Canvas / WebGL",
+    "微前端架构 (Module Federation / qiankun)",
+    "CI/CD 与前端自动化测试 (Jest / Playwright)",
+    "跨端开发 (Electron / React Native / Taro)"
+  ],
+  "evidenceSignals": [
+    "企业级通用组件库设计与维护",
+    "大型 SPA 首屏渲染性能优化 (LCP 提升 50%+)",
+    "前端监控埋点与错误异常捕获体系",
+    "复杂可视化看板与图表交互",
+    "低代码平台或可视化拖拽系统研发"
+  ],
+  "sectionPriority": [
+    "skills",
+    "experience",
+    "projects",
+    "education"
+  ],
+  "keywords": [
+    "TypeScript",
+    "React",
+    "Vue3",
+    "Next.js",
+    "Vite",
+    "Webpack",
+    "Performance Optimization",
+    "CSS3",
+    "Zustand",
+    "TailwindCSS",
+    "Micro Frontend",
+    "CI/CD"
+  ]
+}

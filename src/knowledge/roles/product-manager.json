@@ -1,0 +1,48 @@
+{
+  "id": "product-manager",
+  "name": "AI 产品经理 / 资深产品专家",
+  "category": "management-product",
+  "seniorityLevels": ["mid", "senior", "lead", "director"],
+  "mustHaveSkills": [
+    "产品全生命周期管理 (0-1 孵化与 1-N 商业化)",
+    "用户需求洞察与敏捷 PRD / 交互原型设计",
+    "数据驱动增长与指标分析 (A/B Test, Funnel, Retention)",
+    "跨部门协同 (研发/设计/运营/销售/高管)",
+    "大模型应用场景探索 (Prompt, Agent, 知识库产品化)",
+    "商业化变现与竞品分析"
+  ],
+  "niceToHaveSkills": [
+    "技术背景 / 懂 API 契约与技术架构边界",
+    "AI Agent 产品工作流设计经验",
+    "B 端 SaaS 计费模式与权限系统设计",
+    "用户增长裂变与 PLG (Product-Led Growth)",
+    "敏捷团队 Scrum Master 实践",
+    "SQL 数据提取与高级数据分析"
+  ],
+  "evidenceSignals": [
+    "主导核心产品从 0 到 1 上线并达成百万级用户或千万营收",
+    "设计 AI 赋能工作流，使客户工单处理效率提升 60%+",
+    "通过 A/B 测试将关键转化漏斗转化率提升 25%+",
+    "跨部门推动重大产品版本按期高质量交付",
+    "输出高质量行业研究报告与产品商业计划书 (BP)"
+  ],
+  "sectionPriority": [
+    "summary",
+    "experience",
+    "projects",
+    "skills",
+    "education"
+  ],
+  "keywords": [
+    "Product Management",
+    "AI Product",
+    "User Research",
+    "Data Driven",
+    "A/B Testing",
+    "PRD",
+    "Agile",
+    "PLG",
+    "Monetization",
+    "Cross-functional Leadership"
+  ]
+}

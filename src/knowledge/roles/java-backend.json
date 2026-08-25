@@ -1,0 +1,49 @@
+{
+  "id": "java-backend",
+  "name": "Java 后端开发工程师 / 资深研发专家",
+  "category": "engineering-ai",
+  "seniorityLevels": ["mid", "senior", "lead", "architect"],
+  "mustHaveSkills": [
+    "Java / JVM 核心原理与性能调优",
+    "Spring Boot / Spring Cloud",
+    "MySQL 索引优化与分库分表",
+    "Redis 缓存设计与高可用",
+    "分布式系统与微服务架构",
+    "消息中间件 (Kafka / RocketMQ)"
+  ],
+  "niceToHaveSkills": [
+    "云原生 (Docker / Kubernetes / Istio)",
+    "分布式事务 (Seata) 与一致性协议 (Raft)",
+    "Elasticsearch 全文检索",
+    "高并发与高可用容灾演练",
+    "DDD 领域驱动设计",
+    "Go / Python 多语言经验"
+  ],
+  "evidenceSignals": [
+    "万级 QPS 高并发接口调优与限流降级",
+    "核心业务中台与微服务拆分重构",
+    "分库分表与海量数据冷热归档方案落地",
+    "消息堆积、分布式死锁与缓存穿透/雪崩治理",
+    "CI/CD 流水线与自动化测试覆盖率提升"
+  ],
+  "sectionPriority": [
+    "skills",
+    "experience",
+    "projects",
+    "education"
+  ],
+  "keywords": [
+    "Java",
+    "Spring Boot",
+    "Spring Cloud",
+    "MySQL",
+    "Redis",
+    "Kafka",
+    "Microservices",
+    "High Concurrency",
+    "JVM Tuning",
+    "Kubernetes",
+    "Elasticsearch",
+    "Distributed Systems"
+  ]
+}

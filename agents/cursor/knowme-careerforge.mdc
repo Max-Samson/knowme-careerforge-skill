@@ -1,0 +1,12 @@
+---
+description: KnowMe CareerForge — Agent-native career positioning and resume engineering
+globs: ["workspace/*", "src/**/*"]
+---
+
+# KnowMe CareerForge MDC Rules
+
+1. Enforce Evidence-First discipline: Never hallucinate ungrounded claims (L1~L3 only).
+2. Edit exclusively in `workspace/resume.html` intermediate working canvas.
+3. Use `python3 scripts/search-template.py` to pick the optimal template.
+4. Use `python3 scripts/instantiate-resume.py` to generate the self-contained canvas.
+5. Validate using `python3 scripts/validate-resume.py` before rendering PDF.

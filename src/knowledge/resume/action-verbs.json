@@ -1,0 +1,20 @@
+{
+  "categories": {
+    "leadership": [
+      "主导", "统筹", "规划", "搭建", "驱动", "赋能", "重构", "制定",
+      "Spearheaded", "Led", "Architected", "Orchestrated", "Formulated", "Pioneered"
+    ],
+    "engineering_architecture": [
+      "设计", "研发", "实现", "解耦", "落地", "攻坚", "重构", "迁移",
+      "Designed", "Engineered", "Implemented", "Refactored", "Decoupled", "Migrated"
+    ],
+    "optimization_performance": [
+      "优化", "缩减", "压榨", "降本", "提速", "消除", "治理", "排查",
+      "Optimized", "Reduced", "Accelerated", "Mitigated", "Eliminated", "Benchmarked"
+    ],
+    "business_impact": [
+      "提升", "增长", "突破", "交付", "支撑", "达成",
+      "Delivered", "Accelerated", "Boosted", "Achieved", "Scaled", "Sustained"
+    ]
+  }
+}

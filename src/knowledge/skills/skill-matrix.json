@@ -1,0 +1,29 @@
+{
+  "categories": [
+    {
+      "id": "languages",
+      "name": "编程语言 (Programming Languages)",
+      "skills": ["Python", "TypeScript", "JavaScript", "Java", "Go", "C++", "Rust", "Swift", "Kotlin", "SQL", "HTML/CSS"]
+    },
+    {
+      "id": "ai-ml",
+      "name": "AI 与大模型 (AI & LLMs)",
+      "skills": ["LLM Orchestration", "RAG", "LangGraph", "LangChain", "LlamaIndex", "VectorDB", "Qdrant", "Milvus", "Pinecone", "Prompt Engineering", "Fine-tuning", "Evaluation"]
+    },
+    {
+      "id": "backend",
+      "name": "后端与分布式架构 (Backend & Distributed)",
+      "skills": ["Spring Boot", "FastAPI", "NestJS", "Express", "Node.js", "Microservices", "High Concurrency", "Kafka", "RocketMQ", "Redis", "MySQL", "PostgreSQL", "MongoDB"]
+    },
+    {
+      "id": "frontend",
+      "name": "前端与跨端 (Frontend & Cross-Platform)",
+      "skills": ["React", "Vue 3", "Next.js", "Vite", "Webpack", "TailwindCSS", "Zustand", "Redux", "Flutter", "SwiftUI", "Jetpack Compose", "Electron"]
+    },
+    {
+      "id": "infrastructure",
+      "name": "基础设施与云原生 (Infra & Cloud Native)",
+      "skills": ["Docker", "Kubernetes", "Linux", "CI/CD", "GitHub Actions", "Terraform", "Nginx", "Prometheus", "Grafana", "AWS", "Aliyun"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "enterprise-saas",
+  "name": "企业级软件与 SaaS (Enterprise SaaS & B2B)",
+  "domains": ["Cloud Native", "Multi-tenancy", "ERP / CRM", "DevOps & Observability", "Workflow Automation"],
+  "highFrequencyKeywords": [
+    "Multi-tenant Isolation",
+    "RBAC / ABAC Security",
+    "SLA 99.99%",
+    "High Availability",
+    "Disaster Recovery",
+    "Data Migration",
+    "Audit Logging",
+    "OpenAPI Integration"
+  ],
+  "hiringSignals": [
+    "复杂业务建模与领域驱动设计 (DDD)",
+    "系统高稳定与数据一致性保障",
+    "客户成功与业务需求快速交付",
+    "代码可维护性与规范化工程标准"
+  ]
+}

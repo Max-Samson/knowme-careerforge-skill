@@ -1,0 +1,38 @@
+{
+  "id": "modern",
+  "name": "Modern Split Sidebar",
+  "version": "1.0.0",
+  "style": "two-column-split",
+  "roleCategory": "engineering-ai",
+  "layout": {
+    "type": "two-column-sidebar",
+    "targetPages": 1,
+    "maxPages": 2,
+    "sidebarRatio": "32:68",
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "modern-deep-navy",
+    "sidebarBg": "#254665",
+    "accentColor": "#254665",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "frontend",
+    "backend",
+    "fullstack",
+    "node-fullstack",
+    "ai-agent-engineer",
+    "product-manager",
+    "architect"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-sidebar-width",
+    "--resume-color-sidebar-bg"
+  ]
+}

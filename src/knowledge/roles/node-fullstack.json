@@ -1,0 +1,49 @@
+{
+  "id": "node-fullstack",
+  "name": "Node.js 全栈开发工程师 / 后端专家",
+  "category": "engineering-ai",
+  "seniorityLevels": ["mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "Node.js / TypeScript",
+    "NestJS / Express / Fastify",
+    "React / Next.js / Vue",
+    "PostgreSQL / MySQL / Prisma / TypeORM",
+    "Redis / 缓存与会话管理",
+    "RESTful API / GraphQL 契约设计"
+  ],
+  "niceToHaveSkills": [
+    "Docker / K8s / 云原生部署",
+    "Serverless / AWS Lambda / Vercel Edge",
+    "WebSocket / 实时长连接通讯",
+    "CI/CD 自动化流水线",
+    "微服务架构与 RPC 治理",
+    "自动化测试 (Jest / Vitest / Supertest)"
+  ],
+  "evidenceSignals": [
+    "端到端完整 SaaS 产品架构与独立交付",
+    "SSR/SSG 高性能渲染与 SEO 优化落地",
+    "Node.js 异步 I/O 阻塞、内存泄漏排查与 GC 调优",
+    "实时协作与 WebSocket 消息分发集群搭建",
+    "Monorepo 现代工程化架构管理 (Turborepo / pnpm)"
+  ],
+  "sectionPriority": [
+    "skills",
+    "projects",
+    "experience",
+    "education"
+  ],
+  "keywords": [
+    "TypeScript",
+    "Node.js",
+    "NestJS",
+    "Next.js",
+    "React",
+    "PostgreSQL",
+    "Redis",
+    "Prisma",
+    "GraphQL",
+    "Docker",
+    "Monorepo",
+    "Fullstack"
+  ]
+}

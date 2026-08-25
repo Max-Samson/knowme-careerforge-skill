@@ -1,0 +1,21 @@
+{
+  "id": "tech-ai",
+  "name": "人工智能与前沿科技 (AI & Frontier Tech)",
+  "domains": ["LLM Applications", "Autonomous Agents", "RAG Systems", "AI Infrastructure", "Multimodal"],
+  "highFrequencyKeywords": [
+    "Token Efficiency",
+    "Model Evaluation",
+    "Latency Optimization",
+    "Context Window",
+    "Vector Indexing",
+    "Agent Orchestration",
+    "Hallucination Mitigation",
+    "Streaming Inference"
+  ],
+  "hiringSignals": [
+    "0-1 探索与学术/工程快速转化能力",
+    "对最新大模型技术演进敏感 (Llama, Claude, DeepSeek, OpenAI)",
+    "端到端产品思维与模型降本意识",
+    "系统工程化与高并发支撑能力"
+  ]
+}

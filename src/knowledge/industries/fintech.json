@@ -1,0 +1,21 @@
+{
+  "id": "fintech",
+  "name": "金融科技与量化交易 (FinTech & Quantitative)",
+  "domains": ["Payment Gateway", "Core Banking", "Risk Control", "Quantitative Trading", "Blockchain / Web3"],
+  "highFrequencyKeywords": [
+    "Zero Data Loss",
+    "Distributed Transaction",
+    "Microsecond Latency",
+    "PCI-DSS Compliance",
+    "Real-time Risk Engine",
+    "High Throughput",
+    "Financial Auditing",
+    "Idempotency"
+  ],
+  "hiringSignals": [
+    "极致严谨与强一致性保障 (Zero Tolerance for Inconsistency)",
+    "低延迟高并发架构调优功底",
+    "对金融业务合规与风控机制的深入理解",
+    "复杂故障排查与应急响应能力"
+  ]
+}

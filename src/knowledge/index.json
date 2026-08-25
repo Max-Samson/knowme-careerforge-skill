@@ -1,0 +1,734 @@
+{
+  "version": "1.0.0",
+  "totalRoles": 9,
+  "totalTemplates": 4,
+  "roles": [
+    {
+      "id": "ai-agent-engineer",
+      "name": "AI Agent / LLM 算法与应用工程师",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "Python",
+        "LLM Orchestration",
+        "RAG 架构与向量检索",
+        "Function / Tool Calling",
+        "FastAPI / Asyncio",
+        "VectorDB (Qdrant / Milvus / Pinecone)"
+      ],
+      "niceToHaveSkills": [
+        "LangGraph / LangChain",
+        "LlamaIndex",
+        "Prompt Optimization / DSPy",
+        "模型微调与评测 (Eval)",
+        "Docker / K8s / 云原生",
+        "TypeScript / Node.js"
+      ],
+      "evidenceSignals": [
+        "多 Agent 协同工作流编排",
+        "检索增强生成 RAG 管道优化",
+        "Prompt 动态剪枝与 Token 降本",
+        "长上下文窗口治理与防幻觉",
+        "企业级智能知识库落地",
+        "高并发模型网关与流式响应"
+      ],
+      "sectionPriority": [
+        "skills",
+        "projects",
+        "experience",
+        "education"
+      ],
+      "keywords": [
+        "Python",
+        "LLM Orchestration",
+        "RAG",
+        "LangGraph",
+        "LangChain",
+        "Tool Calling",
+        "FastAPI",
+        "VectorDB",
+        "Qdrant",
+        "Milvus",
+        "Prompt Engineering",
+        "Embedding",
+        "Model Evaluation",
+        "Docker"
+      ]
+    },
+    {
+      "id": "android-engineer",
+      "name": "Android 客户端开发工程师 / 资深移动专家",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "junior",
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "Kotlin / Java 核心原理与协程 (Coroutines/Flow)",
+        "Android Jetpack 套件 (Compose, ViewModel, Room, Navigation)",
+        "Android 系统架构 (Handler, Binder IPC, Activity 生命周期)",
+        "性能与内存优化 (Memory Leak, MAT, Systrace, ANR 治理)",
+        "网络与缓存架构 (Retrofit, OkHttp, MMKV, Room)",
+        "架构设计模式 (MVVM, MVI, 组件化/插件化)"
+      ],
+      "niceToHaveSkills": [
+        "NDK / JNI C++ 底层音视频或图像处理",
+        "Flutter / React Native 跨端开发",
+        "Gradle 编译提速与自定义 Plugin 研发",
+        "热修复与动态化技术方案",
+        "自动化测试与 CI/CD 交付流水线"
+      ],
+      "evidenceSignals": [
+        "主导千万级用户 App 核心业务线研发与架构演进",
+        "系统性治理 ANR 与 Crash，核心页面卡顿率下降 70%",
+        "APK 瘦身 (通过资源混淆、动态下发缩减包体积 45%)",
+        "主导构建全链路日志埋点与 APM 线上性能监控体系",
+        "基于 Jetpack Compose 实现全新设计语言与复杂动效"
+      ],
+      "sectionPriority": [
+        "skills",
+        "projects",
+        "experience",
+        "education"
+      ],
+      "keywords": [
+        "Kotlin",
+        "Android Jetpack",
+        "Jetpack Compose",
+        "Coroutines",
+        "Performance Optimization",
+        "ANR Governance",
+        "Retrofit",
+        "Componentization",
+        "NDK"
+      ]
+    },
+    {
+      "id": "architect",
+      "name": "首席架构师 / 技术总监 / 分布式系统架构师",
+      "category": "management-product",
+      "seniorityLevels": [
+        "lead",
+        "principal",
+        "architect",
+        "cto"
+      ],
+      "mustHaveSkills": [
+        "大型分布式系统架构与演进路线规划",
+        "高并发、高可用 (99.99%) 与异地多活容灾设计",
+        "微服务中台治理与技术栈选型决策",
+        "技术团队管理 (20~50+ 人) 与敏捷研发体系",
+        "云原生架构 (Kubernetes / ServiceMesh / 云上降本)",
+        "商业目标与技术架构深度对齐"
+      ],
+      "niceToHaveSkills": [
+        "企业级 AI 中台与大模型落地架构",
+        "领域驱动设计 (DDD) 战略与战术建模",
+        "数据中台与实时数仓架构",
+        "研发效能与工程化度量标准制定",
+        "专利与技术标准制定",
+        "跨部门与高管汇报沟通能力"
+      ],
+      "evidenceSignals": [
+        "主导跨多业务线的统一架构规划与技术中台落地",
+        "驱动企业级系统从单体向微服务/云原生平滑演进",
+        "主导高可用演练，消除单点故障，支撑亿级大促交易",
+        "主导团队技术梯队搭建与工程师文化塑造",
+        "技术赋能业务实现数千万元商业增长或大幅降本增效"
+      ],
+      "sectionPriority": [
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education"
+      ],
+      "keywords": [
+        "System Architecture",
+        "High Concurrency",
+        "Microservices",
+        "Cloud Native",
+        "Kubernetes",
+        "Team Leadership",
+        "DDD",
+        "Disaster Recovery",
+        "Business Alignment",
+        "Cost Optimization"
+      ]
+    },
+    {
+      "id": "cpp-systems",
+      "name": "C/C++ 底层与系统研发工程师",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "C/C++ (C++11/14/17/20 现代特性)",
+        "Linux 系统编程与内核机制 (epoll, 内存管理)",
+        "多线程并发编程与锁优化 (无锁队列, CAS)",
+        "网络通信与高性能服务架构 (TCP/UDP, RDMA)",
+        "性能剖析与调优 (Perf, Valgrind, GDB, eBPF)",
+        "数据结构与算法深度功底"
+      ],
+      "niceToHaveSkills": [
+        "GPU / CUDA 异构计算与并行加速",
+        "存储引擎 (LSM-Tree, B+Tree, RocksDB 源码)",
+        "嵌入式开发与音视频编解码 (FFmpeg, WebRTC)",
+        "量化高频交易低延迟架构 (微秒级优化)",
+        "开源项目源码深度定制与贡献",
+        "Rust 语言系统级开发"
+      ],
+      "evidenceSignals": [
+        "核心网络中间件吞吐量调优 (突破百万 QPS)",
+        "内存泄漏、死锁与段错误 (Core Dump) 根因定位与攻坚",
+        "基于 SIMD / CUDA 的核心算法加速 10x+",
+        "自研高性能 RPC 框架或底层存储引擎",
+        "跨平台 SDK 架构设计与性能压榨"
+      ],
+      "sectionPriority": [
+        "skills",
+        "experience",
+        "projects",
+        "education"
+      ],
+      "keywords": [
+        "C++",
+        "Linux Systems",
+        "High Performance",
+        "Multi-threading",
+        "Networking",
+        "CUDA",
+        "Low Latency",
+        "Perf",
+        "GDB",
+        "Memory Optimization"
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "Web 前端开发工程师 / 前端架构师",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "junior",
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "JavaScript / TypeScript",
+        "React / Vue 3",
+        "HTML5 / CSS3 / Modern Layout",
+        "前端工程化 (Vite / Webpack / Turbopack)",
+        "性能优化 (FCP, LCP, INP, 内存治理)",
+        "状态管理 (Zustand / Redux / Pinia)"
+      ],
+      "niceToHaveSkills": [
+        "Next.js / SSR / SSG",
+        "Node.js 全栈能力",
+        "WebAssembly / Canvas / WebGL",
+        "微前端架构 (Module Federation / qiankun)",
+        "CI/CD 与前端自动化测试 (Jest / Playwright)",
+        "跨端开发 (Electron / React Native / Taro)"
+      ],
+      "evidenceSignals": [
+        "企业级通用组件库设计与维护",
+        "大型 SPA 首屏渲染性能优化 (LCP 提升 50%+)",
+        "前端监控埋点与错误异常捕获体系",
+        "复杂可视化看板与图表交互",
+        "低代码平台或可视化拖拽系统研发"
+      ],
+      "sectionPriority": [
+        "skills",
+        "experience",
+        "projects",
+        "education"
+      ],
+      "keywords": [
+        "TypeScript",
+        "React",
+        "Vue3",
+        "Next.js",
+        "Vite",
+        "Webpack",
+        "Performance Optimization",
+        "CSS3",
+        "Zustand",
+        "TailwindCSS",
+        "Micro Frontend",
+        "CI/CD"
+      ]
+    },
+    {
+      "id": "ios-engineer",
+      "name": "iOS 客户端开发工程师 / 资深移动架构师",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "junior",
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "Swift / Objective-C 语言基础与混编",
+        "UIKit / SwiftUI 声明式 UI 开发",
+        "iOS 内存管理 (ARC 原理, 循环引用排查)",
+        "多线程编程 (GCD, OperationQueue, Swift Concurrency)",
+        "网络层与数据持久化 (URLSession, CoreData, Realm)",
+        "组件化与架构设计 (MVVM, Clean Architecture, 模块化)"
+      ],
+      "niceToHaveSkills": [
+        "性能与卡顿优化 (Time Profiler, 启动耗时, 帧率保持 60/120fps)",
+        "跨端开发能力 (Flutter / React Native / KMP)",
+        "音视频开发与图形渲染 (Metal, CoreGraphics, AVFoundation)",
+        "App 打包自动化 (Fastlane, CI/CD, 动态化方案)",
+        "逆向安全与防护 (混淆, 防越狱, 签名机制)"
+      ],
+      "evidenceSignals": [
+        "App 冷启动时间从 2.5s 优化至 800ms",
+        "主导数百万 DAU App 的核心模块组件化拆分",
+        "解决严重主线程卡顿与极端 OOM 崩溃，Crash 率降至 0.02%",
+        "自研高性能图文混排或离线缓存框架",
+        "App Store 独立上架及国际化多语言支持"
+      ],
+      "sectionPriority": [
+        "skills",
+        "projects",
+        "experience",
+        "education"
+      ],
+      "keywords": [
+        "Swift",
+        "SwiftUI",
+        "Objective-C",
+        "iOS Architecture",
+        "Performance Optimization",
+        "Memory Management",
+        "GCD",
+        "Fastlane",
+        "Componentization"
+      ]
+    },
+    {
+      "id": "java-backend",
+      "name": "Java 后端开发工程师 / 资深研发专家",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "mid",
+        "senior",
+        "lead",
+        "architect"
+      ],
+      "mustHaveSkills": [
+        "Java / JVM 核心原理与性能调优",
+        "Spring Boot / Spring Cloud",
+        "MySQL 索引优化与分库分表",
+        "Redis 缓存设计与高可用",
+        "分布式系统与微服务架构",
+        "消息中间件 (Kafka / RocketMQ)"
+      ],
+      "niceToHaveSkills": [
+        "云原生 (Docker / Kubernetes / Istio)",
+        "分布式事务 (Seata) 与一致性协议 (Raft)",
+        "Elasticsearch 全文检索",
+        "高并发与高可用容灾演练",
+        "DDD 领域驱动设计",
+        "Go / Python 多语言经验"
+      ],
+      "evidenceSignals": [
+        "万级 QPS 高并发接口调优与限流降级",
+        "核心业务中台与微服务拆分重构",
+        "分库分表与海量数据冷热归档方案落地",
+        "消息堆积、分布式死锁与缓存穿透/雪崩治理",
+        "CI/CD 流水线与自动化测试覆盖率提升"
+      ],
+      "sectionPriority": [
+        "skills",
+        "experience",
+        "projects",
+        "education"
+      ],
+      "keywords": [
+        "Java",
+        "Spring Boot",
+        "Spring Cloud",
+        "MySQL",
+        "Redis",
+        "Kafka",
+        "Microservices",
+        "High Concurrency",
+        "JVM Tuning",
+        "Kubernetes",
+        "Elasticsearch",
+        "Distributed Systems"
+      ]
+    },
+    {
+      "id": "node-fullstack",
+      "name": "Node.js 全栈开发工程师 / 后端专家",
+      "category": "engineering-ai",
+      "seniorityLevels": [
+        "mid",
+        "senior",
+        "lead"
+      ],
+      "mustHaveSkills": [
+        "Node.js / TypeScript",
+        "NestJS / Express / Fastify",
+        "React / Next.js / Vue",
+        "PostgreSQL / MySQL / Prisma / TypeORM",
+        "Redis / 缓存与会话管理",
+        "RESTful API / GraphQL 契约设计"
+      ],
+      "niceToHaveSkills": [
+        "Docker / K8s / 云原生部署",
+        "Serverless / AWS Lambda / Vercel Edge",
+        "WebSocket / 实时长连接通讯",
+        "CI/CD 自动化流水线",
+        "微服务架构与 RPC 治理",
+        "自动化测试 (Jest / Vitest / Supertest)"
+      ],
+      "evidenceSignals": [
+        "端到端完整 SaaS 产品架构与独立交付",
+        "SSR/SSG 高性能渲染与 SEO 优化落地",
+        "Node.js 异步 I/O 阻塞、内存泄漏排查与 GC 调优",
+        "实时协作与 WebSocket 消息分发集群搭建",
+        "Monorepo 现代工程化架构管理 (Turborepo / pnpm)"
+      ],
+      "sectionPriority": [
+        "skills",
+        "projects",
+        "experience",
+        "education"
+      ],
+      "keywords": [
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "Next.js",
+        "React",
+        "PostgreSQL",
+        "Redis",
+        "Prisma",
+        "GraphQL",
+        "Docker",
+        "Monorepo",
+        "Fullstack"
+      ]
+    },
+    {
+      "id": "product-manager",
+      "name": "AI 产品经理 / 资深产品专家",
+      "category": "management-product",
+      "seniorityLevels": [
+        "mid",
+        "senior",
+        "lead",
+        "director"
+      ],
+      "mustHaveSkills": [
+        "产品全生命周期管理 (0-1 孵化与 1-N 商业化)",
+        "用户需求洞察与敏捷 PRD / 交互原型设计",
+        "数据驱动增长与指标分析 (A/B Test, Funnel, Retention)",
+        "跨部门协同 (研发/设计/运营/销售/高管)",
+        "大模型应用场景探索 (Prompt, Agent, 知识库产品化)",
+        "商业化变现与竞品分析"
+      ],
+      "niceToHaveSkills": [
+        "技术背景 / 懂 API 契约与技术架构边界",
+        "AI Agent 产品工作流设计经验",
+        "B 端 SaaS 计费模式与权限系统设计",
+        "用户增长裂变与 PLG (Product-Led Growth)",
+        "敏捷团队 Scrum Master 实践",
+        "SQL 数据提取与高级数据分析"
+      ],
+      "evidenceSignals": [
+        "主导核心产品从 0 到 1 上线并达成百万级用户或千万营收",
+        "设计 AI 赋能工作流，使客户工单处理效率提升 60%+",
+        "通过 A/B 测试将关键转化漏斗转化率提升 25%+",
+        "跨部门推动重大产品版本按期高质量交付",
+        "输出高质量行业研究报告与产品商业计划书 (BP)"
+      ],
+      "sectionPriority": [
+        "summary",
+        "experience",
+        "projects",
+        "skills",
+        "education"
+      ],
+      "keywords": [
+        "Product Management",
+        "AI Product",
+        "User Research",
+        "Data Driven",
+        "A/B Testing",
+        "PRD",
+        "Agile",
+        "PLG",
+        "Monetization",
+        "Cross-functional Leadership"
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "classic",
+      "name": "Table Structured Modern",
+      "version": "1.0.0",
+      "style": "table-structured",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "table-grid",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "structured-formal",
+        "accentColor": "#1d4ed8",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "hardware",
+        "civil-servant",
+        "corporate"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-cell-padding",
+        "--resume-color-accent",
+        "--resume-color-label-bg"
+      ],
+      "directory": "src/templates/classic",
+      "detectedTokens": [
+        "--resume-cell-padding",
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-header-bg",
+        "--resume-color-label-bg",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-meta",
+        "--resume-font-size-title",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-padding",
+        "--resume-page-width"
+      ]
+    },
+    {
+      "id": "executive",
+      "name": "Executive Modern Split",
+      "version": "1.0.0",
+      "style": "two-column-split",
+      "roleCategory": "management-product",
+      "layout": {
+        "type": "two-column-split",
+        "targetPages": 1,
+        "maxPages": 2,
+        "leftRatio": "33:67",
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "executive-formal",
+        "bannerBg": "#1e293b",
+        "accentColor": "#0f766e",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "architect",
+        "tech-director",
+        "product-manager",
+        "engineering-lead",
+        "cto"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-left-col-width",
+        "--resume-color-accent",
+        "--resume-color-banner-bg"
+      ],
+      "directory": "src/templates/executive",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-banner-bg",
+        "--resume-color-banner-muted",
+        "--resume-color-banner-text",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-title",
+        "--resume-left-col-width",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "minimal",
+      "name": "Minimal Tech",
+      "version": "1.0.0",
+      "style": "single-column-minimal",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 2,
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "geek-minimal",
+        "accentColor": "#2563eb",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "java-backend",
+        "node-fullstack",
+        "ai-agent-engineer",
+        "devops",
+        "cpp-systems",
+        "architect"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/minimal",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-padding",
+        "--resume-page-width",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "modern",
+      "name": "Modern Split Sidebar",
+      "version": "1.0.0",
+      "style": "two-column-split",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "two-column-sidebar",
+        "targetPages": 1,
+        "maxPages": 2,
+        "sidebarRatio": "32:68",
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "modern-deep-navy",
+        "sidebarBg": "#254665",
+        "accentColor": "#254665",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "node-fullstack",
+        "ai-agent-engineer",
+        "product-manager",
+        "architect"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-sidebar-width",
+        "--resume-color-sidebar-bg"
+      ],
+      "directory": "src/templates/modern",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-main-bg",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-sidebar-accent",
+        "--resume-color-sidebar-bg",
+        "--resume-color-sidebar-muted",
+        "--resume-color-sidebar-text",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-width",
+        "--resume-sidebar-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    }
+  ]
+}

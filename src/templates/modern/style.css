@@ -1,0 +1,277 @@
+:root {
+  /* 页面物理约束 */
+  --resume-page-width: 210mm;
+  --resume-page-min-height: 297mm;
+
+  /* 配色体系 */
+  --resume-color-sidebar-bg: #254665;    /* 经典深海蓝 Navy */
+  --resume-color-sidebar-text: #f8fafc;  /* 侧边栏反白字 */
+  --resume-color-sidebar-muted: #94a3b8; /* 侧边栏辅助文字 */
+  --resume-color-sidebar-accent: #38bdf8;/* 侧边栏亮色高亮 */
+  
+  --resume-color-main-bg: #ffffff;
+  --resume-color-primary: #0f172a;       /* Slate 900 */
+  --resume-color-secondary: #334155;     /* Slate 700 */
+  --resume-color-muted: #64748b;         /* Slate 500 */
+  --resume-color-accent: #254665;        /* 主舞台强调色 */
+  --resume-color-border: #e2e8f0;        /* Slate 200 */
+
+  /* 字阶系统 */
+  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --resume-font-size-name: 22pt;
+  --resume-font-size-target: 11pt;
+  --resume-font-size-h2: 12pt;
+  --resume-font-size-body: 9.2pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.45;
+
+  /* 间距 Tokens (Agent 自愈参数) */
+  --resume-space-section: 12pt;
+  --resume-space-item: 8pt;
+  --resume-space-bullet: 2.5pt;
+  --resume-sidebar-width: 32%;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #e2e8f0;
+  font-family: var(--resume-font-body);
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.resume-page {
+  width: var(--resume-page-width);
+  min-height: var(--resume-page-min-height);
+  background: var(--resume-color-main-bg);
+  display: grid;
+  grid-template-columns: var(--resume-sidebar-width) 1fr;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 左侧深色侧边栏 */
+.resume-sidebar {
+  background-color: var(--resume-color-sidebar-bg);
+  color: var(--resume-color-sidebar-text);
+  padding: 16mm 6mm 16mm 10mm;
+  display: flex;
+  flex-direction: column;
+  gap: 14pt;
+}
+
+.sidebar-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4pt;
+}
+
+.avatar-placeholder {
+  width: 76pt;
+  height: 98pt;
+  border-radius: 4pt;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8.5pt;
+  color: var(--resume-color-sidebar-muted);
+}
+
+.sidebar-title {
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--resume-color-sidebar-accent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 3pt;
+  margin-bottom: 6pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-info-list {
+  list-style: none;
+  font-size: 8.5pt;
+  display: flex;
+  flex-direction: column;
+  gap: 5pt;
+  line-height: 1.4;
+}
+
+.sidebar-info-list .info-label {
+  color: var(--resume-color-sidebar-muted);
+}
+
+.skill-meter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6pt;
+}
+
+.skill-meter-item {
+  font-size: 8pt;
+}
+
+.skill-meter-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2pt;
+  color: var(--resume-color-sidebar-text);
+}
+
+.meter-bar {
+  width: 100%;
+  height: 4pt;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2pt;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--resume-color-sidebar-accent);
+  border-radius: 2pt;
+}
+
+.sidebar-tags-list {
+  list-style: none;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+  gap: 4pt;
+  color: var(--resume-color-sidebar-muted);
+}
+
+/* 右侧主舞台 */
+.resume-main {
+  padding: 14mm 14mm 14mm 10mm;
+  color: var(--resume-color-primary);
+}
+
+.main-header {
+  margin-bottom: 12pt;
+  border-bottom: 2px solid var(--resume-color-border);
+  padding-bottom: 8pt;
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 800;
+  color: var(--resume-color-accent);
+  letter-spacing: 1px;
+}
+
+.job-target {
+  font-size: var(--resume-font-size-target);
+  font-weight: 600;
+  color: var(--resume-color-secondary);
+  margin-top: 2pt;
+}
+
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-accent);
+  display: flex;
+  align-items: center;
+  gap: 6pt;
+  margin-bottom: 6pt;
+}
+
+.title-bar {
+  display: inline-block;
+  width: 3.5pt;
+  height: 11pt;
+  background-color: var(--resume-color-accent);
+  border-radius: 1pt;
+}
+
+.timeline-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2pt;
+}
+
+.item-title-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6pt;
+}
+
+.org-name, .project-name {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.role-title {
+  font-size: 9pt;
+  font-weight: 600;
+  color: #0284c7; /* Sky 600 */
+}
+
+.tech-badge {
+  font-size: 8pt;
+  color: var(--resume-color-muted);
+  background: #f1f5f9;
+  padding: 1.5pt 4pt;
+  border-radius: 2pt;
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.bullet-list {
+  margin-left: 12pt;
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+}
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.bullet-list strong {
+  color: var(--resume-color-primary);
+  font-weight: 600;
+}
+
+.edu-desc {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+}
+
+@media print {
+  body { background: transparent; padding: 0; }
+  .resume-page {
+    box-shadow: none;
+    margin: 0;
+    width: var(--resume-page-width);
+    min-height: var(--resume-page-min-height);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}

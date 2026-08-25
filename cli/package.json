@@ -1,0 +1,28 @@
+{
+  "name": "knowme-careerforge-cli",
+  "version": "1.0.0",
+  "description": "Unified Multi-Agent CLI for KnowMe CareerForge Skill distribution, template search, and resume validation.",
+  "main": "dist/index.js",
+  "bin": {
+    "knowme": "bin/knowme.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "career-forge",
+    "resume-engineering",
+    "agent-cli",
+    "claude",
+    "cursor",
+    "codex"
+  ],
+  "author": "KnowMe CareerForge Team",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ios-engineer",
+  "name": "iOS 客户端开发工程师 / 资深移动架构师",
+  "category": "engineering-ai",
+  "seniorityLevels": ["junior", "mid", "senior", "lead"],
+  "mustHaveSkills": [
+    "Swift / Objective-C 语言基础与混编",
+    "UIKit / SwiftUI 声明式 UI 开发",
+    "iOS 内存管理 (ARC 原理, 循环引用排查)",
+    "多线程编程 (GCD, OperationQueue, Swift Concurrency)",
+    "网络层与数据持久化 (URLSession, CoreData, Realm)",
+    "组件化与架构设计 (MVVM, Clean Architecture, 模块化)"
+  ],
+  "niceToHaveSkills": [
+    "性能与卡顿优化 (Time Profiler, 启动耗时, 帧率保持 60/120fps)",
+    "跨端开发能力 (Flutter / React Native / KMP)",
+    "音视频开发与图形渲染 (Metal, CoreGraphics, AVFoundation)",
+    "App 打包自动化 (Fastlane, CI/CD, 动态化方案)",
+    "逆向安全与防护 (混淆, 防越狱, 签名机制)"
+  ],
+  "evidenceSignals": [
+    "App 冷启动时间从 2.5s 优化至 800ms",
+    "主导数百万 DAU App 的核心模块组件化拆分",
+    "解决严重主线程卡顿与极端 OOM 崩溃，Crash 率降至 0.02%",
+    "自研高性能图文混排或离线缓存框架",
+    "App Store 独立上架及国际化多语言支持"
+  ],
+  "sectionPriority": [
+    "skills",
+    "projects",
+    "experience",
+    "education"
+  ],
+  "keywords": [
+    "Swift",
+    "SwiftUI",
+    "Objective-C",
+    "iOS Architecture",
+    "Performance Optimization",
+    "Memory Management",
+    "GCD",
+    "Fastlane",
+    "Componentization"
+  ]
+}

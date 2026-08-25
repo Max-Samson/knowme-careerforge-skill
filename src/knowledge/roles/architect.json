@@ -1,0 +1,48 @@
+{
+  "id": "architect",
+  "name": "首席架构师 / 技术总监 / 分布式系统架构师",
+  "category": "management-product",
+  "seniorityLevels": ["lead", "principal", "architect", "cto"],
+  "mustHaveSkills": [
+    "大型分布式系统架构与演进路线规划",
+    "高并发、高可用 (99.99%) 与异地多活容灾设计",
+    "微服务中台治理与技术栈选型决策",
+    "技术团队管理 (20~50+ 人) 与敏捷研发体系",
+    "云原生架构 (Kubernetes / ServiceMesh / 云上降本)",
+    "商业目标与技术架构深度对齐"
+  ],
+  "niceToHaveSkills": [
+    "企业级 AI 中台与大模型落地架构",
+    "领域驱动设计 (DDD) 战略与战术建模",
+    "数据中台与实时数仓架构",
+    "研发效能与工程化度量标准制定",
+    "专利与技术标准制定",
+    "跨部门与高管汇报沟通能力"
+  ],
+  "evidenceSignals": [
+    "主导跨多业务线的统一架构规划与技术中台落地",
+    "驱动企业级系统从单体向微服务/云原生平滑演进",
+    "主导高可用演练，消除单点故障，支撑亿级大促交易",
+    "主导团队技术梯队搭建与工程师文化塑造",
+    "技术赋能业务实现数千万元商业增长或大幅降本增效"
+  ],
+  "sectionPriority": [
+    "summary",
+    "experience",
+    "projects",
+    "skills",
+    "education"
+  ],
+  "keywords": [
+    "System Architecture",
+    "High Concurrency",
+    "Microservices",
+    "Cloud Native",
+    "Kubernetes",
+    "Team Leadership",
+    "DDD",
+    "Disaster Recovery",
+    "Business Alignment",
+    "Cost Optimization"
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "templates": [
+    {
+      "id": "classic",
+      "name": "Table Structured Modern",
+      "version": "1.0.0",
+      "style": "table-structured",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "table-grid",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "structured-formal",
+        "accentColor": "#1d4ed8",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "hardware",
+        "civil-servant",
+        "corporate"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-cell-padding",
+        "--resume-color-accent",
+        "--resume-color-label-bg"
+      ],
+      "directory": "src/templates/classic",
+      "detectedTokens": [
+        "--resume-cell-padding",
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-header-bg",
+        "--resume-color-label-bg",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-meta",
+        "--resume-font-size-title",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-padding",
+        "--resume-page-width"
+      ]
+    },
+    {
+      "id": "executive",
+      "name": "Executive Modern Split",
+      "version": "1.0.0",
+      "style": "two-column-split",
+      "roleCategory": "management-product",
+      "layout": {
+        "type": "two-column-split",
+        "targetPages": 1,
+        "maxPages": 2,
+        "leftRatio": "33:67",
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "executive-formal",
+        "bannerBg": "#1e293b",
+        "accentColor": "#0f766e",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "architect",
+        "tech-director",
+        "product-manager",
+        "engineering-lead",
+        "cto"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-left-col-width",
+        "--resume-color-accent",
+        "--resume-color-banner-bg"
+      ],
+      "directory": "src/templates/executive",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-banner-bg",
+        "--resume-color-banner-muted",
+        "--resume-color-banner-text",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-title",
+        "--resume-left-col-width",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "minimal",
+      "name": "Minimal Tech",
+      "version": "1.0.0",
+      "style": "single-column-minimal",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 2,
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "geek-minimal",
+        "accentColor": "#2563eb",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "java-backend",
+        "node-fullstack",
+        "ai-agent-engineer",
+        "devops",
+        "cpp-systems",
+        "architect"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/minimal",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-padding",
+        "--resume-page-width",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "modern",
+      "name": "Modern Split Sidebar",
+      "version": "1.0.0",
+      "style": "two-column-split",
+      "roleCategory": "engineering-ai",
+      "layout": {
+        "type": "two-column-sidebar",
+        "targetPages": 1,
+        "maxPages": 2,
+        "sidebarRatio": "32:68",
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "modern-deep-navy",
+        "sidebarBg": "#254665",
+        "accentColor": "#254665",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "node-fullstack",
+        "ai-agent-engineer",
+        "product-manager",
+        "architect"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-sidebar-width",
+        "--resume-color-sidebar-bg"
+      ],
+      "directory": "src/templates/modern",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-main-bg",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-sidebar-accent",
+        "--resume-color-sidebar-bg",
+        "--resume-color-sidebar-muted",
+        "--resume-color-sidebar-text",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-min-height",
+        "--resume-page-width",
+        "--resume-sidebar-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    }
+  ]
+}

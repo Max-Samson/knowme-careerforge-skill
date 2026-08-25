@@ -1,0 +1,22 @@
+{
+  "model": "FAB (Feature - Advantage - Benefit)",
+  "description": "结构化叙事模型，将经历转化为具有商业与技术说服力的量化论据",
+  "components": {
+    "F": {
+      "name": "Feature (功能/动作)",
+      "meaning": "做了什么系统/功能/重构",
+      "example": "主导设计并研发多 Agent 智能协同工作流系统"
+    },
+    "A": {
+      "name": "Advantage (优势/技术亮点)",
+      "meaning": "采用了什么先进架构、技术选型或创新解法",
+      "example": "基于 LangGraph 状态图与动态路由剪枝机制进行状态流转"
+    },
+    "B": {
+      "name": "Benefit (成效/量化价值)",
+      "meaning": "达成了什么业务提升、延迟降低、成本节约或团队赋能",
+      "example": "实现端到端任务成功率从 68% 提升至 94%，并缩减 Token 成本 35%"
+    }
+  },
+  "standardBulletFormula": "[强动词] + [Feature 核心系统/项目] + [Advantage 核心技术选型/创新解法] + [Benefit 量化业务/技术成效]"
+}

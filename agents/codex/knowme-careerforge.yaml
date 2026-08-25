@@ -1,0 +1,15 @@
+name: knowme-careerforge
+description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering.
+version: 1.0.0
+entrypoint: SKILL.md
+tools:
+  - name: search-template
+    command: python3 scripts/search-template.py
+  - name: analyze-jd
+    command: python3 scripts/analyze-jd.py
+  - name: instantiate-resume
+    command: python3 scripts/instantiate-resume.py
+  - name: validate-resume
+    command: python3 scripts/validate-resume.py
+  - name: render-pdf
+    command: npx ts-node scripts/render-pdf.ts

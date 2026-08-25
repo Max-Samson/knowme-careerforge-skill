@@ -1,0 +1,164 @@
+:root {
+  /* A4 绝对几何尺寸 */
+  --resume-page-width: 210mm;
+  --resume-page-min-height: 297mm;
+  --resume-page-padding: 12mm 14mm;
+
+  /* 配色系统 */
+  --resume-color-primary: #0f172a;       /* Slate 900 */
+  --resume-color-secondary: #334155;     /* Slate 700 */
+  --resume-color-muted: #64748b;         /* Slate 500 */
+  --resume-color-accent: #1d4ed8;        /* Blue 700 */
+  --resume-color-border: #cbd5e1;        /* Slate 300 稳重边框 */
+  --resume-color-header-bg: #f8fafc;     /* Slate 50 */
+  --resume-color-label-bg: #f1f5f9;      /* Slate 100 */
+
+  /* 字阶系统 */
+  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --resume-font-size-title: 18pt;
+  --resume-font-size-body: 9pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.4;
+
+  /* 单元格内边距 */
+  --resume-cell-padding: 4.5pt 7pt;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: #e2e8f0;
+  font-family: var(--resume-font-body);
+  display: flex;
+  justify-content: center;
+  padding: 24px 0;
+  color: var(--resume-color-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+.resume-page {
+  width: var(--resume-page-width);
+  min-height: var(--resume-page-min-height);
+  background: #ffffff;
+  padding: var(--resume-page-padding);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.resume-header {
+  text-align: center;
+  margin-bottom: 8pt;
+}
+
+.resume-main-title {
+  font-size: var(--resume-font-size-title);
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--resume-color-primary);
+}
+
+.resume-sub-title {
+  font-size: 8pt;
+  letter-spacing: 2px;
+  color: var(--resume-color-muted);
+  margin-top: 1pt;
+}
+
+/* 结构化表格 */
+.resume-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--resume-font-size-body);
+  border: 1px solid var(--resume-color-border);
+}
+
+.resume-grid-table td {
+  border: 1px solid var(--resume-color-border);
+  padding: var(--resume-cell-padding);
+  vertical-align: middle;
+  line-height: var(--resume-line-height-body);
+}
+
+.cell-label {
+  background-color: var(--resume-color-label-bg);
+  font-weight: 600;
+  color: var(--resume-color-secondary);
+  text-align: center;
+  width: 58pt;
+}
+
+.cell-value {
+  color: var(--resume-color-primary);
+}
+
+.cell-highlight-bg {
+  background-color: #eff6ff; /* Blue 50 */
+  color: var(--resume-color-accent);
+}
+
+.date-col {
+  width: 82pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+}
+
+.section-header-cell {
+  background-color: var(--resume-color-header-bg);
+  border-left: 3.5px solid var(--resume-color-accent) !important;
+  padding: 3.5pt 8pt;
+}
+
+.section-title {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-accent);
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  color: var(--resume-color-accent);
+  font-size: 8pt;
+  margin-right: 4pt;
+}
+
+.cell-content {
+  color: var(--resume-color-secondary);
+}
+
+.exp-header {
+  margin-bottom: 2pt;
+  color: var(--resume-color-primary);
+}
+
+.exp-bullets {
+  margin-left: 12pt;
+  margin-top: 2pt;
+}
+
+.exp-bullets li {
+  margin-bottom: 2pt;
+}
+
+.project-desc {
+  font-size: 8.5pt;
+  color: var(--resume-color-secondary);
+  line-height: 1.38;
+}
+
+@media print {
+  body { background: transparent; padding: 0; }
+  .resume-page {
+    box-shadow: none;
+    margin: 0;
+    width: var(--resume-page-width);
+    min-height: var(--resume-page-min-height);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+}

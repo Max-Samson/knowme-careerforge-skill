@@ -1,0 +1,10 @@
+# KnowMe CareerForge — Windsurf Rules
+# Trigger: Career discovery, resume tailoring, JD analysis
+
+When user requests resume tailoring or career analysis:
+1. Extract candidate facts and tag with Evidence Level (L1~L3).
+2. Analyze target JD requirements using scripts/analyze-jd.py.
+3. Recommend best template using scripts/search-template.py.
+4. Instantiate workspace/resume.html and calibrate CSS variables.
+5. Run scripts/validate-resume.py to check DOM fit and ATS compatibility.
+6. Export final PDF using scripts/render-pdf.ts.

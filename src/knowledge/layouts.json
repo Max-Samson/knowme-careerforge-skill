@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "layouts": [
+    {
+      "id": "single-column",
+      "name": "单栏线性流布局 (Single-Column Linear Flow)",
+      "description": "严格从上至下的经典阅读流，全平台 ATS 解析友好度 100%，适合高密度技术展现或单页紧凑型简历。",
+      "bestFor": ["engineering-ai", "backend", "algorithms", "systems", "junior-to-senior"],
+      "defaultDensity": "high",
+      "targetPages": [1, 2],
+      "recommendedTokens": {
+        "--resume-space-section": "11pt",
+        "--resume-space-item": "7.5pt",
+        "--resume-font-size-body": "9.2pt"
+      }
+    },
+    {
+      "id": "two-column-sidebar",
+      "name": "左右双栏侧边栏布局 (Two-Column Sidebar Split)",
+      "description": "32:68 黄金比例分割，左侧深色侧边栏归纳基础信息与技能掌握度条，右侧展开深度项目经历，视觉层次丰满。",
+      "bestFor": ["fullstack", "frontend", "ai-agent-engineer", "global-remote"],
+      "defaultDensity": "balanced",
+      "targetPages": [1, 2],
+      "recommendedTokens": {
+        "--resume-sidebar-width": "32%",
+        "--resume-space-section": "12pt",
+        "--resume-space-item": "8pt",
+        "--resume-font-size-body": "9.2pt"
+      }
+    },
+    {
+      "id": "executive-split",
+      "name": "高管顶栏+双栏布局 (Executive Banner + 33:67 Split)",
+      "description": "顶部 Executive Banner 沉淀核心价值主张与领导力标签，左栏沉淀领导力与技能广度，右栏展开重大项目与团队治理。",
+      "bestFor": ["management-product", "tech-director", "architect", "cto", "engineering-lead"],
+      "defaultDensity": "balanced",
+      "targetPages": [1, 2],
+      "recommendedTokens": {
+        "--resume-left-col-width": "33%",
+        "--resume-space-section": "12pt",
+        "--resume-space-item": "9pt",
+        "--resume-font-size-body": "9.2pt"
+      }
+    },
+    {
+      "id": "table-grid",
+      "name": "现代 6 列结构化表格网格 (Structured Table Grid)",
+      "description": "现代网格式表格结构，信息密度极高，规避一切布局错位，完美适配政企、国企、金融科技与传统名企合规岗位。",
+      "bestFor": ["corporate", "state-owned", "fintech", "hardware", "civil-servant"],
+      "defaultDensity": "high",
+      "targetPages": [1],
+      "recommendedTokens": {
+        "--resume-cell-padding": "4.5pt 7pt",
+        "--resume-font-size-body": "9pt",
+        "--resume-color-accent": "#1d4ed8"
+      }
+    }
+  ]
+}

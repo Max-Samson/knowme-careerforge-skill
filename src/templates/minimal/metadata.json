@@ -1,0 +1,37 @@
+{
+  "id": "minimal",
+  "name": "Minimal Tech",
+  "version": "1.0.0",
+  "style": "single-column-minimal",
+  "roleCategory": "engineering-ai",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 2,
+    "density": "high"
+  },
+  "visualStyle": {
+    "tone": "geek-minimal",
+    "accentColor": "#2563eb",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "frontend",
+    "backend",
+    "java-backend",
+    "node-fullstack",
+    "ai-agent-engineer",
+    "devops",
+    "cpp-systems",
+    "architect"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

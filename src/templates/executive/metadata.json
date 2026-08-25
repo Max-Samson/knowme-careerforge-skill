@@ -1,0 +1,37 @@
+{
+  "id": "executive",
+  "name": "Executive Modern Split",
+  "version": "1.0.0",
+  "style": "two-column-split",
+  "roleCategory": "management-product",
+  "layout": {
+    "type": "two-column-split",
+    "targetPages": 1,
+    "maxPages": 2,
+    "leftRatio": "33:67",
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "executive-formal",
+    "bannerBg": "#1e293b",
+    "accentColor": "#0f766e",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "architect",
+    "tech-director",
+    "product-manager",
+    "engineering-lead",
+    "cto"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-left-col-width",
+    "--resume-color-accent",
+    "--resume-color-banner-bg"
+  ]
+}

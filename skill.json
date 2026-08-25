@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json.schemastore.org/skill.json",
+  "name": "knowme-careerforge",
+  "displayName": "KnowMe CareerForge",
+  "version": "1.0.0",
+  "description": "An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Know yourself. Define your direction. Forge your opportunity.",
+  "author": "KnowMe CareerForge Team",
+  "license": "MIT",
+  "homepage": "https://github.com/knowme-careerforge/knowme-careerforge-skill",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knowme-careerforge/knowme-careerforge-skill.git"
+  },
+  "keywords": [
+    "career",
+    "resume",
+    "career-positioning",
+    "self-discovery",
+    "resume-engineering",
+    "ats-friendly",
+    "html-resume",
+    "pdf-generation",
+    "agent-skill"
+  ],
+  "entrypoint": "SKILL.md",
+  "platforms": [
+    "claude",
+    "codex",
+    "cursor",
+    "windsurf",
+    "gemini",
+    "copilot",
+    "opencode"
+  ],
+  "categories": [
+    "career-development",
+    "productivity",
+    "writing-assistant"
+  ],
+  "installation": {
+    "claude": "cp -r knowme-careerforge-skill ~/.claude/skills/knowme-careerforge",
+    "codex": "cp -r knowme-careerforge-skill ~/.codex/skills/knowme-careerforge",
+    "cursor": "cp SKILL.md .cursor/rules/knowme-careerforge.mdc",
+    "windsurf": "cat SKILL.md >> .windsurfrules",
+    "opencode": "cp -r knowme-careerforge-skill ~/.opencode/skills/knowme-careerforge"
+  }
+}

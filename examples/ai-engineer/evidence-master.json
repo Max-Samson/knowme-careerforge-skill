@@ -1,0 +1,32 @@
+{
+  "candidate": {
+    "name": "鹿小笙",
+    "target": "资深 AI Agent 架构师",
+    "education": {
+      "school": "北京航空航天大学",
+      "degree": "计算机硕士",
+      "gpa": "3.8/4.0",
+      "evidenceLevel": "L1"
+    },
+    "evidenceItems": [
+      {
+        "claim": "主导企业级多 Agent 智能协同平台研发，日均调用超 500 万次，成功率 99.2%",
+        "evidenceLevel": "L1",
+        "evidenceSource": "GitLab 生产代码库、Prometheus 监控看板与生产上线评审记录",
+        "keywords": ["LangGraph", "Multi-Agent", "FastAPI", "High Availability"]
+      },
+      {
+        "claim": "设计多路召回 RAG 检索管线 (Qdrant + BM25 + BGE Reranker)，问答准确率提升 38%",
+        "evidenceLevel": "L1",
+        "evidenceSource": "RAG benchmark 评测报告与 Qdrant 索引配置文件",
+        "keywords": ["RAG", "Qdrant", "BM25", "BGE Reranker", "Latency Optimization"]
+      },
+      {
+        "claim": "开源 OpenAgent 获得 2,400+ GitHub Stars，设计 Prompt 剪枝降低 42% Token 成本",
+        "evidenceLevel": "L1",
+        "evidenceSource": "GitHub 公开仓库 open-source/openagent",
+        "keywords": ["Open Source", "Prompt Optimization", "Token Efficiency", "AST"]
+      }
+    ]
+  }
+}
