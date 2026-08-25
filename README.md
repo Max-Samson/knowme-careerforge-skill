@@ -206,6 +206,22 @@ python3 scripts/run-all-tests.py
 
 ---
 
-## 10. License
+## 10. NPM Build, Release & Publishing
+
+This package is ready to be built, tested, and published to the NPM Registry:
+
+```bash
+# 1. Automated release preparation & verification
+npm run release -- 1.0.0
+
+# 2. Publish to public NPM registry
+npm publish --access public
+```
+
+See the full [NPM Publishing & Update Guide](docs/PUBLISHING.md) for step-by-step release instructions.
+
+---
+
+## 11. License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.

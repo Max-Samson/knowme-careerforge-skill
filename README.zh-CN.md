@@ -210,6 +210,22 @@ python3 scripts/run-all-tests.py
 
 ---
 
-## 10. 开源协议
+## 10. NPM 构建、发布与版本更新
+
+本项目已配置为标准的 NPM Package，支持一键编译、测试与发布：
+
+```bash
+# 1. 执行发布前自动化测试与打包预检
+npm run release -- 1.0.0
+
+# 2. 发布至公共 NPM 注册表
+npm publish --access public
+```
+
+更多详细发版与 SemVer 版本升级策略请参阅 [NPM 构建与发布更新指南](docs/PUBLISHING.zh-CN.md)。
+
+---
+
+## 11. 开源协议
 
 本项目采用 **MIT 开源协议**，详情请参阅 [LICENSE](LICENSE) 文件。

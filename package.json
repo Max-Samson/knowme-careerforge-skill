@@ -26,6 +26,7 @@
     "render:pdf": "ts-node scripts/render-pdf.ts",
     "build:knowledge": "python3 scripts/build-knowledge.py",
     "build:gallery": "python3 scripts/build-gallery.py",
+    "release": "python3 scripts/release.py",
     "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
@@ -48,11 +49,10 @@
   "bugs": {
     "url": "https://github.com/Max-Samson/knowme-careerforge-skill/issues"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "^22.0.0",
     "playwright": "^1.49.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.9.3"
   }
 }
