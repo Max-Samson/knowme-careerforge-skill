@@ -1,5 +1,24 @@
 # KnowMe CareerForge
 
+<p align="center">
+  <a href="README.zh-CN.md">🇨🇳 简体中文</a> | 
+  <a href="README.md">🇺🇸 English</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
+  <img src="https://img.shields.io/badge/岗位画像-9套标准画像-green?style=for-the-badge" alt="9 Role Profiles">
+  <img src="https://img.shields.io/badge/A4模板-4套黄金基准-purple?style=for-the-badge" alt="4 Baseline A4 Templates">
+  <img src="https://img.shields.io/badge/python-3.9+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=green" alt="License: MIT"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat-square&logo=npm&label=npm" alt="npm package"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
+  <img src="https://img.shields.io/badge/核心架构-HTML中间修改场%20%2B%20Design%20Tokens-blue?style=flat-square" alt="HTML Intermediate Canvas">
+</p>
+
 > **认识自己，明确方向，锻造属于你的职业机会。**
 >
 > *Know Yourself. Define Your Direction. Forge Your Opportunity.*
@@ -8,17 +27,9 @@
 
 ---
 
-[中文说明](README.zh-CN.md) | [English Documentation](README.md)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Platform Support](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-orange.svg)](skill.json)
-[![Architecture](https://img.shields.io/badge/Architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-success.svg)](SKILL.md)
-
----
-
 ## 1. 什么是 KnowMe CareerForge？
 
-**KnowMe CareerForge** 绝非又一个普通的“AI 简历代写生成器”。
+**KnowMe CareerForge** 是一款专为 Claude Code、Cursor、Codex、Windsurf 及 Gemini CLI 打造的工业级、Agent-Native 简历工程 Skill。
 
 传统的 AI 简历工具通常将写简历视为简单的“文本生成任务”：给大模型一段提示词，吐出一堆 Markdown，再经由黑盒转换器输出格式混乱、排版错位、充斥幻觉的 PDF。
 
@@ -59,7 +70,51 @@ knowme-careerforge-skill
 
 ---
 
-## 3. 三大运行模式 (Operational Modes)
+## 3. 安装与部署指南
+
+你可以通过 **CLI 极速初始化 (无需 Clone)** 或直接通过 **Agent 原生规则文件** 接入：
+
+### 方式 A：通过 CLI 快速安装 (推荐)
+
+直接使用 `npx` 免安装初始化：
+
+```bash
+# 进入你的目标项目目录
+cd /path/to/your/project
+
+# 为你所使用的 AI 编程助手一键安装 Skill
+npx knowme-careerforge-skill init --ai cursor    # Cursor (.cursor/rules/)
+npx knowme-careerforge-skill init --ai claude    # Claude Code (~/.claude/skills/)
+npx knowme-careerforge-skill init --ai codex     # Codex CLI (~/.codex/skills/)
+npx knowme-careerforge-skill init --ai windsurf  # Windsurf (.windsurfrules)
+npx knowme-careerforge-skill init --ai gemini    # Gemini CLI (~/.gemini/skills/)
+npx knowme-careerforge-skill init --ai opencode  # OpenCode (.opencode/skills/)
+npx knowme-careerforge-skill init --all          # 为所有支持的平台一键安装
+```
+
+或全局安装 CLI：
+
+```bash
+npm install -g knowme-careerforge-skill
+knowme init --ai cursor
+knowme list
+```
+
+---
+
+### 方式 B：Agent 平台原生手动配置
+
+| 平台 | 目标注入路径 | 配置方法 |
+| :--- | :--- | :--- |
+| **Cursor** | `.cursor/rules/knowme-careerforge.mdc` | `cp SKILL.md .cursor/rules/knowme-careerforge.mdc` |
+| **Claude Code** | `~/.claude/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.claude/skills/` |
+| **Codex** | `~/.codex/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.codex/skills/` |
+| **Windsurf** | `.windsurfrules` | `cat agents/windsurf/knowme-careerforge.rules >> .windsurfrules` |
+| **OpenCode** | `.opencode/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.opencode/skills/` |
+
+---
+
+## 4. 三大运行模式 (Operational Modes)
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -79,106 +134,33 @@ knowme-careerforge-skill
 
 ---
 
-## 4. 端到端 Skill 完整执行链路 (Step-by-Step)
+## 5. 端到端执行工作流 (The 6-Stage Workflow)
 
-在 AI Agent（Claude Code、Codex、Cursor、Windsurf、Gemini 等）中激活本 Skill 后的标准闭环工作流如下：
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as 求职候选人
-    participant Agent as AI Agent (Claude/Cursor/Codex)
-    participant Engine as KnowMe 工具链 (Python/TS)
-    participant Chrome as Playwright (Chromium 无头浏览器)
-
-    User->>Agent: “帮我针对这份资深 AI 工程师 JD 定制一份简历：[粘贴 JD + 个人经历]”
-    
-    rect rgb(30, 41, 59)
-    note right of Agent: 阶段 1 & 2: 认知与定位 (Know & Define)
-    Agent->>Engine: 运行 scripts/analyze-jd.py 分析目标 JD
-    Engine-->>Agent: 输出必备技能 (Must-Have)、加分项与招聘信号
-    Agent->>Agent: 梳理经历，执行 L1(代码)、L2(模块)、L3(推论) 证据分级
-    end
-
-    rect rgb(15, 23, 42)
-    note right of Agent: 阶段 3 & 4: 策略与选模 (Understand & Position)
-    Agent->>Agent: 提炼核心价值主张 (CVP) 并规划模块优先级 (Skills 优先)
-    Agent->>Engine: 运行 scripts/search-template.py "AI Agent Engineer" --style "two-column-split"
-    Engine-->>Agent: 智能推荐最佳模板 (如 modern 模板，匹配度 89.0 分)
-    end
-
-    rect rgb(30, 58, 138)
-    note right of Agent: 阶段 5: 简历工程与工作区实例化 (CareerForge)
-    Agent->>Engine: 运行 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG"
-    Engine-->>Agent: 组装生成单文件自包含修改场 workspace/resume.html
-    Agent->>Agent: 运用 FAB 模型重塑 Bullets，注入关键词高亮，调校 CSS 变量
-    end
-
-    rect rgb(20, 83, 45)
-    note right of Agent: 阶段 6: 双重质检与确定性渲染 (Review & Dual QA)
-    Agent->>Engine: 运行 scripts/validate-resume.py 与 scripts/validate-layout.ts
-    alt 检测到页面高度溢出 A4 边界 (如 1145px > 1122.5px 超出 22.5px)
-        Engine-->>Agent: 反馈溢出节点与具体超标像素
-        Agent->>Agent: 自愈调优：在 <style> 中微调 --resume-space-section 与字号
-        Agent->>Engine: 再次运行质检 (100% 通过)
-    end
-    Agent->>Chrome: 运行 npx ts-node scripts/render-pdf.ts
-    Chrome-->>Agent: 确定性导出 workspace/resume.pdf
-    end
-
-    Agent-->>User: 交付 workspace/resume.html + workspace/resume.pdf + 证据链映射报告
+```text
+  Know (证据分级) ──> Define (明确目标) ──> Understand (洞察JD) ──> Position (制定策略) ──> Forge (HTML修改场) ──> Review (双重QA)
 ```
+
+1. **[KnowMe] 证据挖掘**：分析候选人代码库与真实经历，严格划分为 L1 (代码配置直证)、L2 (模块依赖推断) 与 L3 (合理解读)。
+2. **[Define & Understand] 信号提取**：解析目标 JD，提取必备项、加分项与团队招聘风格。
+3. **[Position] 优势对齐**：差距分析匹配真实证据，规划模块优先级。
+4. **[CareerForge] 模板检索与组装**：通过多维打分引擎检索最佳模板，实例化生成 `workspace/resume.html`。
+5. **[Review & Dual QA] 闭环自愈**：无头浏览器检测 DOM 高度溢出与 ATS 文本流，自愈调校 CSS 间距 Tokens。
+6. **[PDF Export] 确定性渲染**：通过 Playwright 导出无损矢量 `workspace/resume.pdf`。
 
 ---
 
-## 5. CSS Design Tokens 调优与自愈速查表
+## 6. CSS Design Tokens 调优与自愈速查表
 
-所有模板排版参数均集中在 `workspace/resume.html` 的 `:root` 变量中，Agent 与候选人可通过微调以下变量实现全局秒级调优与溢出自愈：
+所有排版参数均集中在 `workspace/resume.html` 的 `:root` 变量中，可进行全局即时微调：
 
-| CSS Token 变量名 | 默认推荐值 | 紧凑模式 (单页压测微调) | 宽松模式 (两页饱满) | 调优核心作用 |
+| CSS Token 变量名 | 默认推荐值 | 紧凑模式 (单页微调) | 宽松模式 (双页饱满) | 调优核心作用 |
 | :--- | :--- | :--- | :--- | :--- |
-| `--resume-space-section` | `12pt` | `9.5pt` ~ `10.5pt` | `14pt` ~ `16pt` | 模块间纵向间距 (自愈主要调节旋钮) |
+| `--resume-space-section` | `12pt` | `9.5pt` ~ `10.5pt` | `14pt` ~ `16pt` | 模块间纵向间距 (自愈核心旋钮) |
 | `--resume-space-item` | `8pt` | `6.5pt` ~ `7pt` | `9pt` ~ `11pt` | 经历/项目条目间距 |
-| `--resume-font-size-body` | `9.2pt` | `8.8pt` ~ `9.0pt` | `9.5pt` ~ `10pt` | 正文字号 (物理可读性安全底线为 8.8pt) |
+| `--resume-font-size-body` | `9.2pt` | `8.8pt` ~ `9.0pt` | `9.5pt` ~ `10pt` | 正文字号 (物理安全底线 8.8pt) |
 | `--resume-line-height-body`| `1.45` | `1.38` | `1.50` | 正文行高比例 |
-| `--resume-color-accent` | `#2563eb` | 自定义 Hex 色值 | 自定义 Hex 色值 | 主题强调色 (科技蓝/松石绿/经典深蓝) |
+| `--resume-color-accent` | `#2563eb` | 自定义 Hex | 自定义 Hex | 主题强调色 (科技蓝/松石绿/经典深蓝) |
 | `--resume-sidebar-width` | `32%` | `30%` | `35%` | 侧边栏占比 (双栏/高管模板有效) |
-
-## 6. 安装与多平台 CLI 命令总览
-
-```bash
-# 0. 克隆项目仓库
-git clone https://github.com/Max-Samson/knowme-careerforge-skill.git
-cd knowme-careerforge-skill
-npm install
-
-# 1. 为主流 AI Agent 平台一键初始化配置
-npx ts-node cli/src/index.ts init --ai cursor
-npx ts-node cli/src/index.ts init --ai claude
-npx ts-node cli/src/index.ts init --ai codex
-npx ts-node cli/src/index.ts init --all
-
-# 2. 列出本地知识库所有可用岗位与核心模板
-npx ts-node cli/src/index.ts list
-
-# 3. 智能检索最匹配的 HTML 简历模板
-python3 scripts/search-template.py "资深前端架构师" --style "single-column" --target-pages 1
-
-# 4. 深度解析目标 JD 文本与技能词频
-python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
-
-# 5. 实例化 HTML 中间工作区并注入关键词高亮
-python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
-
-# 6. 运行布局结构、Design Tokens 与文字密度验证
-python3 scripts/validate-resume.py --html workspace/resume.html --expected-pages 1
-
-# 7. 通过 Playwright 确定性导出无损矢量 A4 PDF
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
-
-# 8. 重新编译静态模板画廊
-python3 scripts/build-gallery.py
-```
 
 ---
 
@@ -193,20 +175,41 @@ python3 scripts/build-gallery.py
 
 ---
 
-## 8. 自动化测试与质量保障
-
-项目内置全链路自动化测试套件：
+## 8. CLI 命令参考
 
 ```bash
-# 运行全套 Python & TypeScript 测试脚本
-python3 scripts/run-all-tests.py
+# 1. 智能检索最匹配的 HTML 简历模板
+knowme search "AI Agent Engineer" --style "two-column-split"
 
-# 或通过 unittest 自动发现测试
-python3 -m unittest discover -s tests
+# 2. 深度解析目标 JD 文本与技能词频
+python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
+
+# 3. 实例化 HTML 中间工作区并注入关键词高亮
+python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
+
+# 4. 运行布局结构、Design Tokens 与文字密度验证
+knowme validate
+
+# 5. 通过 Playwright 确定性导出无损矢量 A4 PDF
+npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+
+# 6. 编译生成可视化模板画廊
+knowme gallery
 ```
 
 ---
 
-## 9. 开源协议
+## 9. 自动化测试与质量保障
+
+```bash
+# 运行全链路自动化测试套件 (21/21 项测试 0.3 秒通过)
+npm test
+# 或:
+python3 scripts/run-all-tests.py
+```
+
+---
+
+## 10. 开源协议
 
 本项目采用 **MIT 开源协议**，详情请参阅 [LICENSE](LICENSE) 文件。

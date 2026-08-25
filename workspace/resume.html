@@ -3,43 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>候选人 - 结构化表格简历</title>
+  <title>候选人 - 资深工程师简历</title>
   <style>
 :root {
-  /* A4 绝对几何尺寸 */
+  /* 页面绝对 A4 尺寸 */
   --resume-page-width: 210mm;
   --resume-page-min-height: 297mm;
-  --resume-page-padding: 12mm 14mm;
+  --resume-page-padding: 14mm 16mm;
 
-  /* 配色系统 */
+  /* 现代科技色系 */
   --resume-color-primary: #0f172a;       /* Slate 900 */
   --resume-color-secondary: #334155;     /* Slate 700 */
   --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #1d4ed8;        /* Blue 700 */
-  --resume-color-border: #cbd5e1;        /* Slate 300 稳重边框 */
-  --resume-color-header-bg: #f8fafc;     /* Slate 50 */
-  --resume-color-label-bg: #f1f5f9;      /* Slate 100 */
+  --resume-color-accent: #2563eb;        /* Tech Blue 600 */
+  --resume-color-accent-bg: #eff6ff;     /* Blue 50 */
+  --resume-color-border: #e2e8f0;        /* Slate 200 */
+  --resume-color-tag-bg: #f1f5f9;        /* Slate 100 */
 
   /* 字阶系统 */
   --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-title: 18pt;
-  --resume-font-size-body: 9pt;
+  --resume-font-size-name: 20pt;
+  --resume-font-size-target: 10.5pt;
+  --resume-font-size-h2: 12pt;
+  --resume-font-size-body: 9.2pt;
   --resume-font-size-meta: 8.5pt;
-  --resume-line-height-body: 1.4;
+  --resume-line-height-body: 1.45;
 
-  /* 单元格内边距 */
-  --resume-cell-padding: 4.5pt 7pt;
+  /* 间距 Tokens (Agent 自愈关键参数) */
+  --resume-space-header-bottom: 11pt;
+  --resume-space-section: 11pt;
+  --resume-space-item: 7.5pt;
+  --resume-space-bullet: 2.5pt;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background-color: #e2e8f0;
+  background-color: #f1f5f9;
   font-family: var(--resume-font-body);
+  color: var(--resume-color-primary);
   display: flex;
   justify-content: center;
   padding: 24px 0;
-  color: var(--resume-color-primary);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -52,100 +57,156 @@ body {
   box-sizing: border-box;
 }
 
+/* Header 模块 */
 .resume-header {
-  text-align: center;
-  margin-bottom: 8pt;
+  border-bottom: 1.5px solid var(--resume-color-accent);
+  padding-bottom: var(--resume-space-header-bottom);
+  margin-bottom: var(--resume-space-section);
 }
 
-.resume-main-title {
-  font-size: var(--resume-font-size-title);
-  font-weight: 800;
-  letter-spacing: 4px;
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6pt;
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 700;
   color: var(--resume-color-primary);
+  letter-spacing: 1px;
 }
 
-.resume-sub-title {
-  font-size: 8pt;
-  letter-spacing: 2px;
-  color: var(--resume-color-muted);
-  margin-top: 1pt;
+.job-target {
+  font-size: var(--resume-font-size-target);
+  font-weight: 600;
+  color: var(--resume-color-accent);
 }
 
-/* 结构化表格 */
-.resume-grid-table {
-  width: 100%;
-  border-collapse: collapse;
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6pt 16pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3pt;
+}
+
+/* Section 结构 */
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  display: flex;
+  align-items: center;
+  margin-bottom: 6pt;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--resume-color-border);
+  margin-left: 8pt;
+}
+
+/* 技能行 */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5pt;
   font-size: var(--resume-font-size-body);
-  border: 1px solid var(--resume-color-border);
 }
 
-.resume-grid-table td {
-  border: 1px solid var(--resume-color-border);
-  padding: var(--resume-cell-padding);
-  vertical-align: middle;
+.skill-row {
   line-height: var(--resume-line-height-body);
 }
 
-.cell-label {
-  background-color: var(--resume-color-label-bg);
+.skill-category {
   font-weight: 600;
-  color: var(--resume-color-secondary);
-  text-align: center;
-  width: 58pt;
-}
-
-.cell-value {
   color: var(--resume-color-primary);
 }
 
-.cell-highlight-bg {
-  background-color: #eff6ff; /* Blue 50 */
+.skill-items {
+  color: var(--resume-color-secondary);
+}
+
+/* 经历条目 (Experience & Projects) */
+.experience-item, .project-item, .education-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2.5pt;
+}
+
+.item-title-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8pt;
+}
+
+.org-name, .project-name {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.role-badge {
+  font-size: 9pt;
+  font-weight: 600;
   color: var(--resume-color-accent);
 }
 
-.date-col {
-  width: 82pt;
+.tech-tags {
+  font-size: 8pt;
+  color: var(--resume-color-muted);
+  background: var(--resume-color-tag-bg);
+  padding: 1.5pt 5pt;
+  border-radius: 3pt;
+}
+
+.date-range {
   font-size: var(--resume-font-size-meta);
   color: var(--resume-color-muted);
+  font-variant-numeric: tabular-nums;
 }
 
-.section-header-cell {
-  background-color: var(--resume-color-header-bg);
-  font-weight: 700;
-  color: var(--resume-color-accent);
-  font-size: 10pt;
-  border-left: 3.5px solid var(--resume-color-accent) !important;
-  padding: 4pt 8pt;
-}
-
-.section-icon {
-  color: var(--resume-color-accent);
-  font-size: 8pt;
-  margin-right: 2pt;
-}
-
-.cell-content {
+/* Bullet 清单 */
+.bullet-list {
+  margin-left: 14pt;
+  font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
 }
 
-.exp-header {
-  margin-bottom: 2pt;
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.bullet-list strong {
   color: var(--resume-color-primary);
+  font-weight: 600;
 }
 
-.exp-bullets {
-  margin-left: 12pt;
-  margin-top: 2pt;
-}
-
-.exp-bullets li {
-  margin-bottom: 2pt;
-}
-
-.project-desc {
-  font-size: 8.5pt;
+.edu-detail {
+  font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
-  line-height: 1.38;
+  line-height: var(--resume-line-height-body);
 }
 
 @media print {
@@ -168,126 +229,107 @@ body {
 </head>
 <body>
   <div class="resume-page" id="page-1">
+    <!-- Header 头部个人信息 -->
     <header class="resume-header">
-      <h1 class="resume-main-title">个人求职简历</h1>
-      <p class="resume-sub-title">PERSONAL RESUME</p>
+      <div class="header-main">
+        <h1 class="candidate-name">鹿小笙</h1>
+        <p class="job-target">求职意向：AI Agent 研发工程师 / 资深后端架构师</p>
+      </div>
+      <div class="contact-grid">
+        <span class="contact-item"><i class="icon">📱</i> 138-0000-0000</span>
+        <span class="contact-item"><i class="icon">✉️</i> luxiaosheng@example.com</span>
+        <span class="contact-item"><i class="icon">📍</i> 北京 · 海淀</span>
+        <span class="contact-item"><i class="icon">🎂</i> 1995.06 (5年经验)</span>
+        <span class="contact-item"><i class="icon">🎓</i> 硕士 · 计算机科学与技术</span>
+        <span class="contact-item"><i class="icon">🔗</i> github.com/luxiaosheng</span>
+      </div>
     </header>
 
-    <!-- 现代结构化表格 -->
-    <table class="resume-grid-table">
-      <!-- 求职意向高亮行 -->
-      <tr>
-        <td class="cell-label cell-highlight-bg">求职意向</td>
-        <td colspan="5" class="cell-value cell-highlight-bg"><strong>AI Agent 研发工程师 / 资深后端架构师</strong></td>
-      </tr>
+    <!-- 专业技能 -->
+    <section class="resume-section" id="skills">
+      <h2 class="section-title"><span class="title-text">专业技能</span></h2>
+      <div class="skills-content">
+        <div class="skill-row">
+          <span class="skill-category">AI / <strong>LLM</strong> 体系：</span>
+          <span class="skill-items">精通 <strong>RAG</strong> 架构、Agent Workflow 编排 (LangGraph / LlamaIndex)、Function Calling 与模型微调评估。</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">后端与工程：</span>
+          <span class="skill-items">熟练掌握 <strong>Python</strong> / TypeScript / Go，精通 FastAPI、Node.js、微服务架构、Docker 与 K8s 容器编排。</span>
+        </div>
+        <div class="skill-row">
+          <span class="skill-category">存储与索引：</span>
+          <span class="skill-items">精通 PostgreSQL、Redis、向量数据库 (Qdrant / Milvus / Pinecone) 混合多模态检索与性能优化。</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section class="resume-section" id="experience">
+      <h2 class="section-title"><span class="title-text">工作经历</span></h2>
       
-      <!-- 基本信息 6 列矩阵 -->
-      <tr>
-        <td class="cell-label">姓 名</td>
-        <td class="cell-value">鹿小笙</td>
-        <td class="cell-label">出生年月</td>
-        <td class="cell-value">1995.06 (29岁)</td>
-        <td class="cell-label">政治面貌</td>
-        <td class="cell-value">中共党员</td>
-      </tr>
-      <tr>
-        <td class="cell-label">联系电话</td>
-        <td class="cell-value">138-0000-0000</td>
-        <td class="cell-label">电子邮箱</td>
-        <td class="cell-value">luxiaosheng@example.com</td>
-        <td class="cell-label">最高学历</td>
-        <td class="cell-value">硕士研究生</td>
-      </tr>
-      <tr>
-        <td class="cell-label">毕业院校</td>
-        <td class="cell-value">北京航空航天大学</td>
-        <td class="cell-label">所学专业</td>
-        <td class="cell-value">计算机科学与技术</td>
-        <td class="cell-label">求职城市</td>
-        <td class="cell-value">北京 / 远程</td>
-      </tr>
-
-      <!-- 专业技能模块 -->
-      <tr>
-        <td colspan="6" class="section-header-cell">
-          <span class="section-icon">■</span> 专业技能
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label">AI / 大模型</td>
-        <td colspan="5" class="cell-content">
-          精通 RAG 知识检索、多 Agent 协作工作流 (LangGraph / LlamaIndex)、Prompt 优化与模型评测微调。
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label">后端工程</td>
-        <td colspan="5" class="cell-content">
-          熟练掌握 Python / Go / TypeScript，精通 FastAPI、微服务架构、Docker / K8s 与可观测性体系。
-        </td>
-      </tr>
-
-      <!-- 工作经历模块 -->
-      <tr>
-        <td colspan="6" class="section-header-cell">
-          <span class="section-icon">■</span> 工作经历
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label date-col">2023.03 - 至今</td>
-        <td colspan="5" class="cell-content">
-          <div class="exp-header">
-            <strong>智元未来人工智能实验室</strong> · 资深 AI 应用工程师
+      <div class="experience-item">
+        <div class="item-header">
+          <div class="item-title-group">
+            <span class="org-name">智元未来人工智能实验室</span>
+            <span class="role-badge">资深 AI 应用工程师</span>
           </div>
-          <ul class="exp-bullets">
-            <li>主导研发企业级多 Agent 工作流系统，单日调度调用量超 <strong>500 万次</strong>，工作流成功率达 <strong>99.2%</strong>。</li>
-            <li>设计高吞吐多路召回 RAG 检索管线，问答匹配命中率提升 <strong>38%</strong>，端到端延迟压测低于 <strong>650ms</strong>。</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label date-col">2020.07 - 2023.02</td>
-        <td colspan="5" class="cell-content">
-          <div class="exp-header">
-            <strong>极光互联科技有限公司</strong> · 高级后端开发工程师
-          </div>
-          <ul class="exp-bullets">
-            <li>负责核心 API 网关重构，平稳支撑双十一 <strong>80,000 QPS</strong> 峰值，核心接口 P99 延迟降低 <strong>45%</strong>。</li>
-            <li>落地微服务链路追踪与自动化巡检探针，线上平均故障自愈恢复时间（MTTR）缩短 <strong>60%</strong>。</li>
-          </ul>
-        </td>
-      </tr>
+          <span class="date-range">2023.03 - 至今</span>
+        </div>
+        <ul class="bullet-list">
+          <li>主导企业级多 Agent 协同工作流系统研发，设计基于状态机的任务拆解与自愈重试机制，单日承载调用量超过 <strong>500 万次</strong>，工作流执行成功率由 84% 提升至 <strong>99.2%</strong>。</li>
+          <li>设计并落地混合多路召回 <strong>RAG</strong> 检索管线（Dense Vector + BM25 + Cross-Encoder Rerank），将行业专业知识问答的精准匹配准确率（Hit@3）提升 <strong>38%</strong>，端到端延迟降低至 <strong>650ms</strong> 以内。</li>
+        </ul>
+      </div>
 
-      <!-- 核心项目模块 -->
-      <tr>
-        <td colspan="6" class="section-header-cell">
-          <span class="section-icon">■</span> 核心项目
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label date-col">2024.01 - 2024.08</td>
-        <td colspan="5" class="cell-content">
-          <div class="exp-header">
-            <strong>OpenAgent: 自适应代码审查与重构 Agent</strong> (GitHub 2,400+ Stars)
+      <div class="experience-item">
+        <div class="item-header">
+          <div class="item-title-group">
+            <span class="org-name">极光互联科技有限公司</span>
+            <span class="role-badge">高级后端开发工程师</span>
           </div>
-          <p class="project-desc">
-            基于 AST 语义解析与 AST-Grep 上下文感知引擎，结合 LLM 实现工业级代码重构建议生成；设计 Prompt 动态剪枝算法，在保障重构精度的同时降低 42% 的 API Token 成本。
-          </p>
-        </td>
-      </tr>
+          <span class="date-range">2020.07 - 2023.02</span>
+        </div>
+        <ul class="bullet-list">
+          <li>负责核心中台 API 网关与实时流计算系统的重构，采用异步非阻塞架构与 Redis 缓存多级穿透防护，支撑双十一峰值 <strong>80,000 QPS</strong>，核心接口 P99 延迟降低 <strong>45%</strong>。</li>
+          <li>设计并维护微服务 CI/CD 自动化流水线与可观测性链路追踪平台，构建自动化健康巡检探针，线上平均故障发现与自愈恢复时间（MTTR）缩短 <strong>60%</strong>。</li>
+        </ul>
+      </div>
+    </section>
 
-      <!-- 教育背景与荣誉 -->
-      <tr>
-        <td colspan="6" class="section-header-cell">
-          <span class="section-icon">■</span> 教育背景与荣誉
-        </td>
-      </tr>
-      <tr>
-        <td class="cell-label date-col">2017.09 - 2020.06</td>
-        <td colspan="5" class="cell-content">
-          <strong>北京航空航天大学</strong> · 计算机科学与技术 (硕士) · GPA: 3.8/4.0 · 国家奖学金 · CCF-B 论文发表
-        </td>
-      </tr>
-    </table>
+    <!-- 项目经历 -->
+    <section class="resume-section" id="projects">
+      <h2 class="section-title"><span class="title-text">核心项目</span></h2>
+      
+      <div class="project-item">
+        <div class="item-header">
+          <div class="item-title-group">
+            <span class="project-name">OpenAgent: 开源自适应代码审查与重构 Agent</span>
+            <span class="tech-tags"><strong>Python</strong> / FastAPI / AST / Qdrant / OpenAI SDK</span>
+          </div>
+          <span class="date-range">2024.01 - 2024.08</span>
+        </div>
+        <ul class="bullet-list">
+          <li>构建基于 AST 语义解析与 AST-Grep 的上下文精准感知引擎，结合 <strong>LLM</strong> 实现工业级代码重构建议生成，项目在 GitHub 斩获 <strong>2,400+ Stars</strong>。</li>
+          <li>实现轻量级上下文窗口压缩与 Prompt Token 动态裁切算法，在保持代码重构建议完整度的前提下降低 <strong>42%</strong> 的 API Token 调用开销。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 教育背景 -->
+    <section class="resume-section" id="education">
+      <h2 class="section-title"><span class="title-text">教育背景</span></h2>
+      <div class="education-item">
+        <div class="item-header">
+          <div class="item-title-group">
+            <span class="org-name">北京航空航天大学</span>
+            <span class="role-badge">计算机科学与技术 · 硕士</span>
+          </div>
+          <span class="date-range">2017.09 - 2020.06</span>
+        </div>
+        <p class="edu-detail">GPA: 3.8/4.0 (Top 5%) · 国家奖学金 · 发表 CCF-B 国际学术会议论文 1 篇</p>
+      </div>
+    </section>
   </div>
 </body>
 </html>

@@ -15,8 +15,19 @@ export interface InitOptions {
 
 const SUPPORTED_PLATFORMS = ['claude', 'codex', 'cursor', 'windsurf', 'gemini', 'opencode'];
 
+function findPackageRoot(startDir: string): string {
+  let curr = startDir;
+  for (let i = 0; i < 6; i++) {
+    if (fs.existsSync(path.join(curr, 'src', 'templates')) && fs.existsSync(path.join(curr, 'SKILL.md'))) {
+      return curr;
+    }
+    curr = path.dirname(curr);
+  }
+  return path.resolve(startDir, '../../..');
+}
+
 export function runInit(options: InitOptions): void {
-  const rootDir = path.resolve(__dirname, '../../..');
+  const rootDir = findPackageRoot(__dirname);
   const projectDir = options.projectDir ? path.resolve(options.projectDir) : process.cwd();
   const homeDir = os.homedir();
 

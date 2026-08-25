@@ -1,24 +1,35 @@
 # KnowMe CareerForge
 
+<p align="center">
+  <a href="README.zh-CN.md">🇨🇳 简体中文</a> | 
+  <a href="README.md">🇺🇸 English</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
+  <img src="https://img.shields.io/badge/role_profiles-9_standard-green?style=for-the-badge" alt="9 Role Profiles">
+  <img src="https://img.shields.io/badge/templates-4_baseline_A4-purple?style=for-the-badge" alt="4 Baseline A4 Templates">
+  <img src="https://img.shields.io/badge/python-3.9+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=green" alt="License: MIT"></a>
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat-square&logo=npm&label=npm" alt="npm package"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
+  <img src="https://img.shields.io/badge/architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-blue?style=flat-square" alt="HTML Intermediate Canvas">
+</p>
+
 > **Know Yourself. Define Your Direction. Forge Your Opportunity.**
 >
 > *An agent-native skill for self-discovery, career positioning, and tailored resume engineering.*
 
 ---
 
-[English](README.md) | [中文说明](README.zh-CN.md)
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Platform Support](https://img.shields.io/badge/Platforms-Claude%20%7C%20Codex%20%7C%20Cursor%20%7C%20Windsurf%20%7C%20Gemini-orange.svg)](skill.json)
-[![Architecture](https://img.shields.io/badge/Architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-success.svg)](SKILL.md)
-
----
-
 ## 1. What is KnowMe CareerForge?
 
-**KnowMe CareerForge** is not just another generic AI resume generator.
+**KnowMe CareerForge** is an industrial-grade, agent-native resume engineering skill for Claude Code, Cursor, Codex, Windsurf, and Gemini CLI.
 
-Traditional AI resume tools treat resume writing as a superficial text-generation task: feed a prompt to an LLM, get a block of Markdown, and convert it through external converters into a fragile, hallucination-prone PDF.
+Traditional AI resume tools treat resume writing as a superficial text-generation task: feed a prompt to an LLM, get a block of Markdown, and convert it through black-box tools into a fragile, hallucination-prone PDF.
 
 **KnowMe CareerForge** fundamentally rethinks this paradigm into a structured, dual-engine system:
 
@@ -55,9 +66,51 @@ Real Experience ──> Grounded Evidence ──> True Strengths ──> Job Mat
 
 ---
 
-## 3. The 3 Operational Modes
+## 3. Installation
 
-KnowMe CareerForge seamlessly adapts to candidate inputs across 3 primary scenarios:
+You can install and use KnowMe CareerForge via **CLI (Zero Clone)** or directly through **Agent-Native Manifests**:
+
+### Option A: Using CLI (Recommended)
+
+Run directly with `npx` (no clone required):
+
+```bash
+# Go to your project directory
+cd /path/to/your/project
+
+# Install for your preferred AI assistant
+npx knowme-careerforge-skill init --ai cursor    # Cursor (.cursor/rules/)
+npx knowme-careerforge-skill init --ai claude    # Claude Code (~/.claude/skills/)
+npx knowme-careerforge-skill init --ai codex     # Codex CLI (~/.codex/skills/)
+npx knowme-careerforge-skill init --ai windsurf  # Windsurf (.windsurfrules)
+npx knowme-careerforge-skill init --ai gemini    # Gemini CLI (~/.gemini/skills/)
+npx knowme-careerforge-skill init --ai opencode  # OpenCode (.opencode/skills/)
+npx knowme-careerforge-skill init --all          # All supported assistants
+```
+
+Or install globally:
+
+```bash
+npm install -g knowme-careerforge-skill
+knowme init --ai cursor
+knowme list
+```
+
+---
+
+### Option B: Direct Agent Integration
+
+| Platform | Target Configuration Path | Setup Command |
+| :--- | :--- | :--- |
+| **Cursor** | `.cursor/rules/knowme-careerforge.mdc` | `cp SKILL.md .cursor/rules/knowme-careerforge.mdc` |
+| **Claude Code** | `~/.claude/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.claude/skills/` |
+| **Codex** | `~/.codex/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.codex/skills/` |
+| **Windsurf** | `.windsurfrules` | `cat agents/windsurf/knowme-careerforge.rules >> .windsurfrules` |
+| **OpenCode** | `.opencode/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.opencode/skills/` |
+
+---
+
+## 4. The 3 Operational Modes
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -77,61 +130,24 @@ KnowMe CareerForge seamlessly adapts to candidate inputs across 3 primary scenar
 
 ---
 
-## 4. End-to-End Skill Usage Walkthrough (Step-by-Step)
+## 5. End-to-End Execution Workflow
 
-Here is the exact step-by-step execution path when activating KnowMe CareerForge in an AI Agent:
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User as Candidate
-    participant Agent as AI Agent (Claude/Codex/Cursor)
-    participant Engine as KnowMe Scripts (Python/TS)
-    participant Chrome as Playwright (Chromium QA)
-
-    User->>Agent: "Tailor my resume for this Senior AI Engineer JD: [paste JD + experience]"
-    
-    rect rgb(30, 41, 59)
-    note right of Agent: Stage 1 & 2: Know Me & Define
-    Agent->>Engine: Run scripts/analyze-jd.py on JD text
-    Engine-->>Agent: Returns Must-Have Skills, Signals, and Seniority
-    Agent->>Agent: Classifies candidate facts into L1 (Code), L2 (Module), L3 (Context)
-    end
-
-    rect rgb(15, 23, 42)
-    note right of Agent: Stage 3 & 4: Position & Strategy
-    Agent->>Agent: Formulates Core Value Proposition & Section Priority
-    Agent->>Engine: Run scripts/search-template.py "AI Agent Engineer" --style "two-column-split"
-    Engine-->>Agent: Recommends template (e.g., modern, score 89.0)
-    end
-
-    rect rgb(30, 58, 138)
-    note right of Agent: Stage 5: CareerForge Canvas Instantiation
-    Agent->>Engine: Run scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG"
-    Engine-->>Agent: Creates self-contained workspace/resume.html
-    Agent->>Agent: Populates experience using FAB formula & calibrates CSS variables
-    end
-
-    rect rgb(20, 83, 45)
-    note right of Agent: Stage 6: Dual QA & Deterministic Export
-    Agent->>Engine: Run scripts/validate-resume.py & scripts/validate-layout.ts
-    alt DOM Height Exceeds A4 (1122.5px)
-        Engine-->>Agent: Overflow Alert (e.g. Height 1145px > 1122.5px by 22.5px)
-        Agent->>Agent: Self-heals: reduces --resume-space-section & --resume-font-size-body
-        Agent->>Engine: Re-validates (Pass)
-    end
-    Agent->>Chrome: Run npx ts-node scripts/render-pdf.ts
-    Chrome-->>Agent: Generates workspace/resume.pdf
-    end
-
-    Agent-->>User: Delivers workspace/resume.html + workspace/resume.pdf + Evidence Report
+```text
+  Know (Evidence L1~3) ──> Define (Goal) ──> Understand (JD Signals) ──> Position (Strategy) ──> Forge (HTML Canvas) ──> Review (Dual QA)
 ```
+
+1. **[KnowMe] Evidence Mapping**: Candidate experience is analyzed and strictly categorized into L1 (Code/Config proven), L2 (Module/Dependency inferred), and L3 (Contextual inference).
+2. **[Define & Understand] Signal Extraction**: The target JD is parsed to extract must-have competencies and hiring signals.
+3. **[Position] Strategy Formulation**: Gap analysis maps real candidate evidence to target JD requirements.
+4. **[CareerForge] Template Search & Assembly**: The best HTML template is chosen using multi-criteria BM25 ranking (`search-template.py`) and instantiated to `workspace/resume.html`.
+5. **[Review & Dual QA] Self-Healing**: Layout box model height overflow and ATS textual readability tests run automatically. If an overflow is detected, CSS spacing tokens are auto-calibrated.
+6. **[PDF Export] Deterministic Output**: Playwright renders pixel-perfect `workspace/resume.pdf` with `@media print` A4 rules.
 
 ---
 
-## 5. Token Self-Healing & Visual Tuning Cheat Sheet
+## 6. Token Self-Healing & Visual Tuning Cheat Sheet
 
-All visual parameters are concentrated in `:root` variables inside `workspace/resume.html`. Agent and candidates can adjust these tokens for instant global self-healing:
+All visual parameters are concentrated in `:root` variables inside `workspace/resume.html`:
 
 | CSS Token | Default | Compact (1-Page Squeeze) | Relaxed (2-Page Flow) | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
@@ -144,45 +160,7 @@ All visual parameters are concentrated in `:root` variables inside `workspace/re
 
 ---
 
-## 6. Installation & Multi-Platform CLI Commands
-
-```bash
-# 0. Clone repository
-git clone https://github.com/Max-Samson/knowme-careerforge-skill.git
-cd knowme-careerforge-skill
-npm install
-
-# 1. Install Skill for your favorite AI Agent
-npx ts-node cli/src/index.ts init --ai cursor
-npx ts-node cli/src/index.ts init --ai claude
-npx ts-node cli/src/index.ts init --ai codex
-npx ts-node cli/src/index.ts init --all
-
-# 2. List all available roles, templates, and layouts
-npx ts-node cli/src/index.ts list
-
-# 3. Search best template for target role
-python3 scripts/search-template.py "Senior Frontend Architect" --style "single-column" --target-pages 1
-
-# 4. Analyze a target Job Description
-python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
-
-# 5. Instantiate Intermediate Canvas with keyword highlights
-python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
-
-# 6. Run automated structural and density validation
-python3 scripts/validate-resume.py --html workspace/resume.html --expected-pages 1
-
-# 7. Render deterministic pixel-perfect PDF via Playwright
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
-
-# 8. Build static HTML Template Gallery
-python3 scripts/build-gallery.py
-```
-
----
-
-## 7. Core Templates Showcase
+## 7. Core Templates Matrix
 
 | Template ID | Style | Category | ATS Tier | Best For | Target Pages |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -193,20 +171,41 @@ python3 scripts/build-gallery.py
 
 ---
 
-## 8. Test Suites & Verification
-
-The repository includes a full-chain automated test suite:
+## 8. CLI & Script Reference
 
 ```bash
-# Run all Python & TypeScript test suites
-python3 scripts/run-all-tests.py
+# 1. Search best template for target role
+knowme search "AI Agent Engineer" --style "two-column-split"
 
-# Or run via unittest discovery
-python3 -m unittest discover -s tests
+# 2. Analyze a target Job Description
+python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
+
+# 3. Instantiate Intermediate Working Canvas
+python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG" --output workspace/resume.html
+
+# 4. Validate working canvas layout & ATS compliance
+knowme validate
+
+# 5. Render deterministic pixel-perfect PDF via Playwright
+npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+
+# 6. Build & view static HTML Template Gallery
+knowme gallery
 ```
 
 ---
 
-## 9. License
+## 9. Automated Testing & Verification
+
+```bash
+# Run full automated test suite (21/21 passing in 0.3s)
+npm test
+# Or:
+python3 scripts/run-all-tests.py
+```
+
+---
+
+## 10. License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
