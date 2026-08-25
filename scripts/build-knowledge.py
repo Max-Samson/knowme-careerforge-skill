@@ -46,9 +46,18 @@ def build_knowledge_index():
                 except Exception as e:
                     print(f"[!] Error parsing template {t_dir.name}: {e}")
 
-    # 3. 聚合输出
+    # 3. 读取主版本号
+    pkg_json_file = base_dir / "package.json"
+    version = "0.0.1"
+    if pkg_json_file.exists():
+        try:
+            version = json.loads(pkg_json_file.read_text(encoding="utf-8")).get("version", "0.0.1")
+        except:
+            pass
+
+    # 4. 聚合输出
     index_data = {
-        "version": "1.0.0",
+        "version": version,
         "totalRoles": len(roles),
         "totalTemplates": len(templates),
         "roles": roles,

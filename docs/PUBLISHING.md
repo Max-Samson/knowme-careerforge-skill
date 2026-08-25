@@ -42,13 +42,13 @@ When publishing, NPM only packages files declared in `"files"` in `package.json`
 
 We provide an automated release engine (`scripts/release.py`) that handles version synchronization, compilation, template gallery rebuilding, full-chain test validation, and packaging checks.
 
-### Releasing a New Version (e.g. `1.0.1`):
+### Releasing a New Version (e.g. `0.0.1`):
 
 ```bash
 # Step 1: Run the automated release pipeline
-npm run release -- 1.0.1
+npm run release -- 0.0.1
 # Or directly:
-python3 scripts/release.py 1.0.1
+python3 scripts/release.py 0.0.1
 ```
 
 The script automatically executes:
@@ -68,8 +68,8 @@ After the release script passes with 100% success:
 ```bash
 # 1. Commit and tag the new version
 git add .
-git commit -m "chore(release): bump version to v1.0.1"
-git tag v1.0.1
+git commit -m "chore(release): bump version to v0.0.1"
+git tag v0.0.1
 git push origin main --tags
 
 # 2. Publish to the public NPM registry
@@ -94,11 +94,8 @@ npx knowme-careerforge-skill@latest search "AI Agent Engineer"
 ---
 
 ## 6. Updating an Existing Release
-
-When making patches or adding new templates:
-
 | Release Type | Command | Example Version | When to Use |
 | :--- | :--- | :--- | :--- |
-| **Patch** | `npm run release -- 1.0.1` | `1.0.0` -> `1.0.1` | Bug fixes, typo corrections, template token tweaks |
-| **Minor** | `npm run release -- 1.1.0` | `1.0.1` -> `1.1.0` | New templates, new role profiles, new CLI commands |
-| **Major** | `npm run release -- 2.0.0` | `1.1.0` -> `2.0.0` | Breaking schema changes, major workflow restructuring |
+| **Patch** | `npm run release -- 0.0.2` | `0.0.1` -> `0.0.2` | Bug fixes, typo corrections, template token tweaks |
+| **Minor** | `npm run release -- 0.1.0` | `0.0.1` -> `0.1.0` | New templates, new role profiles, new CLI commands |
+| **Major** | `npm run release -- 1.0.0` | `0.1.0` -> `1.0.0` | Production milestone, breaking schema changes |

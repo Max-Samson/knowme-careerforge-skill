@@ -212,7 +212,7 @@ This package is ready to be built, tested, and published to the NPM Registry:
 
 ```bash
 # 1. Automated release preparation & verification
-npm run release -- 1.0.0
+npm run release -- 0.0.1
 
 # 2. Publish to public NPM registry
 npm publish --access public

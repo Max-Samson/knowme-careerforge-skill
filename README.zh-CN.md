@@ -216,7 +216,7 @@ python3 scripts/run-all-tests.py
 
 ```bash
 # 1. 执行发布前自动化测试与打包预检
-npm run release -- 1.0.0
+npm run release -- 0.0.1
 
 # 2. 发布至公共 NPM 注册表
 npm publish --access public

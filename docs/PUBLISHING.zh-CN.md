@@ -42,13 +42,13 @@
 
 项目内置了发布自动化引擎（`scripts/release.py`），自动完成版本号同步、知识库编译、画廊刷新、TypeScript 编译、全量测试质检与打包预检。
 
-### 发布新版本（例如 `1.0.1`）：
+### 发布新版本（例如 `0.0.1`）：
 
 ```bash
 # 步骤 1：执行自动化发布准备流水线
-npm run release -- 1.0.1
+npm run release -- 0.0.1
 # 或直接运行：
-python3 scripts/release.py 1.0.1
+python3 scripts/release.py 0.0.1
 ```
 
 该脚本将自动执行：
@@ -68,8 +68,8 @@ python3 scripts/release.py 1.0.1
 ```bash
 # 1. 提交代码并打上 Git Tag
 git add .
-git commit -m "chore(release): bump version to v1.0.1"
-git tag v1.0.1
+git commit -m "chore(release): bump version to v0.0.1"
+git tag v0.0.1
 git push origin main --tags
 
 # 2. 正式发布至公共 NPM 注册表
@@ -97,6 +97,6 @@ npx knowme-careerforge-skill@latest search "AI Agent Engineer"
 
 | 更新类型 | 触发命令 | 版本号变化示例 | 适用场景 |
 | :--- | :--- | :--- | :--- |
-| **Patch (补丁版本)** | `npm run release -- 1.0.1` | `1.0.0` ➔ `1.0.1` | 修复 Bug、修正文档错别字、微调模板 CSS 变量 |
-| **Minor (次版本)** | `npm run release -- 1.1.0` | `1.0.1` ➔ `1.1.0` | 新增简历模板、新增岗位画像、新增 CLI 子命令 |
-| **Major (主版本)** | `npm run release -- 2.0.0` | `1.1.0` ➔ `2.0.0` | 涉及底层 Schema 破坏性重构或重大架构升级 |
+| **Patch (补丁版本)** | `npm run release -- 0.0.2` | `0.0.1` ➔ `0.0.2` | 修复 Bug、修正文档错别字、微调模板 CSS 变量 |
+| **Minor (次版本)** | `npm run release -- 0.1.0` | `0.0.1` ➔ `0.1.0` | 新增简历模板、新增岗位画像、新增 CLI 子命令 |
+| **Major (主版本)** | `npm run release -- 1.0.0` | `0.1.0` ➔ `1.0.0` | 达成生产里程碑、底层 Schema 破坏性重构 |
