@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "mcpServers": {
+    "knowme-careerforge": {
+      "command": "python3",
+      "args": ["-m", "scripts.search-template", "--help"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "tools": [
+        {
+          "name": "search_template",
+          "description": "Search and rank HTML resume templates based on target role, style, target page count, and information density.",
+          "command": "python3 scripts/search-template.py"
+        },
+        {
+          "name": "analyze_jd",
+          "description": "Analyze raw Job Description (JD) text to extract must-have skills, nice-to-have skills, seniority, and hiring signals.",
+          "command": "python3 scripts/analyze-jd.py"
+        },
+        {
+          "name": "instantiate_resume",
+          "description": "Instantiate a self-contained intermediate HTML working canvas (workspace/resume.html) from a chosen template with keyword highlights.",
+          "command": "python3 scripts/instantiate-resume.py"
+        },
+        {
+          "name": "validate_resume",
+          "description": "Run automated layout, Design Tokens, semantic structure, and text density checks on the intermediate HTML canvas.",
+          "command": "python3 scripts/validate-resume.py"
+        },
+        {
+          "name": "render_pdf",
+          "description": "Render deterministic vector A4 PDF using Playwright headless Chromium after Dual QA verification passes.",
+          "command": "npx ts-node scripts/render-pdf.ts"
+        }
+      ]
+    }
+  }
+}
