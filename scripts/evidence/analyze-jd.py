@@ -17,9 +17,6 @@ COMMON_TECH_STACKS = [
 ]
 
 def analyze_jd_text(jd_text: str) -> dict:
-    text_lower = jd_text.lower()
-    
-    # 1. 识别岗位与职级
     seniority = "mid"
     if any(k in jd_text for k in ["资深", "专家", "架构师", "总监", "Lead", "Senior", "Principal"]):
         seniority = "senior/lead"
@@ -30,18 +27,15 @@ def analyze_jd_text(jd_text: str) -> dict:
     if any(k in jd_text for k in ["产品经理", "Product Manager", "总监", "Director", "业务负责人"]):
         category = "management-product"
 
-    # 2. 匹配技术栈与关键词
     detected_skills = []
     for skill in COMMON_TECH_STACKS:
         pattern = re.compile(rf'(?:^|[^\w]){re.escape(skill)}(?:[^\w]|$)', re.IGNORECASE)
         if pattern.search(jd_text):
             detected_skills.append(skill)
 
-    # 3. 区分必备与加分
     must_haves = detected_skills[:6] if len(detected_skills) >= 6 else detected_skills
     nice_to_haves = detected_skills[6:] if len(detected_skills) > 6 else []
 
-    # 4. 业务痛点与职责关键词提取
     responsibilities = []
     for line in jd_text.splitlines():
         line_clean = line.strip()
@@ -50,59 +44,54 @@ def analyze_jd_text(jd_text: str) -> dict:
 
     return {
         "status": "success",
+        "seniority": seniority,
         "category": category,
-        "estimatedSeniority": seniority,
+        "detectedSkills": detected_skills,
         "mustHaveSkills": must_haves,
         "niceToHaveSkills": nice_to_haves,
-        "detectedSkills": detected_skills,
-        "keyResponsibilities": responsibilities[:6],
-        "hiringSignals": [
-            "强调工程化与系统高并发稳定性" if "稳定" in jd_text or "高并发" in jd_text else "强调快速交付与 0-1 探索",
-            "大模型与 AI Agent 场景深度落地" if "大模型" in jd_text or "rag" in text_lower or "agent" in text_lower else "传统业务系统演进"
-        ]
+        "keyResponsibilities": responsibilities[:5]
     }
 
 def main():
     parser = argparse.ArgumentParser(description="KnowMe CareerForge — JD Analyzer")
-    parser.add_argument("--jd", "-j", help="Path to JD text file")
-    parser.add_argument("--text", "-t", help="Raw JD text string")
-    parser.add_argument("--json", action="store_true", help="Output only clean JSON")
+    parser.add_argument("--jd", help="Path to JD markdown/text file")
+    parser.add_argument("--text", help="Raw JD text string")
+    parser.add_argument("--json", action="store_true", help="Output JSON format")
 
     args = parser.parse_args()
+    jd_content = ""
 
-    content = ""
-    if args.jd and Path(args.jd).exists():
-        content = Path(args.jd).read_text(encoding="utf-8")
+    if args.jd:
+        p = Path(args.jd)
+        if not p.exists():
+            print(f"Error: JD file not found: {p}", file=sys.stderr)
+            sys.exit(1)
+        jd_content = p.read_text(encoding="utf-8")
     elif args.text:
-        content = args.text
+        jd_content = args.text
+    else:
+        if not sys.stdin.isatty():
+            jd_content = sys.stdin.read()
+        else:
+            parser.print_help()
+            sys.exit(1)
 
-    if not content.strip():
-        # 默认样例
-        content = """职位：资深 AI Agent 研发工程师
-岗位职责：
-1. 负责企业级多 Agent 智能协同工作流平台的设计与核心研发；
-2. 主导基于 RAG 的专业知识库检索管线优化与模型微调；
-3. 持续优化 Prompt 与上下文窗口，压榨模型推理延迟与 Token 成本。
-任职要求：
-1. 本科及以上学历，精通 Python、FastAPI 及多线程异步编程；
-2. 熟练掌握 LangGraph、LangChain、LlamaIndex 等 Agent 开发框架；
-3. 深入理解向量数据库（Qdrant / Milvus）原理，具备高并发高可用调优经验；
-4. 熟悉 Docker、Kubernetes 云原生技术栈者优先。"""
-
-    result = analyze_jd_text(content)
+    result = analyze_jd_text(jd_content)
 
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        return
-
-    print("=" * 70)
-    print("  KnowMe CareerForge — JD Analysis Result")
-    print(f"  Category            : {result['category']}")
-    print(f"  Seniority Level     : {result['estimatedSeniority']}")
-    print(f"  Must-Have Skills    : {', '.join(result['mustHaveSkills'])}")
-    print(f"  Nice-To-Have Skills : {', '.join(result['niceToHaveSkills'])}")
-    print(f"  Hiring Signals      : {', '.join(result['hiringSignals'])}")
-    print("=" * 70)
+    else:
+        print("=" * 70)
+        print("  KnowMe CareerForge — JD Analysis Report")
+        print("=" * 70)
+        print(f"  Target Category   : {result['category']}")
+        print(f"  Seniority Level   : {result['seniority']}")
+        print(f"  Must-have Skills  : {', '.join(result['mustHaveSkills']) or 'None'}")
+        print(f"  Nice-to-have Skills: {', '.join(result['niceToHaveSkills']) or 'None'}")
+        print("  Key Responsibilities:")
+        for r in result["keyResponsibilities"]:
+            print(f"    • {r}")
+        print("=" * 70)
 
 if __name__ == "__main__":
     main()

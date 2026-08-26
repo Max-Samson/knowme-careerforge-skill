@@ -16,30 +16,36 @@ Welcome, AI Coding Assistant! This file provides key conventions, architecture g
 ## 2. Essential Commands
 
 ```bash
-# Run all automated tests (Templates, ATS, Workflows, End-to-End Pipeline)
-python3 scripts/run-all-tests.py
+# Run one-shot end-to-end forge pipeline
+python3 scripts/pipeline/forge.py --repo . --role "AI Agent Engineer" --template modern --quiet
 
-# Run individual test modules
-python3 -m unittest tests/templates/test_templates.py
-python3 -m unittest tests/ats/test_ats.py
-python3 -m unittest tests/workflows/test_workflows.py
-python3 -m unittest tests/rendering/test_smoke.py
+# Extract codebase & Git evidence (repo-to-resume)
+python3 scripts/evidence/extract-evidence.py --repo . --output workspace/evidence-master.json
 
-# Recompile knowledge index & templates registry
-python3 scripts/build-knowledge.py
-
-# Rebuild interactive HTML template gallery
-python3 scripts/build-gallery.py
+# Analyze target Job Description
+python3 scripts/evidence/analyze-jd.py --jd examples/ai-engineer/jd.md
 
 # Search templates via CLI
-python3 scripts/search-template.py "AI Agent Engineer" --style "two-column-split"
+python3 scripts/template/search-template.py "AI Agent Engineer" --style "two-column-split"
+
+# Instantiate HTML working canvas with profile data
+python3 scripts/template/instantiate-resume.py --template modern --profile workspace/evidence-master.json
 
 # Validate working canvas layout & ATS compliance
-python3 scripts/validate-resume.py --html workspace/resume.html --expected-pages 1
+python3 scripts/validation/validate-resume.py --html workspace/resume.html --expected-pages 1
 
-# Render deterministic PDF via Playwright
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+# Render deterministic PDF via multi-strategy auto-discovery
+python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
+
+# Run all automated tests
+python3 scripts/build/run-all-tests.py
+
+# Recompile knowledge index & rebuild gallery
+python3 scripts/build/build-knowledge.py
+python3 scripts/build/build-gallery.py
 ```
+
+See `scripts/Agent.md` for complete domain architecture and invocation standards.
 
 ---
 

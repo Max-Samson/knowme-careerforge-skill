@@ -2,11 +2,14 @@
 """
 KnowMe CareerForge — End-to-End Smoke & Functional Pipeline Tests
 验证完整功能链路：
-1. 模板检索引擎打分与 JSON 返回
-2. 所有 4 款模板的实例化与关键词高亮注入
-3. 布局与 ATS 规则自动化验证
-4. 知识库编译器 (build-knowledge.py) 执行
-5. 可视化模板画廊生成器 (build-gallery.py) 执行
+1. 模板检索引擎打分与 JSON 返回 (scripts/template/search-template.py)
+2. 所有 4 款模板的实例化与关键词高亮注入 (scripts/template/instantiate-resume.py)
+3. 布局与 ATS 规则自动化验证 (scripts/validation/validate-resume.py)
+4. 知识库编译器 (scripts/build/build-knowledge.py) 执行
+5. 可视化模板画廊生成器 (scripts/build/build-gallery.py) 执行
+6. 事实证据挖掘器 (scripts/evidence/extract-evidence.py) 执行
+7. 一键全流程管线 (scripts/pipeline/forge.py) 执行
+8. 规范文档 (scripts/Agent.md) 完整性验证
 """
 
 import os, sys, json, unittest, subprocess
@@ -21,7 +24,7 @@ class TestSmokePipeline(unittest.TestCase):
         self.workspace_dir.mkdir(parents=True, exist_ok=True)
 
     def test_1_search_template_cli(self):
-        cmd = [sys.executable, str(self.scripts_dir / "search-template.py"), "Senior Backend Engineer", "--json"]
+        cmd = [sys.executable, str(self.scripts_dir / "template" / "search-template.py"), "Senior Backend Engineer", "--json"]
         proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
         self.assertEqual(proc.returncode, 0, f"search-template.py failed: {proc.stderr}")
         data = json.loads(proc.stdout)
@@ -35,7 +38,7 @@ class TestSmokePipeline(unittest.TestCase):
             with self.subTest(template=template_id):
                 target_html = self.workspace_dir / f"test_{template_id}.html"
                 cmd_inst = [
-                    sys.executable, str(self.scripts_dir / "instantiate-resume.py"),
+                    sys.executable, str(self.scripts_dir / "template" / "instantiate-resume.py"),
                     "--template", template_id,
                     "--keywords", test_keywords,
                     "--output", str(target_html)
@@ -54,7 +57,7 @@ class TestSmokePipeline(unittest.TestCase):
 
                 # 运行验证
                 cmd_val = [
-                    sys.executable, str(self.scripts_dir / "validate-resume.py"),
+                    sys.executable, str(self.scripts_dir / "validation" / "validate-resume.py"),
                     "--html", str(target_html),
                     "--expected-pages", "1",
                     "--json"
@@ -69,7 +72,7 @@ class TestSmokePipeline(unittest.TestCase):
                     target_html.unlink()
 
     def test_3_build_knowledge_compiler(self):
-        cmd = [sys.executable, str(self.scripts_dir / "build-knowledge.py")]
+        cmd = [sys.executable, str(self.scripts_dir / "build" / "build-knowledge.py")]
         proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
         self.assertEqual(proc.returncode, 0, f"build-knowledge.py failed: {proc.stderr}")
 
@@ -80,7 +83,7 @@ class TestSmokePipeline(unittest.TestCase):
         self.assertEqual(index_data["totalTemplates"], 4)
 
     def test_4_build_gallery_generator(self):
-        cmd = [sys.executable, str(self.scripts_dir / "build-gallery.py")]
+        cmd = [sys.executable, str(self.scripts_dir / "build" / "build-gallery.py")]
         proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
         self.assertEqual(proc.returncode, 0, f"build-gallery.py failed: {proc.stderr}")
 
@@ -91,6 +94,58 @@ class TestSmokePipeline(unittest.TestCase):
         self.assertIn("modern.html", content)
         self.assertIn("executive.html", content)
         self.assertIn("classic.html", content)
+
+    def test_5_extract_evidence_miner(self):
+        out_json = self.workspace_dir / "test_evidence.json"
+        cmd = [
+            sys.executable, str(self.scripts_dir / "evidence" / "extract-evidence.py"),
+            "--repo", str(self.base_dir),
+            "--name", "测试自动化候选人",
+            "--output", str(out_json),
+            "--quiet"
+        ]
+        proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
+        self.assertEqual(proc.returncode, 0, f"extract-evidence failed: {proc.stderr}")
+        self.assertTrue(out_json.exists())
+        data = json.loads(out_json.read_text(encoding="utf-8"))
+        self.assertEqual(data["basics"]["name"], "测试自动化候选人")
+        self.assertTrue(len(data["experience"]) > 0)
+        self.assertTrue(len(data["skills"]) > 0)
+        if out_json.exists():
+            out_json.unlink()
+
+    def test_6_forge_one_shot_pipeline(self):
+        out_pdf = self.workspace_dir / "test_forge.pdf"
+        out_html = self.workspace_dir / "test_forge.html"
+        cmd = [
+            sys.executable, str(self.scripts_dir / "pipeline" / "forge.py"),
+            "--repo", str(self.base_dir),
+            "--role", "全栈工程师",
+            "--name", "张集成",
+            "--template", "minimal",
+            "--output", str(out_pdf),
+            "--html-output", str(out_html),
+            "--quiet"
+        ]
+        proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
+        self.assertEqual(proc.returncode, 0, f"forge.py failed: {proc.stderr}")
+        self.assertTrue(out_html.exists())
+        self.assertTrue(out_pdf.exists())
+        self.assertTrue(out_pdf.stat().st_size > 1000)
+        
+        if out_pdf.exists(): out_pdf.unlink()
+        if out_html.exists(): out_html.unlink()
+
+    def test_7_agent_spec_document_exists(self):
+        agent_md = self.scripts_dir / "Agent.md"
+        self.assertTrue(agent_md.exists(), "scripts/Agent.md must exist")
+        content = agent_md.read_text(encoding="utf-8")
+        self.assertIn("pipeline/", content)
+        self.assertIn("evidence/", content)
+        self.assertIn("template/", content)
+        self.assertIn("validation/", content)
+        self.assertIn("rendering/", content)
+        self.assertIn("build/", content)
 
 if __name__ == "__main__":
     unittest.main()

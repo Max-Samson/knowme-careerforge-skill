@@ -29,26 +29,32 @@ Usage:
   knowme <command> [options]
 
 Commands:
-  init          Install and configure Skill for AI Agent platforms (cursor, claude, codex, windsurf, gemini, opencode)
-  list          Display all available role profiles and HTML templates
-  search <role> Search and rank templates for a specific role (e.g. knowme search "AI Agent Engineer")
-  validate      Validate working canvas HTML layout & ATS compliance
-  gallery       Build & refresh static HTML template gallery
-  test          Run full automated test suite
-  help          Show this help message
+  forge                 One-shot resume engineering pipeline (repo mining -> canvas -> QA -> PDF)
+  extract               Extract candidate evidence & facts from codebase/Git repo
+  render                Multi-strategy deterministic A4 PDF export
+  init                  Install and configure Skill for AI Agent platforms (cursor, claude, codex, windsurf, gemini, opencode)
+  list                  Display all available role profiles and HTML templates
+  search <role>         Search and rank templates for a specific role (e.g. knowme search "AI Agent Engineer")
+  validate              Validate working canvas HTML layout & ATS compliance
+  gallery               Build & refresh static HTML template gallery
+  test                  Run full automated test suite
+  help                  Show this help message
 
-Options (for init):
-  --ai, -a <platform>   Target platform (claude, codex, cursor, windsurf, gemini, opencode)
-  --all                 Install to all supported platforms
-  --project, -p <dir>   Target project directory (default: current directory)
+Options (for forge):
+  --repo, -r <dir>      Target repository path (default: .)
+  --role <title>        Target role title
+  --jd <file|text>      Target job description
+  --template, -t <id>   Template ID (minimal, modern, executive, classic)
+  --name <name>         Candidate name override
+  --output, -o <path>   Output PDF path (default: workspace/resume.pdf)
+  --quiet, -q           Quiet execution (compact JSON output)
 
 Examples:
-  npx knowme-careerforge init --ai cursor
-  npx knowme-careerforge init --ai claude
-  npx knowme-careerforge init --all
-  npx knowme-careerforge list
-  npx knowme-careerforge search "Senior Frontend Architect"
-  npx knowme-careerforge validate
+  knowme forge --repo . --role "AI Agent Engineer" --template modern
+  knowme extract --repo . --output workspace/evidence-master.json
+  knowme render workspace/resume.html workspace/resume.pdf
+  knowme init --ai codex
+  knowme init --all
 `);
 }
 
@@ -58,6 +64,30 @@ export function main(): void {
   const rootDir = findPackageRoot(__dirname);
 
   switch (command) {
+    case 'forge': {
+      let scriptPath = path.join(rootDir, 'scripts', 'pipeline', 'forge.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'forge.py');
+      const passArgs = args.slice(1);
+      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
+      break;
+    }
+    case 'extract': {
+      let scriptPath = path.join(rootDir, 'scripts', 'evidence', 'extract-evidence.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'extract-evidence.py');
+      const passArgs = args.slice(1);
+      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
+      break;
+    }
+    case 'render': {
+      let scriptPath = path.join(rootDir, 'scripts', 'rendering', 'render-pdf.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'render-pdf.py');
+      const passArgs = args.slice(1);
+      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
+      break;
+    }
     case 'init': {
       let platform = 'cursor';
       let all = false;
@@ -82,25 +112,28 @@ export function main(): void {
       runList();
       break;
     case 'search': {
-      const role = args[1] || 'AI Agent Engineer';
-      const scriptPath = path.join(rootDir, 'scripts', 'search-template.py');
+      let scriptPath = path.join(rootDir, 'scripts', 'template', 'search-template.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'search-template.py');
       const passArgs = args.slice(1);
       child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
       break;
     }
     case 'validate': {
-      const scriptPath = path.join(rootDir, 'scripts', 'validate-resume.py');
+      let scriptPath = path.join(rootDir, 'scripts', 'validation', 'validate-resume.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'validate-resume.py');
       const passArgs = args.slice(1);
       child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
       break;
     }
     case 'gallery': {
-      const scriptPath = path.join(rootDir, 'scripts', 'build-gallery.py');
+      let scriptPath = path.join(rootDir, 'scripts', 'build', 'build-gallery.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'build-gallery.py');
       child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
       break;
     }
     case 'test': {
-      const scriptPath = path.join(rootDir, 'scripts', 'run-all-tests.py');
+      let scriptPath = path.join(rootDir, 'scripts', 'build', 'run-all-tests.py');
+      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'run-all-tests.py');
       child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
       break;
     }

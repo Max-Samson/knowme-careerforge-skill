@@ -3,35 +3,45 @@
   "mcpServers": {
     "knowme-careerforge": {
       "command": "python3",
-      "args": ["-m", "scripts.search-template", "--help"],
+      "args": ["-m", "scripts.template.search-template", "--help"],
       "env": {
         "PYTHONUNBUFFERED": "1"
       },
       "tools": [
         {
+          "name": "forge",
+          "description": "One-shot end-to-end resume engineering pipeline (repo fact mining -> template matching -> HTML canvas -> Dual QA -> A4 PDF).",
+          "command": "python3 scripts/pipeline/forge.py"
+        },
+        {
+          "name": "extract_evidence",
+          "description": "Mine codebase and Git commit history for verified L1~L3 technical facts and architecture signals.",
+          "command": "python3 scripts/evidence/extract-evidence.py"
+        },
+        {
           "name": "search_template",
           "description": "Search and rank HTML resume templates based on target role, style, target page count, and information density.",
-          "command": "python3 scripts/search-template.py"
+          "command": "python3 scripts/template/search-template.py"
         },
         {
           "name": "analyze_jd",
           "description": "Analyze raw Job Description (JD) text to extract must-have skills, nice-to-have skills, seniority, and hiring signals.",
-          "command": "python3 scripts/analyze-jd.py"
+          "command": "python3 scripts/evidence/analyze-jd.py"
         },
         {
           "name": "instantiate_resume",
-          "description": "Instantiate a self-contained intermediate HTML working canvas (workspace/resume.html) from a chosen template with keyword highlights.",
-          "command": "python3 scripts/instantiate-resume.py"
+          "description": "Instantiate a self-contained intermediate HTML working canvas (workspace/resume.html) from a chosen template with keyword highlights and candidate data.",
+          "command": "python3 scripts/template/instantiate-resume.py"
         },
         {
           "name": "validate_resume",
           "description": "Run automated layout, Design Tokens, semantic structure, and text density checks on the intermediate HTML canvas.",
-          "command": "python3 scripts/validate-resume.py"
+          "command": "python3 scripts/validation/validate-resume.py"
         },
         {
           "name": "render_pdf",
-          "description": "Render deterministic vector A4 PDF using Playwright headless Chromium after Dual QA verification passes.",
-          "command": "npx ts-node scripts/render-pdf.ts"
+          "description": "Render deterministic vector A4 PDF using multi-strategy auto-discovery browser engine.",
+          "command": "python3 scripts/rendering/render-pdf.py"
         }
       ]
     }

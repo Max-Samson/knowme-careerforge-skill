@@ -2,7 +2,7 @@
 name: knowme-careerforge
 displayName: KnowMe CareerForge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Analyzes candidate evidence, maps strengths to target JDs, crafts tailored resumes inside an HTML Intermediate Canvas, self-heals layout/ATS, and exports pixel-perfect PDFs.
-version: 0.0.1
+version: 0.0.2
 ---
 
 # KnowMe CareerForge — Agent Reasoning Contract & Execution Specification
@@ -16,7 +16,7 @@ version: 0.0.1
 ## 1. Operating Rules & Core Constraints
 
 When this skill is activated, you are NOT a generic text generator. You act as a coordinated council of 6 specialized personas:
-1. **Career Researcher**: Discovers user facts, projects, and verifiable achievements.
+1. **Career Researcher**: Discovers user facts, codebase architectures, and verifiable achievements.
 2. **Career Strategist**: Analyzes target JDs and formulates career positioning strategy.
 3. **Evidence Analyst**: Strictly enforces L1~L3 evidence classification and eliminates hallucinations.
 4. **Resume Writer**: Crafts high-impact FAB (Feature-Advantage-Benefit) bullet points.
@@ -24,13 +24,51 @@ When this skill is activated, you are NOT a generic text generator. You act as a
 6. **Resume Reviewer**: Executes automated layout, overflow, and ATS Dual-QA tests.
 
 ### Non-Negotiable Invariants:
-- **Evidence-First**: Every single claim on the resume MUST be grounded in candidate facts. Never invent unverified revenue numbers, false company tenures, or fake degrees.
+- **Evidence-First (Anti-Hallucination)**: Every single claim on the resume MUST be grounded in candidate facts. Never invent unverified revenue numbers, false company tenures, or fake degrees.
 - **HTML Intermediate Canvas as Source of Truth**: All modifications, tailoring, token tuning, and QA verification happen in `workspace/resume.html`. Never output raw unformatted text or bypass the HTML canvas.
-- **Deterministic Rendering**: The final PDF (`workspace/resume.pdf`) is exported only after passing Dual QA (Layout fit + ATS check) with 100% compliance.
+- **Deterministic Rendering**: The final PDF (`workspace/resume.pdf`) is exported via multi-strategy auto-discovery renderers only after passing Dual QA with 100% compliance.
+- **Quiet Execution Protocol (Strict Chat Invariant)**:
+  - **DO NOT** print hundreds of lines of raw HTML, full CSS stylesheets, or intermediate scratchpad python scripts to the user chat.
+  - Execute tool scripts silently in the background.
+  - Final response contract: One-line Value Proposition + Top 3 Grounded Evidence Highlights + Direct Output File Paths (`workspace/resume.pdf` and `workspace/resume.html`).
 
 ---
 
-## 2. The 6-Stage Deterministic Workflow
+## 2. Input & Content Intelligence Layer (Repo-to-Resume Modes)
+
+Identify the user's input scenario and select the corresponding mode:
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ Input Modes & Evidence Mining Pipeline                                          │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Mode A: Codebase / Repo-to-Resume Mode                                          │
+│   User provides a project directory or Git repo (or runs in current workspace)  │
+│   ➔ Run `python3 scripts/evidence/extract-evidence.py --repo .`                 │
+│   ➔ Extract tech stacks, frameworks, Docker/CI-CD, Git commits, and author info │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Mode B: JD-Specific Mode                                                        │
+│   User provides a target Job Description (text or file)                         │
+│   ➔ Run `python3 scripts/evidence/analyze-jd.py --jd "path/to/jd.txt"`          │
+│   ➔ Extract Must-Have skills, Nice-to-Haves, hiring signals, and priority words │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Mode C: Target-Role Mode                                                        │
+│   User specifies a direction (e.g. "AI Agent Engineer", "Senior Architect")     │
+│   ➔ Match against `src/knowledge/roles/*.json` knowledge profiles               │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Collecting Candidate Information:
+1. **Basic Info**: Name, Contact (Email, Phone, Location, GitHub). If missing from user prompt, auto-detect from Git / `package.json` / `evidence-master.json` or prompt briefly.
+2. **L1~L3 Evidence Classification**:
+   - **Level 1 (Direct Code/Config Evidence)**: Verified by code files, configuration files (`package.json`, `Dockerfile`, `go.mod`, `Cargo.toml`), API contracts, or Git commits.
+   - **Level 2 (Structural/Dependency Evidence)**: Deduced from directory structure, tech stack dependencies, and architectural patterns.
+   - **Level 3 (Contextual Inference)**: Reasonable contextual deduction (MUST use conservative phrasing, e.g., *"Participated in the design and implementation of..."*).
+   - **Unsupported**: Facts not present in candidate records. **NEVER WRITE INTO RESUME**.
+
+---
+
+## 3. The 6-Stage Deterministic Workflow
 
 You MUST execute the following 6 stages in exact sequence:
 
@@ -47,133 +85,74 @@ You MUST execute the following 6 stages in exact sequence:
 └──────────────┘     └──────────────┘     └──────────────────┘
 ```
 
----
+### Option 1: Fast One-Shot Unified Execution (Recommended)
+You can run the full end-to-end pipeline in a single command:
+```bash
+python3 scripts/pipeline/forge.py --repo . --role "<Target Role>" --jd "<path/to/jd.txt>" --template "<minimal|modern|executive|classic>" --quiet
+```
+Or via CLI:
+```bash
+knowme forge --repo . --role "<Target Role>" --template modern --quiet
+```
 
-### Stage 1: Know Me (Self-Discovery & Evidence Extraction)
+### Option 2: Step-by-Step Granular Execution
 
-1. **Collect & Structure Facts**:
-   - Extract education, company tenures, project scopes, code repositories, system architectures, and technical competencies.
-2. **Classify Evidence into 3 Strict Levels**:
-   - **Level 1 (Direct Evidence)**: Verified by code files, configuration files (`package.json`, `Dockerfile`), API contracts, Git commits, or published metrics.
-   - **Level 2 (Structural Evidence)**: Deduced from directory structure, tech stack dependencies, and architectural patterns.
-   - **Level 3 (Contextual Inference)**: Reasonable contextual deduction (MUST use conservative phrasing, e.g., *"Participated in the design and implementation of..."*).
-   - **Unsupported**: Facts not present in candidate records. **NEVER WRITE INTO RESUME**. If a core JD skill is missing, prompt the candidate to clarify rather than fabricating.
+#### Step 1: Extract Evidence (Know Me)
+```bash
+python3 scripts/evidence/extract-evidence.py --repo . --output workspace/evidence-master.json --quiet
+```
 
----
+#### Step 2 & 3: JD & Target Analysis (Understand)
+```bash
+python3 scripts/evidence/analyze-jd.py --jd "path/to/jd.txt"
+```
 
-### Stage 2: Define (Goal & Career Positioning)
+#### Step 4: Search & Select Template (Position)
+```bash
+python3 scripts/template/search-template.py "<Target Role>" --style "<minimal|modern|executive|classic>" --target-pages 1
+```
 
-1. **Clarify Career Target**:
-   - **Target Role Title**: e.g., *Senior AI Agent Engineer*, *Staff Frontend Architect*, *Tech Lead*.
-   - **Target Seniority**: Junior / Mid / Senior / Lead / Principal / Executive.
-   - **Industry Domain**: e.g., AI/LLM, Enterprise SaaS, FinTech, E-Commerce.
-2. **Formulate Core Value Proposition (CVP)**:
-   - One concise statement (15~25 words) capturing the candidate's unique intersection of skills and business impact.
+#### Step 5: Instantiate Intermediate HTML Working Canvas (CareerForge)
+```bash
+python3 scripts/template/instantiate-resume.py --template <template_id> --profile workspace/evidence-master.json --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
+```
 
----
+#### Step 6: Review, Dual QA & PDF Export
+```bash
+# 1. Run Layout QA (DOM height & overflow validation)
+python3 scripts/validation/validate-resume.py --html workspace/resume.html --expected-pages 1
+```
+# 2. If overflow occurs, tune CSS tokens in workspace/resume.html:
+#    - Reduce --resume-space-section (e.g., 11pt -> 9.5pt)
+#    - Reduce --resume-font-size-body (e.g., 9.2pt -> 9.0pt)
 
-### Stage 3: Understand (Job Description & Signal Extraction)
-
-1. Run the JD Analysis script (or execute equivalent extraction logic):
-   ```bash
-   python3 scripts/analyze-jd.py --jd "path/to/jd.txt"
-   ```
-2. **Extract Key Signals**:
-   - **Must-Have Skills**: Absolute prerequisites (e.g., Python, LangChain/LangGraph, RAG, FastAPI).
-   - **Nice-to-Have Skills**: Advantageous boosters (e.g., Kubernetes, VectorDB benchmarking).
-   - **Core Pain Points & Responsibilities**: What business problems is this hire expected to solve?
-   - **Hiring Signals & Cultural Cues**: High-frequency verbs and domain terminology.
-
----
-
-### Stage 4: Position Myself (Strength Mapping & Resume Strategy)
-
-1. **Conduct Gap Analysis**:
-   - Compare Candidate Evidence (Stage 1) against JD Requirements (Stage 3).
-   - Identify **Strong Matches** (L1 evidence), **Potential Matches** (L2/L3), and **Gaps**.
-2. **Define Resume Strategy**:
-   - **Section Priority**: e.g., for AI Engineer: `Skills` ➔ `Projects` ➔ `Experience` ➔ `Education`. For Executive: `Summary` ➔ `Experience` ➔ `Leadership Projects` ➔ `Skills`.
-   - **Keyword Highlight Targets**: 8~12 high-priority terms to emphasize visually.
-   - **Narrative Angle**: Tailor project bullets using the **FAB Formula** (*Feature: What was built; Advantage: How it was built better; Benefit: Measurable business impact*).
+```bash
+# 3. Deterministic PDF Export via Multi-Strategy Auto-Discovery:
+python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf --quiet
+```
 
 ---
 
-### Stage 5: CareerForge (Template Selection, Canvas Instantiation & Editing)
+## 4. Final Response Delivery Contract (Strict Template)
 
-1. **Search & Select Best Template**:
-   ```bash
-   python3 scripts/search-template.py "<Target Role>" --style "<minimal|modern|executive|classic>" --target-pages 1
-   ```
-   - `minimal`: Single-column, tech-dense, optimal for Backend/AI/Systems (1 page).
-   - `modern`: Two-column split (32:68), deep navy sidebar, fullstack/AI/global (1~2 pages).
-   - `executive`: Executive dark banner + 33:67 split, leadership & architecture (1~2 pages).
-   - `classic`: Modern structured table grid, formal/gov/corporate (1 page).
+Once `workspace/resume.pdf` is generated, deliver your final response strictly in this clear, professional structure:
 
-2. **Instantiate Intermediate Working Canvas**:
-   ```bash
-   python3 scripts/instantiate-resume.py --template <template_id> --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
-   ```
-
-3. **Edit in Intermediate Canvas (`workspace/resume.html`)**:
-   - Inject candidate details into the semantic HTML structure.
-   - Wrap core matching keywords in `<strong>` or `<span class="tech-tag">`.
-   - Calibrate CSS Variables in `<style>`:
-     - Spacing: `--resume-space-section`, `--resume-space-item`, `--resume-space-bullet`.
-     - Typography: `--resume-font-size-body`, `--resume-line-height-body`.
-     - Accents: `--resume-color-accent`, `--resume-color-primary`.
+```markdown
+### 🎯 Career Positioning & Value Proposition
+> **[Candidate Name] · [Target Role Title]**
+> *[15~25 words Core Value Proposition highlighting key strengths]*
 
 ---
 
-### Stage 6: Review & Dual QA (Verification, Self-Healing & PDF Export)
-
-1. **Execute Automated Dual QA**:
-   ```bash
-   # QA Test 1: Layout & DOM Height Overflow Check
-   python3 scripts/validate-resume.py --html workspace/resume.html --expected-pages 1
-
-   # QA Test 2: ATS Text Flow & Heading Hierarchy Check
-   npx ts-node scripts/validate-ats.ts --html workspace/resume.html
-   ```
-
-2. **Self-Healing Closed Loop (If QA Fails)**:
-   - **Case A: Page Overflow (e.g. DOM Height 1145px > 1122.5px)**:
-     1. In `workspace/resume.html`, reduce `--resume-space-section` by `1~2pt`.
-     2. Reduce `--resume-font-size-body` by `0.2pt` (minimum `8.8pt`).
-     3. Condense verbose bullet points while preserving evidence verbs and metrics.
-     4. Re-run `validate-resume.py` until 100% single page fit.
-   - **Case B: ATS Structure Warning**:
-     1. Ensure all section titles use standard H2 tags (`工作经历`, `专业技能`, `项目经历`, `教育背景`).
-     2. Ensure contact items are plain text in standard DOM nodes.
-
-3. **Export Deterministic PDF**:
-   ```bash
-   npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
-   ```
-
-4. **Deliver to User**:
-   - Provide `workspace/resume.html` and `workspace/resume.pdf`.
-   - Deliver an **Evidence & Strategy Traceability Summary** explaining how real strengths were mapped to the target JD.
+### 🛡️ Top Grounded Evidence Highlights (L1/L2)
+1. **[Key Domain / Architecture]**: [Action Verb + Grounded Achievement + Metrics] *(Evidence: [Source])*
+2. **[Core Tech Stack]**: [Engineered feature with exact frameworks] *(Evidence: [Source])*
+3. **[Delivery & Impact]**: [System stability / CI-CD / Performance metric] *(Evidence: [Source])*
 
 ---
 
-## 3. Anti-Hallucination & Evidence Rules Summary
-
-| Evidence Level | Permitted Phrasing | Prohibited Phrasing |
-| :--- | :--- | :--- |
-| **L1 (Code/Config Proven)** | "Architected and implemented...", "Reduced latency by 40% (benchmarked in test suite)" | Phrasing that claims scope beyond repository evidence |
-| **L2 (Dependency/Module Proven)** | "Built microservices utilizing FastAPI and PostgreSQL..." | Claiming senior ownership when code only shows minor integration |
-| **L3 (Contextual Inference)** | "Collaborated on the deployment workflow...", "Participated in data pipeline optimization..." | Claiming "Solely designed and led entire enterprise migration" |
-| **Unsupported (No Evidence)** | **DO NOT INCLUDE** | Inventing metrics, tools, or roles |
-
----
-
-## 4. Troubleshooting & Self-Healing Decision Matrix
-
-```text
-QA Failure: Height Overflow (> 1122.5px)
- │
- ├── Step 1: Reduce --resume-space-section (e.g., 11pt -> 9.5pt)
- ├── Step 2: Reduce --resume-space-item (e.g., 7.5pt -> 6pt)
- ├── Step 3: Reduce --resume-font-size-body (e.g., 9.2pt -> 9.0pt)
- └── Step 4: Merge multi-line bullets into concise single-line bullets
+### 📄 Final Verified Deliverables
+- **PDF Resume (Deterministic A4)**: `workspace/resume.pdf` (Passed 100% Dual QA)
+- **HTML Working Canvas**: `workspace/resume.html` (Design Tokens Calibrated)
+- **Master Profile JSON**: `workspace/evidence-master.json` (Traceable Evidence底座)
 ```

@@ -1,0 +1,99 @@
+{
+  "basics": {
+    "name": "张集成",
+    "title": "全栈工程师",
+    "email": "364475182@qq.com",
+    "phone": "138-0000-0000",
+    "location": "北京 / 远程",
+    "github": "https://github.com/Max-Samson/knowme-careerforge-skill.git",
+    "summary": "拥有坚实的技术研发与工程化落地实战经验，主导过多个基于 Playwright, TypeScript, JavaScript 的核心系统设计与交付。"
+  },
+  "skills": [
+    {
+      "category": "核心技术栈",
+      "items": [
+        "Playwright",
+        "TypeScript"
+      ],
+      "highlighted": [
+        "Playwright",
+        "TypeScript"
+      ]
+    },
+    {
+      "category": "工程化与架构",
+      "items": [
+        "自动化单元/集成测试"
+      ],
+      "highlighted": [
+        "CI/CD",
+        "性能优化"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "创新科技企业",
+      "role": "全栈工程师",
+      "startDate": "2022.06",
+      "endDate": "至今",
+      "location": "北京",
+      "summary": "负责核心产品研发与关键架构攻坚",
+      "bullets": [
+        {
+          "text": "基于 Playwright, TypeScript 构建核心工程架构，实现高可靠端到端业务流",
+          "evidenceLevel": "L1",
+          "evidenceSource": "代码库依赖配置文件 (package.json)",
+          "keywords": [
+            "Playwright",
+            "TypeScript"
+          ]
+        },
+        {
+          "text": "主导设计工程架构体系，落地 自动化单元/集成测试，保障交付效率与质量",
+          "evidenceLevel": "L1",
+          "evidenceSource": "工程根目录架构配置文件与流水线定义",
+          "keywords": [
+            "Architecture",
+            "CI/CD",
+            "Testing",
+            "DevOps"
+          ]
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "knowme-careerforge-skill",
+      "role": "核心负责人 / 主力开发者",
+      "techStack": [
+        "Playwright",
+        "TypeScript"
+      ],
+      "repoUrl": "https://github.com/Max-Samson/knowme-careerforge-skill.git",
+      "startDate": "2023.01",
+      "endDate": "至今",
+      "bullets": [
+        {
+          "text": "基于 Playwright, TypeScript 构建核心工程架构，实现高可靠端到端业务流",
+          "evidenceLevel": "L1",
+          "evidenceSource": "代码库依赖配置文件 (package.json)"
+        },
+        {
+          "text": "主导设计工程架构体系，落地 自动化单元/集成测试，保障交付效率与质量",
+          "evidenceLevel": "L1",
+          "evidenceSource": "工程根目录架构配置文件与流水线定义"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "重点大学",
+      "degree": "计算机科学与技术 本科",
+      "startDate": "2016.09",
+      "endDate": "2020.06"
+    }
+  ]
+}

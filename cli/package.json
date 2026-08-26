@@ -1,6 +1,6 @@
 {
   "name": "knowme-careerforge-cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unified Multi-Agent CLI for KnowMe CareerForge Skill distribution, template search, and resume validation.",
   "main": "dist/index.js",
   "bin": {

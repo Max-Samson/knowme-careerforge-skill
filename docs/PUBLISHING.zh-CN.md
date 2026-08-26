@@ -40,23 +40,22 @@
 
 ## 3. 一键自动化发布流程
 
-项目内置了发布自动化引擎（`scripts/release.py`），自动完成版本号同步、知识库编译、画廊刷新、TypeScript 编译、全量测试质检与打包预检。
+项目内置了发布自动化引擎（`scripts/build/release.py`），自动完成版本号同步、知识库编译、画廊刷新、TypeScript 编译、全量测试质检与打包预检。
 
 ### 发布新版本（例如 `0.0.1`）：
 
 ```bash
-# 步骤 1：执行自动化发布准备流水线
 npm run release -- 0.0.1
 # 或直接运行：
-python3 scripts/release.py 0.0.1
+python3 scripts/build/release.py 0.0.1
 ```
 
 该脚本将自动执行：
 1. **多文件版本号同步**：自动对齐 `package.json`、`pyproject.toml`、`skill.json` 与 `cli/package.json`；
-2. **知识库索引编译**：运行 `scripts/build-knowledge.py` 生成最新索引；
-3. **模板画廊生成**：运行 `scripts/build-gallery.py` 刷新静态预览画廊；
+2. **知识库索引编译**：运行 `scripts/build/build-knowledge.py` 生成最新索引；
+3. **模板画廊生成**：运行 `scripts/build/build-gallery.py` 刷新静态预览画廊；
 4. **CLI 编译**：运行 `npm run build` 将 TypeScript 编译至 `dist/`；
-5. **全量测试质检**：运行 `scripts/run-all-tests.py` 执行 21 项测试（确保 100% 通过）；
+5. **全量测试质检**：运行 `scripts/build/run-all-tests.py` 执行 24 项测试（确保 100% 通过）；
 6. **NPM 打包预检**：运行 `npm pack --dry-run` 检查打包文件清单与解压体积。
 
 ---

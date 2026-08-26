@@ -12,8 +12,8 @@ interface AtsValidationResult {
   status: 'PASS' | 'WARN' | 'FAIL';
   candidateName: string | null;
   detectedContacts: {
-    phone: string | null;
     email: string | null;
+    phone: string | null;
   };
   headingsFound: Array<{
     level: string;
@@ -44,26 +44,24 @@ export async function validateAts(htmlPath: string): Promise<AtsValidationResult
   await page.goto(`file://${absoluteHtml}`, { waitUntil: 'networkidle' });
 
   const rawData = await page.evaluate(() => {
-    const nameEl = document.querySelector('.candidate-name, h1');
-    const name = nameEl ? (nameEl.textContent || '').trim() : null;
+    const nameEl = document.querySelector('.candidate-name') || document.querySelector('h1');
+    const candidateName = nameEl ? nameEl.textContent?.trim() || null : null;
 
-    const fullText = (document.body.innerText || '').trim();
+    const bodyText = document.body.innerText || '';
+    const emailMatch = bodyText.match(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
+    const phoneMatch = bodyText.match(/1[3-9]\d{9}|\+?\d{1,4}[-\s]?\d{7,11}/);
 
-    // 提取电话与邮箱
-    const phoneMatch = fullText.match(/(?:(?:\+|00)86)?1[3-9]\d{9}|(?:1[3-9]\d-\d{4}-\d{4})/);
-    const emailMatch = fullText.match(/[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/);
-
-    const headings = Array.from(document.querySelectorAll('h1, h2, h3, .section-title, .sub-title')).map(h => ({
+    const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4')).map(h => ({
       level: h.tagName.toLowerCase(),
-      text: (h.textContent || '').trim()
+      text: h.textContent?.replace(/[\s\n]+/g, ' ').trim() || ''
     }));
 
     return {
-      candidateName: name,
-      phone: phoneMatch ? phoneMatch[0] : null,
+      candidateName,
       email: emailMatch ? emailMatch[0] : null,
+      phone: phoneMatch ? phoneMatch[0] : null,
       headings,
-      fullTextLength: fullText.length
+      totalTextLength: bodyText.trim().length
     };
   });
 
@@ -85,12 +83,11 @@ export async function validateAts(htmlPath: string): Promise<AtsValidationResult
   }
 
   const validatedHeadings = rawData.headings.map(h => {
-    const textClean = h.text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]/g, '');
-    const isStd = STANDARD_SECTION_HEADERS.some(s => textClean.includes(s.toLowerCase().replace(/\s+/g, '')));
+    const textClean = h.text.toLowerCase();
+    const isStandard = STANDARD_SECTION_HEADERS.some(sh => textClean.includes(sh.toLowerCase()));
     return {
-      level: h.level,
-      text: h.text,
-      isStandard: isStd
+      ...h,
+      isStandard
     };
   });
 
@@ -105,11 +102,11 @@ export async function validateAts(htmlPath: string): Promise<AtsValidationResult
     status,
     candidateName: rawData.candidateName,
     detectedContacts: {
-      phone: rawData.phone,
-      email: rawData.email
+      email: rawData.email,
+      phone: rawData.phone
     },
     headingsFound: validatedHeadings,
-    totalTextLength: rawData.fullTextLength,
+    totalTextLength: rawData.totalTextLength,
     warnings,
     errors
   };
@@ -126,6 +123,8 @@ async function main() {
       i++;
     } else if (args[i] === '--json') {
       jsonOutput = true;
+    } else if (!args[i].startsWith('-')) {
+      htmlPath = args[i];
     }
   }
 
@@ -134,36 +133,41 @@ async function main() {
 
     if (jsonOutput) {
       console.log(JSON.stringify(result, null, 2));
-      return;
+      process.exit(result.status === 'FAIL' ? 1 : 0);
     }
 
     console.log('======================================================');
     console.log(`  KnowMe CareerForge — ATS Compliance QA: [${result.status}]`);
-    console.log(`  Candidate Name : ${result.candidateName || 'N/A'}`);
-    console.log(`  Phone Extracted: ${result.detectedContacts.phone || 'None'}`);
-    console.log(`  Email Extracted: ${result.detectedContacts.email || 'None'}`);
+    console.log(`  Candidate Name : ${result.candidateName || 'NOT FOUND'}`);
+    console.log(`  Phone Extracted: ${result.detectedContacts.phone || 'NOT DETECTED'}`);
+    console.log(`  Email Extracted: ${result.detectedContacts.email || 'NOT DETECTED'}`);
     console.log(`  Text Extracted : ${result.totalTextLength} characters`);
     console.log('------------------------------------------------------');
     console.log('  Headings Structure:');
     for (const h of result.headingsFound) {
-      const tag = h.isStandard ? '✓' : '?';
-      console.log(`    [${tag}] <${h.level}> ${h.text}`);
-    }
-
-    if (result.errors.length > 0) {
-      console.log('\n[!] Errors:');
-      for (const e of result.errors) console.log(`  - ✗ ${e}`);
+      const mark = h.isStandard ? '[✓]' : '[?]';
+      console.log(`    ${mark} <${h.level}> ${h.text}`);
     }
 
     if (result.warnings.length > 0) {
-      console.log('\n[?] Warnings:');
-      for (const w of result.warnings) console.log(`  - ⚠️ ${w}`);
+      console.log('\n[!] Warnings:');
+      for (const w of result.warnings) {
+        console.log(`  - ⚠️  ${w}`);
+      }
+    }
+
+    if (result.errors.length > 0) {
+      console.log('\n[✗] Errors:');
+      for (const e of result.errors) {
+        console.log(`  - ✗ ${e}`);
+      }
     }
 
     console.log('======================================================');
+    process.exit(result.status === 'FAIL' ? 1 : 0);
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error(`[✗] ATS Validation Failed: ${msg}`);
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error(`[✗] ATS Validation Failed: ${errorMsg}`);
     process.exit(1);
   }
 }

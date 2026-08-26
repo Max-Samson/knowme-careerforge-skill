@@ -14,15 +14,15 @@ interface LayoutValidationResult {
   totalPagesFound: number;
   pageDetails: Array<{
     pageIndex: number;
-    measuredHeightPx: number;
+    actualHeightPx: number;
     allowedHeightPx: number;
-    overflowPx: number;
     isOverflow: boolean;
+    overflowDeltaPx: number;
   }>;
   overflowSections: Array<{
     selector: string;
-    heightPx: number;
-    textPreview: string;
+    bottomPx: number;
+    overflowByPx: number;
   }>;
 }
 
@@ -35,7 +35,7 @@ export async function validateLayout(htmlPath: string, expectedPages: number = 1
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
     viewport: { width: 794, height: 1123 }, // A4 at 96 DPI
-    deviceScaleFactor: 2
+    deviceScaleFactor: 1
   });
 
   const page = await context.newPage();
@@ -47,39 +47,44 @@ export async function validateLayout(htmlPath: string, expectedPages: number = 1
 
   const evaluation = await page.evaluate((allowedHeight) => {
     const pages = Array.from(document.querySelectorAll('.resume-page'));
-    const details = pages.map((el, index) => {
-      const rect = el.getBoundingClientRect();
-      const scrollH = el.scrollHeight;
-      const actualH = Math.max(rect.height, scrollH);
-      const diff = actualH - allowedHeight;
+    const details = pages.map((p, idx) => {
+      const rect = p.getBoundingClientRect();
+      const actualHeight = Math.ceil(rect.height);
+      const isOverflow = actualHeight > allowedHeight + 2; // 2px 浮点容差
       return {
-        pageIndex: index + 1,
-        measuredHeightPx: Math.round(actualH * 10) / 10,
+        pageIndex: idx + 1,
+        actualHeightPx: actualHeight,
         allowedHeightPx: allowedHeight,
-        overflowPx: diff > 2 ? Math.round(diff * 10) / 10 : 0,
-        isOverflow: diff > 2
+        isOverflow,
+        overflowDeltaPx: isOverflow ? Math.ceil(actualHeight - allowedHeight) : 0
       };
     });
 
-    const overflows: Array<{ selector: string; heightPx: number; textPreview: string }> = [];
+    const overflowSections: Array<{ selector: string; bottomPx: number; overflowByPx: number }> = [];
     if (details.some(d => d.isOverflow)) {
-      const sections = Array.from(document.querySelectorAll('.resume-section, .timeline-item, .milestone-item, .experience-item, tr'));
-      for (const s of sections) {
-        const r = s.getBoundingClientRect();
-        if (r.bottom > allowedHeight) {
-          overflows.push({
-            selector: s.className || s.tagName.toLowerCase(),
-            heightPx: Math.round(r.height),
-            textPreview: (s.textContent || '').trim().slice(0, 60)
+      const items = Array.from(document.querySelectorAll('.experience-item, .project-item, .skills-content, .resume-section'));
+      for (const item of items) {
+        const rect = item.getBoundingClientRect();
+        if (rect.bottom > allowedHeight) {
+          overflowSections.push({
+            selector: item.className ? `.${item.className.split(' ').join('.')}` : item.tagName.toLowerCase(),
+            bottomPx: Math.ceil(rect.bottom),
+            overflowByPx: Math.ceil(rect.bottom - allowedHeight)
           });
         }
       }
     }
 
     return {
-      totalPagesFound: pages.length,
-      pageDetails: details,
-      overflowSections: overflows
+      totalPagesFound: pages.length || 1,
+      pageDetails: details.length ? details : [{
+        pageIndex: 1,
+        actualHeightPx: Math.ceil(document.body.getBoundingClientRect().height),
+        allowedHeightPx: allowedHeight,
+        isOverflow: document.body.getBoundingClientRect().height > allowedHeight + 2,
+        overflowDeltaPx: Math.max(0, Math.ceil(document.body.getBoundingClientRect().height - allowedHeight))
+      }],
+      overflowSections
     };
   }, A4_HEIGHT_PX);
 
@@ -111,6 +116,8 @@ async function main() {
       i++;
     } else if (args[i] === '--json') {
       jsonOutput = true;
+    } else if (!args[i].startsWith('-')) {
+      htmlPath = args[i];
     }
   }
 
@@ -119,7 +126,7 @@ async function main() {
 
     if (jsonOutput) {
       console.log(JSON.stringify(result, null, 2));
-      return;
+      process.exit(result.status === 'PASS' ? 0 : 1);
     }
 
     console.log('======================================================');
@@ -129,29 +136,23 @@ async function main() {
     console.log('------------------------------------------------------');
 
     for (const p of result.pageDetails) {
-      const statusSymbol = p.isOverflow ? '✗ OVERFLOW' : '✓ FIT';
-      console.log(`  Page ${p.pageIndex}: ${p.measuredHeightPx}px / ${p.allowedHeightPx}px [${statusSymbol}] (Overflow: ${p.overflowPx}px)`);
+      const fitText = p.isOverflow ? `[✗ OVERFLOW by ${p.overflowDeltaPx}px]` : `[✓ FIT] (Overflow: ${p.overflowDeltaPx}px)`;
+      console.log(`  Page ${p.pageIndex}: ${p.actualHeightPx}px / ${p.allowedHeightPx}px ${fitText}`);
     }
 
     if (result.overflowSections.length > 0) {
-      console.log('\n[!] Nodes exceeding A4 physical boundary:');
-      for (const o of result.overflowSections) {
-        console.log(`  - <${o.selector}> (${o.heightPx}px): "${o.textPreview}..."`);
+      console.log('\n[!] Offending Overflow Elements:');
+      for (const el of result.overflowSections.slice(0, 3)) {
+        console.log(`  - Element "${el.selector}" exceeds A4 baseline by ${el.overflowByPx}px (Bottom: ${el.bottomPx}px)`);
       }
-      console.log('\n[Self-Healing Guidance]:');
-      console.log('  1. Reduce --resume-space-section by 1~2pt in workspace/resume.html <style>');
-      console.log('  2. Reduce --resume-font-size-body by 0.2pt');
-      console.log('  3. Condense verbose bullet points');
+      console.log('\n💡 Recommendation: Reduce --resume-space-section by 1~2pt or reduce --resume-font-size-body by 0.2pt in <style>.');
     }
 
     console.log('======================================================');
-
-    if (result.status === 'OVERFLOW') {
-      process.exit(1);
-    }
+    process.exit(result.status === 'PASS' ? 0 : 1);
   } catch (err: unknown) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error(`[✗] Layout Validation Failed: ${msg}`);
+    const errorMsg = err instanceof Error ? err.message : String(err);
+    console.error(`[✗] Layout Validation Failed: ${errorMsg}`);
     process.exit(1);
   }
 }

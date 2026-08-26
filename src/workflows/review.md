@@ -8,12 +8,12 @@
 
 1. **测试 1：布局与 DOM 高度溢出检测**：
    ```bash
-   python3 scripts/validate-resume.py --html workspace/resume.html --expected-pages 1
+   python3 scripts/validation/validate-resume.py --html workspace/resume.html --expected-pages 1
    ```
    - 单页标准高度：$297\text{mm} \times 96\text{DPI} / 25.4 \approx 1122.5\text{px}$。
 2. **测试 2：ATS 纯文本流解析检测**：
    ```bash
-   npx ts-node scripts/validate-ats.ts --html workspace/resume.html
+   npx ts-node scripts/validation/validate-ats.ts --html workspace/resume.html
    ```
 
 ## 2. 自动化自愈修复闭环
@@ -27,5 +27,5 @@
 ## 3. 确定性无损 PDF 导出
 
 ```bash
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
 ```

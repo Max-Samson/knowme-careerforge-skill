@@ -178,32 +178,29 @@ All visual parameters are concentrated in `:root` variables inside `workspace/re
 knowme search "AI Agent Engineer" --style "two-column-split"
 
 # 2. Analyze a target Job Description
-python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
+python3 scripts/evidence/analyze-jd.py --jd examples/ai-engineer/jd.md
 
 # 3. Instantiate Intermediate Working Canvas
-python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG" --output workspace/resume.html
+python3 scripts/template/instantiate-resume.py --template modern --keywords "Python,LLM,RAG" --output workspace/resume.html
 
 # 4. Validate working canvas layout & ATS compliance
 knowme validate
 
-# 5. Render deterministic pixel-perfect PDF via Playwright
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+# 5. Render deterministic pixel-perfect PDF
+python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
 
 # 6. Build & view static HTML Template Gallery
 knowme gallery
-```
 
 ---
 
-## 9. Automated Testing & Verification
+## Automated Test Suite
 
 ```bash
-# Run full automated test suite (21/21 passing in 0.3s)
 npm test
 # Or:
-python3 scripts/run-all-tests.py
+python3 scripts/build/run-all-tests.py
 ```
-
 ---
 
 ## 10. NPM Build, Release & Publishing

@@ -182,32 +182,29 @@ knowme list
 knowme search "AI Agent Engineer" --style "two-column-split"
 
 # 2. 深度解析目标 JD 文本与技能词频
-python3 scripts/analyze-jd.py --jd examples/ai-engineer/jd.md
+python3 scripts/evidence/analyze-jd.py --jd examples/ai-engineer/jd.md
 
 # 3. 实例化 HTML 中间工作区并注入关键词高亮
-python3 scripts/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
+python3 scripts/template/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
 
 # 4. 运行布局结构、Design Tokens 与文字密度验证
 knowme validate
 
-# 5. 通过 Playwright 确定性导出无损矢量 A4 PDF
-npx ts-node scripts/render-pdf.ts --input workspace/resume.html --output workspace/resume.pdf
+# 5. 确定性导出无损矢量 A4 PDF
+python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
 
 # 6. 编译生成可视化模板画廊
 knowme gallery
-```
 
 ---
 
-## 9. 自动化测试与质量保障
+## 自动化测试与持续集成
 
 ```bash
-# 运行全链路自动化测试套件 (21/21 项测试 0.3 秒通过)
 npm test
 # 或:
-python3 scripts/run-all-tests.py
+python3 scripts/build/run-all-tests.py
 ```
-
 ---
 
 ## 10. NPM 构建、发布与版本更新

@@ -40,23 +40,22 @@ When publishing, NPM only packages files declared in `"files"` in `package.json`
 
 ## 3. Automated One-Command Release Flow
 
-We provide an automated release engine (`scripts/release.py`) that handles version synchronization, compilation, template gallery rebuilding, full-chain test validation, and packaging checks.
+We provide an automated release engine (`scripts/build/release.py`) that handles version synchronization, compilation, template gallery rebuilding, full-chain test validation, and packaging checks.
 
 ### Releasing a New Version (e.g. `0.0.1`):
 
 ```bash
-# Step 1: Run the automated release pipeline
 npm run release -- 0.0.1
 # Or directly:
-python3 scripts/release.py 0.0.1
+python3 scripts/build/release.py 0.0.1
 ```
 
 The script automatically executes:
 1. Version synchronization across `package.json`, `pyproject.toml`, `skill.json`, and `cli/package.json`.
-2. Knowledge base compilation (`scripts/build-knowledge.py`).
-3. HTML template gallery generation (`scripts/build-gallery.py`).
+2. Knowledge base compilation (`scripts/build/build-knowledge.py`).
+3. HTML template gallery generation (`scripts/build/build-gallery.py`).
 4. TypeScript CLI compilation (`npm run build` -> `dist/`).
-5. Full-chain automated test suite execution (21/21 tests).
+5. Full-chain automated test suite execution (24/24 tests).
 6. NPM packaging dry-run inspection (`npm pack --dry-run`).
 
 ---

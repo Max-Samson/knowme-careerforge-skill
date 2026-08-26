@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CandidateResumeSchema",
+  "description": "KnowMe CareerForge Candidate Master Profile & Tailored Resume Schema with L1~L3 Evidence Chains.",
+  "type": "object",
+  "required": ["basics", "skills", "experience", "education"],
+  "properties": {
+    "basics": {
+      "type": "object",
+      "required": ["name", "title", "email", "phone"],
+      "properties": {
+        "name": { "type": "string", "description": "Candidate's full name" },
+        "title": { "type": "string", "description": "Professional job title or target role" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "location": { "type": "string" },
+        "website": { "type": "string" },
+        "github": { "type": "string" },
+        "summary": { "type": "string", "description": "Core Value Proposition (15-30 words)" }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "items"],
+        "properties": {
+          "category": { "type": "string" },
+          "items": { "type": "array", "items": { "type": "string" } },
+          "highlighted": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["company", "role", "startDate", "endDate", "bullets"],
+        "properties": {
+          "company": { "type": "string" },
+          "role": { "type": "string" },
+          "startDate": { "type": "string" },
+          "endDate": { "type": "string" },
+          "location": { "type": "string" },
+          "summary": { "type": "string" },
+          "bullets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text", "evidenceLevel"],
+              "properties": {
+                "text": { "type": "string" },
+                "evidenceLevel": { "type": "string", "enum": ["L1", "L2", "L3"] },
+                "evidenceSource": { "type": "string" },
+                "keywords": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "role", "techStack", "bullets"],
+        "properties": {
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "techStack": { "type": "array", "items": { "type": "string" } },
+          "repoUrl": { "type": "string" },
+          "demoUrl": { "type": "string" },
+          "startDate": { "type": "string" },
+          "endDate": { "type": "string" },
+          "bullets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["text", "evidenceLevel"],
+              "properties": {
+                "text": { "type": "string" },
+                "evidenceLevel": { "type": "string", "enum": ["L1", "L2", "L3"] },
+                "evidenceSource": { "type": "string" },
+                "keywords": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["institution", "degree", "startDate", "endDate"],
+        "properties": {
+          "institution": { "type": "string" },
+          "degree": { "type": "string" },
+          "field": { "type": "string" },
+          "startDate": { "type": "string" },
+          "endDate": { "type": "string" },
+          "gpa": { "type": "string" },
+          "honors": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

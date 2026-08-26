@@ -1,6 +1,6 @@
 {
   "name": "knowme-careerforge-skill",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An agent-native skill for self-discovery, career positioning, and tailored resume engineering.",
   "main": "dist/cli/src/index.js",
   "bin": {
@@ -17,16 +17,19 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "python3 scripts/run-all-tests.py",
-    "search": "python3 scripts/search-template.py",
-    "analyze:jd": "python3 scripts/analyze-jd.py",
-    "instantiate": "python3 scripts/instantiate-resume.py",
-    "validate:layout": "ts-node scripts/validate-layout.ts",
-    "validate:ats": "ts-node scripts/validate-ats.ts",
-    "render:pdf": "ts-node scripts/render-pdf.ts",
-    "build:knowledge": "python3 scripts/build-knowledge.py",
-    "build:gallery": "python3 scripts/build-gallery.py",
-    "release": "python3 scripts/release.py",
+    "test": "python3 scripts/build/run-all-tests.py",
+    "forge": "python3 scripts/pipeline/forge.py",
+    "extract": "python3 scripts/evidence/extract-evidence.py",
+    "search": "python3 scripts/template/search-template.py",
+    "analyze:jd": "python3 scripts/evidence/analyze-jd.py",
+    "instantiate": "python3 scripts/template/instantiate-resume.py",
+    "validate": "python3 scripts/validation/validate-resume.py",
+    "validate:layout": "ts-node scripts/validation/validate-layout.ts",
+    "validate:ats": "ts-node scripts/validation/validate-ats.ts",
+    "render:pdf": "python3 scripts/rendering/render-pdf.py",
+    "build:knowledge": "python3 scripts/build/build-knowledge.py",
+    "build:gallery": "python3 scripts/build/build-gallery.py",
+    "release": "python3 scripts/build/release.py",
     "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [

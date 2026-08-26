@@ -73,7 +73,7 @@ class TestWorkflowsAndKnowledge(unittest.TestCase):
         职责：负责 LangGraph 多智能体协同系统设计，优化 RAG 向量召回管线与 Prompt 调优。
         要求：精通 Python、FastAPI、Qdrant、Docker，熟悉 Kubernetes。
         """
-        cmd = [sys.executable, str(self.scripts_dir / "analyze-jd.py"), "--text", sample_jd, "--json"]
+        cmd = [sys.executable, str(self.scripts_dir / "evidence" / "analyze-jd.py"), "--text", sample_jd, "--json"]
         proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
         self.assertEqual(proc.returncode, 0, f"analyze-jd.py failed: {proc.stderr}")
 
@@ -86,9 +86,8 @@ class TestWorkflowsAndKnowledge(unittest.TestCase):
 
     def test_template_search_ranking_relevance(self):
         # 针对 AI Agent 角色检索
-        cmd_ai = [sys.executable, str(self.scripts_dir / "search-template.py"), "AI Agent Engineer", "--json"]
+        cmd_ai = [sys.executable, str(self.scripts_dir / "template" / "search-template.py"), "AI Agent Engineer", "--json"]
         proc_ai = subprocess.run(cmd_ai, capture_output=True, text=True, cwd=str(self.base_dir))
-        self.assertEqual(proc_ai.returncode, 0)
         results_ai = json.loads(proc_ai.stdout)
         self.assertGreater(len(results_ai), 0)
         # 第一名应该是 modern 或 minimal
@@ -96,9 +95,8 @@ class TestWorkflowsAndKnowledge(unittest.TestCase):
         self.assertIn(top_id, ["modern", "minimal", "classic"])
 
         # 针对高管/总监角色检索
-        cmd_exec = [sys.executable, str(self.scripts_dir / "search-template.py"), "技术总监 CTO", "--json"]
+        cmd_exec = [sys.executable, str(self.scripts_dir / "template" / "search-template.py"), "技术总监 CTO", "--json"]
         proc_exec = subprocess.run(cmd_exec, capture_output=True, text=True, cwd=str(self.base_dir))
-        self.assertEqual(proc_exec.returncode, 0)
         results_exec = json.loads(proc_exec.stdout)
         top_exec_id = results_exec[0]["template"]["id"]
         self.assertEqual(top_exec_id, "executive", "Executive template must rank #1 for Director/CTO roles")

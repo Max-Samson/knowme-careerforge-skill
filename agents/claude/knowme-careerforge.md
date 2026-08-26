@@ -1,16 +1,17 @@
 ---
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering.
-globs: ["workspace/*", "src/**/*"]
+globs: ["workspace/*", "src/**/*", "scripts/**/*"]
 ---
 
 # KnowMe CareerForge — Claude Code Skill
 
 Know Yourself. Define Your Direction. Forge Your Opportunity.
 
-When activated, follow the 6-stage workflow:
-1. **Know Me**: Extract candidate facts, classify into L1~L3 evidence.
-2. **Define**: Establish target role, seniority, and Core Value Proposition.
-3. **Understand**: Analyze target JD via `python3 scripts/analyze-jd.py`.
-4. **Position**: Perform gap analysis, map evidence, design Resume Strategy.
-5. **CareerForge**: Search template (`python3 scripts/search-template.py`), instantiate `workspace/resume.html`, calibrate CSS tokens.
-6. **Review & Dual QA**: Run `python3 scripts/validate-resume.py`, self-heal overflow, render `workspace/resume.pdf` via `npx ts-node scripts/render-pdf.ts`.
+When activated, follow the Evidence-First & Quiet Execution Protocol (see `scripts/Agent.md`):
+1. **Evidence Mining (repo-to-resume)**: Extract codebase facts via `python3 scripts/evidence/extract-evidence.py --repo .` or run one-shot `python3 scripts/pipeline/forge.py`.
+2. **Understand Target**: Analyze target JD via `python3 scripts/evidence/analyze-jd.py`.
+3. **Template Search**: Match template (`python3 scripts/template/search-template.py`).
+4. **Intermediate Canvas**: Instantiate `workspace/resume.html` via `python3 scripts/template/instantiate-resume.py` and calibrate CSS design tokens.
+5. **Review & Dual QA**: Run `python3 scripts/validation/validate-resume.py`.
+6. **PDF Delivery**: Export `workspace/resume.pdf` via `python3 scripts/rendering/render-pdf.py`.
+7. **Quiet Delivery**: Execute silently in background; deliver concise executive summary and final file path (`workspace/resume.pdf`).

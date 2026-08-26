@@ -21,7 +21,6 @@ export async function renderResumePdf(options: RenderOptions): Promise<void> {
     throw new Error(`Input HTML file does not exist: ${absoluteHtml}`);
   }
 
-  // 确保输出目录存在
   const outputDir = path.dirname(absolutePdf);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
@@ -41,8 +40,6 @@ export async function renderResumePdf(options: RenderOptions): Promise<void> {
 
   const page = await context.newPage();
   await page.goto(`file://${absoluteHtml}`, { waitUntil: 'networkidle' });
-
-  // 确保所有 Web 字体准备就绪
   await page.evaluateHandle('document.fonts.ready');
 
   await page.pdf({
@@ -69,6 +66,9 @@ async function main() {
     } else if (args[i] === '--output' || args[i] === '-o') {
       outputPdf = args[i + 1];
       i++;
+    } else if (!args[i].startsWith('-')) {
+      if (i === 0) inputHtml = args[i];
+      else if (i === 1) outputPdf = args[i];
     }
   }
 

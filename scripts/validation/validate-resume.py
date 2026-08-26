@@ -7,21 +7,28 @@ KnowMe CareerForge — Resume Validation Engine (Layout, Schema & ATS Compliance
 import sys, os, json, argparse, re
 from pathlib import Path
 
+def get_project_root() -> Path:
+    curr = Path(__file__).resolve().parent
+    for _ in range(5):
+        if (curr / "SKILL.md").exists() or (curr / "package.json").exists():
+            return curr
+        curr = curr.parent
+    return Path.cwd()
+
 def validate_resume_html(html_path: str, expected_pages: int = 1) -> dict:
     p = Path(html_path)
     if not p.exists():
-        # 尝试相对于脚本目录上一级
-        alt = Path(__file__).resolve().parent.parent / html_path
+        root = get_project_root()
+        alt = root / html_path
         if alt.exists():
             p = alt
         else:
             return {
                 "status": "FAIL",
-                "file": html_path,
-                "expectedPages": expected_pages,
-                "checks": {},
-                "errors": [f"HTML file not found at: {html_path}"],
-                "warnings": []
+                "file": str(p),
+                "errors": [f"File not found: {html_path}"],
+                "warnings": [],
+                "checks": {}
             }
 
     content = p.read_text(encoding="utf-8")
@@ -45,7 +52,9 @@ def validate_resume_html(html_path: str, expected_pages: int = 1) -> dict:
     required_tokens = [
         "--resume-page-width",
         "--resume-page-min-height",
-        "--resume-font-size-body"
+        "--resume-font-size-body",
+        "--resume-space-section",
+        "--resume-color-primary"
     ]
     missing_tokens = []
     for token in required_tokens:
@@ -72,18 +81,18 @@ def validate_resume_html(html_path: str, expected_pages: int = 1) -> dict:
 
     checks["detected_sections"] = detected_sections
 
-    # 6. 单页高度预估 (剔除 <style> 后的实际可见文字量)
+    # 6. 单页高度预估 (可见文字量)
     body_text_only = re.sub(r'<style.*?>.*?</style>', '', content, flags=re.DOTALL)
     visible_text = re.sub(r'<[^>]+>', '', body_text_only).strip()
     char_count = len(re.sub(r'\s+', ' ', visible_text))
 
     density_status = "OPTIMAL"
     if expected_pages == 1:
-        if char_count > 1500:
-            warnings.append(f"Visible text volume ({char_count} chars) is high for a single-page resume; risk of overflow.")
-            density_status = "HIGH_RISK_OVERFLOW"
-        elif char_count < 400:
-            warnings.append(f"Visible text volume ({char_count} chars) is low for a single-page resume; canvas may appear sparse.")
+        if char_count > 1600:
+            warnings.append(f"High text density for 1 page: {char_count} chars (recommend trimming or reducing spacing tokens)")
+            density_status = "OVERFLOW_RISK"
+        elif char_count < 300:
+            warnings.append(f"Low content volume for 1 page: {char_count} chars")
             density_status = "UNDERFLOW"
 
     checks["char_count"] = char_count
@@ -95,21 +104,21 @@ def validate_resume_html(html_path: str, expected_pages: int = 1) -> dict:
         "status": "PASS" if passed else "FAIL",
         "file": str(p.resolve()),
         "expectedPages": expected_pages,
-        "checks": checks,
         "errors": errors,
-        "warnings": warnings
+        "warnings": warnings,
+        "checks": checks
     }
 
 def main():
     parser = argparse.ArgumentParser(description="KnowMe CareerForge — Resume Validator")
-    parser.add_argument("--html", "-i", default="workspace/resume.html", help="Path to resume HTML (default: workspace/resume.html)")
-    parser.add_argument("--expected-pages", "-p", type=int, default=1, help="Expected page count (default: 1)")
-    parser.add_argument("--json", action="store_true", help="Output JSON format")
+    parser.add_argument("path", nargs="?", default="workspace/resume.html", help="Path to resume.html")
+    parser.add_argument("--html", help="Path to resume.html (named)")
+    parser.add_argument("--expected-pages", "-p", type=int, default=1, help="Expected target pages (1 or 2)")
+    parser.add_argument("--json", action="store_true", help="Output JSON result")
 
     args = parser.parse_args()
-
-    result = validate_resume_html(args.html, args.expected_pages)
-
+    target_html = args.html or args.path
+    result = validate_resume_html(target_html, expected_pages=args.expected_pages)
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
