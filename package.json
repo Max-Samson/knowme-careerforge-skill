@@ -47,7 +47,7 @@
   "homepage": "https://github.com/Max-Samson/knowme-careerforge-skill",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Max-Samson/knowme-careerforge-skill.git"
+    "url": "git+https://github.com/Max-Samson/knowme-careerforge-skill.git"
   },
   "bugs": {
     "url": "https://github.com/Max-Samson/knowme-careerforge-skill/issues"
