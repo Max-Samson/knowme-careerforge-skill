@@ -1,28 +1,33 @@
-# KnowMe CareerForge
+<div align="center">
+
+# 🎯 KnowMe CareerForge
 
 <p align="center">
-  <a href="README.zh-CN.md">🇨🇳 简体中文</a> | 
-  <a href="README.md">🇺🇸 English</a>
+  <strong>认识自己，明确方向，锻造属于你的职业机会。</strong><br>
+  <em>Know Yourself. Define Your Direction. Forge Your Opportunity.</em>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
-  <img src="https://img.shields.io/badge/role_profiles-9_standard-green?style=for-the-badge" alt="9 Role Profiles">
-  <img src="https://img.shields.io/badge/templates-4_baseline_A4-purple?style=for-the-badge" alt="4 Baseline A4 Templates">
-  <img src="https://img.shields.io/badge/python-3.9+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=green" alt="License: MIT"></a>
+  <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/Language-🇨🇳_简体中文-0284C7?style=flat&logo=translate&logoColor=white" alt="简体中文"></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-🇺🇸_English-4F46E5?style=flat&logo=translate&logoColor=white" alt="English"></a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat-square&logo=npm&label=npm" alt="npm package"></a>
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/architecture-HTML%20Intermediate%20Canvas%20%2B%20Design%20Tokens-blue?style=flat-square" alt="HTML Intermediate Canvas">
+  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837&label=npm" alt="npm version"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=2563EB" alt="GitHub Release"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=F59E0B" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-10B981?style=flat" alt="License: MIT"></a>
 </p>
 
-> **Know Yourself. Define Your Direction. Forge Your Opportunity.**
->
-> *An agent-native skill for self-discovery, career positioning, and tailored resume engineering.*
+<p align="center">
+  <img src="https://img.shields.io/badge/roles-9_Standard_Profiles-0EA5E9?style=flat&logo=target&logoColor=white" alt="9 Role Profiles">
+  <img src="https://img.shields.io/badge/templates-4_Baseline_A4-8B5CF6?style=flat&logo=html5&logoColor=white" alt="4 Baseline A4 Templates">
+  <img src="https://img.shields.io/badge/architecture-Two--Tier_Tokens-EC4899?style=flat&logo=css3&logoColor=white" alt="Two-Tier Tokens">
+  <img src="https://img.shields.io/badge/python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/engine-Playwright_A4_PDF-16A34A?style=flat&logo=playwright&logoColor=white" alt="Playwright PDF">
+</p>
 
+</div>
 ---
 
 ## 1. What is KnowMe CareerForge?
@@ -174,24 +179,24 @@ All visual parameters are concentrated in `:root` variables inside `workspace/re
 ## 8. CLI & Script Reference
 
 ```bash
-# 1. Search best template for target role
-knowme search "AI Agent Engineer" --style "two-column-split"
+# 1. One-shot resume engineering pipeline (mining -> canvas -> QA -> PDF)
+knowme forge --repo . --role "AI Agent Engineer" --template modern --quiet
 
-# 2. Analyze a target Job Description
-python3 scripts/evidence/analyze-jd.py --jd examples/ai-engineer/jd.md
+# 2. Search best template for target role (hybrid engine)
+knowme search --role "AI Agent Engineer" --engine hybrid
 
-# 3. Instantiate Intermediate Working Canvas
-python3 scripts/template/instantiate-resume.py --template modern --keywords "Python,LLM,RAG" --output workspace/resume.html
+# 3. Extract candidate evidence & facts from codebase
+knowme extract --repo . --output workspace/evidence-master.json
 
 # 4. Validate working canvas layout & ATS compliance
 knowme validate
 
 # 5. Render deterministic pixel-perfect PDF
-python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
+knowme render --input workspace/resume.html --output output/resume.pdf
 
 # 6. Build & view static HTML Template Gallery
 knowme gallery
-
+```
 ---
 
 ## Automated Test Suite
@@ -209,7 +214,7 @@ This package is ready to be built, tested, and published to the NPM Registry:
 
 ```bash
 # 1. Automated release preparation & verification
-npm run release -- 0.0.1
+npm run release -- 0.0.4
 
 # 2. Publish to public NPM registry
 npm publish --access public

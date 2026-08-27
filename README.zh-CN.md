@@ -1,30 +1,33 @@
-# KnowMe CareerForge
+<div align="center">
+
+# 🎯 KnowMe CareerForge
 
 <p align="center">
-  <a href="README.zh-CN.md">🇨🇳 简体中文</a> | 
-  <a href="README.md">🇺🇸 English</a>
+  <strong>认识自己，明确方向，锻造属于你的职业机会。</strong><br>
+  <em>Know Yourself. Define Your Direction. Forge Your Opportunity.</em>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=blue" alt="GitHub Release"></a>
-  <img src="https://img.shields.io/badge/岗位画像-9套标准画像-green?style=for-the-badge" alt="9 Role Profiles">
-  <img src="https://img.shields.io/badge/A4模板-4套黄金基准-purple?style=for-the-badge" alt="4 Baseline A4 Templates">
-  <img src="https://img.shields.io/badge/python-3.9+-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.9+">
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/Max-Samson/knowme-careerforge-skill?style=for-the-badge&color=green" alt="License: MIT"></a>
+  <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/语言-🇨🇳_简体中文-0284C7?style=flat&logo=translate&logoColor=white" alt="简体中文"></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-🇺🇸_English-4F46E5?style=flat&logo=translate&logoColor=white" alt="English"></a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat-square&logo=npm&label=npm" alt="npm package"></a>
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat-square&logo=github" alt="GitHub stars"></a>
-  <img src="https://img.shields.io/badge/核心架构-HTML中间修改场%20%2B%20Design%20Tokens-blue?style=flat-square" alt="HTML Intermediate Canvas">
+  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837&label=npm" alt="npm package"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=2563EB" alt="GitHub Release"></a>
+  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=F59E0B" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/开源协议-MIT-10B981?style=flat" alt="License: MIT"></a>
 </p>
 
-> **认识自己，明确方向，锻造属于你的职业机会。**
->
-> *Know Yourself. Define Your Direction. Forge Your Opportunity.*
->
-> *面向主流 AI Agent 的自我认知、职业定位与岗位定制简历工程 Skill。*
+<p align="center">
+  <img src="https://img.shields.io/badge/岗位画像-9套标准画像-0EA5E9?style=flat&logo=target&logoColor=white" alt="9套标准画像">
+  <img src="https://img.shields.io/badge/A4模板-4套黄金基准-8B5CF6?style=flat&logo=html5&logoColor=white" alt="4套黄金基准模板">
+  <img src="https://img.shields.io/badge/核心架构-两层_Design_Tokens-EC4899?style=flat&logo=css3&logoColor=white" alt="两层 Design Tokens">
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python 3.9+">
+  <img src="https://img.shields.io/badge/渲染引擎-Playwright_A4_PDF-16A34A?style=flat&logo=playwright&logoColor=white" alt="Playwright PDF">
+</p>
 
+</div>
 ---
 
 ## 1. 什么是 KnowMe CareerForge？
@@ -178,24 +181,24 @@ knowme list
 ## 8. CLI 命令参考
 
 ```bash
-# 1. 智能检索最匹配的 HTML 简历模板
-knowme search "AI Agent Engineer" --style "two-column-split"
+# 1. 一键全流程装配管线（代码挖掘 -> HTML画布 -> 双重质检 -> A4 PDF）
+knowme forge --repo . --role "AI Agent Engineer" --template modern --quiet
 
-# 2. 深度解析目标 JD 文本与技能词频
-python3 scripts/evidence/analyze-jd.py --jd examples/ai-engineer/jd.md
+# 2. 智能检索最匹配的 HTML 简历模板（混合评分引擎）
+knowme search --role "AI Agent Engineer" --engine hybrid
 
-# 3. 实例化 HTML 中间工作区并注入关键词高亮
-python3 scripts/template/instantiate-resume.py --template modern --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
+# 3. 深度抽取代码仓事实证据与可验证经历
+knowme extract --repo . --output workspace/evidence-master.json
 
-# 4. 运行布局结构、Design Tokens 与文字密度验证
+# 4. 运行布局结构、Design Tokens 与 ATS 双重质检
 knowme validate
 
 # 5. 确定性导出无损矢量 A4 PDF
-python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf
+knowme render --input workspace/resume.html --output output/resume.pdf
 
 # 6. 编译生成可视化模板画廊
 knowme gallery
-
+```
 ---
 
 ## 自动化测试与持续集成
@@ -213,7 +216,7 @@ python3 scripts/build/run-all-tests.py
 
 ```bash
 # 1. 执行发布前自动化测试与打包预检
-npm run release -- 0.0.1
+npm run release -- 0.0.4
 
 # 2. 发布至公共 NPM 注册表
 npm publish --access public
