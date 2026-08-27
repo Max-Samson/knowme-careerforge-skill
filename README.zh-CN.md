@@ -8,23 +8,17 @@
 </p>
 
 <p align="center">
-  <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/语言-🇨🇳_简体中文-0284C7?style=flat&logo=translate&logoColor=white" alt="简体中文"></a>
-  <a href="README.md"><img src="https://img.shields.io/badge/Language-🇺🇸_English-4F46E5?style=flat&logo=translate&logoColor=white" alt="English"></a>
+  <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/语言-🇨🇳_简体中文-0284C7?style=flat" alt="简体中文"></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-🇺🇸_English-4F46E5?style=flat" alt="English"></a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837&label=npm" alt="npm package"></a>
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/releases"><img src="https://img.shields.io/github/v/release/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=2563EB" alt="GitHub Release"></a>
-  <a href="https://github.com/Max-Samson/knowme-careerforge-skill/stargazers"><img src="https://img.shields.io/github/stars/Max-Samson/knowme-careerforge-skill?style=flat&logo=github&logoColor=white&color=F59E0B" alt="GitHub stars"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/开源协议-MIT-10B981?style=flat" alt="License: MIT"></a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/岗位画像-9套标准画像-0EA5E9?style=flat&logo=target&logoColor=white" alt="9套标准画像">
-  <img src="https://img.shields.io/badge/A4模板-4套黄金基准-8B5CF6?style=flat&logo=html5&logoColor=white" alt="4套黄金基准模板">
-  <img src="https://img.shields.io/badge/核心架构-两层_Design_Tokens-EC4899?style=flat&logo=css3&logoColor=white" alt="两层 Design Tokens">
-  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python 3.9+">
-  <img src="https://img.shields.io/badge/渲染引擎-Playwright_A4_PDF-16A34A?style=flat&logo=playwright&logoColor=white" alt="Playwright PDF">
+  <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837" alt="npm package"></a>
+  <img src="https://img.shields.io/badge/Node.js-%3E%3D18-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Playwright-A4_PDF-2EAD33?style=flat&logo=playwright&logoColor=white" alt="Playwright">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/开源协议-MIT-6B7280?style=flat" alt="License: MIT"></a>
 </p>
 
 </div>
