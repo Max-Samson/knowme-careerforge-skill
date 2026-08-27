@@ -18,6 +18,16 @@ function findPackageRoot(startDir: string): string {
   }
   return path.resolve(startDir, '../../..');
 }
+function getVersion(rootDir: string): string {
+  try {
+    const pkgJson = path.join(rootDir, 'package.json');
+    if (require('fs').existsSync(pkgJson)) {
+      const data = JSON.parse(require('fs').readFileSync(pkgJson, 'utf-8'));
+      return data.version || '0.0.4';
+    }
+  } catch {}
+  return '0.0.4';
+}
 
 export function showHelp(): void {
   console.log(`
@@ -135,6 +145,12 @@ export function main(): void {
       let scriptPath = path.join(rootDir, 'scripts', 'build', 'run-all-tests.py');
       if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'run-all-tests.py');
       child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
+      break;
+    }
+    case '--version':
+    case '-v':
+    case 'version': {
+      console.log(getVersion(rootDir));
       break;
     }
     case 'help':

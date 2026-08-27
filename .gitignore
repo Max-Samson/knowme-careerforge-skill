@@ -5,8 +5,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-dist/
-build/
+/dist/
+/build/
 .turbo/
 
 # Python
@@ -18,9 +18,9 @@ __pycache__/
 env/
 venv/
 .venv/
-build/
+/build/
 develop-eggs/
-dist/
+/dist/
 downloads/
 eggs/
 .eggs/

@@ -6,6 +6,16 @@
 
 ---
 
+## [0.0.4] - 2026-08-28
+
+### 🐛 缺陷修复 (Fixed)
+- **CLI 选项与参数解析修复 (`cli/src/index.ts`)**：
+  - 增加 `--version`、`-v` 与 `version` 命令分支处理，支持直接输出包版本号而非落入帮助菜单。
+- **模板搜索引擎岗位参数兼容 (`scripts/template/search-template.py`)**：
+  - 增加 `--role` / `-r` 命名选项支持，完美兼容 `knowme search --role "<岗位>"` 与 `knowme search "<岗位>"` 两种调用语法。
+
+---
+
 ## [0.0.3] - 2026-08-28
 
 ### 🚀 新增功能 (Added)

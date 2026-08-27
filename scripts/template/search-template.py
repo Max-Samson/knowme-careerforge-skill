@@ -299,7 +299,8 @@ def search_templates(
     return results
 def main():
     parser = argparse.ArgumentParser(description="KnowMe CareerForge — Template Search Engine")
-    parser.add_argument("role", help="Target role or job title (e.g. 'AI Agent Engineer')")
+    parser.add_argument("role", nargs="?", default=None, help="Target role or job title (e.g. 'AI Agent Engineer')")
+    parser.add_argument("--role", "-r", dest="named_role", default=None, help="Target role (named option)")
     parser.add_argument("--style", "-s", default=None, help="Style preference (minimal, modern, executive, classic)")
     parser.add_argument("--target-pages", "-p", type=int, default=1, help="Target pages (1 or 2)")
     parser.add_argument("--density", "-d", default="balanced", choices=["high", "balanced", "spacious"], help="Density")
@@ -308,8 +309,12 @@ def main():
     parser.add_argument("--json", action="store_true", help="Output raw JSON array")
     
     args = parser.parse_args()
+    target_role = args.named_role or args.role
+    if not target_role:
+        parser.error("the following arguments are required: role (or --role / -r)")
+
     results = search_templates(
-        role=args.role,
+        role=target_role,
         style=args.style,
         target_pages=args.target_pages,
         density=args.density,
@@ -323,7 +328,7 @@ def main():
         
     print("=" * 80)
     print(f"  KnowMe CareerForge — Template Search Engine Results")
-    print(f"  Query Role   : {args.role}")
+    print(f"  Query Role   : {target_role}")
     print(f"  Style Filter : {args.style or 'Any'}")
     print(f"  Engine       : {args.engine.upper()}")
     print(f"  Matches      : {len(results)} template(s) found")

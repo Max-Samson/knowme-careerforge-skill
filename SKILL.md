@@ -2,7 +2,7 @@
 name: knowme-careerforge
 displayName: KnowMe CareerForge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Analyzes candidate evidence, maps strengths to target JDs, crafts tailored resumes inside an HTML Intermediate Canvas, self-heals layout/ATS, and exports pixel-perfect PDFs.
-version: 0.0.3
+version: 0.0.4
 ---
 
 # KnowMe CareerForge — Agent Reasoning Contract & Execution Specification

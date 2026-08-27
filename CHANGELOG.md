@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.0.4] - 2026-08-28
+
+### 🐛 Fixed
+- **CLI Flag Parsing (`cli/src/index.ts`)**:
+  - Added `--version`, `-v`, and `version` command options to print the package version directly instead of falling through to the help menu.
+- **Template Search Engine Arguments (`scripts/template/search-template.py`)**:
+  - Added support for named `--role` / `-r` options alongside positional `role` arguments, enabling both `knowme search --role "<Role>"` and `knowme search "<Role>"`.
+
+---
+
 
 ## [0.0.3] - 2026-08-28
 
