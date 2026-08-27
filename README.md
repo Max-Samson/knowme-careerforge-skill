@@ -207,8 +207,8 @@ python3 scripts/build/run-all-tests.py
 This package is ready to be built, tested, and published to the NPM Registry:
 
 ```bash
-# 1. Automated release preparation & verification
-npm run release -- 0.0.4
+# 1. Automated release preparation & verification (e.g. patch/minor/major)
+npm run release -- <version>
 
 # 2. Publish to public NPM registry
 npm publish --access public

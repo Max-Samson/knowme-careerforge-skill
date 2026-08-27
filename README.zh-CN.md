@@ -209,8 +209,8 @@ python3 scripts/build/run-all-tests.py
 本项目已配置为标准的 NPM Package，支持一键编译、测试与发布：
 
 ```bash
-# 1. 执行发布前自动化测试与打包预检
-npm run release -- 0.0.4
+# 1. 执行发布前自动化版本对齐、测试与打包预检
+npm run release -- <version>
 
 # 2. 发布至公共 NPM 注册表
 npm publish --access public

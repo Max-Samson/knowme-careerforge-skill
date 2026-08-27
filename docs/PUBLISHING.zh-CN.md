@@ -42,12 +42,12 @@
 
 项目内置了发布自动化引擎（`scripts/build/release.py`），自动完成版本号同步、知识库编译、画廊刷新、TypeScript 编译、全量测试质检与打包预检。
 
-### 发布新版本（例如 `0.0.1`）：
+### 发布新版本：
 
 ```bash
-npm run release -- 0.0.1
+npm run release -- <version>
 # 或直接运行：
-python3 scripts/build/release.py 0.0.1
+python3 scripts/build/release.py <version>
 ```
 
 该脚本将自动执行：
@@ -67,8 +67,8 @@ python3 scripts/build/release.py 0.0.1
 ```bash
 # 1. 提交代码并打上 Git Tag
 git add .
-git commit -m "chore(release): bump version to v0.0.1"
-git tag v0.0.1
+git commit -m "chore(release): bump version to v<version>"
+git tag v<version>
 git push origin main --tags
 
 # 2. 正式发布至公共 NPM 注册表

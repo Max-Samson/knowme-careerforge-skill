@@ -42,12 +42,12 @@ When publishing, NPM only packages files declared in `"files"` in `package.json`
 
 We provide an automated release engine (`scripts/build/release.py`) that handles version synchronization, compilation, template gallery rebuilding, full-chain test validation, and packaging checks.
 
-### Releasing a New Version (e.g. `0.0.1`):
+### Releasing a New Version:
 
 ```bash
-npm run release -- 0.0.1
+npm run release -- <version>
 # Or directly:
-python3 scripts/build/release.py 0.0.1
+python3 scripts/build/release.py <version>
 ```
 
 The script automatically executes:
@@ -67,8 +67,8 @@ After the release script passes with 100% success:
 ```bash
 # 1. Commit and tag the new version
 git add .
-git commit -m "chore(release): bump version to v0.0.1"
-git tag v0.0.1
+git commit -m "chore(release): bump version to v<version>"
+git tag v<version>
 git push origin main --tags
 
 # 2. Publish to the public NPM registry
