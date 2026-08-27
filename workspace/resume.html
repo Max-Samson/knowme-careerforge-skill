@@ -5,58 +5,199 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Miles - 个人简历</title>
   <style>
+/**
+ * KnowMe CareerForge — Common Base Design System & CSS Foundation
+ * 
+ * Architecture:
+ * 1. Primitive Tokens (Raw Colors, Font Stacks, Spacing Ladder, Physical Page Dimensions)
+ * 2. Universal Reset & Base Canvas Box Model
+ * 3. Deterministic A4 Print Media Contract (@page & print-color-adjust)
+ * 4. Shared Micro-Typography & Layout Utilities
+ */
+
 :root {
-  /* 页面物理约束 */
-  --resume-page-width: 210mm;
-  --resume-page-min-height: 297mm;
+  /* === 1. PRIMITIVE TOKENS === */
 
-  /* 配色体系 */
-  --resume-color-sidebar-bg: #254665;    /* 经典深海蓝 Navy */
-  --resume-color-sidebar-text: #f8fafc;  /* 侧边栏反白字 */
-  --resume-color-sidebar-muted: #94a3b8; /* 侧边栏辅助文字 */
-  --resume-color-sidebar-accent: #38bdf8;/* 侧边栏亮色高亮 */
-  
-  --resume-color-main-bg: #ffffff;
-  --resume-color-primary: #0f172a;       /* Slate 900 */
-  --resume-color-secondary: #334155;     /* Slate 700 */
-  --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #254665;        /* 主舞台强调色 */
-  --resume-color-border: #e2e8f0;        /* Slate 200 */
+  /* 1.1 Physical A4 Page Constants */
+  --primitive-page-width: 210mm;
+  --primitive-page-min-height: 297mm;
+  --primitive-page-height-px: 1122.5px; /* 297mm * 96DPI / 25.4 */
 
-  /* 字阶系统 */
-  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-name: 22pt;
-  --resume-font-size-target: 11pt;
-  --resume-font-size-h2: 12pt;
-  --resume-font-size-body: 9.2pt;
-  --resume-font-size-meta: 8.5pt;
-  --resume-line-height-body: 1.45;
+  /* 1.2 Neutral Color Palette (Slate Foundation) */
+  --primitive-color-slate-900: #0f172a; /* Body & Headings Primary */
+  --primitive-color-slate-800: #1e293b; /* Dark Banners & Deep Cards */
+  --primitive-color-slate-700: #334155; /* Secondary Text & Subheadings */
+  --primitive-color-slate-600: #475569;
+  --primitive-color-slate-500: #64748b; /* Muted Meta & Dates */
+  --primitive-color-slate-400: #94a3b8; /* Subtle Inverted Meta */
+  --primitive-color-slate-300: #cbd5e1; /* Strong Border */
+  --primitive-color-slate-200: #e2e8f0; /* Default Border & Dividers */
+  --primitive-color-slate-100: #f1f5f9; /* Tag & Label Background */
+  --primitive-color-slate-50:  #f8fafc; /* Card Background & Inverted Text */
+  --primitive-color-white:     #ffffff;
 
-  /* 间距 Tokens (Agent 自愈参数) */
-  --resume-space-section: 12pt;
-  --resume-space-item: 8pt;
-  --resume-space-bullet: 2.5pt;
-  --resume-sidebar-width: 32%;
+  /* 1.3 Brand & Industry Accent Palettes */
+  --primitive-color-blue-700:  #1d4ed8; /* Corporate Blue */
+  --primitive-color-blue-600:  #2563eb; /* Tech Blue */
+  --primitive-color-blue-500:  #3b82f6;
+  --primitive-color-blue-50:   #eff6ff; /* Light Accent Tint */
+  --primitive-color-navy-900:  #172a3a;
+  --primitive-color-navy-800:  #254665; /* Modern Deep Navy */
+  --primitive-color-sky-400:   #38bdf8; /* Highlight Blue */
+  --primitive-color-teal-700:  #0f766e; /* Executive Teal */
+  --primitive-color-teal-50:   #f0fdfa; /* Light Teal Tint */
+
+  /* 1.4 Typography Families */
+  --primitive-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  --primitive-font-mono: "Geist Mono", "SF Mono", Monaco, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* 1.5 Spacing Scale (2pt / 4px Base Grid) */
+  --primitive-space-1: 2pt;
+  --primitive-space-2: 4pt;
+  --primitive-space-3: 6pt;
+  --primitive-space-4: 8pt;
+  --primitive-space-5: 10pt;
+  --primitive-space-6: 12pt;
+  --primitive-space-7: 14pt;
+  --primitive-space-8: 16pt;
+  --primitive-space-10: 20pt;
+  --primitive-space-12: 24pt;
+
+  /* 1.6 Type Scale */
+  --primitive-font-size-display: 22pt;
+  --primitive-font-size-title:   18pt;
+  --primitive-font-size-h2:      12pt;
+  --primitive-font-size-h3:      10.5pt;
+  --primitive-font-size-body:    9.2pt;
+  --primitive-font-size-meta:    8.5pt;
+  --primitive-font-size-badge:   8.0pt;
+
+  /* 1.7 Line Heights */
+  --primitive-line-height-tight:  1.2;
+  --primitive-line-height-normal: 1.45;
+  --primitive-line-height-loose:  1.6;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* === 2. UNIVERSAL RESET & BASE CANVAS === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   background-color: #e2e8f0;
-  font-family: var(--resume-font-body);
+  font-family: var(--primitive-font-sans);
   display: flex;
   justify-content: center;
   padding: 24px 0;
+  color: var(--primitive-color-slate-900);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Base Resume Page Container */
+.resume-page {
+  width: var(--primitive-page-width);
+  min-height: var(--primitive-page-min-height);
+  background: var(--primitive-color-white);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* === 3. DETERMINISTIC PRINT MEDIA CONTRACT === */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0; /* System print margins completely removed; template padding takes full control */
+  }
+
+  body {
+    background: transparent !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .resume-page {
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: var(--primitive-page-width) !important;
+    min-height: var(--primitive-page-min-height) !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+
+/* === 4. SHARED BASE COMPONENTS & UTILITIES === */
+.bullet-list {
+  list-style-type: disc;
+  margin-left: 14pt;
+  color: var(--resume-color-secondary, var(--primitive-color-slate-700));
+}
+
+.bullet-list strong {
+  color: var(--resume-color-primary, var(--primitive-color-slate-900));
+  font-weight: 600;
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta, var(--primitive-font-size-meta));
+  color: var(--resume-color-muted, var(--primitive-color-slate-500));
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+
+/* === TEMPLATE SPECIFIC STYLES === */
+/**
+ * KnowMe CareerForge — Modern Split Sidebar Template Style
+ * Style Tone: Modern Deep Navy (Two-Column Sidebar 32:68)
+ * Inherits: src/templates/common/base.css
+ */
+
+:root {
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-color-sidebar-bg: var(--primitive-color-navy-800);
+  --resume-color-sidebar-text: var(--primitive-color-slate-50);
+  --resume-color-sidebar-muted: var(--primitive-color-slate-400);
+  --resume-color-sidebar-accent: var(--primitive-color-sky-400);
+  
+  --resume-color-main-bg: var(--primitive-color-white);
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--primitive-color-navy-800);
+  --resume-color-border: var(--primitive-color-slate-200);
+
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: var(--primitive-font-size-display);
+  --resume-font-size-target: var(--primitive-font-size-h3);
+  --resume-font-size-h2: var(--primitive-font-size-h2);
+  --resume-font-size-body: var(--primitive-font-size-body);
+  --resume-font-size-meta: var(--primitive-font-size-meta);
+  --resume-line-height-body: var(--primitive-line-height-normal);
+
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-section: var(--primitive-space-6);
+  --resume-space-item: var(--primitive-space-4);
+  --resume-space-bullet: var(--primitive-space-1);
+  --resume-sidebar-width: 32%;
 }
 
 .resume-page {
-  width: var(--resume-page-width);
-  min-height: var(--resume-page-min-height);
   background: var(--resume-color-main-bg);
   display: grid;
   grid-template-columns: var(--resume-sidebar-width) 1fr;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -234,21 +375,14 @@ body {
 .tech-badge {
   font-size: 8pt;
   color: var(--resume-color-muted);
-  background: #f1f5f9;
+  background: var(--primitive-color-slate-100);
   padding: 1.5pt 4pt;
   border-radius: 2pt;
-}
-
-.date-range {
-  font-size: var(--resume-font-size-meta);
-  color: var(--resume-color-muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .bullet-list {
   margin-left: 12pt;
   font-size: var(--resume-font-size-body);
-  color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
 }
 
@@ -256,31 +390,10 @@ body {
   margin-bottom: var(--resume-space-bullet);
 }
 
-.bullet-list strong {
-  color: var(--resume-color-primary);
-  font-weight: 600;
-}
-
 .edu-desc {
   font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
-}
-
-@media print {
-  body { background: transparent; padding: 0; }
-  .resume-page {
-    box-shadow: none;
-    margin: 0;
-    width: var(--resume-page-width);
-    min-height: var(--resume-page-min-height);
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
 }
 
   </style>

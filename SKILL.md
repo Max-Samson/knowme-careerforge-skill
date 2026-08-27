@@ -2,7 +2,7 @@
 name: knowme-careerforge
 displayName: KnowMe CareerForge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Analyzes candidate evidence, maps strengths to target JDs, crafts tailored resumes inside an HTML Intermediate Canvas, self-heals layout/ATS, and exports pixel-perfect PDFs.
-version: 0.0.2
+version: 0.0.3
 ---
 
 # KnowMe CareerForge — Agent Reasoning Contract & Execution Specification
@@ -31,6 +31,16 @@ When this skill is activated, you are NOT a generic text generator. You act as a
   - **DO NOT** print hundreds of lines of raw HTML, full CSS stylesheets, or intermediate scratchpad python scripts to the user chat.
   - Execute tool scripts silently in the background.
   - Final response contract: One-line Value Proposition + Top 3 Grounded Evidence Highlights + Direct Output File Paths (`workspace/resume.pdf` and `workspace/resume.html`).
+
+### Reference Manuals (L3 Domain Rules):
+- **Stage 1 (Know Me)**: `references/01-evidence-mining.md`
+- **Stage 2 (Define Goal)**: `references/02-career-goal.md`
+- **Stage 3 (Understand JD)**: `references/03-jd-analysis.md`
+- **Stage 4 (Position & Select)**: `references/04-template-selection.md`
+- **Stage 5 (Forge Canvas)**: `references/05-html-canvas-tokens.md`
+- **Stage 6 (Review & QA)**: `references/06-qa-and-rendering.md`
+
+*See `AGENT.md` for strict editorial standards and `ARCHITECTURE.md` for system architecture.*
 
 ---
 

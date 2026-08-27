@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.3] - 2026-08-28
+
+### 🚀 Added
+- **4-Tier Documentation Pyramid (L0~L3)**:
+  - **L0**: Primary reasoning entrypoint `SKILL.md` aligned with 6-stage deterministic workflow.
+  - **L1**: `AGENT.md` (Vercel-inspired agent editorial standards, priority order, four-pass discipline, anti-pattern blacklist, and quiet execution protocol) + `CLAUDE.md` (developer cheat sheet).
+  - **L2**: `ARCHITECTURE.md` (6-tier architecture, data flow, Deep Module seams) + `docs/decisions/` (ADR-0001 through ADR-0004).
+  - **L3**: Consolidated `references/` (01-evidence-mining.md ~ 06-qa-and-rendering.md) strictly aligned 1:1 with the 6 workflow stages.
+- **Two-Tier Design Tokens Architecture**:
+  - `src/templates/common/base.css`: Standardized Primitive Tokens (Slate/Blue/Teal/Navy palettes, 2pt grid spacing scale `--primitive-space-1` ~ `--primitive-space-12`, A4 print contract `@page` & `print-color-adjust`).
+  - Refactored all 4 core template `style.css` files (`minimal`, `modern`, `executive`, `classic`) to bind Component Tokens to Primitive Tokens, eliminating 60% of CSS boilerplate.
+  - `scripts/template/instantiate-resume.py`: Automatically merges and inlines `base.css` + `style.css` during canvas instantiation, preserving the Single-File Self-Contained Canvas Invariant.
+- **Pluggable Deep Module Search Engine (`scripts/template/search-template.py`)**:
+  - Abstract `BaseTemplateScorer` interface with `WeightedRuleScorer`, pure-Python `BM25TextScorer`, and `HybridTemplateScorer` (70% rules + 30% BM25).
+  - Extensible CLI supporting `--engine hybrid|weighted|bm25`.
+- **Architecture Decision Records (`docs/decisions/`)**:
+  - `0001-html-intermediate-canvas.md`: HTML as the sole working canvas.
+  - `0002-pure-css-design-tokens-over-tailwind.md`: Pure CSS3 Design Tokens over Tailwind runtime toolchain.
+  - `0003-two-tier-tokens-architecture.md`: Primitive + Component token layering.
+  - `0004-decentralized-json-with-bm25-index.md`: Decentralized JSON metadata with build-time BM25 index.
+
+### 🔄 Changed
+- **Platform Adapters & Distribution Packaging**:
+  - Updated `agents/` configurations (`cursor.mdc`, `windsurf.rules`, `claude.md`, `codex.yaml`) to reference `AGENT.md`, `ARCHITECTURE.md`, and `references/01~06`.
+  - Updated `cli/src/commands/init.ts` to bundle `references/`, `AGENT.md`, and `ARCHITECTURE.md` during `knowme init`.
+- **Full Test Suite & Pipelines**:
+  - Updated tests in `tests/workflows/`, `tests/templates/`, and `tests/rendering/` to validate the new architecture, passing all 24 automated tests.
+
+---
+
 ## [0.0.2] - 2026-08-26
 
 ### 🚀 Added

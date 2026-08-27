@@ -129,6 +129,7 @@ def instantiate_workspace(template_id: str, profile_path: Optional[str] = None, 
         
     html_file = template_dir / "template.html"
     css_file = template_dir / "style.css"
+    base_css_file = base_dir / "src" / "templates" / "common" / "base.css"
     
     if not html_file.exists() or not css_file.exists():
         raise FileNotFoundError(f"template.html or style.css missing in {template_dir}")
@@ -136,11 +137,16 @@ def instantiate_workspace(template_id: str, profile_path: Optional[str] = None, 
     html_content = html_file.read_text(encoding="utf-8")
     css_content = css_file.read_text(encoding="utf-8")
     
+    combined_css = ""
+    if base_css_file.exists():
+        combined_css = base_css_file.read_text(encoding="utf-8") + "\n\n/* === TEMPLATE SPECIFIC STYLES === */\n" + css_content
+    else:
+        combined_css = css_content
+    
     inlined_html = html_content.replace(
         '<link rel="stylesheet" href="style.css">',
-        f'<style>\n{css_content}\n  </style>'
+        f'<style>\n{combined_css}\n  </style>'
     )
-    
     kw_list = [k.strip() for k in keywords.split(",") if k.strip()] if keywords else []
 
     if profile_path and Path(profile_path).exists():

@@ -5,54 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>候选人 - 技术总监 / 架构师简历</title>
   <style>
+/**
+ * KnowMe CareerForge — Executive Modern Split Template Style
+ * Style Tone: Executive Formal (Hero Banner + Two-Column 33:67)
+ * Inherits: src/templates/common/base.css
+ */
+
 :root {
-  /* A4 绝对几何尺寸 */
-  --resume-page-width: 210mm;
-  --resume-page-min-height: 297mm;
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-color-banner-bg: var(--primitive-color-slate-800);
+  --resume-color-banner-text: var(--primitive-color-slate-50);
+  --resume-color-banner-muted: var(--primitive-color-slate-400);
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--primitive-color-teal-700);
+  --resume-color-tag-bg: var(--primitive-color-teal-50);
+  --resume-color-border: var(--primitive-color-slate-200);
 
-  /* 配色体系 */
-  --resume-color-banner-bg: #1e293b;    /* Slate 800 */
-  --resume-color-banner-text: #f8fafc;
-  --resume-color-banner-muted: #94a3b8;
-  --resume-color-primary: #0f172a;       /* Slate 900 */
-  --resume-color-secondary: #334155;     /* Slate 700 */
-  --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #0f766e;        /* Teal 700 沉稳高管色 */
-  --resume-color-tag-bg: #f0fdfa;        /* Teal 50 */
-  --resume-color-border: #e2e8f0;
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: var(--primitive-font-size-display);
+  --resume-font-size-title: var(--primitive-font-size-h3);
+  --resume-font-size-body: var(--primitive-font-size-body);
+  --resume-font-size-meta: var(--primitive-font-size-meta);
+  --resume-line-height-body: var(--primitive-line-height-normal);
 
-  /* 字阶系统 */
-  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-name: 22pt;
-  --resume-font-size-title: 11pt;
-  --resume-font-size-body: 9.2pt;
-  --resume-font-size-meta: 8.5pt;
-  --resume-line-height-body: 1.45;
-
-  /* 间距 Tokens (Agent 自愈参数) */
-  --resume-space-section: 12pt;
-  --resume-space-item: 9pt;
-  --resume-space-bullet: 3pt;
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-section: var(--primitive-space-6);
+  --resume-space-item: var(--primitive-space-4);
+  --resume-space-bullet: var(--primitive-space-1);
   --resume-left-col-width: 33%;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background-color: #e2e8f0;
-  font-family: var(--resume-font-body);
-  display: flex;
-  justify-content: center;
-  padding: 24px 0;
-  color: var(--resume-color-primary);
-  -webkit-font-smoothing: antialiased;
-}
-
 .resume-page {
-  width: var(--resume-page-width);
-  min-height: var(--resume-page-min-height);
-  background: #ffffff;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -81,7 +67,7 @@ body {
 
 .candidate-title {
   font-size: var(--resume-font-size-title);
-  color: #38bdf8; /* Sky 400 */
+  color: var(--primitive-color-sky-400);
   font-weight: 600;
   margin-top: 2pt;
 }
@@ -203,42 +189,13 @@ body {
   color: var(--resume-color-accent);
 }
 
-.date-range {
-  font-size: var(--resume-font-size-meta);
-  color: var(--resume-color-muted);
-  font-variant-numeric: tabular-nums;
-}
-
 .bullet-list {
-  margin-left: 14pt;
   font-size: var(--resume-font-size-body);
-  color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
 }
 
 .bullet-list li {
   margin-bottom: var(--resume-space-bullet);
-}
-
-.bullet-list strong {
-  color: var(--resume-color-primary);
-  font-weight: 600;
-}
-
-@media print {
-  body { background: transparent; padding: 0; }
-  .resume-page {
-    box-shadow: none;
-    margin: 0;
-    width: var(--resume-page-width);
-    min-height: var(--resume-page-min-height);
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
 }
 
   </style>

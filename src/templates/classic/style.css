@@ -1,48 +1,35 @@
+/**
+ * KnowMe CareerForge — Classic Structured Table Template Style
+ * Style Tone: Structured Corporate (Table Grid Matrix)
+ * Inherits: src/templates/common/base.css
+ */
+
 :root {
-  /* A4 绝对几何尺寸 */
-  --resume-page-width: 210mm;
-  --resume-page-min-height: 297mm;
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
   --resume-page-padding: 12mm 14mm;
 
-  /* 配色系统 */
-  --resume-color-primary: #0f172a;       /* Slate 900 */
-  --resume-color-secondary: #334155;     /* Slate 700 */
-  --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #1d4ed8;        /* Blue 700 */
-  --resume-color-border: #cbd5e1;        /* Slate 300 稳重边框 */
-  --resume-color-header-bg: #f8fafc;     /* Slate 50 */
-  --resume-color-label-bg: #f1f5f9;      /* Slate 100 */
+  /* Color Bindings */
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--primitive-color-blue-700);
+  --resume-color-border: var(--primitive-color-slate-300);
+  --resume-color-header-bg: var(--primitive-color-slate-50);
+  --resume-color-label-bg: var(--primitive-color-slate-100);
 
-  /* 字阶系统 */
-  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-title: 18pt;
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-title: var(--primitive-font-size-title);
   --resume-font-size-body: 9pt;
-  --resume-font-size-meta: 8.5pt;
+  --resume-font-size-meta: var(--primitive-font-size-meta);
   --resume-line-height-body: 1.4;
 
-  /* 单元格内边距 */
+  /* Cell & Spacing Tokens */
   --resume-cell-padding: 4.5pt 7pt;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background-color: #e2e8f0;
-  font-family: var(--resume-font-body);
-  display: flex;
-  justify-content: center;
-  padding: 24px 0;
-  color: var(--resume-color-primary);
-  -webkit-font-smoothing: antialiased;
-}
-
 .resume-page {
-  width: var(--resume-page-width);
-  min-height: var(--resume-page-min-height);
-  background: #ffffff;
   padding: var(--resume-page-padding);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }
 
 .resume-header {
@@ -92,7 +79,7 @@ body {
 }
 
 .cell-highlight-bg {
-  background-color: #eff6ff; /* Blue 50 */
+  background-color: var(--primitive-color-blue-50);
   color: var(--resume-color-accent);
 }
 
@@ -145,20 +132,4 @@ body {
   font-size: 8.5pt;
   color: var(--resume-color-secondary);
   line-height: 1.38;
-}
-
-@media print {
-  body { background: transparent; padding: 0; }
-  .resume-page {
-    box-shadow: none;
-    margin: 0;
-    width: var(--resume-page-width);
-    min-height: var(--resume-page-min-height);
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
 }

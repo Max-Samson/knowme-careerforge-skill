@@ -1,6 +1,6 @@
 name: knowme-careerforge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering.
-version: 0.0.2
+version: 0.0.3
 entrypoint: SKILL.md
 tools:
   - name: forge
@@ -18,7 +18,7 @@ tools:
   - name: render-pdf
     command: python3 scripts/rendering/render-pdf.py
 rules:
-  - "Execute tools silently in background (DO NOT print raw HTML, full CSS, or scripts in chat)."
+  - "Execute tools silently in background with --quiet (DO NOT print raw HTML, full CSS, or scripts in chat)."
   - "Use workspace/resume.html as the sole Intermediate Working Canvas."
   - "Deliver final concise summary and path to workspace/resume.pdf."
-  - "Reference scripts/Agent.md for complete toolchain conventions."
+  - "Reference AGENT.md, ARCHITECTURE.md, and references/01~06 for complete specifications."

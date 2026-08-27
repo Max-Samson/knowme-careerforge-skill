@@ -1,55 +1,43 @@
+/**
+ * KnowMe CareerForge — Modern Split Sidebar Template Style
+ * Style Tone: Modern Deep Navy (Two-Column Sidebar 32:68)
+ * Inherits: src/templates/common/base.css
+ */
+
 :root {
-  /* 页面物理约束 */
-  --resume-page-width: 210mm;
-  --resume-page-min-height: 297mm;
-
-  /* 配色体系 */
-  --resume-color-sidebar-bg: #254665;    /* 经典深海蓝 Navy */
-  --resume-color-sidebar-text: #f8fafc;  /* 侧边栏反白字 */
-  --resume-color-sidebar-muted: #94a3b8; /* 侧边栏辅助文字 */
-  --resume-color-sidebar-accent: #38bdf8;/* 侧边栏亮色高亮 */
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-color-sidebar-bg: var(--primitive-color-navy-800);
+  --resume-color-sidebar-text: var(--primitive-color-slate-50);
+  --resume-color-sidebar-muted: var(--primitive-color-slate-400);
+  --resume-color-sidebar-accent: var(--primitive-color-sky-400);
   
-  --resume-color-main-bg: #ffffff;
-  --resume-color-primary: #0f172a;       /* Slate 900 */
-  --resume-color-secondary: #334155;     /* Slate 700 */
-  --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #254665;        /* 主舞台强调色 */
-  --resume-color-border: #e2e8f0;        /* Slate 200 */
+  --resume-color-main-bg: var(--primitive-color-white);
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--primitive-color-navy-800);
+  --resume-color-border: var(--primitive-color-slate-200);
 
-  /* 字阶系统 */
-  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-name: 22pt;
-  --resume-font-size-target: 11pt;
-  --resume-font-size-h2: 12pt;
-  --resume-font-size-body: 9.2pt;
-  --resume-font-size-meta: 8.5pt;
-  --resume-line-height-body: 1.45;
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: var(--primitive-font-size-display);
+  --resume-font-size-target: var(--primitive-font-size-h3);
+  --resume-font-size-h2: var(--primitive-font-size-h2);
+  --resume-font-size-body: var(--primitive-font-size-body);
+  --resume-font-size-meta: var(--primitive-font-size-meta);
+  --resume-line-height-body: var(--primitive-line-height-normal);
 
-  /* 间距 Tokens (Agent 自愈参数) */
-  --resume-space-section: 12pt;
-  --resume-space-item: 8pt;
-  --resume-space-bullet: 2.5pt;
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-section: var(--primitive-space-6);
+  --resume-space-item: var(--primitive-space-4);
+  --resume-space-bullet: var(--primitive-space-1);
   --resume-sidebar-width: 32%;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background-color: #e2e8f0;
-  font-family: var(--resume-font-body);
-  display: flex;
-  justify-content: center;
-  padding: 24px 0;
-  -webkit-font-smoothing: antialiased;
-}
-
 .resume-page {
-  width: var(--resume-page-width);
-  min-height: var(--resume-page-min-height);
   background: var(--resume-color-main-bg);
   display: grid;
   grid-template-columns: var(--resume-sidebar-width) 1fr;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -227,21 +215,14 @@ body {
 .tech-badge {
   font-size: 8pt;
   color: var(--resume-color-muted);
-  background: #f1f5f9;
+  background: var(--primitive-color-slate-100);
   padding: 1.5pt 4pt;
   border-radius: 2pt;
-}
-
-.date-range {
-  font-size: var(--resume-font-size-meta);
-  color: var(--resume-color-muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .bullet-list {
   margin-left: 12pt;
   font-size: var(--resume-font-size-body);
-  color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
 }
 
@@ -249,29 +230,8 @@ body {
   margin-bottom: var(--resume-space-bullet);
 }
 
-.bullet-list strong {
-  color: var(--resume-color-primary);
-  font-weight: 600;
-}
-
 .edu-desc {
   font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
-}
-
-@media print {
-  body { background: transparent; padding: 0; }
-  .resume-page {
-    box-shadow: none;
-    margin: 0;
-    width: var(--resume-page-width);
-    min-height: var(--resume-page-min-height);
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
 }

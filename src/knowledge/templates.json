@@ -51,9 +51,7 @@
         "--resume-font-size-meta",
         "--resume-font-size-title",
         "--resume-line-height-body",
-        "--resume-page-min-height",
-        "--resume-page-padding",
-        "--resume-page-width"
+        "--resume-page-padding"
       ]
     },
     {
@@ -113,8 +111,6 @@
         "--resume-font-size-title",
         "--resume-left-col-width",
         "--resume-line-height-body",
-        "--resume-page-min-height",
-        "--resume-page-width",
         "--resume-space-bullet",
         "--resume-space-item",
         "--resume-space-section"
@@ -175,9 +171,7 @@
         "--resume-font-size-name",
         "--resume-font-size-target",
         "--resume-line-height-body",
-        "--resume-page-min-height",
         "--resume-page-padding",
-        "--resume-page-width",
         "--resume-space-bullet",
         "--resume-space-header-bottom",
         "--resume-space-item",
@@ -243,8 +237,6 @@
         "--resume-font-size-name",
         "--resume-font-size-target",
         "--resume-line-height-body",
-        "--resume-page-min-height",
-        "--resume-page-width",
         "--resume-sidebar-width",
         "--resume-space-bullet",
         "--resume-space-item",

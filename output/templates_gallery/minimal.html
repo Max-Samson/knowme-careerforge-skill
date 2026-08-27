@@ -5,56 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>候选人 - 资深工程师简历</title>
   <style>
+/**
+ * KnowMe CareerForge — Minimal Tech Template Style
+ * Style Tone: Geek Minimal (Single-Column Flow)
+ * Inherits: src/templates/common/base.css
+ */
+
 :root {
-  /* 页面绝对 A4 尺寸 */
-  --resume-page-width: 210mm;
-  --resume-page-min-height: 297mm;
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
   --resume-page-padding: 14mm 16mm;
 
-  /* 现代科技色系 */
-  --resume-color-primary: #0f172a;       /* Slate 900 */
-  --resume-color-secondary: #334155;     /* Slate 700 */
-  --resume-color-muted: #64748b;         /* Slate 500 */
-  --resume-color-accent: #2563eb;        /* Tech Blue 600 */
-  --resume-color-accent-bg: #eff6ff;     /* Blue 50 */
-  --resume-color-border: #e2e8f0;        /* Slate 200 */
-  --resume-color-tag-bg: #f1f5f9;        /* Slate 100 */
+  /* Color Bindings */
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--primitive-color-blue-600);
+  --resume-color-accent-bg: var(--primitive-color-blue-50);
+  --resume-color-border: var(--primitive-color-slate-200);
+  --resume-color-tag-bg: var(--primitive-color-slate-100);
 
-  /* 字阶系统 */
-  --resume-font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --resume-font-size-name: 20pt;
-  --resume-font-size-target: 10.5pt;
-  --resume-font-size-h2: 12pt;
-  --resume-font-size-body: 9.2pt;
-  --resume-font-size-meta: 8.5pt;
-  --resume-line-height-body: 1.45;
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: var(--primitive-font-size-display);
+  --resume-font-size-target: var(--primitive-font-size-h3);
+  --resume-font-size-h2: var(--primitive-font-size-h2);
+  --resume-font-size-body: var(--primitive-font-size-body);
+  --resume-font-size-meta: var(--primitive-font-size-meta);
+  --resume-line-height-body: var(--primitive-line-height-normal);
 
-  /* 间距 Tokens (Agent 自愈关键参数) */
-  --resume-space-header-bottom: 11pt;
-  --resume-space-section: 11pt;
-  --resume-space-item: 7.5pt;
-  --resume-space-bullet: 2.5pt;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background-color: #f1f5f9;
-  font-family: var(--resume-font-body);
-  color: var(--resume-color-primary);
-  display: flex;
-  justify-content: center;
-  padding: 24px 0;
-  -webkit-font-smoothing: antialiased;
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-header-bottom: var(--primitive-space-5);
+  --resume-space-section: var(--primitive-space-5);
+  --resume-space-item: var(--primitive-space-4);
+  --resume-space-bullet: var(--primitive-space-1);
 }
 
 .resume-page {
-  width: var(--resume-page-width);
-  min-height: var(--resume-page-min-height);
-  background: #ffffff;
   padding: var(--resume-page-padding);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }
 
 /* Header 模块 */
@@ -180,17 +167,9 @@ body {
   border-radius: 3pt;
 }
 
-.date-range {
-  font-size: var(--resume-font-size-meta);
-  color: var(--resume-color-muted);
-  font-variant-numeric: tabular-nums;
-}
-
 /* Bullet 清单 */
 .bullet-list {
-  margin-left: 14pt;
   font-size: var(--resume-font-size-body);
-  color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
 }
 
@@ -198,31 +177,10 @@ body {
   margin-bottom: var(--resume-space-bullet);
 }
 
-.bullet-list strong {
-  color: var(--resume-color-primary);
-  font-weight: 600;
-}
-
 .edu-detail {
   font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
-}
-
-@media print {
-  body { background: transparent; padding: 0; }
-  .resume-page {
-    box-shadow: none;
-    margin: 0;
-    width: var(--resume-page-width);
-    min-height: var(--resume-page-min-height);
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
 }
 
   </style>

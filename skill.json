@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/skill.json",
   "name": "knowme-careerforge",
   "displayName": "KnowMe CareerForge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Know yourself. Define your direction. Forge your opportunity.",
   "author": "Miles <https://github.com/Max-Samson>",
   "license": "MIT",

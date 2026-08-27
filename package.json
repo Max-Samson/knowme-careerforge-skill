@@ -1,6 +1,6 @@
 {
   "name": "knowme-careerforge-skill",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An agent-native skill for self-discovery, career positioning, and tailored resume engineering.",
   "main": "dist/cli/src/index.js",
   "bin": {

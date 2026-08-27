@@ -70,7 +70,10 @@ export function runInit(options: InitOptions): void {
           fs.mkdirSync(claudeDir, { recursive: true });
           copyDirRecursive(path.join(rootDir, 'scripts'), path.join(claudeDir, 'scripts'));
           copyDirRecursive(path.join(rootDir, 'src'), path.join(claudeDir, 'src'));
+          copyDirRecursive(path.join(rootDir, 'references'), path.join(claudeDir, 'references'));
           fs.copyFileSync(path.join(rootDir, 'SKILL.md'), path.join(claudeDir, 'SKILL.md'));
+          fs.copyFileSync(path.join(rootDir, 'AGENT.md'), path.join(claudeDir, 'AGENT.md'));
+          fs.copyFileSync(path.join(rootDir, 'ARCHITECTURE.md'), path.join(claudeDir, 'ARCHITECTURE.md'));
           fs.copyFileSync(path.join(rootDir, 'skill.json'), path.join(claudeDir, 'skill.json'));
           console.log(`[✓] Claude Code Skill fully bundled -> ${claudeDir}`);
           break;
@@ -80,7 +83,10 @@ export function runInit(options: InitOptions): void {
           fs.mkdirSync(codexDir, { recursive: true });
           copyDirRecursive(path.join(rootDir, 'scripts'), path.join(codexDir, 'scripts'));
           copyDirRecursive(path.join(rootDir, 'src'), path.join(codexDir, 'src'));
+          copyDirRecursive(path.join(rootDir, 'references'), path.join(codexDir, 'references'));
           fs.copyFileSync(path.join(rootDir, 'SKILL.md'), path.join(codexDir, 'SKILL.md'));
+          fs.copyFileSync(path.join(rootDir, 'AGENT.md'), path.join(codexDir, 'AGENT.md'));
+          fs.copyFileSync(path.join(rootDir, 'ARCHITECTURE.md'), path.join(codexDir, 'ARCHITECTURE.md'));
           fs.copyFileSync(path.join(rootDir, 'skill.json'), path.join(codexDir, 'skill.json'));
           if (fs.existsSync(path.join(rootDir, 'agents', 'codex', 'knowme-careerforge.yaml'))) {
             fs.copyFileSync(path.join(rootDir, 'agents', 'codex', 'knowme-careerforge.yaml'), path.join(codexDir, 'skill.yaml'));
@@ -116,7 +122,10 @@ export function runInit(options: InitOptions): void {
           fs.mkdirSync(opencodeDir, { recursive: true });
           copyDirRecursive(path.join(rootDir, 'scripts'), path.join(opencodeDir, 'scripts'));
           copyDirRecursive(path.join(rootDir, 'src'), path.join(opencodeDir, 'src'));
+          copyDirRecursive(path.join(rootDir, 'references'), path.join(opencodeDir, 'references'));
           fs.copyFileSync(path.join(rootDir, 'SKILL.md'), path.join(opencodeDir, 'SKILL.md'));
+          fs.copyFileSync(path.join(rootDir, 'AGENT.md'), path.join(opencodeDir, 'AGENT.md'));
+          fs.copyFileSync(path.join(rootDir, 'ARCHITECTURE.md'), path.join(opencodeDir, 'ARCHITECTURE.md'));
           fs.copyFileSync(path.join(rootDir, 'skill.json'), path.join(opencodeDir, 'skill.json'));
           console.log(`[✓] OpenCode Skill fully bundled -> ${opencodeDir}`);
           break;

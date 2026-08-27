@@ -55,15 +55,19 @@ class TestTemplateContracts(unittest.TestCase):
                 self.assertIn("candidate-name", content, f"template.html in '{t_dir.name}' must contain .candidate-name")
 
     def test_css_contains_a4_print_geometry(self):
+        base_css_path = self.templates_dir / "common" / "base.css"
+        self.assertTrue(base_css_path.exists(), "src/templates/common/base.css must exist")
+        base_clean = base_css_path.read_text(encoding="utf-8").replace(" ", "").replace("\t", "")
+        self.assertIn("--primitive-page-width:210mm", base_clean, "base.css must define 210mm primitive width")
+        self.assertIn("--primitive-page-min-height:297mm", base_clean, "base.css must define 297mm primitive min-height")
+        self.assertIn("@page", base_clean, "base.css must define @page print media contract")
+
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
                 css_path = t_dir / "style.css"
-                content_clean = css_path.read_text(encoding="utf-8").replace(" ", "").replace("\t", "")
-                self.assertIn("--resume-page-width:210mm", content_clean, f"style.css in '{t_dir.name}' must define 210mm width")
-                self.assertIn("--resume-page-min-height:297mm", content_clean, f"style.css in '{t_dir.name}' must define 297mm min-height")
-                self.assertIn("@page", content_clean, f"style.css in '{t_dir.name}' must contain @page print rule")
-
+                self.assertTrue(css_path.exists(), f"style.css in '{t_dir.name}' must exist")
+                self.assertGreater(len(css_path.read_text(encoding="utf-8")), 50)
     def test_customizable_tokens_exist_in_css(self):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:

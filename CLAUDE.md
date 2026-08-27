@@ -45,8 +45,7 @@ python3 scripts/build/build-knowledge.py
 python3 scripts/build/build-gallery.py
 ```
 
-See `scripts/Agent.md` for complete domain architecture and invocation standards.
-
+See `AGENT.md` for Vercel-inspired agent editorial standards, `ARCHITECTURE.md` for system design & seams, and `docs/decisions/` for ADRs.
 ---
 
 ## 3. Code & Architecture Standards

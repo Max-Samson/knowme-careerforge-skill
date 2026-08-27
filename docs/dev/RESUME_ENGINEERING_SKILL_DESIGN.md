@@ -373,106 +373,106 @@ sequenceDiagram
 ## 5. 项目源码结构 (Source-of-Truth 结构)
 
 ```text
-resume-engineering-skill/
+knowme-careerforge-skill/
 ├── README.md                           # 英文项目说明
 ├── README.zh-CN.md                    # 中文项目说明
 ├── LICENSE                            # MIT 开源协议
 ├── skill.json                         # Skill 元数据与平台清单 (参照 ui-ux-pro-max)
-├── SKILL.md                           # Core Skill 指令与 Agent 执行标准 (含 HTML 修改场规范)
+├── SKILL.md                           # Core Skill 推理入口与 Agent 执行契约
+├── AGENT.md                           # 吸收 Vercel Editorial 规范的 Agent 行为与排版手册
+├── ARCHITECTURE.md                    # 6 层系统架构、数据流与 Deep Module Seam 设计
+├── CLAUDE.md                          # 开发者指令与测试速查指南
 ├── pyproject.toml                     # Python 工具链配置 (零重型第三方依赖)
 ├── package.json                       # Playwright & TypeScript 依赖
 ├── THIRD_PARTY_NOTICES.md             # 第三方模板与知识库溯源及合规说明
 │
+├── docs/
+│   ├── decisions/                     # 【架构决策记录 (ADRs)】
+│   │   ├── 0001-html-intermediate-canvas.md
+│   │   ├── 0002-pure-css-design-tokens-over-tailwind.md
+│   │   ├── 0003-two-tier-tokens-architecture.md
+│   │   └── 0004-decentralized-json-with-bm25-index.md
+│   └── dev/
+│       └── RESUME_ENGINEERING_SKILL_DESIGN.md # 本技术全景设计手册
+│
+├── references/                        # 【6 阶段深度运行时规范手册 (L3)】
+│   ├── 01-evidence-mining.md          # L1~L3 证据分级与代码仓/Git 挖掘
+│   ├── 02-career-goal.md              # 职级信号、能力矩阵与价值主张
+│   ├── 03-jd-analysis.md              # JD 痛点抽取、关键词密度与 FAB 模型
+│   ├── 04-template-selection.md       # 模板矩阵、布局几何与可插拔搜索
+│   ├── 05-html-canvas-tokens.md       # HTML 中间修改场与两层 Tokens 自愈
+│   └── 06-qa-and-rendering.md         # DOM 高度质检、ATS 规则与确定性 PDF 导出
+│
 ├── src/
-│   └── resume-engineering/
-│       ├── data/                      # 【结构化数据资产 (Source of Truth)】
-│       │   ├── roles/                 # 岗位技能画像 (基于 ResumeSample 预处理重构)
-│       │   │   ├── frontend.json
-│       │   │   ├── java-backend.json
-│       │   │   ├── node-fullstack.json
-│       │   │   ├── ai-agent-engineer.json
-│       │   │   ├── ios-engineer.json
-│       │   │   ├── android-engineer.json
-│       │   │   ├── cpp-systems.json
-│       │   │   ├── php-engineer.json
-│       │   │   ├── architect.json
-│       │   │   └── product-manager.json
-│       │   ├── layouts.json           # 布局分类 (单栏极简、双栏分割、结构化表格)
-│       │   ├── styles.json            # 视觉风格与配色方案 (Modern, Minimal, Executive...)
-│       │   ├── ats-rules.json         # ATS 解析友好性检查规则集
-│       │   └── templates.json         # 模板注册总表 (由 build_templates_registry.py 自动生成)
-│       │
-│       ├── templates/                 # 【核心 HTML/CSS 模板资源库】
-│       │   ├── minimal-tech/          # 【单栏 × 研发】极简工程师单栏模板 (后端/算法/AI/系统)
-│       │   │   ├── template.html
-│       │   │   ├── style.css
-│       │   │   └── metadata.json
-│       │   ├── modern-split-sidebar/  # 【双栏 × 研发/全栈】现代深色侧边栏模板 (32:68 黄金比例)
-│       │   │   ├── template.html
-│       │   │   ├── style.css
-│       │   │   └── metadata.json
-│       │   ├── executive-split/       # 【深色Banner+双栏 × 管理】技术总监/架构师模板 (33:67)
-│       │   │   ├── template.html
-│       │   │   ├── style.css
-│       │   │   └── metadata.json
-│       │   ├── table-structured/      # 【结构化表格 × 综合】政企/国企/合规岗位高密度模板
-│       │   │   ├── template.html
-│       │   │   ├── style.css
-│       │   │   └── metadata.json
-│       │   └── common/
-│       │       └── resume-contract.md # 全模板必须遵循的 HTML 契约与 A4 几何标准
-│       │
-│       └── references/                # 【Agent 深度参考文档】
-│           ├── jd-analysis.md         # JD 分析技巧与权重分配
-│           ├── evidence-rules.md      # L1~L3 证据约束与措辞指南
-│           ├── fab-formula.md         # FAB (Feature-Advantage-Benefit) 写作法
-│           ├── design-tokens.md       # CSS 变量定义与调整指南
-│           └── ats-compatibility.md   # ATS 避坑与标准规范指南
+│   ├── knowledge/                     # 【结构化数据资产 (Source of Truth)】
+│   │   ├── roles/                     # 9+ 岗位技能画像 (JSON Schema 规范)
+│   │   │   ├── frontend.json, java-backend.json, ai-agent-engineer.json...
+│   │   ├── layouts.json               # 布局几何分类 (单栏极简、双栏侧栏、表格网格)
+│   │   ├── styles.json                # 视觉风格与配色方案 (Modern, Minimal, Executive...)
+│   │   ├── ats-rules.json             # ATS 解析友好性检查规则集
+│   │   ├── index.json                 # 岗位与模板编译聚合总索引
+│   │   └── resume-schema.json         # 候选人主档案与证据链 JSON Schema
+│   │
+│   └── templates/                     # 【核心 HTML/CSS 模板资源库】
+│       ├── common/
+│       │   ├── base.css               # Primitive Tokens (色板/间距阶梯) + A4 绝对打印契约
+│       │   └── resume-contract.md     # 全模板必须遵循的 HTML 契约与 A4 几何标准
+│       ├── minimal/                   # 【单栏 × 研发】极简极客单栏模板 (style.css, template.html, metadata.json)
+│       ├── modern/                    # 【双栏 × 研发/全栈】现代深海蓝侧边栏模板 (32:68 黄金比例)
+│       ├── executive/                 # 【深色Banner+双栏 × 管理】技术总监/架构师模板 (33:67)
+│       └── classic/                   # 【结构化表格 × 综合】政企/国企/合规岗位高密度表格模板
 │
-├── scripts/                           # 【核心工具链与引擎】
-│   ├── build_role_data.py             # 离线预处理：从 ResumeSample 提取岗位画像 JSON
-│   ├── build_templates_registry.py    # 扫描模板生成 templates.json 并构建画廊
-│   ├── search.py                      # BM25 + 多维权重模板搜索引擎
-│   ├── instantiate_resume.py          # 将模板与数据组装到 workspace/resume.html
-│   ├── analyze_jd.py                  # JD 关键词、职责与能力信号抽取
-│   ├── extract_evidence.py            # 经历/代码库证据级别评定引擎
-│   ├── render_pdf.ts                  # Playwright 驱动的确定性 PDF 渲染器
-│   ├── validate_layout.ts             # HTML 修改场页面高度、溢出检测与孤行检查
-│   └── validate_ats.ts                # PDF 文本流与 ATS 解析合规性检测
+├── scripts/                           # 【核心工具链与引擎 (6 大领域模块)】
+│   ├── Agent.md                       # 脚本调用契约与开发者手册
+│   ├── pipeline/                      # 【模块 1: 端到端管线】
+│   │   └── forge.py                   # 一键全流程管线 (挖掘 -> 匹配 -> 装配 -> QA -> PDF)
+│   ├── evidence/                      # 【模块 2: 事实与证据挖掘 (repo-to-resume)】
+│   │   ├── extract-evidence.py        # 代码仓与 Git 事实挖掘器 (生成 L1~L3 证据链)
+│   │   └── analyze-jd.py              # 目标 JD 深度分析器 (提取技能、关键词、痛点)
+│   ├── template/                      # 【模块 3: 模板检索与画布装配】
+│   │   ├── search-template.py         # Pluggable 搜索引擎 (Weighted + BM25 + Hybrid)
+│   │   └── instantiate-resume.py      # 单文件内联合并 (base.css + style.css + 数据注入)
+│   ├── validation/                    # 【模块 4: 双重 QA 自动化质检】
+│   │   ├── validate-resume.py         # 语义结构、Design Tokens 与字符密度轻量校验
+│   │   ├── validate-layout.ts         # Playwright DOM 盒模型物理高度 (1122.5px A4) 溢出检测
+│   │   └── validate-ats.ts            # ATS 纯文本流解析、联系方式与标头层级校验
+│   ├── rendering/                     # 【模块 5: 确定性 PDF 渲染导出】
+│   │   ├── render-pdf.py              # 跨平台多策略浏览器自适应 PDF 渲染调度器
+│   │   └── render-pdf.ts              # Playwright 无损矢量 A4 PDF 渲染器
+│   └── build/                         # 【模块 6: 编译构建、测试与发布】
+│       ├── build-knowledge.py         # 岗位画像与模板知识库索引编译器
+│       ├── build-gallery.py           # 静态交互式模板画廊生成器 (output/templates_gallery/)
+│       ├── run-all-tests.py           # 全链路自动化测试运行器
+│       ├── sync-version.py            # 多清单版本号同步器
+│       └── release.py                 # 自动化发布流水线引擎
 │
-├── cli/                               # 【统一分发 CLI】
+├── cli/                               # 【统一分发 CLI (knowme)】
 │   ├── src/
-│   │   ├── commands/
-│   │   │   ├── init.ts                # 安装与初始化对应 Agent 配置
-│   │   │   ├── update.ts              # 规则与模板热更新
-│   │   │   └── list.ts                # 模板与岗位列表查询
+│   │   ├── commands/ (init.ts, list.ts)
 │   │   └── index.ts
 │   └── package.json
 │
-├── agents/                            # 各平台 Agent 适配描述文件
-│   ├── claude.json
-│   ├── codex.json
-│   ├── cursor.json
-│   ├── gemini.json
-│   ├── windsurf.json
-│   └── opencode.json
+├── agents/                            # 【多 Agent 平台适配配置】
+│   ├── claude/knowme-careerforge.md
+│   ├── codex/knowme-careerforge.yaml
+│   ├── cursor/knowme-careerforge.mdc
+│   ├── windsurf/knowme-careerforge.rules
+│   ├── gemini/knowme-careerforge.json
+│   └── opencode/skill.yaml
 │
 ├── workspace/                         # 【中间工作区修改场】
-│   ├── resume.html                    # 当前编辑中的自包含单文件 HTML
-│   └── resume.pdf                     # 质检通过后导出的确定性 PDF
+│   ├── resume.html                    # 当前编辑中的自包含单文件 HTML (Canvas)
+│   ├── resume.pdf                     # 质检通过后导出的确定性 PDF
+│   └── evidence-master.json           # 结构化候选人事实底座
 │
 ├── output/
-│   └── templates_gallery/             # 自动化构建的 4 套模板静态预览画廊
-│       ├── index.html
-│       ├── minimal-tech.html
-│       ├── modern-split-sidebar.html
-│       ├── executive-split.html
-│       └── table-structured.html
+│   └── templates_gallery/             # 4 套模板静态交互预览画廊
 │
-└── examples/                          # 典型端到端案例库
-    ├── ai-agent-engineer/             # JD + 原始经历 + 证据链 + HTML + 生成的 PDF
-    ├── senior-frontend/
-    └── fullstack-architect/
+└── tests/                             # 【全链路 24 项自动化测试集】
+    ├── ats/
+    ├── rendering/
+    ├── templates/
+    └── workflows/
 ```
 
 ---

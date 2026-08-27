@@ -6,6 +6,36 @@
 
 ---
 
+## [0.0.3] - 2026-08-28
+
+### 🚀 新增功能 (Added)
+- **4-Tier 渐进式文档金字塔工程 (Docs Engineering)**：
+  - **L0 平台入口**：`SKILL.md` 统一 6 阶段确定性工作流契约；
+  - **L1 行为与开发契约**：根目录新增 `AGENT.md`（全面吸收 Vercel Editorial 规范、优先级决断秩序、Four-Pass 严密工序、反模式黑名单与静默交付标准）+ `CLAUDE.md` 开发者速查；
+  - **L2 架构与决策体系**：根目录新增 `ARCHITECTURE.md`（六层架构、端到端数据流、Deep Module Seam 设计）+ `docs/decisions/`（4 篇 ADR 架构决策记录）；
+  - **L3 领域运行时规范**：归一化重构 `references/`（`01-evidence-mining.md` ~ `06-qa-and-rendering.md`），与 6 阶段保持 1:1 严格对齐。
+- **两层 Design Tokens 架构与基础样式库 (`src/templates/common/base.css`)**：
+  - 声明基础 Primitive Tokens（Slate/Blue/Teal/Navy 调色板、2pt 间距阶梯 `--primitive-space-1` ~ `--primitive-space-12`、A4 绝对打印契约 `@page` & `print-color-adjust`）；
+  - 全量重构 4 套核心模板 `style.css`，由 Component Tokens 引用 Primitives，消除 60% 冗余代码；
+  - `scripts/template/instantiate-resume.py` 自动合并内联 `base.css` + `style.css`，严格保证单文件自包含修改场铁律。
+- **深模块化可插拔搜索引擎内核 (`scripts/template/search-template.py`)**：
+  - 抽象 `BaseTemplateScorer` 策略接口，实现 `WeightedRuleScorer`（加权规则打分）、纯 Python 标准库 `BM25TextScorer`（全文相关度检索）与 `HybridTemplateScorer`（70% 规则 + 30% BM25）；
+  - CLI 支持 `--engine hybrid|weighted|bm25` 自由切换。
+- **架构决策记录 (ADRs in `docs/decisions/`)**：
+  - `0001-html-intermediate-canvas.md`（HTML 作为唯一中间修改场）；
+  - `0002-pure-css-design-tokens-over-tailwind.md`（纯 CSS3 变量替代 Tailwind 编译链）；
+  - `0003-two-tier-tokens-architecture.md`（Primitive + Component 两层 Token 分层）；
+  - `0004-decentralized-json-with-bm25-index.md`（去中心化 JSON 元数据 + 构建期 BM25 索引）。
+
+### 🔄 优化与重构 (Changed)
+- **平台适配器与分发打包机制**：
+  - 同步更新 Cursor (`.mdc`)、Windsurf (`.rules`)、Claude Code (`.md`)、Codex (`.yaml`)，指向全新 `AGENT.md`、`ARCHITECTURE.md` 与 `references/01~06`；
+  - 升级 `cli/src/commands/init.ts`，在执行 `knowme init` 时完整打包 `references/`、`AGENT.md` 与 `ARCHITECTURE.md`。
+- **全链路自动化测试套件**：
+  - 调整各测试用例以精确断言两层 Tokens、参考手册结构与检索门面，全量 24 项测试 100% 通过。
+
+---
+
 ## [0.0.2] - 2026-08-26
 
 ### 🚀 新增功能 (Added)
