@@ -164,3 +164,12 @@ Key architectural choices are formally documented in `docs/decisions/`:
 2. [ADR-0002: Pure CSS3 Design Tokens over Tailwind Runtime](docs/decisions/0002-pure-css-design-tokens-over-tailwind.md)
 3. [ADR-0003: Two-Tier Token Architecture (Primitives + Components)](docs/decisions/0003-two-tier-tokens-architecture.md)
 4. [ADR-0004: Decentralized JSON Metadata with Build-Time BM25 Index](docs/decisions/0004-decentralized-json-with-bm25-index.md)
+5. [ADR-0005: Heuristic Design Token Auto-Healing for Page-Fit Closed Loop](docs/decisions/0005-heuristic-token-auto-healing.md)
+6. [ADR-0006: Lightweight Zero-Dependency Live Preview & Conversational Intake Wizard](docs/decisions/0006-zero-dependency-live-preview-and-wizard.md)
+
+---
+
+## 7. Product & Engineering Iteration Roadmap
+
+Detailed iteration specifications and roadmap tasks are governed in:
+- [v0.0.6 Iteration Plan & Engineering Specification](docs/dev/ITERATION_PLAN_V0.0.6_EXPERIENCE_EXPANSION.md)

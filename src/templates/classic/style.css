@@ -78,6 +78,14 @@
   color: var(--resume-color-primary);
 }
 
+.candidate-name {
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.job-target {
+  color: var(--resume-color-accent);
+}
 .cell-highlight-bg {
   background-color: var(--primitive-color-blue-50);
   color: var(--resume-color-accent);

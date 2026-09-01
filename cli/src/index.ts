@@ -23,10 +23,10 @@ function getVersion(rootDir: string): string {
     const pkgJson = path.join(rootDir, 'package.json');
     if (require('fs').existsSync(pkgJson)) {
       const data = JSON.parse(require('fs').readFileSync(pkgJson, 'utf-8'));
-      return data.version || '0.0.4';
+      return data.version || '0.0.5';
     }
   } catch {}
-  return '0.0.4';
+  return '0.0.5';
 }
 
 export function showHelp(): void {

@@ -6,6 +6,42 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.0.6-planned] - Planned Roadmap
+
+### 🚀 Template Matrix Expansion (Direction 2)
+- Expand 6 core new templates (`academic-research`, `international-flow`, `creative-tech`, `compact-dense`, `startup-generalist`, `data-analyst`) to reach a full 10-template baseline matrix;
+- Introduce 6 official theme palette presets (Tech Blue, Deep Navy, Teal Modern, Emerald Fresh, Violet Creative, Slate Minimal) in `base.css` with one-line switching.
+
+### 🛠️ Heuristic Token Auto-Healing Algorithm (Direction 3)
+- Implement `--auto-heal` parameter in `validate-resume.py` and `forge.py` (ADR-0005) to automatically step through spacing and font-size ladders for 100% single/two-page fit in one pass.
+
+### 💻 Live Preview & Interactive Intake Wizard (Direction 4.1 & 4.2)
+- **Zero-Dependency Live Preview Server (`knowme preview` / `knowme serve`)**: Lightweight HTTP + SSE server auto-reloading browser view on `workspace/resume.html` change (ADR-0006);
+- **Terminal Intake Wizard (`knowme wizard`)**: Interactive 3-turn conversational profiler for Mode D non-repo candidates, producing structured `evidence-master.json`.
+
+---
+
+## [0.0.5] - 2026-09-01
+
+### 🚀 Added
+- **Multi-Template Full-Field Data Backfill Engine (`scripts/template/instantiate-resume.py`)**:
+  - Upgraded `render_profile_into_html` to automatically backfill structured candidate profiles across all 4 template geometries (single-column, split sidebar, executive hero banner, structured table);
+  - Complete coverage for `basics` (name, title, contact, city, GitHub, value proposition summary), `skills` (skill rows, tag clouds, table matrix), `experience` (org name, role badge, date range, FAB highlights), `projects` (name, role, tech stack tags, achievements), and `education` (institution, degree, date range, GPA/honors).
+- **Automated Template Auto-Selection in Forge Pipeline (`scripts/pipeline/forge.py`)**:
+  - Removed hardcoded default for `--template`. When omitted, `forge.py` dynamically invokes `search_templates()` via the Hybrid scorer (70% rules + 30% BM25) to recommend the optimal template for the target role;
+  - Preserved explicit `--template` flag override with highest precedence.
+
+### 🎨 Changed
+- **Emoji-Free & Formal Business Aesthetic**:
+  - Eliminated all casual emojis (e.g. `📱`, `✉️`, `📍`, `🎓`, `🔗`) across all templates (`minimal`, `modern`, `executive`, `classic`);
+  - Standardized on clean text labels (`.contact-label`, `.badge-label`, `.info-label`) with structured alignment for an executive, distraction-free aesthetic;
+  - Removed excessive translucent bubble card borders from `executive` hero banner for a streamlined, modern contact layout.
+- **Template & Generator Class Name Contract Alignment**:
+  - Added complete style rules for all runtime generator classes (`.role-badge`, `.tech-tag`, `.tech-stack-tags`, `.sidebar-section`, `.experience-item`, `.project-item`, `.contact-label`, `.badge-label`) in `src/templates/modern/style.css`, `minimal/style.css`, and `classic/style.css`;
+  - Codified the formal Instantiator HTML Contract in `src/templates/common/base.css`.
+
+---
+
 ## [0.0.4] - 2026-08-28
 
 ### 🐛 Fixed

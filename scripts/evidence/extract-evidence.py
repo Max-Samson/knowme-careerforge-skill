@@ -225,86 +225,133 @@ def scan_repo(repo_path: Path) -> Dict[str, Any]:
     return facts
 
 def build_master_profile(facts: Dict[str, Any], user_overrides: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Build structured candidate profile from codebase facts + optional user overrides.
+
+    Placeholder discipline:
+    - repo_mode=True : facts dict is populated from real repo scan; safe to synthesize
+      experience/education skeletons because they'll be user-reviewed before use.
+    - repo_mode=False: only user_overrides carry real data. NEVER emit fabricated placeholder
+      strings (fake company, fake school, fake dates). Use null / empty list instead.
+    """
     overrides = user_overrides or {}
     author = facts.get("author_info", {})
-    
-    name = overrides.get("name") or author.get("name") or "求职者"
-    title = overrides.get("title") or "资深工程师 / 技术专家"
-    email = overrides.get("email") or author.get("email") or "candidate@example.com"
-    phone = overrides.get("phone") or "138-0000-0000"
-    github = overrides.get("github") or author.get("git_remote") or "https://github.com"
-    
-    tech_stacks = facts.get("detected_tech_stacks", [])
-    languages = list(facts.get("detected_languages", {}).keys())
+    repo_mode: bool = bool(facts.get("detected_tech_stacks") or facts.get("evidence_items"))
 
-    profile = {
-        "basics": {
-            "name": name,
-            "title": title,
-            "email": email,
-            "phone": phone,
-            "location": overrides.get("location") or "北京 / 远程",
-            "github": github,
-            "summary": f"拥有坚实的技术研发与工程化落地实战经验，主导过多个基于 {', '.join((tech_stacks + languages)[:3])} 的核心系统设计与交付。"
-        },
-        "skills": [
+    # ── Basics ────────────────────────────────────────────────────────────────
+    name  = overrides.get("name")  or author.get("name")  or (None if not repo_mode else "候选人")
+    title = overrides.get("title") or (None if not repo_mode else "资深工程师 / 技术专家")
+    email = overrides.get("email") or author.get("email") or (None if not repo_mode else "candidate@example.com")
+    phone = overrides.get("phone") or (None if not repo_mode else None)
+    github = overrides.get("github") or author.get("git_remote") or None
+    location = overrides.get("location") or (None if not repo_mode else None)
+
+    tech_stacks = facts.get("detected_tech_stacks", [])
+    languages   = list(facts.get("detected_languages", {}).keys())
+
+    # ── Skills ────────────────────────────────────────────────────────────────
+    all_tech = tech_stacks + [l for l in languages if l not in tech_stacks]
+    arch_signals = facts.get("architectural_signals", [])
+    skills: list = []
+    if all_tech:
+        skills.append({"category": "核心技术栈", "items": all_tech, "highlighted": all_tech[:4]})
+    if arch_signals:
+        skills.append({"category": "工程化与架构", "items": arch_signals, "highlighted": arch_signals[:2]})
+
+    # ── Experience ────────────────────────────────────────────────────────────
+    bullets = [
+        {
+            "text": item["claim"],
+            "evidenceLevel": item["evidenceLevel"],
+            "evidenceSource": item["evidenceSource"],
+            "keywords": item.get("keywords", [])
+        }
+        for item in facts.get("evidence_items", [])
+    ]
+
+    if repo_mode and bullets:
+        # Repo mode: synthesize a single experience entry from code evidence.
+        # Company / dates are placeholders that the user MUST review.
+        experience = [
             {
-                "category": "核心技术栈",
-                "items": tech_stacks if tech_stacks else ["Python", "TypeScript", "FastAPI", "React", "Docker"],
-                "highlighted": tech_stacks[:4]
-            },
-            {
-                "category": "工程化与架构",
-                "items": facts.get("architectural_signals", ["CI/CD", "微服务架构", "自动化测试", "性能优化"]),
-                "highlighted": ["CI/CD", "性能优化"]
-            }
-        ],
-        "experience": [
-            {
-                "company": overrides.get("company") or "创新科技企业",
-                "role": title,
-                "startDate": "2022.06",
-                "endDate": "至今",
-                "location": "北京",
+                "company": overrides.get("company") or "[请填写：公司名称]",
+                "role": title or "[请填写：职位名称]",
+                "startDate": overrides.get("startDate") or "[请填写：开始时间]",
+                "endDate": overrides.get("endDate") or "至今",
+                "location": location or "[请填写：工作地点]",
                 "summary": "负责核心产品研发与关键架构攻坚",
-                "bullets": [
-                    {
-                        "text": item["claim"],
-                        "evidenceLevel": item["evidenceLevel"],
-                        "evidenceSource": item["evidenceSource"],
-                        "keywords": item["keywords"]
-                    }
-                    for item in facts.get("evidence_items", [])
-                ]
+                "bullets": bullets
             }
-        ],
-        "projects": [
+        ]
+    elif overrides.get("experience"):
+        experience = overrides["experience"]
+    else:
+        experience = []
+
+    # ── Projects ──────────────────────────────────────────────────────────────
+    if repo_mode and tech_stacks:
+        projects = [
             {
-                "name": facts.get("repo_name", "CoreSystem"),
+                "name": facts.get("repo_name") or "[请填写：项目名称]",
                 "role": "核心负责人 / 主力开发者",
                 "techStack": tech_stacks[:5],
                 "repoUrl": github,
-                "startDate": "2023.01",
+                "startDate": "[请填写：开始时间]",
                 "endDate": "至今",
                 "bullets": [
-                    {
-                        "text": item["claim"],
-                        "evidenceLevel": item["evidenceLevel"],
-                        "evidenceSource": item["evidenceSource"]
-                    }
+                    {"text": item["claim"], "evidenceLevel": item["evidenceLevel"], "evidenceSource": item["evidenceSource"]}
                     for item in facts.get("evidence_items", [])
                 ]
             }
-        ],
-        "education": [
+        ]
+    elif overrides.get("projects"):
+        projects = overrides["projects"]
+    else:
+        projects = []
+
+    # ── Education ─────────────────────────────────────────────────────────────
+    if overrides.get("education"):
+        education = overrides["education"]
+    elif overrides.get("school") or overrides.get("degree"):
+        education = [
             {
-                "institution": overrides.get("school") or "重点大学",
-                "degree": overrides.get("degree") or "计算机科学与技术 本科",
-                "startDate": "2016.09",
-                "endDate": "2020.06"
+                "institution": overrides.get("school") or "[请填写：学校名称]",
+                "degree": overrides.get("degree") or "[请填写：学历与专业]",
+                "startDate": overrides.get("edu_start") or "[请填写：入学时间]",
+                "endDate": overrides.get("edu_end") or "[请填写：毕业时间]"
             }
         ]
-    }
+    elif repo_mode:
+        # Repo mode: emit a reminder skeleton so the user knows to fill it in.
+        education = [
+            {
+                "institution": "[请填写：学校名称]",
+                "degree": "[请填写：学历与专业]",
+                "startDate": "[请填写：入学时间]",
+                "endDate": "[请填写：毕业时间]"
+            }
+        ]
+    else:
+        education = []
+
+    # ── Assemble ──────────────────────────────────────────────────────────────
+    basics: Dict[str, Any] = {}
+    if name:    basics["name"]     = name
+    if title:   basics["title"]    = title
+    if email:   basics["email"]    = email
+    if phone:   basics["phone"]    = phone
+    if location: basics["location"] = location
+    if github:  basics["github"]   = github
+    if all_tech:
+        basics["summary"] = (
+            f"拥有坚实的技术研发与工程化落地实战经验，"
+            f"主导过多个基于 {', '.join(all_tech[:3])} 的核心系统设计与交付。"
+        )
+
+    profile: Dict[str, Any] = {"basics": basics}
+    if skills:     profile["skills"]     = skills
+    if experience: profile["experience"] = experience
+    if projects:   profile["projects"]   = projects
+    if education:  profile["education"]  = education
     return profile
 
 def main():

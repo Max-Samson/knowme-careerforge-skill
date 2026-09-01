@@ -2,7 +2,7 @@
 name: knowme-careerforge
 displayName: KnowMe CareerForge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering. Analyzes candidate evidence, maps strengths to target JDs, crafts tailored resumes inside an HTML Intermediate Canvas, self-heals layout/ATS, and exports pixel-perfect PDFs.
-version: 0.0.4
+version: 0.0.5
 ---
 
 # KnowMe CareerForge — Agent Reasoning Contract & Execution Specification
@@ -46,7 +46,7 @@ When this skill is activated, you are NOT a generic text generator. You act as a
 
 ## 2. Input & Content Intelligence Layer (Repo-to-Resume Modes)
 
-Identify the user's input scenario and select the corresponding mode:
+**Mode Detection is mandatory before any tool call.** Evaluate the user's message and classify into exactly one input mode:
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -65,18 +65,109 @@ Identify the user's input scenario and select the corresponding mode:
 │ Mode C: Target-Role Mode                                                        │
 │   User specifies a direction (e.g. "AI Agent Engineer", "Senior Architect")     │
 │   ➔ Match against `src/knowledge/roles/*.json` knowledge profiles               │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│ Mode D: Narrative / Chat-First Mode  ← NEW (handles natural-language input)     │
+│   Trigger: User provides only descriptive text with no repo path, no JD file    │
+│   Examples: "我做了3年前端低代码", "help me write a resume, I'm a backend eng"   │
+│   ➔ DO NOT run extract-evidence.py against the skill's own repo                 │
+│   ➔ INSTEAD: Execute the Structured Interview Protocol (see §2.1 below)         │
 └─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Collecting Candidate Information:
-1. **Basic Info**: Name, Contact (Email, Phone, Location, GitHub). If missing from user prompt, auto-detect from Git / `package.json` / `evidence-master.json` or prompt briefly.
-2. **L1~L3 Evidence Classification**:
-   - **Level 1 (Direct Code/Config Evidence)**: Verified by code files, configuration files (`package.json`, `Dockerfile`, `go.mod`, `Cargo.toml`), API contracts, or Git commits.
-   - **Level 2 (Structural/Dependency Evidence)**: Deduced from directory structure, tech stack dependencies, and architectural patterns.
-   - **Level 3 (Contextual Inference)**: Reasonable contextual deduction (MUST use conservative phrasing, e.g., *"Participated in the design and implementation of..."*).
-   - **Unsupported**: Facts not present in candidate records. **NEVER WRITE INTO RESUME**.
+### 2.1 Mode D — Structured Interview Protocol (对话式证据收集)
+
+**Trigger condition**: No `--repo` argument present AND no local code repository detectable from user context.
+
+**Step D1 — Emit the structured questionnaire** (output this EXACTLY, do not skip fields):
+
+```
+📋 KnowMe CareerForge — 候选人信息采集
+
+请填写以下信息（未知项可填「暂无」）：
+
+【基本信息】
+- 姓名：
+- 手机：
+- 邮箱：
+- 所在城市：
+- GitHub / 个人网站：
+
+【目标信息】
+- 求职目标岗位：
+- 期望行业 / 公司类型（可选）：
+
+【工作经历】（每段填一份，可多段）
+- 公司名称：
+- 职位：
+- 在职时间：（如 2021.07 — 2024.03）
+- 核心工作内容 / 项目成果（尽量量化）：
+
+【项目经历】（可选，代码项目 / 业务系统均可）
+- 项目名称：
+- 角色 / 职责：
+- 技术栈：
+- 核心成果（量化优先）：
+
+【教育背景】
+- 学校 / 学历 / 专业：
+- 在读时间：
+
+【技能清单】
+- 编程语言 / 框架（如 Python, React, Spring Boot）：
+- 工具与平台（如 Docker, K8s, AWS）：
+- 其他加分技能（证书、专利、开源贡献等）：
+```
+
+**Step D2 — Parse responses into `workspace/evidence-master.json`**: Once the user fills the questionnaire, write the JSON directly using the `resume-schema.json` structure. Assign evidence levels: user-stated facts = L3, verifiable via links/repos = L1/L2. Do NOT invent placeholder values for unfilled fields — use `null` or omit the field entirely.
+
+**Step D3 — Proceed to JD Acquisition Gate** (§2.2), then continue from Stage 3 onward.
 
 ---
+
+### 2.2 JD Acquisition Gate (强制 JD 询问门禁)
+
+**This gate MUST execute before Stage 3 in ALL modes.** It is NOT optional.
+
+```text
+IF no JD text and no JD file path found in user's message:
+  MUST output exactly:
+
+  "请提供目标岗位的 JD（可直接粘贴完整 JD 文本，或提供文件路径）。
+   JD 是生成精准定制简历的核心输入，没有 JD 将无法完成关键词匹配和岗位定向。
+   如暂时没有具体 JD，请至少告知目标岗位名称（如「资深 AI Agent 工程师」）。"
+
+  THEN WAIT for user response before proceeding.
+
+IF JD text is provided inline (pasted into chat):
+  Write it to a temp file: workspace/jd-target.md
+  Run: python3 scripts/evidence/analyze-jd.py --jd workspace/jd-target.md --json
+
+IF only role name is provided (no full JD):
+  Run: python3 scripts/evidence/analyze-jd.py --text "<role name>" --json
+  Then load matching role profile from src/knowledge/roles/<matched>.json as supplementary signal
+```
+
+---
+
+### 2.3 Evidence Classification & Anti-Hallucination Gate
+
+Every claim written into `workspace/resume.html` MUST carry an assigned evidence level:
+
+| Level | Source | Phrasing Standard |
+|:---|:---|:---|
+| **L1 (Strong)** | Code files, config (`package.json`, `Dockerfile`, `go.mod`), Git commits, CI/CD pipelines | Direct assertion with metrics: *"Designed dual-path retrieval pipeline using FastAPI+Qdrant, achieving 92% recall."* |
+| **L2 (Medium)** | Directory structure, dependency manifests, module names, framework integrations | Engineering verbs: *"Engineered distributed microservice endpoints using gRPC."* |
+| **L3 (Weak / User-Stated)** | User's own description in chat (Mode D), contextual inference | Conservative phrasing: *"Participated in design and implementation of..."* |
+| **Unsupported** | Not present in any evidence source | **STRICTLY PROHIBITED. NEVER write into resume.** |
+
+**Gap Handling Rule (Unsupported Skills)**: When a JD requires a skill with NO matching evidence:
+1. DO NOT fabricate or silently omit — flag it explicitly.
+2. Ask the candidate: *"JD 要求 [Skill X]，未在您的信息中找到相关证据。是否有相关经验可补充？"*
+3. If candidate confirms no experience → mark as gap, do not include in resume.
+4. If candidate provides description → downgrade to L3, use conservative phrasing.
+
+---
+
 
 ## 3. The 6-Stage Deterministic Workflow
 
@@ -96,25 +187,34 @@ You MUST execute the following 6 stages in exact sequence:
 ```
 
 ### Option 1: Fast One-Shot Unified Execution (Recommended)
-You can run the full end-to-end pipeline in a single command:
+
+**Mode A/B/C** (repo available):
 ```bash
-python3 scripts/pipeline/forge.py --repo . --role "<Target Role>" --jd "<path/to/jd.txt>" --template "<minimal|modern|executive|classic>" --quiet
+python3 scripts/pipeline/forge.py --repo . --role "<Target Role>" --jd "workspace/jd-target.md" --template "<minimal|modern|executive|classic>" --quiet
 ```
-Or via CLI:
+
+**Mode D** (chat-first, no repo — after questionnaire is complete and evidence-master.json is written):
 ```bash
-knowme forge --repo . --role "<Target Role>" --template modern --quiet
+python3 scripts/pipeline/forge.py --profile-json workspace/evidence-master.json --role "<Target Role>" --jd "workspace/jd-target.md" --template "<minimal|modern|executive|classic>" --quiet
 ```
 
 ### Option 2: Step-by-Step Granular Execution
 
-#### Step 1: Extract Evidence (Know Me)
+#### Step 1: Extract or Compose Evidence (Know Me)
+
+**Path A — Repo available** (Mode A):
 ```bash
 python3 scripts/evidence/extract-evidence.py --repo . --output workspace/evidence-master.json --quiet
 ```
 
-#### Step 2 & 3: JD & Target Analysis (Understand)
+**Path D — No repo, questionnaire completed** (Mode D):
+> Write `workspace/evidence-master.json` directly from user's questionnaire answers.
+> Use `resume-schema.json` structure. Assign L3 to user-stated facts. Leave missing fields `null` — never use placeholder values like "重点大学", "创新科技企业", or "2022.06".
+
+#### Step 2 & 3: JD Acquisition Gate + Analysis (MUST NOT SKIP)
 ```bash
-python3 scripts/evidence/analyze-jd.py --jd "path/to/jd.txt"
+# If JD was pasted inline, it was written to workspace/jd-target.md first.
+python3 scripts/evidence/analyze-jd.py --jd workspace/jd-target.md --json
 ```
 
 #### Step 4: Search & Select Template (Position)
@@ -132,14 +232,12 @@ python3 scripts/template/instantiate-resume.py --template <template_id> --profil
 # 1. Run Layout QA (DOM height & overflow validation)
 python3 scripts/validation/validate-resume.py --html workspace/resume.html --expected-pages 1
 ```
-# 2. If overflow occurs, tune CSS tokens in workspace/resume.html:
-#    - Reduce --resume-space-section (e.g., 11pt -> 9.5pt)
-#    - Reduce --resume-font-size-body (e.g., 9.2pt -> 9.0pt)
-
 ```bash
-# 3. Deterministic PDF Export via Multi-Strategy Auto-Discovery:
+# If overflow: reduce --resume-space-section (11pt → 9.5pt) and --resume-font-size-body (9.2pt → 9.0pt) in workspace/resume.html
+# 2. Deterministic PDF Export:
 python3 scripts/rendering/render-pdf.py workspace/resume.html workspace/resume.pdf --quiet
 ```
+
 
 ---
 

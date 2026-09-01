@@ -83,13 +83,26 @@
 .banner-right {
   display: flex;
   flex-direction: column;
-  gap: 3.5pt;
+  align-items: flex-end;
+  gap: 3pt;
   font-size: 8pt;
-  color: var(--resume-color-banner-text);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 6pt 10pt;
-  border-radius: 4pt;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--resume-color-banner-muted);
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 4pt;
+  white-space: nowrap;
+}
+
+.badge-label {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 7.5pt;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+  min-width: 2em;
+  text-align: right;
 }
 
 /* 下方 3:7 双栏主体 */
@@ -210,13 +223,12 @@
         <p class="value-prop">8年高并发系统架构与 AI 落地经验 · 曾主导 0-1 搭建 30 人技术研发团队 · 赋能业务实现数千万元商业增长</p>
       </div>
       <div class="banner-right">
-        <span class="badge-item">📱 138-0000-0000</span>
-        <span class="badge-item">✉️ luxiaosheng@example.com</span>
-        <span class="badge-item">📍 北京 · 海淀</span>
-        <span class="badge-item">🎓 硕士 · 北航计算机</span>
+        <span class="badge-item"><span class="badge-label">电话</span>138-0000-0000</span>
+        <span class="badge-item"><span class="badge-label">邮箱</span>luxiaosheng@example.com</span>
+        <span class="badge-item"><span class="badge-label">地点</span>北京 · 海淀</span>
+        <span class="badge-item"><span class="badge-label">学历</span>硕士 · 北航计算机</span>
       </div>
     </header>
-
     <!-- 下方 3:7 现代双栏布局 -->
     <div class="executive-body">
       <!-- 左栏：领导力矩阵、技能广度、教育背景 -->

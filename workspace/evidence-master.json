@@ -3,8 +3,6 @@
     "name": "张集成",
     "title": "全栈工程师",
     "email": "364475182@qq.com",
-    "phone": "138-0000-0000",
-    "location": "北京 / 远程",
     "github": "https://github.com/Max-Samson/knowme-careerforge-skill.git",
     "summary": "拥有坚实的技术研发与工程化落地实战经验，主导过多个基于 Playwright, TypeScript, JavaScript 的核心系统设计与交付。"
   },
@@ -13,11 +11,17 @@
       "category": "核心技术栈",
       "items": [
         "Playwright",
-        "TypeScript"
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "Python",
+        "CSS"
       ],
       "highlighted": [
         "Playwright",
-        "TypeScript"
+        "TypeScript",
+        "JavaScript",
+        "HTML"
       ]
     },
     {
@@ -26,18 +30,17 @@
         "自动化单元/集成测试"
       ],
       "highlighted": [
-        "CI/CD",
-        "性能优化"
+        "自动化单元/集成测试"
       ]
     }
   ],
   "experience": [
     {
-      "company": "创新科技企业",
+      "company": "[请填写：公司名称]",
       "role": "全栈工程师",
-      "startDate": "2022.06",
+      "startDate": "[请填写：开始时间]",
       "endDate": "至今",
-      "location": "北京",
+      "location": "[请填写：工作地点]",
       "summary": "负责核心产品研发与关键架构攻坚",
       "bullets": [
         {
@@ -59,6 +62,16 @@
             "Testing",
             "DevOps"
           ]
+        },
+        {
+          "text": "持续推进工程重构与版本迭代，累计提交 13 次代码并完成多版本发布",
+          "evidenceLevel": "L2",
+          "evidenceSource": "Git 提交历史与版本变更记录",
+          "keywords": [
+            "Refactoring",
+            "Git",
+            "Release Engineering"
+          ]
         }
       ]
     }
@@ -72,7 +85,7 @@
         "TypeScript"
       ],
       "repoUrl": "https://github.com/Max-Samson/knowme-careerforge-skill.git",
-      "startDate": "2023.01",
+      "startDate": "[请填写：开始时间]",
       "endDate": "至今",
       "bullets": [
         {
@@ -84,16 +97,21 @@
           "text": "主导设计工程架构体系，落地 自动化单元/集成测试，保障交付效率与质量",
           "evidenceLevel": "L1",
           "evidenceSource": "工程根目录架构配置文件与流水线定义"
+        },
+        {
+          "text": "持续推进工程重构与版本迭代，累计提交 13 次代码并完成多版本发布",
+          "evidenceLevel": "L2",
+          "evidenceSource": "Git 提交历史与版本变更记录"
         }
       ]
     }
   ],
   "education": [
     {
-      "institution": "重点大学",
-      "degree": "计算机科学与技术 本科",
-      "startDate": "2016.09",
-      "endDate": "2020.06"
+      "institution": "[请填写：学校名称]",
+      "degree": "[请填写：学历与专业]",
+      "startDate": "[请填写：入学时间]",
+      "endDate": "[请填写：毕业时间]"
     }
   ]
 }

@@ -5,6 +5,45 @@
 本日志格式严格遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，版本号遵守 [语义化版本 (Semantic Versioning)](https://semver.org/lang/zh-CN/) 标准。
 
 ---
+## [0.0.6-planned] - 规划中 (Roadmap)
+
+### 🚀 模板矩阵扩展 (方向二)
+- 扩展 6 套核心新模板（`academic-research` 学术科研型、`international-flow` 欧美纯文字流、`creative-tech` 创意前端型、`compact-dense` 极致紧凑型、`startup-generalist` 初创全能型、`data-analyst` 指标看板型），达到 10 套黄金模板矩阵；
+- 在 `base.css` 中引入 6 大主题调色板（Tech Blue, Deep Navy, Teal Modern, Emerald Fresh, Violet Creative, Slate Minimal），支持一键主题切换。
+
+### 🛠️ 启发式 Token 自动自愈算法 (方向三)
+- 在 `validate-resume.py` 与 `forge.py` 中内置 `--auto-heal` 闭环调谐算法（ADR-0005），根据 DOM 高度溢出阶梯式自动缩紧间距与字号，实现单次执行 100% 自动收敛。
+
+### 💻 实时预览与交互建档向导 (方向四-1, 4-2)
+- **本地实时热重载预览器 (`knowme preview` / `knowme serve`)**：基于标准库启动轻量 HTTP 服务并注入 SSE 监听脚本，在用户或 Agent 调整代码时实现浏览器秒级热更新（ADR-0006）；
+- **交互式终端建档向导 (`knowme wizard`)**：为非代码仓用户提供流畅的 3-Turn 交互式提问采集，自动输出结构化 `evidence-master.json`。
+
+---
+
+## [0.0.5] - 2026-09-01
+
+### 🚀 新增功能 (Added)
+- **多模板全字段数据回填引擎 (`scripts/template/instantiate-resume.py`)**：
+  - 深度升级 `render_profile_into_html`，打通 4 套不同几何结构模板（单栏、双栏侧边栏、顶栏双栏、结构化表格）的全字段自动化回填；
+  - 覆盖个人基础信息 (`basics`：姓名、求职意向、联系电话、邮箱、城市、GitHub、个人摘要/核心价值定位)；
+  - 覆盖专业技能矩阵 (`skills`：分类技能行、技能标签云、表格矩阵单元格)；
+  - 覆盖工作经历 (`experience`：机构名称、岗位徽章、时间跨度、FAB 动词成果亮点)；
+  - 覆盖核心项目 (`projects`：项目名、角色、技术栈标签、交付价值)；
+  - 覆盖教育背景 (`education`：毕业院校、所学专业、学位、GPA、荣誉成果)。
+- **管线自动模板智能选择集成 (`scripts/pipeline/forge.py`)**：
+  - 移除 `--template` 参数的死板默认值，当用户未显式指定模板时，自动调用 `search-template.py` 的 Hybrid 混合评分引擎（70% 加权规则 + 30% BM25 文本相关度），基于目标岗位与候选人特征自动选择最优模板；
+  - 显式传递 `--template` 参数时保留最高优先级覆盖。
+
+### 🎨 视觉与样式优化 (Changed)
+- **去 Emoji 化与商务极简视觉规范 (Formal & Clean Styling)**：
+  - 全面清理所有模板（`minimal`, `modern`, `executive`, `classic`）中的 Emoji 图标（如 `📱`, `✉️`, `📍`, `🎓`, `🔗` 等）；
+  - 统一采用简洁专业的文本标签（如 `.contact-label`、`.badge-label`、`.info-label`），右对齐或行内排布，杜绝视觉杂乱；
+  - 移除 `executive` 顶栏多余的半透明气泡卡片边框背景，还原为清爽专业的 Hero Banner 联系人排布。
+- **模板与生成器类名契约对齐**：
+  - 在 `src/templates/modern/style.css`、`minimal/style.css`、`classic/style.css` 中补全运行时 HTML 生成器所需的全部类名样式（`.role-badge`, `.tech-tag`, `.tech-stack-tags`, `.sidebar-section`, `.experience-item`, `.project-item`, `.contact-label`, `.badge-label` 等）；
+  - 在 `src/templates/common/base.css` 中正式确立 Instantiator HTML Contract 契约规范。
+
+---
 
 ## [0.0.4] - 2026-08-28
 

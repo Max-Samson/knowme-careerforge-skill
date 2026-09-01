@@ -243,6 +243,50 @@
   line-height: var(--resume-line-height-body);
 }
 
+/* === GENERATED HTML COMPONENT CLASSES ===
+ * These classes are emitted by instantiate-resume.py at runtime.
+ * Must stay in sync with the HTML generator output.
+ */
+
+/* Sidebar section grouping container */
+.sidebar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Experience / project card wrappers (alias of timeline-item) */
+.experience-item,
+.project-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+/* Role badge next to company/project name in instantiated cards */
+.role-badge {
+  font-size: 9pt;
+  font-weight: 500;
+  color: #0284c7; /* Sky 600 — matches .role-title */
+  white-space: nowrap;
+}
+
+/* Tech stack tag row container */
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt;
+  margin: 3pt 0 5pt;
+}
+
+/* Individual tech stack pill */
+.tech-tag {
+  font-size: 7.5pt;
+  color: var(--resume-color-muted);
+  background: var(--primitive-color-slate-100);
+  padding: 1.5pt 4pt;
+  border-radius: 2pt;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
   </style>
 </head>
 <body>
@@ -310,11 +354,11 @@
       <section class="resume-section" id="experience">
         <h2 class="section-title"><span class="title-bar"></span>工作经历</h2>
         
-        <div class="timeline-item">
+        <div class="experience-item">
           <div class="item-header">
             <div class="item-title-group">
               <span class="org-name">智元未来人工智能实验室</span>
-              <span class="role-title">资深 AI 应用工程师</span>
+              <span class="role-badge">资深 AI 应用工程师</span>
             </div>
             <span class="date-range">2023.03 - 至今</span>
           </div>
@@ -324,11 +368,11 @@
           </ul>
         </div>
 
-        <div class="timeline-item">
+        <div class="experience-item">
           <div class="item-header">
             <div class="item-title-group">
               <span class="org-name">极光互联科技有限公司</span>
-              <span class="role-title">高级后端开发工程师</span>
+              <span class="role-badge">高级后端开发工程师</span>
             </div>
             <span class="date-range">2020.07 - 2023.02</span>
           </div>
@@ -343,13 +387,16 @@
       <section class="resume-section" id="projects">
         <h2 class="section-title"><span class="title-bar"></span>核心项目</h2>
         
-        <div class="timeline-item">
+        <div class="project-item">
           <div class="item-header">
             <div class="item-title-group">
               <span class="project-name">OpenAgent: 自适应代码审查与重构 Agent</span>
-              <span class="tech-badge">FastAPI / AST / LangGraph</span>
+              <span class="role-badge">独立开发者</span>
             </div>
             <span class="date-range">2024.01 - 2024.08</span>
+          </div>
+          <div class="tech-stack-tags">
+            <span class="tech-tag">FastAPI</span><span class="tech-tag">AST</span><span class="tech-tag">LangGraph</span><span class="tech-tag">Python</span>
           </div>
           <ul class="bullet-list">
             <li>基于 AST 语法树解析构建局部代码语义切片器，结合 LLM 实现精准重构决策，项目在 GitHub 获得 <strong>2,400+ Stars</strong>。</li>

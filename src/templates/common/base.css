@@ -148,3 +148,17 @@ body {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+/* === 5. INSTANTIATOR HTML CONTRACT ===
+ * The following classes are emitted by instantiate-resume.py at runtime.
+ * Every template MUST define these in its own style.css.
+ * Base layer provides NO default rules — templates own the visual implementation.
+ *
+ * Required classes:
+ *   .sidebar-section        — sidebar grouping wrapper
+ *   .experience-item        — work experience card
+ *   .project-item           — project card
+ *   .role-badge             — role/position label beside org/project name
+ *   .tech-stack-tags        — flex container for tech pills
+ *   .tech-tag               — individual technology pill
+ */

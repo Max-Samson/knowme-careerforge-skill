@@ -75,7 +75,31 @@
 .contact-item {
   display: inline-flex;
   align-items: center;
+  gap: 2pt;
+}
+
+.contact-label {
+  color: var(--resume-color-muted);
+  font-weight: 500;
+}
+
+/* Tech stack tag row container */
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: 3pt;
+  margin: 3pt 0 4pt;
+}
+
+/* Individual tech stack pill */
+.tech-tag {
+  font-size: 7.5pt;
+  color: var(--resume-color-muted);
+  background: var(--resume-color-tag-bg);
+  padding: 1.5pt 4.5pt;
+  border-radius: 2pt;
+  white-space: nowrap;
+  line-height: 1.35;
 }
 
 /* Section 结构 */

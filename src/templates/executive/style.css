@@ -76,13 +76,26 @@
 .banner-right {
   display: flex;
   flex-direction: column;
-  gap: 3.5pt;
+  align-items: flex-end;
+  gap: 3pt;
   font-size: 8pt;
-  color: var(--resume-color-banner-text);
-  background: rgba(255, 255, 255, 0.08);
-  padding: 6pt 10pt;
-  border-radius: 4pt;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--resume-color-banner-muted);
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 4pt;
+  white-space: nowrap;
+}
+
+.badge-label {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 7.5pt;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+  min-width: 2em;
+  text-align: right;
 }
 
 /* 下方 3:7 双栏主体 */

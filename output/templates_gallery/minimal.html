@@ -82,7 +82,31 @@
 .contact-item {
   display: inline-flex;
   align-items: center;
+  gap: 2pt;
+}
+
+.contact-label {
+  color: var(--resume-color-muted);
+  font-weight: 500;
+}
+
+/* Tech stack tag row container */
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
   gap: 3pt;
+  margin: 3pt 0 4pt;
+}
+
+/* Individual tech stack pill */
+.tech-tag {
+  font-size: 7.5pt;
+  color: var(--resume-color-muted);
+  background: var(--resume-color-tag-bg);
+  padding: 1.5pt 4.5pt;
+  border-radius: 2pt;
+  white-space: nowrap;
+  line-height: 1.35;
 }
 
 /* Section 结构 */
@@ -194,12 +218,12 @@
         <p class="job-target">求职意向：AI Agent 研发工程师 / 资深后端架构师</p>
       </div>
       <div class="contact-grid">
-        <span class="contact-item"><i class="icon">📱</i> 138-0000-0000</span>
-        <span class="contact-item"><i class="icon">✉️</i> luxiaosheng@example.com</span>
-        <span class="contact-item"><i class="icon">📍</i> 北京 · 海淀</span>
-        <span class="contact-item"><i class="icon">🎂</i> 1995.06 (5年经验)</span>
-        <span class="contact-item"><i class="icon">🎓</i> 硕士 · 计算机科学与技术</span>
-        <span class="contact-item"><i class="icon">🔗</i> github.com/luxiaosheng</span>
+        <span class="contact-item"><span class="contact-label">电话：</span>138-0000-0000</span>
+        <span class="contact-item"><span class="contact-label">邮箱：</span>luxiaosheng@example.com</span>
+        <span class="contact-item"><span class="contact-label">地点：</span>北京 · 海淀</span>
+        <span class="contact-item"><span class="contact-label">经验：</span>5年研发经验</span>
+        <span class="contact-item"><span class="contact-label">学历：</span>硕士 · 计算机科学与技术</span>
+        <span class="contact-item"><span class="contact-label">开源：</span>github.com/luxiaosheng</span>
       </div>
     </header>
 
