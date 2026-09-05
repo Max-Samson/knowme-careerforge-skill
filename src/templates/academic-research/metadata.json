@@ -1,0 +1,38 @@
+{
+  "id": "academic-research",
+  "name": "Academic Research Flow",
+  "version": "1.0.0",
+  "style": "single-column-academic",
+  "roleCategory": "research-algorithm",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 2,
+    "density": "ultra"
+  },
+  "visualStyle": {
+    "tone": "oxford-navy",
+    "accentColor": "#1e3a8a",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "ai-agent-engineer",
+    "algorithm-engineer",
+    "research-scientist",
+    "data-scientist",
+    "nlp-engineer",
+    "cv-engineer",
+    "phd-candidate",
+    "postdoc"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

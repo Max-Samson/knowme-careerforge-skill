@@ -1,0 +1,39 @@
+{
+  "id": "creative-tech",
+  "name": "Creative Tech Split",
+  "version": "1.0.0",
+  "style": "two-column-split",
+  "roleCategory": "frontend-creative",
+  "layout": {
+    "type": "two-column-sidebar",
+    "targetPages": 1,
+    "maxPages": 1,
+    "sidebarRatio": "28:72",
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "tech-violet",
+    "accentColor": "#7c3aed",
+    "sidebarBg": "#faf5ff",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "frontend",
+    "ui-ux-engineer",
+    "creative-technologist",
+    "web-architect",
+    "design-system-engineer",
+    "node-fullstack"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-sidebar-width",
+    "--resume-color-accent"
+  ]
+}

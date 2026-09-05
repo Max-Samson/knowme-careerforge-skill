@@ -97,5 +97,22 @@ class TestWorkflowsAndKnowledge(unittest.TestCase):
         results_exec = json.loads(proc_exec.stdout)
         top_exec_id = results_exec[0].get("id") or results_exec[0].get("template", {}).get("id")
         self.assertEqual(top_exec_id, "executive", "Executive template must rank #1 for Director/CTO roles")
+
+        # 针对学术/算法研究员角色检索
+        cmd_acad = [sys.executable, str(self.scripts_dir / "template" / "search-template.py"), "算法科学家 研究员", "--json"]
+        proc_acad = subprocess.run(cmd_acad, capture_output=True, text=True, cwd=str(self.base_dir))
+        results_acad = json.loads(proc_acad.stdout)
+        top_acad_id = results_acad[0].get("id") or results_acad[0].get("template", {}).get("id")
+        self.assertEqual(top_acad_id, "academic-research", "academic-research must rank #1 for Algorithm Scientist")
+        self.assertIn("recommendedPalette", results_acad[0])
+        self.assertEqual(results_acad[0]["recommendedPalette"]["token"], "--palette-deep-navy")
+
+        # 针对数据分析师检索
+        cmd_data = [sys.executable, str(self.scripts_dir / "template" / "search-template.py"), "数据科学家 BI 分析师", "--json"]
+        proc_data = subprocess.run(cmd_data, capture_output=True, text=True, cwd=str(self.base_dir))
+        results_data = json.loads(proc_data.stdout)
+        top_data_id = results_data[0].get("id") or results_data[0].get("template", {}).get("id")
+        self.assertEqual(top_data_id, "data-analyst", "data-analyst must rank #1 for Data Scientist / BI")
+
 if __name__ == "__main__":
     unittest.main()

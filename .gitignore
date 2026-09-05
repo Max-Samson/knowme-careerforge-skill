@@ -56,6 +56,9 @@ Thumbs.db
 
 # Temporary outputs & logs
 *.log
-workspace/resume.pdf
+output/
+/output/
+workspace/*.pdf
+workspace/test_*
 !workspace/resume.html
 !workspace/.gitkeep

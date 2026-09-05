@@ -28,13 +28,18 @@ class TestSmokePipeline(unittest.TestCase):
         proc = subprocess.run(cmd, capture_output=True, text=True, cwd=str(self.base_dir))
         self.assertEqual(proc.returncode, 0, f"search-template.py failed: {proc.stderr}")
         data = json.loads(proc.stdout)
-        self.assertEqual(len(data), 4, "Search must evaluate all 4 templates")
+        self.assertEqual(len(data), 10, "Search must evaluate all 10 templates")
         self.assertIn("score", data[0])
         self.assertIn("template", data[0])
 
     def test_2_instantiate_and_keyword_highlighting(self):
         test_keywords = "Python,FastAPI,LangGraph,Qdrant"
-        for template_id in ["minimal", "modern", "executive", "classic"]:
+        all_templates = [
+            "minimal", "modern", "executive", "classic",
+            "academic-research", "international-flow", "creative-tech",
+            "compact-dense", "startup-generalist", "data-analyst"
+        ]
+        for template_id in all_templates:
             with self.subTest(template=template_id):
                 target_html = self.workspace_dir / f"test_{template_id}.html"
                 cmd_inst = [
@@ -80,7 +85,7 @@ class TestSmokePipeline(unittest.TestCase):
         self.assertTrue(index_file.exists())
         index_data = json.loads(index_file.read_text(encoding="utf-8"))
         self.assertEqual(index_data["totalRoles"], 9)
-        self.assertEqual(index_data["totalTemplates"], 4)
+        self.assertEqual(index_data["totalTemplates"], 10)
 
     def test_4_build_gallery_generator(self):
         cmd = [sys.executable, str(self.scripts_dir / "build" / "build-gallery.py")]
@@ -90,10 +95,8 @@ class TestSmokePipeline(unittest.TestCase):
         gallery_index = self.output_dir / "templates_gallery" / "index.html"
         self.assertTrue(gallery_index.exists())
         content = gallery_index.read_text(encoding="utf-8")
-        self.assertIn("minimal.html", content)
-        self.assertIn("modern.html", content)
-        self.assertIn("executive.html", content)
-        self.assertIn("classic.html", content)
+        for t in ["minimal", "modern", "executive", "classic", "academic-research", "international-flow", "creative-tech", "compact-dense", "startup-generalist", "data-analyst"]:
+            self.assertIn(f"{t}.html", content)
 
     def test_5_extract_evidence_miner(self):
         out_json = self.workspace_dir / "test_evidence.json"

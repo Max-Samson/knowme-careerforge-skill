@@ -23,7 +23,7 @@ def main():
     parser.add_argument("--role", help="Target job title / role (e.g. 'AI Agent Engineer', '资深前端专家')")
     parser.add_argument("--jd", help="Path to JD file or raw JD text")
     parser.add_argument("--template", "-t", default=None,
-                        help="Template ID (minimal, modern, executive, classic). "
+                        help="Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst). "
                              "Omit to auto-select via search engine.")
     parser.add_argument("--name", help="Candidate full name override")
     parser.add_argument("--email", help="Candidate email override")
@@ -31,6 +31,7 @@ def main():
     parser.add_argument("--output", "-o", default="workspace/resume.pdf", help="Output PDF file path")
     parser.add_argument("--html-output", default="workspace/resume.html", help="Intermediate working canvas HTML path")
     parser.add_argument("--quiet", "-q", action="store_true", help="Quiet mode (compact JSON output for AI Agent)")
+    parser.add_argument("--auto-heal", action="store_true", help="Enable heuristic token auto-healing for physical A4 overflow")
 
     args = parser.parse_args()
     root = get_project_root()
@@ -145,9 +146,14 @@ def main():
         sys.executable, str(val_script),
         args.html_output
     ]
+    if args.auto_heal:
+        validator_cmd.append("--auto-heal")
     subprocess.run(validator_cmd, stdout=subprocess.DEVNULL if args.quiet else None, check=True)
     if not args.quiet:
-        print("[✓] Stage 3: Dual QA Validation Passed 100%")
+        status_msg = "[✓] Stage 3: Dual QA Validation Passed 100%"
+        if args.auto_heal:
+            status_msg += " (Heuristic Auto-Heal Active)"
+        print(status_msg)
 
     # 5. 确定性渲染导出 PDF (Stage 6: PDF Export)
     render_script = scripts_dir / "rendering" / "render-pdf.py"

@@ -1,0 +1,237 @@
+/**
+ * KnowMe CareerForge — Startup Generalist Cards Template Style
+ * Style Tone: Emerald Green (Modular Cards Flow)
+ * Inherits: src/templates/common/base.css
+ */
+
+:root {
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-page-padding: 12mm 14mm;
+
+  /* Color Bindings */
+  --resume-color-primary: #0f172a;
+  --resume-color-secondary: #334155;
+  --resume-color-muted: #64748b;
+  --resume-color-accent: var(--palette-emerald-fresh);
+  --resume-color-accent-bg: #ecfdf5;
+  --resume-color-card-border: #e2e8f0;
+  --resume-color-card-bg: #f8fafc;
+  --resume-color-tag-bg: #e6f4ea;
+  --resume-color-border: #cbd5e1;
+
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: 20pt;
+  --resume-font-size-target: 10pt;
+  --resume-font-size-h2: 11pt;
+  --resume-font-size-body: 9.0pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.42;
+
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-header-bottom: 8pt;
+  --resume-space-section: 10pt;
+  --resume-space-item: 7pt;
+  --resume-space-bullet: 2.0pt;
+}
+
+.resume-page {
+  padding: var(--resume-page-padding);
+}
+
+/* Header 模块 */
+.resume-header {
+  border-bottom: 2px solid var(--resume-color-accent);
+  padding-bottom: var(--resume-space-header-bottom);
+  margin-bottom: var(--resume-space-section);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6pt;
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 700;
+  color: var(--resume-color-accent);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.job-target {
+  font-size: var(--resume-font-size-target);
+  color: var(--resume-color-secondary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4pt 12pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  margin-top: 4pt;
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin: 5pt 0 0 0;
+}
+
+/* 章节通用样式 */
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  display: flex;
+  align-items: center;
+  gap: 6pt;
+  margin: 0 0 calc(var(--resume-space-item) * 0.75) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 4pt;
+  height: 11pt;
+  background-color: var(--resume-color-accent);
+  border-radius: 1pt;
+}
+
+/* 技能模块 */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+  background-color: var(--resume-color-card-bg);
+  border: 1px solid var(--resume-color-card-border);
+  border-radius: 4pt;
+  padding: 6pt 10pt;
+}
+
+.skill-row {
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+}
+
+.skill-category {
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.skill-items {
+  color: var(--resume-color-secondary);
+}
+
+/* 卡片风格条目 */
+.experience-item,
+.project-item,
+.education-item {
+  margin-bottom: var(--resume-space-item);
+  background-color: #ffffff;
+  border: 1px solid var(--resume-color-card-border);
+  border-radius: 4pt;
+  padding: 6pt 10pt;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2pt;
+}
+
+.item-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6pt;
+  flex-wrap: wrap;
+}
+
+.org-name,
+.project-name {
+  font-weight: 700;
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-primary);
+}
+
+.role-badge {
+  font-size: var(--resume-font-size-meta);
+  font-weight: 600;
+  color: var(--resume-color-accent);
+  background-color: var(--resume-color-accent-bg);
+  padding: 1pt 5pt;
+  border-radius: 3pt;
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt;
+  margin: 2pt 0 3pt 0;
+}
+
+.tech-tag {
+  font-size: 7.5pt;
+  background-color: var(--resume-color-tag-bg);
+  color: var(--resume-color-accent);
+  padding: 1pt 5pt;
+  border-radius: 3pt;
+  font-family: var(--primitive-font-mono);
+  font-weight: 600;
+}
+
+.bullet-list {
+  margin: 0;
+  padding-left: 13pt;
+  color: var(--resume-color-secondary);
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+}
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.edu-detail {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+  margin: 2pt 0 0 0;
+}
+
+.sidebar-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+@media print {
+  .resume-page {
+    padding: var(--resume-page-padding);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "international-flow",
+  "name": "International Text Flow",
+  "version": "1.0.0",
+  "style": "single-column-flow",
+  "roleCategory": "international-remote",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 2,
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "neutral-slate",
+    "accentColor": "#334155",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "frontend",
+    "backend",
+    "fullstack",
+    "ai-agent-engineer",
+    "product-manager",
+    "engineering-manager",
+    "remote-specialist"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

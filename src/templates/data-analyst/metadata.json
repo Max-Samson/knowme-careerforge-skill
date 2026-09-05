@@ -1,0 +1,39 @@
+{
+  "id": "data-analyst",
+  "name": "Data Analyst Metric Stream",
+  "version": "1.0.0",
+  "style": "two-column-metrics",
+  "roleCategory": "data-analytics",
+  "layout": {
+    "type": "two-column-sidebar",
+    "targetPages": 1,
+    "maxPages": 1,
+    "sidebarRatio": "30:70",
+    "density": "high"
+  },
+  "visualStyle": {
+    "tone": "amber-cyan",
+    "accentColor": "#0891b2",
+    "sidebarBg": "#f0fdfa",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "data-analyst",
+    "data-scientist",
+    "bi-engineer",
+    "growth-architect",
+    "data-engineer",
+    "machine-learning-engineer"
+  ],
+  "languages": ["zh-CN", "en-US"],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-sidebar-width",
+    "--resume-color-accent"
+  ]
+}

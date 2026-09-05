@@ -54,11 +54,11 @@ Options (for forge):
   --repo, -r <dir>      Target repository path (default: .)
   --role <title>        Target role title
   --jd <file|text>      Target job description
-  --template, -t <id>   Template ID (minimal, modern, executive, classic)
+  --template, -t <id>   Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst)
   --name <name>         Candidate name override
   --output, -o <path>   Output PDF path (default: workspace/resume.pdf)
+  --auto-heal           Enable heuristic token auto-healing to eliminate A4 height overflow
   --quiet, -q           Quiet execution (compact JSON output)
-
 Examples:
   knowme forge --repo . --role "AI Agent Engineer" --template modern
   knowme extract --repo . --output workspace/evidence-master.json

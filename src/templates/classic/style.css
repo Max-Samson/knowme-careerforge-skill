@@ -24,8 +24,11 @@
   --resume-font-size-meta: var(--primitive-font-size-meta);
   --resume-line-height-body: 1.4;
 
-  /* Cell & Spacing Tokens */
+  /* Cell & Spacing Tokens (Calibratable for Self-Healing) */
   --resume-cell-padding: 4.5pt 7pt;
+  --resume-space-section: 6pt;
+  --resume-space-item: 4.5pt;
+  --resume-space-bullet: 2pt;
 }
 
 .resume-page {
@@ -131,11 +134,10 @@
   margin-left: 12pt;
   margin-top: 2pt;
 }
-
 .exp-bullets li {
-  margin-bottom: 2pt;
+  margin-bottom: var(--resume-space-bullet);
+  line-height: var(--resume-line-height-body);
 }
-
 .project-desc {
   font-size: 8.5pt;
   color: var(--resume-color-secondary);

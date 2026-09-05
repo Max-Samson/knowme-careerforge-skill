@@ -1,6 +1,69 @@
 {
   "templates": [
     {
+      "id": "academic-research",
+      "name": "Academic Research Flow",
+      "version": "1.0.0",
+      "style": "single-column-academic",
+      "roleCategory": "research-algorithm",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 2,
+        "density": "ultra"
+      },
+      "visualStyle": {
+        "tone": "oxford-navy",
+        "accentColor": "#1e3a8a",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "ai-agent-engineer",
+        "algorithm-engineer",
+        "research-scientist",
+        "data-scientist",
+        "nlp-engineer",
+        "cv-engineer",
+        "phd-candidate",
+        "postdoc"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/academic-research",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
       "id": "classic",
       "name": "Table Structured Modern",
       "version": "1.0.0",
@@ -33,6 +96,9 @@
       "customizableTokens": [
         "--resume-font-size-body",
         "--resume-cell-padding",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
         "--resume-color-accent",
         "--resume-color-label-bg"
       ],
@@ -51,7 +117,203 @@
         "--resume-font-size-meta",
         "--resume-font-size-title",
         "--resume-line-height-body",
-        "--resume-page-padding"
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "compact-dense",
+      "name": "Compact Dense Grid",
+      "version": "1.0.0",
+      "style": "two-column-dense",
+      "roleCategory": "engineering-senior",
+      "layout": {
+        "type": "two-column-dense",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "ultra"
+      },
+      "visualStyle": {
+        "tone": "steel-blue",
+        "accentColor": "#0369a1",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "architect",
+        "backend",
+        "frontend",
+        "fullstack",
+        "cpp-systems",
+        "java-backend",
+        "devops",
+        "tech-lead"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/compact-dense",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "creative-tech",
+      "name": "Creative Tech Split",
+      "version": "1.0.0",
+      "style": "two-column-split",
+      "roleCategory": "frontend-creative",
+      "layout": {
+        "type": "two-column-sidebar",
+        "targetPages": 1,
+        "maxPages": 1,
+        "sidebarRatio": "28:72",
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "tech-violet",
+        "accentColor": "#7c3aed",
+        "sidebarBg": "#faf5ff",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "ui-ux-engineer",
+        "creative-technologist",
+        "web-architect",
+        "design-system-engineer",
+        "node-fullstack"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-sidebar-width",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/creative-tech",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-light",
+        "--resume-color-border",
+        "--resume-color-indigo",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-sidebar-bg",
+        "--resume-color-sidebar-border",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-sidebar-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "data-analyst",
+      "name": "Data Analyst Metric Stream",
+      "version": "1.0.0",
+      "style": "two-column-metrics",
+      "roleCategory": "data-analytics",
+      "layout": {
+        "type": "two-column-sidebar",
+        "targetPages": 1,
+        "maxPages": 1,
+        "sidebarRatio": "30:70",
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "amber-cyan",
+        "accentColor": "#0891b2",
+        "sidebarBg": "#f0fdfa",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "data-analyst",
+        "data-scientist",
+        "bi-engineer",
+        "growth-architect",
+        "data-engineer",
+        "machine-learning-engineer"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-sidebar-width",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/data-analyst",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-dark",
+        "--resume-color-accent-light",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-sidebar-bg",
+        "--resume-color-sidebar-border",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-sidebar-width",
+        "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
       ]
     },
     {
@@ -112,6 +374,68 @@
         "--resume-left-col-width",
         "--resume-line-height-body",
         "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "international-flow",
+      "name": "International Text Flow",
+      "version": "1.0.0",
+      "style": "single-column-flow",
+      "roleCategory": "international-remote",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 2,
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "neutral-slate",
+        "accentColor": "#334155",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "ai-agent-engineer",
+        "product-manager",
+        "engineering-manager",
+        "remote-specialist"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/international-flow",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
         "--resume-space-item",
         "--resume-space-section"
       ]
@@ -239,6 +563,70 @@
         "--resume-line-height-body",
         "--resume-sidebar-width",
         "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "startup-generalist",
+      "name": "Startup Generalist Cards",
+      "version": "1.0.0",
+      "style": "modular-cards",
+      "roleCategory": "startup-growth",
+      "layout": {
+        "type": "modular-cards",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "high"
+      },
+      "visualStyle": {
+        "tone": "emerald-green",
+        "accentColor": "#059669",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "fullstack",
+        "indie-hacker",
+        "startup-cto",
+        "growth-engineer",
+        "product-engineer",
+        "frontend",
+        "backend"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/startup-generalist",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-accent-bg",
+        "--resume-color-border",
+        "--resume-color-card-bg",
+        "--resume-color-card-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
         "--resume-space-item",
         "--resume-space-section"
       ]

@@ -196,10 +196,49 @@
 }
 
 .bullet-list {
+  margin: 0;
+  padding-left: 14pt;
   font-size: var(--resume-font-size-body);
   line-height: var(--resume-line-height-body);
+  color: var(--resume-color-secondary);
 }
 
 .bullet-list li {
   margin-bottom: var(--resume-space-bullet);
+}
+
+/* === GENERATED HTML CONTRACT CLASSES === */
+.sidebar-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.experience-item,
+.project-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.role-badge {
+  font-size: 8.5pt;
+  font-weight: 600;
+  color: var(--resume-color-accent);
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt;
+  margin: 2pt 0 4pt 0;
+}
+
+.tech-tag {
+  font-size: 7.5pt;
+  background-color: var(--resume-color-tag-bg);
+  color: var(--resume-color-accent);
+  padding: 1pt 5pt;
+  border-radius: 2pt;
+  font-family: var(--primitive-font-mono);
+}
+
+.education-item {
+  margin-bottom: var(--resume-space-item);
 }

@@ -1,0 +1,208 @@
+/**
+ * KnowMe CareerForge — International Text Flow Template Style
+ * Style Tone: Neutral Slate & Charcoal (Anti-Discrimination Pure Text Flow)
+ * Inherits: src/templates/common/base.css
+ */
+
+:root {
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-page-padding: 14mm 16mm;
+
+  /* Color Bindings */
+  --resume-color-primary: var(--primitive-color-slate-900);
+  --resume-color-secondary: var(--primitive-color-slate-700);
+  --resume-color-muted: var(--primitive-color-slate-500);
+  --resume-color-accent: var(--palette-slate-minimal);
+  --resume-color-accent-bg: var(--primitive-color-slate-100);
+  --resume-color-border: var(--primitive-color-slate-300);
+  --resume-color-tag-bg: var(--primitive-color-slate-100);
+
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: 20pt;
+  --resume-font-size-target: 10.5pt;
+  --resume-font-size-h2: 11pt;
+  --resume-font-size-body: 9.2pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.45;
+
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-header-bottom: 10pt;
+  --resume-space-section: 11pt;
+  --resume-space-item: 7.5pt;
+  --resume-space-bullet: 2.2pt;
+}
+
+.resume-page {
+  padding: var(--resume-page-padding);
+}
+
+/* Header 纯文字流居中排版 */
+.resume-header {
+  border-bottom: 1px solid var(--resume-color-border);
+  padding-bottom: var(--resume-space-header-bottom);
+  margin-bottom: var(--resume-space-section);
+  text-align: center;
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  margin: 0 0 3pt 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.job-target {
+  font-size: var(--resume-font-size-target);
+  color: var(--resume-color-secondary);
+  font-weight: 600;
+  margin: 0 0 5pt 0;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4pt 12pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin: 6pt auto 0 auto;
+  text-align: left;
+}
+
+/* 章节通用样式 */
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-primary);
+  border-bottom: 1px solid var(--resume-color-border);
+  padding-bottom: 2pt;
+  margin: 0 0 calc(var(--resume-space-item) * 0.75) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* 技能模块 */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5pt;
+}
+
+.skill-row {
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+}
+
+.skill-category {
+  font-weight: 700;
+  color: var(--resume-color-primary);
+}
+
+.skill-items {
+  color: var(--resume-color-secondary);
+}
+
+/* 条目通用样式 */
+.experience-item,
+.project-item,
+.education-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2pt;
+}
+
+.item-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6pt;
+  flex-wrap: wrap;
+}
+
+.org-name,
+.project-name {
+  font-weight: 700;
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-primary);
+}
+
+.role-badge {
+  font-size: var(--resume-font-size-meta);
+  font-weight: 600;
+  color: var(--resume-color-secondary);
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-weight: 500;
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4pt;
+  margin: 2pt 0 3pt 0;
+}
+
+.tech-tag {
+  font-size: 7.5pt;
+  background-color: var(--resume-color-tag-bg);
+  color: var(--resume-color-secondary);
+  padding: 1pt 5pt;
+  border-radius: 2pt;
+  font-family: var(--primitive-font-mono);
+}
+
+.bullet-list {
+  margin: 0;
+  padding-left: 14pt;
+  color: var(--resume-color-secondary);
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+}
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.edu-detail {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+  margin: 2pt 0 0 0;
+}
+
+.sidebar-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+@media print {
+  .resume-page {
+    padding: var(--resume-page-padding);
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}

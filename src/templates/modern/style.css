@@ -221,9 +221,11 @@
 }
 
 .bullet-list {
-  margin-left: 12pt;
+  margin: 0;
+  padding-left: 14pt;
   font-size: var(--resume-font-size-body);
   line-height: var(--resume-line-height-body);
+  color: var(--resume-color-secondary);
 }
 
 .bullet-list li {
@@ -272,10 +274,11 @@
 /* Individual tech stack pill */
 .tech-tag {
   font-size: 7.5pt;
-  color: var(--resume-color-muted);
+  color: var(--resume-color-secondary);
   background: var(--primitive-color-slate-100);
-  padding: 1.5pt 4pt;
+  padding: 1pt 5pt;
   border-radius: 2pt;
   white-space: nowrap;
-  line-height: 1.4;
+  line-height: 1.35;
+  font-family: var(--primitive-font-mono);
 }

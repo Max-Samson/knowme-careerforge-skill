@@ -1,37 +1,37 @@
 {
-  "id": "classic",
-  "name": "Table Structured Modern",
+  "id": "startup-generalist",
+  "name": "Startup Generalist Cards",
   "version": "1.0.0",
-  "style": "table-structured",
-  "roleCategory": "engineering-ai",
+  "style": "modular-cards",
+  "roleCategory": "startup-growth",
   "layout": {
-    "type": "table-grid",
+    "type": "modular-cards",
     "targetPages": 1,
     "maxPages": 1,
     "density": "high"
   },
   "visualStyle": {
-    "tone": "structured-formal",
-    "accentColor": "#1d4ed8",
+    "tone": "emerald-green",
+    "accentColor": "#059669",
     "fontFamily": "System Sans-Serif"
   },
   "atsScoreTier": "tier-1-optimal",
   "supportedRoles": [
-    "frontend",
-    "backend",
     "fullstack",
-    "hardware",
-    "civil-servant",
-    "corporate"
+    "indie-hacker",
+    "startup-cto",
+    "growth-engineer",
+    "product-engineer",
+    "frontend",
+    "backend"
   ],
   "languages": ["zh-CN", "en-US"],
   "customizableTokens": [
     "--resume-font-size-body",
-    "--resume-cell-padding",
+    "--resume-line-height-body",
     "--resume-space-section",
     "--resume-space-item",
     "--resume-space-bullet",
-    "--resume-color-accent",
-    "--resume-color-label-bg"
+    "--resume-color-accent"
   ]
 }

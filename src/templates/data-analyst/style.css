@@ -1,0 +1,285 @@
+/**
+ * KnowMe CareerForge — Data Analyst Metric Stream Template Style
+ * Style Tone: Amber Cyan (Metric-Driven Two-Column 30:70)
+ * Inherits: src/templates/common/base.css
+ */
+
+:root {
+  /* === COMPONENT TOKENS (Overrides & Aliases) === */
+  --resume-color-sidebar-bg: #f0fdfa;
+  --resume-color-sidebar-border: #ccfbf1;
+  --resume-color-primary: #0f172a;
+  --resume-color-secondary: #334155;
+  --resume-color-muted: #64748b;
+  --resume-color-accent: #0891b2;
+  --resume-color-accent-light: #e0f2fe;
+  --resume-color-accent-dark: #0e7490;
+  --resume-color-border: #cbd5e1;
+
+  /* Typography Bindings */
+  --resume-font-body: var(--primitive-font-sans);
+  --resume-font-size-name: 20pt;
+  --resume-font-size-target: 10pt;
+  --resume-font-size-h2: 11pt;
+  --resume-font-size-body: 9.0pt;
+  --resume-font-size-meta: 8.5pt;
+  --resume-line-height-body: 1.42;
+
+  /* Spacing Tokens (Calibratable for Self-Healing) */
+  --resume-space-section: 10.5pt;
+  --resume-space-item: 7.0pt;
+  --resume-space-bullet: 2.0pt;
+  --resume-sidebar-width: 30%;
+}
+
+.resume-page {
+  display: flex;
+  flex-direction: row;
+  min-height: var(--primitive-page-min-height);
+  background: #ffffff;
+}
+
+/* 左侧数据与指标侧边栏 (30%) */
+.resume-sidebar {
+  width: var(--resume-sidebar-width);
+  background-color: var(--resume-color-sidebar-bg);
+  border-right: 1px solid var(--resume-color-sidebar-border);
+  padding: 13mm 10mm;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.sidebar-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.sidebar-title {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1.5px solid var(--resume-color-accent);
+  padding-bottom: 2pt;
+  margin-bottom: 6pt;
+}
+
+.sidebar-info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+}
+
+.sidebar-info-list li {
+  margin-bottom: 4pt;
+  word-break: break-all;
+}
+
+.info-label {
+  color: var(--resume-color-muted);
+  font-size: 8pt;
+  display: block;
+}
+
+/* 核心量化看板卡片 (KPI Callouts) */
+.metric-callout-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 5pt;
+}
+
+.metric-card {
+  background: #ffffff;
+  border: 1px solid var(--resume-color-sidebar-border);
+  border-radius: 4pt;
+  padding: 4pt 6pt;
+  text-align: center;
+}
+
+.metric-val {
+  font-size: 12pt;
+  font-weight: 800;
+  color: var(--resume-color-accent);
+  font-family: var(--primitive-font-mono);
+}
+
+.metric-desc {
+  font-size: 7.5pt;
+  color: var(--resume-color-muted);
+}
+
+/* 技能模块 */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5pt;
+}
+
+.skill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5pt;
+}
+
+.skill-category {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: var(--resume-color-accent-dark);
+}
+
+.skill-items {
+  font-size: 8.5pt;
+  color: var(--resume-color-secondary);
+  line-height: 1.35;
+}
+
+/* 右侧主舞台 (70%) */
+.resume-main {
+  width: calc(100% - var(--resume-sidebar-width));
+  padding: 13mm 14mm 13mm 12mm;
+  box-sizing: border-box;
+}
+
+.main-header {
+  border-bottom: 1.5px solid var(--resume-color-accent);
+  padding-bottom: 7pt;
+  margin-bottom: var(--resume-space-section);
+}
+
+.candidate-name {
+  font-size: var(--resume-font-size-name);
+  font-weight: 700;
+  color: var(--resume-color-accent-dark);
+  margin: 0 0 2pt 0;
+  letter-spacing: 0.5px;
+}
+
+.job-target {
+  font-size: var(--resume-font-size-target);
+  color: var(--resume-color-secondary);
+  font-weight: 600;
+  margin: 0 0 3pt 0;
+}
+
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin: 0;
+}
+
+/* 章节通用样式 */
+.resume-section {
+  margin-bottom: var(--resume-space-section);
+}
+
+.section-title {
+  font-size: var(--resume-font-size-h2);
+  font-weight: 700;
+  color: var(--resume-color-accent-dark);
+  display: flex;
+  align-items: center;
+  gap: 6pt;
+  margin: 0 0 calc(var(--resume-space-item) * 0.7) 0;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--resume-color-sidebar-border);
+}
+
+/* 条目样式 */
+.experience-item,
+.project-item,
+.education-item {
+  margin-bottom: var(--resume-space-item);
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2pt;
+}
+
+.item-title-group {
+  display: flex;
+  align-items: center;
+  gap: 5pt;
+  flex-wrap: wrap;
+}
+
+.org-name,
+.project-name {
+  font-weight: 700;
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-primary);
+}
+
+.role-badge {
+  font-size: var(--resume-font-size-meta);
+  font-weight: 600;
+  color: var(--resume-color-accent-dark);
+  background: var(--resume-color-accent-light);
+  padding: 1pt 5pt;
+  border-radius: 2pt;
+}
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt;
+  margin: 2pt 0 3pt 0;
+}
+
+.tech-tag {
+  font-size: 7.5pt;
+  background-color: var(--resume-color-sidebar-bg);
+  color: var(--resume-color-accent-dark);
+  border: 1px solid var(--resume-color-sidebar-border);
+  padding: 0.5pt 4pt;
+  border-radius: 2pt;
+  font-family: var(--primitive-font-mono);
+  font-weight: 600;
+}
+
+.bullet-list {
+  margin: 0;
+  padding-left: 13pt;
+  color: var(--resume-color-secondary);
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+}
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.edu-detail {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+  margin: 2pt 0 0 0;
+}
+
+@media print {
+  .resume-page {
+    box-shadow: none;
+    margin: 0;
+    width: 210mm;
+    min-height: 297mm;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+}

@@ -1,37 +1,38 @@
 {
-  "id": "classic",
-  "name": "Table Structured Modern",
+  "id": "compact-dense",
+  "name": "Compact Dense Grid",
   "version": "1.0.0",
-  "style": "table-structured",
-  "roleCategory": "engineering-ai",
+  "style": "two-column-dense",
+  "roleCategory": "engineering-senior",
   "layout": {
-    "type": "table-grid",
+    "type": "two-column-dense",
     "targetPages": 1,
     "maxPages": 1,
-    "density": "high"
+    "density": "ultra"
   },
   "visualStyle": {
-    "tone": "structured-formal",
-    "accentColor": "#1d4ed8",
+    "tone": "steel-blue",
+    "accentColor": "#0369a1",
     "fontFamily": "System Sans-Serif"
   },
   "atsScoreTier": "tier-1-optimal",
   "supportedRoles": [
-    "frontend",
+    "architect",
     "backend",
+    "frontend",
     "fullstack",
-    "hardware",
-    "civil-servant",
-    "corporate"
+    "cpp-systems",
+    "java-backend",
+    "devops",
+    "tech-lead"
   ],
   "languages": ["zh-CN", "en-US"],
   "customizableTokens": [
     "--resume-font-size-body",
-    "--resume-cell-padding",
+    "--resume-line-height-body",
     "--resume-space-section",
     "--resume-space-item",
     "--resume-space-bullet",
-    "--resume-color-accent",
-    "--resume-color-label-bg"
+    "--resume-color-accent"
   ]
 }

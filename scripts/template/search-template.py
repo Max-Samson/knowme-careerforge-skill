@@ -105,15 +105,24 @@ class WeightedRuleScorer(BaseTemplateScorer):
                 
         if role_score < 0.5:
             cat = template.get("roleCategory", "")
-            if any(k in query_lower for k in ["ai", "agent", "llm", "frontend", "backend", "fullstack", "devops", "engineer"]) and "engineering" in cat:
+            if any(k in query_lower for k in ["research", "scientist", "algorithm", "phd", "academic", "postdoc", "算法", "科研", "学者", "研究员"]) and "research" in cat:
+                role_score = 0.90
+            elif any(k in query_lower for k in ["remote", "international", "global", "overseas", "foreign", "外企", "海外", "跨国", "远程"]) and "international" in cat:
+                role_score = 0.90
+            elif any(k in query_lower for k in ["creative", "ui", "ux", "design", "interaction", "动效", "交互", "视觉"]) and "creative" in cat:
+                role_score = 0.90
+            elif any(k in query_lower for k in ["data", "analyst", "bi", "analytics", "metric", "数据", "商业智能", "数仓"]) and "data" in cat:
+                role_score = 0.90
+            elif any(k in query_lower for k in ["startup", "indie", "growth", "founder", "hacker", "初创", "增长", "独立开发"]) and "startup" in cat:
+                role_score = 0.90
+            elif any(k in query_lower for k in ["ai", "agent", "llm", "frontend", "backend", "fullstack", "devops", "engineer"]) and "engineering" in cat:
                 role_score = 0.85
-            elif any(k in query_lower for k in ["manager", "product", "lead", "director", "architect", "cto"]) and "management" in cat:
+            elif any(k in query_lower for k in ["manager", "product", "lead", "director", "architect", "cto", "高管", "总监"]) and "management" in cat:
                 role_score = 0.85
             elif any(k in query_lower for k in ["bank", "fintech", "state", "corp", "government"]) and "corporate" in cat:
                 role_score = 0.85
             else:
                 role_score = 0.60
-                
         score += role_score * self.weights["role"]
 
         # 2. Style Match
@@ -238,6 +247,70 @@ class HybridTemplateScorer(BaseTemplateScorer):
         return round(blended, 1)
 
 
+PALETTE_PRESETS: Dict[str, Dict[str, Any]] = {
+    "--palette-tech-blue": {
+        "name": "经典科技蓝",
+        "token": "--palette-tech-blue",
+        "hex": "#2563eb",
+        "tone": "tech-blue",
+        "keywords": ["engineering", "frontend", "backend", "fullstack", "devops", "cloud", "software", "前端", "后端", "全栈"]
+    },
+    "--palette-deep-navy": {
+        "name": "深邃海航蓝",
+        "token": "--palette-deep-navy",
+        "hex": "#1e3a8a",
+        "tone": "oxford-navy",
+        "keywords": ["research", "academic", "algorithm", "phd", "scientist", "ai-agent", "llm", "cv", "nlp", "算法", "科研", "学者", "博士"]
+    },
+    "--palette-teal-modern": {
+        "name": "现代松石绿",
+        "token": "--palette-teal-modern",
+        "hex": "#0f766e",
+        "tone": "executive-formal",
+        "keywords": ["executive", "management", "cto", "director", "lead", "product", "architect", "高管", "总监", "架构师", "产品经理"]
+    },
+    "--palette-emerald-fresh": {
+        "name": "活力翡翠绿",
+        "token": "--palette-emerald-fresh",
+        "hex": "#059669",
+        "tone": "emerald-green",
+        "keywords": ["startup", "generalist", "indie", "growth", "founder", "hacker", "初创", "独立开发", "增长"]
+    },
+    "--palette-violet-creative": {
+        "name": "创意极光紫",
+        "token": "--palette-violet-creative",
+        "hex": "#7c3aed",
+        "tone": "tech-violet",
+        "keywords": ["creative", "ui", "ux", "design", "interaction", "threejs", "webgl", "motion", "动效", "视觉", "体验"]
+    },
+    "--palette-slate-minimal": {
+        "name": "极简碳素灰",
+        "token": "--palette-slate-minimal",
+        "hex": "#334155",
+        "tone": "neutral-slate",
+        "keywords": ["international", "remote", "global", "overseas", "minimal", "compact", "dense", "外企", "海外", "远程", "极简"]
+    }
+}
+
+def recommend_palette(role: str, template: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """Recommend official palette preset based on role keywords and template style."""
+    role_lower = (role or "").lower()
+    template_tone = (template.get("visualStyle", {}).get("tone", "") if template else "").lower()
+    template_cat = (template.get("roleCategory", "") if template else "").lower()
+
+    # 1. Match against palette keywords
+    for token, p in PALETTE_PRESETS.items():
+        if any(kw in role_lower for kw in p["keywords"]):
+            return p
+
+    # 2. Match template visual tone
+    for token, p in PALETTE_PRESETS.items():
+        if p["tone"] in template_tone or template_tone in p["tone"]:
+            return p
+
+    # 3. Default fallback
+    return PALETTE_PRESETS["--palette-tech-blue"]
+
 # ==============================================================================
 # 2. PUBLIC FACADE INTERFACE (DEEP MODULE)
 # ==============================================================================
@@ -289,6 +362,7 @@ def search_templates(
     results = []
     for t in templates:
         t_copy = dict(t)
+        t_copy["recommendedPalette"] = recommend_palette(role, t)
         score_val = scorer.score(t, query)
         t_copy["matchScore"] = score_val
         t_copy["score"] = score_val
@@ -341,6 +415,9 @@ def main():
         print(f"   Category: {r.get('roleCategory')} | Style: {r.get('style')} | ATS Tier: {r.get('atsScoreTier')}")
         print(f"   Target Pages: {r.get('layout', {}).get('targetPages', 1)} | Density: {r.get('layout', {}).get('density')}")
         print(f"   Directory: {r.get('_directory')}")
+        pal = r.get("recommendedPalette")
+        if pal:
+            print(f"   Palette  : {pal.get('name')} ({pal.get('hex')}) [Token: {pal.get('token')}]")
         if tokens_preview:
             print(f"   Tokens   : {tokens_preview}")
         print("-" * 80)
