@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 KnowMe CareerForge — Template Bundle Contract & Token Integrity Tests
-验证 src/templates/ 下所有模板包遵循完整规范：包含 template.html, style.css, metadata.json, README.md，
+验证 src/templates/ 下所有模板包遵循完整规范：包含 canvas.html, style.css, metadata.json, README.md，
 验证所有声明的 customizableTokens 在 style.css 中真实定义，并验证物理 A4 印刷约束。
 """
 
@@ -25,7 +25,7 @@ class TestTemplateContracts(unittest.TestCase):
 
     def test_template_bundle_structure(self):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
-        required_files = ["template.html", "style.css", "metadata.json", "README.md"]
+        required_files = ["canvas.html", "sample-profile.json", "style.css", "metadata.json", "README.md"]
         
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
@@ -49,10 +49,11 @@ class TestTemplateContracts(unittest.TestCase):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
-                html_path = t_dir / "template.html"
+                html_path = t_dir / "canvas.html"
                 content = html_path.read_text(encoding="utf-8")
-                self.assertIn("resume-page", content, f"template.html in '{t_dir.name}' must contain .resume-page")
-                self.assertIn("candidate-name", content, f"template.html in '{t_dir.name}' must contain .candidate-name")
+                self.assertIn("resume-page", content, f"canvas.html in '{t_dir.name}' must contain .resume-page")
+                self.assertIn("<!-- resume:basics -->", content)
+                self.assertEqual([p.name for p in t_dir.glob("*.html")], ["canvas.html"])
 
     def test_css_contains_a4_print_geometry(self):
         base_css_path = self.templates_dir / "common" / "base.css"

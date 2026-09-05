@@ -1,17 +1,8 @@
 ---
-description: KnowMe CareerForge — Agent-native career positioning and resume engineering
-globs: ["workspace/*", "src/**/*", "scripts/**/*", "references/*"]
+description: Resume drafting and verified delivery from user-provided facts
+alwaysApply: false
 ---
 
-# KnowMe CareerForge MDC Rules (Cursor)
+# KnowMe CareerForge
 
-When activated for career positioning, resume tailoring, or repo-to-resume analysis:
-
-1. **Evidence-First Invariant**: Enforce strict L1~L3 evidence classification (see `references/01-evidence-mining.md`). Never hallucinate ungrounded revenue metrics, fake degrees, or false tenures.
-2. **Repo-to-Resume Extraction**: Extract codebase facts using `python3 scripts/evidence/extract-evidence.py --repo .` or execute the one-shot pipeline `python3 scripts/pipeline/forge.py`.
-3. **Target Alignment & JD Parsing**: Analyze target Job Descriptions using `python3 scripts/evidence/analyze-jd.py` (see `references/03-jd-analysis.md`).
-4. **Template Search**: Match template via `python3 scripts/template/search-template.py "<Target Role>"` (see `references/04-template-selection.md`).
-5. **HTML Canvas Editing**: Edit exclusively in `workspace/resume.html` Intermediate Working Canvas (`scripts/template/instantiate-resume.py`). Calibrate CSS variables (`--resume-*`) in `:root` (see `references/05-html-canvas-tokens.md`).
-6. **Dual QA & Deterministic PDF**: Validate layout height ($297\text{mm} \le 1122.5\text{px}$) and ATS via `python3 scripts/validation/validate-resume.py`. Export final vector PDF via `python3 scripts/rendering/render-pdf.py`.
-7. **Quiet Execution Protocol**: Execute all tools silently with `--quiet`. Never output raw HTML/CSS into the chat. Deliver concise value proposition and direct output file paths.
-8. **Authoritative Guide**: Refer to root `AGENT.md` for Vercel-inspired editorial standards and `ARCHITECTURE.md` for system design.
+Read the installed SKILL.md and references/07-artifact-contract.md. Use user-supplied facts, preserve Draft/Master/Variant separation and write each pipeline run into its own directory. Repository mining is not supported. Only the current PASS manifest identifies verified PDF delivery; never substitute an old workspace file after failure.

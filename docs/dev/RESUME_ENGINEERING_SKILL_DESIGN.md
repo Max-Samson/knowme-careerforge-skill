@@ -1,3 +1,5 @@
+> 当前实现说明：每套模板仅维护 `canvas.html` 结构与 `style.css` 样式；`sample-profile.json` 只保存虚构展示数据。画廊与真实简历共用实例化器。本文下方 `template.html` 示例属于早期设计，不再作为当前文件契约；以 `src/templates/common/resume-contract.md` 为准。
+
 # Resume Engineering Skill — 产品与技术架构设计文档 (PRD & Architecture Spec)
 
 > **定位：面向主流 AI Agent（Claude Code / Codex / Cursor / Windsurf / Gemini CLI / Copilot / OpenCode 等）的岗位定制型 HTML 简历设计、证据链编排与确定性 PDF 生成 Skill。**
@@ -379,7 +381,7 @@ knowme-careerforge-skill/
 ├── LICENSE                            # MIT 开源协议
 ├── skill.json                         # Skill 元数据与平台清单 (参照 ui-ux-pro-max)
 ├── SKILL.md                           # Core Skill 推理入口与 Agent 执行契约
-├── AGENT.md                           # 吸收 Vercel Editorial 规范的 Agent 行为与排版手册
+├── AGENT.md                           # AI 项目开发与架构规范，吸收 Vercel 设计纪律
 ├── ARCHITECTURE.md                    # 6 层系统架构、数据流与 Deep Module Seam 设计
 ├── CLAUDE.md                          # 开发者指令与测试速查指南
 ├── pyproject.toml                     # Python 工具链配置 (零重型第三方依赖)

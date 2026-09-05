@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837" alt="npm version"></a>
-  <img src="https://img.shields.io/badge/Node.js-%3E%3D18-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Node.js-%3E%3D22.13-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/Playwright-A4_PDF-2EAD33?style=flat&logo=playwright&logoColor=white" alt="Playwright">
@@ -109,44 +109,25 @@ knowme list
 
 ---
 
-## 4. The 3 Operational Modes
+## 4. User input and artifact lifecycle
 
-```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ Mode A: Target-Role Mode                                                    │
-│ User specifies a career direction (e.g., "Senior AI Agent Engineer").       │
-│ ▶ Agent loads role skill tree, extracts matching evidence, builds variant.  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Mode B: JD-Specific Mode                                                    │
-│ User pastes a concrete Job Description (JD).                                │
-│ ▶ Agent runs analyze-jd.py, performs gap analysis, highlights hiring keys.  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ Mode C: Repo-to-Resume Mode                                                 │
-│ User supplies a GitHub repository / codebase / project notes.               │
-│ ▶ Agent inspects code/config files, grades evidence into L1~L3, builds FAB. │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+The host Agent organizes user descriptions, existing resume material and explicitly supplied supporting evidence. Repository-to-resume extraction is not supported. A target role is sufficient; a JD is optional.
 
----
+Draft retains incomplete information, Master preserves supplied facts, and Variant records its source Master hash for a target role. Missing values stay omitted/null; sample people, default honors and invented metrics never fill gaps. See the [artifact and acceptance contract](references/07-artifact-contract.md).
 
-## 5. End-to-End Execution Workflow
+## 5. Isolated runs and final acceptance
 
-```text
-  Know (Evidence L1~3) ──> Define (Goal) ──> Understand (JD Signals) ──> Position (Strategy) ──> Forge (HTML Canvas) ──> Review (Dual QA)
-```
+Each forge invocation writes snapshots, Master, Variant, canvas, QA and manifest to `workspace/runs/<runId>/`. Only an accepted fresh PDF is published. Failed manifests never identify an old output as delivery. Optional `--output` and `--html-output` create verified copies.
 
-1. **[KnowMe] Evidence Mapping**: Candidate experience is analyzed and strictly categorized into L1 (Code/Config proven), L2 (Module/Dependency inferred), and L3 (Contextual inference).
-2. **[Define & Understand] Signal Extraction**: The target JD is parsed to extract must-have competencies and hiring signals.
-3. **[Position] Strategy Formulation**: Gap analysis maps real candidate evidence to target JD requirements.
-4. **[CareerForge] Template Search & Assembly**: The best HTML template is chosen using multi-criteria BM25 ranking (`search-template.py`) and instantiated to `workspace/resume.html`.
-5. **[Review & Dual QA] Self-Healing**: Layout box model height overflow and ATS textual readability tests run automatically. If an overflow is detected, CSS spacing tokens are auto-calibrated.
-6. **[PDF Export] Deterministic Output**: Playwright renders pixel-perfect `workspace/resume.pdf` with `@media print` A4 rules.
+Checks run in print mode across every page, then parse the final PDF's page dimensions and extracted text. PASS means current checks passed; FAIL means a check failed; UNVERIFIED means inspection could not complete; DRAFT means draft preparation only. Automated checks do not certify factual truth or every ATS.
+
+Requires Python 3.9+, Node.js 22.13+, npm runtime dependencies and Chromium. Run `npm install`; use `npx playwright install chromium` if no system Chromium is available.
 
 ---
 
 ## 6. Token Self-Healing & Visual Tuning Cheat Sheet
 
-All visual parameters are concentrated in `:root` variables inside `workspace/resume.html`:
+All visual parameters are concentrated in `:root` variables inside the current run’s `resume.html`:
 
 | CSS Token | Default | Compact (1-Page Squeeze) | Relaxed (2-Page Flow) | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
@@ -173,17 +154,17 @@ All visual parameters are concentrated in `:root` variables inside `workspace/re
 ## 8. CLI & Script Reference
 
 ```bash
-# 1. One-shot resume engineering pipeline (mining -> canvas -> QA -> PDF)
-knowme forge --repo . --role "AI Agent Engineer" --template modern --quiet
+# 1. One-shot resume engineering pipeline (user facts -> canvas -> QA -> PDF)
+knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern --quiet
 
 # 2. Search best template for target role (hybrid engine)
 knowme search --role "AI Agent Engineer" --engine hybrid
 
-# 3. Extract candidate evidence & facts from codebase
-knowme extract --repo . --output workspace/evidence-master.json
+# 3. Prepare an incomplete draft without PDF delivery
+knowme forge --profile-json draft.json --draft
 
 # 4. Validate working canvas layout & ATS compliance
-knowme validate
+knowme validate /path/to/current-run/resume.html --json
 
 # 5. Render deterministic pixel-perfect PDF
 knowme render --input workspace/resume.html --output output/resume.pdf

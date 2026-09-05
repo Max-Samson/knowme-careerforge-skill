@@ -1,0 +1,86 @@
+{
+  "language": "zh-CN",
+  "basics": {
+    "name": "示例候选人",
+    "title": "architect",
+    "email": "candidate@example.com",
+    "phone": "138-0000-0000",
+    "location": "示例城市",
+    "summary": "本页为虚构排版样例，姓名、机构和经历均不代表真实候选人。"
+  },
+  "skills": [
+    {
+      "category": "工程实践",
+      "items": [
+        "Python",
+        "TypeScript",
+        "SQL"
+      ]
+    },
+    {
+      "category": "协作与交付",
+      "items": [
+        "需求分析",
+        "质量验证",
+        "技术文档"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "示例科技公司（虚构）",
+      "role": "architect",
+      "startDate": "2022.07",
+      "endDate": "2025.06",
+      "bullets": [
+        {
+          "text": "负责示例业务模块的需求分析、实现与交付，整理接口约定和验收标准。"
+        },
+        {
+          "text": "与产品和测试协作完成版本迭代，补充异常场景验证及使用文档。"
+        }
+      ]
+    },
+    {
+      "company": "示例工作室（虚构）",
+      "role": "项目成员",
+      "startDate": "2020.07",
+      "endDate": "2022.06",
+      "bullets": [
+        {
+          "text": "参与内部工具开发，梳理业务流程并维护数据校验规则。"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "业务协作平台（虚构项目）",
+      "role": "核心开发",
+      "techStack": [
+        "TypeScript",
+        "Python",
+        "PostgreSQL"
+      ],
+      "startDate": "2024.01",
+      "endDate": "2024.10",
+      "bullets": [
+        {
+          "text": "实现任务分配、进度记录与报表导出，建立可复用的数据访问接口。"
+        },
+        {
+          "text": "补充自动化校验和部署说明，支持团队复现开发环境。"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "示例大学（虚构）",
+      "degree": "学士",
+      "field": "计算机科学",
+      "startDate": "2016.09",
+      "endDate": "2020.06"
+    }
+  ]
+}

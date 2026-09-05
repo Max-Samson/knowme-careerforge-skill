@@ -19,6 +19,7 @@ def run_all_test_suites():
     start_time = time.time()
     base_dir = get_project_root()
     tests_dir = base_dir / "tests"
+    sys.path.insert(0, str(base_dir))
 
     print("==============================================================")
     print("  KnowMe CareerForge — Full-Chain Automated Test Suite")

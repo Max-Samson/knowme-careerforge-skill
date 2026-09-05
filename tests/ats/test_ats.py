@@ -5,9 +5,25 @@ KnowMe CareerForge — ATS Compliance & Text Flow Test Suite
 """
 
 import os, sys, json, unittest, re
+import importlib.util
+import tempfile
 from pathlib import Path
 
 class TestAtsCompliance(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        root = Path(__file__).resolve().parents[2]
+        spec = importlib.util.spec_from_file_location("ats_binder", root / "scripts/template/instantiate-resume.py")
+        binder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(binder)
+        cls.scratch = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(cls.scratch.cleanup)
+        cls.previews = Path(cls.scratch.name)
+        for template in (root / "src/templates").iterdir():
+            if template.is_dir() and template.name != "common":
+                binder.instantiate_workspace(template.name, profile_path=template / "sample-profile.json",
+                                             output_path=cls.previews / f"{template.name}.html", quiet=True)
+
     def setUp(self):
         self.base_dir = Path(__file__).resolve().parent.parent.parent
         self.templates_dir = self.base_dir / "src" / "templates"
@@ -23,7 +39,7 @@ class TestAtsCompliance(unittest.TestCase):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
-                html_path = t_dir / "template.html"
+                html_path = self.previews / f"{t_dir.name}.html"
                 content = html_path.read_text(encoding="utf-8")
                 self.assertTrue(
                     "candidate-name" in content or "<h1>" in content or "<h1 " in content,
@@ -37,7 +53,7 @@ class TestAtsCompliance(unittest.TestCase):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
-                html_path = t_dir / "template.html"
+                html_path = self.previews / f"{t_dir.name}.html"
                 content = html_path.read_text(encoding="utf-8")
                 
                 # 剔除 HTML 标签取纯文本
@@ -60,7 +76,7 @@ class TestAtsCompliance(unittest.TestCase):
         template_dirs = [d for d in self.templates_dir.iterdir() if d.is_dir() and d.name != "common"]
         for t_dir in template_dirs:
             with self.subTest(template=t_dir.name):
-                html_path = t_dir / "template.html"
+                html_path = self.previews / f"{t_dir.name}.html"
                 content = html_path.read_text(encoding="utf-8")
                 
                 # 提取所有标题标签文本

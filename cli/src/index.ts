@@ -39,8 +39,7 @@ Usage:
   knowme <command> [options]
 
 Commands:
-  forge                 One-shot resume engineering pipeline (repo mining -> canvas -> QA -> PDF)
-  extract               Extract candidate evidence & facts from codebase/Git repo
+  forge                 Isolated user facts -> variant -> canvas -> verified PDF
   render                Multi-strategy deterministic A4 PDF export
   init                  Install and configure Skill for AI Agent platforms (cursor, claude, codex, windsurf, gemini, opencode)
   list                  Display all available role profiles and HTML templates
@@ -51,17 +50,19 @@ Commands:
   help                  Show this help message
 
 Options (for forge):
-  --repo, -r <dir>      Target repository path (default: .)
+  --profile-json <file> User/Agent prepared facts or Master document
+  --workspace <dir>    Parent for isolated run directories (default: workspace/runs)
+  --draft              Create a draft canvas without PDF delivery
   --role <title>        Target role title
   --jd <file|text>      Target job description
   --template, -t <id>   Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst)
   --name <name>         Candidate name override
-  --output, -o <path>   Output PDF path (default: workspace/resume.pdf)
+  --output, -o <path>   Optional verified PDF copy (default: isolated run)
+  --font-preset <name>  system or arial-unicode (requires local Arial Unicode MS)
   --auto-heal           Enable heuristic token auto-healing to eliminate A4 height overflow
   --quiet, -q           Quiet execution (compact JSON output)
 Examples:
-  knowme forge --repo . --role "AI Agent Engineer" --template modern
-  knowme extract --repo . --output workspace/evidence-master.json
+  knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern
   knowme render workspace/resume.html workspace/resume.pdf
   knowme init --ai codex
   knowme init --all
@@ -83,11 +84,8 @@ export function main(): void {
       break;
     }
     case 'extract': {
-      let scriptPath = path.join(rootDir, 'scripts', 'evidence', 'extract-evidence.py');
-      if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'extract-evidence.py');
-      const passArgs = args.slice(1);
-      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
-      if (proc.status !== 0) process.exit(proc.status || 1);
+      console.error('Repository-to-resume extraction is not supported. Use user-provided facts with forge --profile-json.');
+      process.exitCode = 1;
       break;
     }
     case 'render': {
@@ -125,26 +123,30 @@ export function main(): void {
       let scriptPath = path.join(rootDir, 'scripts', 'template', 'search-template.py');
       if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'search-template.py');
       const passArgs = args.slice(1);
-      child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
       break;
     }
     case 'validate': {
       let scriptPath = path.join(rootDir, 'scripts', 'validation', 'validate-resume.py');
       if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'validate-resume.py');
       const passArgs = args.slice(1);
-      child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      const proc = child_process.spawnSync('python3', [scriptPath, ...passArgs], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
       break;
     }
     case 'gallery': {
       let scriptPath = path.join(rootDir, 'scripts', 'build', 'build-gallery.py');
       if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'build-gallery.py');
-      child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
+      const proc = child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
       break;
     }
     case 'test': {
       let scriptPath = path.join(rootDir, 'scripts', 'build', 'run-all-tests.py');
       if (!require('fs').existsSync(scriptPath)) scriptPath = path.join(rootDir, 'scripts', 'run-all-tests.py');
-      child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
+      const proc = child_process.spawnSync('python3', [scriptPath], { stdio: 'inherit' });
+      if (proc.status !== 0) process.exit(proc.status || 1);
       break;
     }
     case '--version':

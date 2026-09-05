@@ -1,51 +1,12 @@
-# Reference Manual 05: HTML Canvas Engineering & Design Tokens
+# HTML canvas and tokens
 
-> **"workspace/resume.html is the SOLE Intermediate Working Canvas. All modifications, tailoring, and token tuning happen here."**
+Instantiate an empty canvas.html skeleton with explicit user facts. canvas.html is the sole maintained structure. Gallery previews bind explicit fictional sample-profile.json through the same instantiator and full CSS chain; sample data must never serve as default candidate facts. Shared normalization accepts omitted/null optional fields and rejects invalid types. Failed binding must preserve old output and return nonzero.
 
----
+Tune the run's HTML with CSS variables for section/item/bullet spacing and body typography. Preserve manually edited content rather than regenerating stale profile data. Auto-healing cannot remove facts or reduce body font below 8.8pt. Validate in print mode, inspect all pages and verify the actual PDF before delivery. See 07-artifact-contract.md.
 
-## 1. Two-Tier Design Tokens Architecture
 
-```
-┌────────────────────────────────────────────────────────┐
-│ 1. Primitive Tokens (Declared in common/base.css)       │
-│    Raw colors, 2pt spacing ladder, font-family, A4 size│
-├────────────────────────────────────────────────────────┤
-│                          ▼                             │
-│ 2. Component Tokens (Declared in template style.css)   │
-│    --resume-space-section, --resume-font-size-body...  │
-└────────────────────────────────────────────────────────┘
-```
+## 本地字体与缺字诊断
 
-### 1.1 Primitive Spacing Scale (2pt Base Grid):
-- `--primitive-space-1`: `2pt` (Bullet margins, micro tags)
-- `--primitive-space-2`: `4pt` (Tag padding, avatar margins)
-- `--primitive-space-3`: `6pt` (Title-to-line gaps)
-- `--primitive-space-4`: `8pt` (Item margins)
-- `--primitive-space-5`: `10pt` (Section header bottom margins)
-- `--primitive-space-6`: `12pt` (Section margins)
-- `--primitive-space-8`: `16pt` (Outer page padding gaps)
+`forge.py` 和 `instantiate-resume.py` 支持 `--font-preset system|arial-unicode`，默认保留系统字体。`arial-unicode` 显式使用本机 Arial Unicode MS；没有该字体时字体验收失败并返回 UNVERIFIED，不保证跨机器可用，也不自动下载字体。字体选择只改变画布样式，不改变 Master 事实，并记录在 Variant 的 source.fontPreset 和运行清单中。
 
-### 1.2 Calibratable Component Tokens:
-Agent is strictly authorized to calibrate these CSS variables in `<style>` of `workspace/resume.html`:
-
-| CSS Variable | Default Value | Overflow Remedy (-1.0 Page Fit) |
-|:---|:---|:---|
-| `--resume-space-section` | `11pt` ~ `12pt` | Reduce to `9.0pt` ~ `10pt` |
-| `--resume-space-item` | `7.5pt` ~ `8.0pt` | Reduce to `6.0pt` ~ `6.5pt` |
-| `--resume-space-bullet` | `2.5pt` ~ `3.0pt` | Reduce to `1.5pt` ~ `2.0pt` |
-| `--resume-font-size-body` | `9.2pt` | Reduce to `8.8pt` ~ `9.0pt` |
-| `--resume-line-height-body` | `1.45` | Reduce to `1.38` ~ `1.40` |
-
----
-
-## 2. Canvas Editing Rules & Invariants
-
-1. **Single-File Self-Contained Invariant**: `workspace/resume.html` contains inlined CSS and no external network font/script dependencies;
-2. **Semantic HTML Tags Contract**:
-   - Page Root: `<div class="resume-page" id="page-1">`
-   - Candidate Header: `h1.candidate-name`, `p.job-target`
-   - Sections: `section.resume-section` with `h2.section-title`
-   - Experience/Projects: `div.experience-item`, `div.project-item`
-   - Bullets: `ul.bullet-list > li` with bold key phrases `<strong>`
-3. **Fact Invariant**: Never edit historical dates, company names, or verified achievements to fit a layout; adjust spacing tokens and condense wording instead.
+中文 PDF 若文本验收失败，检查 QA 每页的 missingCodepoints、missingFragments 与 extractedRadicals。部首字符可能来自字体字码映射差异，也可能存在真实缺字；不能仅凭这种提示放行。可选用本机可用字体、创建新运行并重新检查，不改写姓名/经历来绕过问题，也不把部首字符全部忽略。

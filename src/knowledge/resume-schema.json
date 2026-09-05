@@ -1,112 +1,418 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "CandidateResumeSchema",
-  "description": "KnowMe CareerForge Candidate Master Profile & Tailored Resume Schema with L1~L3 Evidence Chains.",
+  "description": "User-provided resume facts shared by Draft, Master and Variant; omissions and null never imply candidate facts.",
   "type": "object",
-  "required": ["basics", "skills", "experience", "education"],
   "properties": {
     "basics": {
-      "type": "object",
-      "required": ["name", "title", "email", "phone"],
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
-        "name": { "type": "string", "description": "Candidate's full name" },
-        "title": { "type": "string", "description": "Professional job title or target role" },
-        "email": { "type": "string", "format": "email" },
-        "phone": { "type": "string" },
-        "location": { "type": "string" },
-        "website": { "type": "string" },
-        "github": { "type": "string" },
-        "summary": { "type": "string", "description": "Core Value Proposition (15-30 words)" }
-      }
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Candidate's full name"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Professional job title or target role"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "email"
+        },
+        "phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "website": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "github": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Core Value Proposition (15-30 words)"
+        }
+      },
+      "additionalProperties": false
     },
     "skills": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
-        "type": "object",
-        "required": ["category", "items"],
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
-          "category": { "type": "string" },
-          "items": { "type": "array", "items": { "type": "string" } },
-          "highlighted": { "type": "array", "items": { "type": "string" } }
-        }
+          "category": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "items": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "highlighted": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false
       }
     },
     "experience": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
-        "type": "object",
-        "required": ["company", "role", "startDate", "endDate", "bullets"],
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
-          "company": { "type": "string" },
-          "role": { "type": "string" },
-          "startDate": { "type": "string" },
-          "endDate": { "type": "string" },
-          "location": { "type": "string" },
-          "summary": { "type": "string" },
+          "company": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "startDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "endDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "location": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "bullets": {
-            "type": "array",
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": "object",
-              "required": ["text", "evidenceLevel"],
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
-                "text": { "type": "string" },
-                "evidenceLevel": { "type": "string", "enum": ["L1", "L2", "L3"] },
-                "evidenceSource": { "type": "string" },
-                "keywords": { "type": "array", "items": { "type": "string" } }
-              }
+                "text": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidenceLevel": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "L1",
+                    "L2",
+                    "L3",
+                    null
+                  ]
+                },
+                "evidenceSource": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "keywords": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
             }
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "projects": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
-        "type": "object",
-        "required": ["name", "role", "techStack", "bullets"],
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "role": { "type": "string" },
-          "techStack": { "type": "array", "items": { "type": "string" } },
-          "repoUrl": { "type": "string" },
-          "demoUrl": { "type": "string" },
-          "startDate": { "type": "string" },
-          "endDate": { "type": "string" },
-          "bullets": {
-            "type": "array",
+          "name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "role": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "techStack": {
+            "type": [
+              "array",
+              "null"
+            ],
             "items": {
-              "type": "object",
-              "required": ["text", "evidenceLevel"],
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "repoUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "demoUrl": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "startDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "endDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bullets": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "object",
+                "null"
+              ],
               "properties": {
-                "text": { "type": "string" },
-                "evidenceLevel": { "type": "string", "enum": ["L1", "L2", "L3"] },
-                "evidenceSource": { "type": "string" },
-                "keywords": { "type": "array", "items": { "type": "string" } }
-              }
+                "text": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "evidenceLevel": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "L1",
+                    "L2",
+                    "L3",
+                    null
+                  ]
+                },
+                "evidenceSource": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "keywords": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
             }
           }
-        }
+        },
+        "additionalProperties": false
       }
     },
     "education": {
-      "type": "array",
+      "type": [
+        "array",
+        "null"
+      ],
       "items": {
-        "type": "object",
-        "required": ["institution", "degree", "startDate", "endDate"],
+        "type": [
+          "object",
+          "null"
+        ],
         "properties": {
-          "institution": { "type": "string" },
-          "degree": { "type": "string" },
-          "field": { "type": "string" },
-          "startDate": { "type": "string" },
-          "endDate": { "type": "string" },
-          "gpa": { "type": "string" },
-          "honors": { "type": "array", "items": { "type": "string" } }
-        }
+          "institution": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "degree": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "field": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "startDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "endDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gpa": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "honors": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "additionalProperties": false
       }
     },
     "certifications": {
-      "type": "array",
-      "items": { "type": "string" }
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "language": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
-  }
+  },
+  "additionalProperties": false
 }

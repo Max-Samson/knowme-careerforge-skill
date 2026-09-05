@@ -1,0 +1,41 @@
+/* Binding components shared by the ten fact-free canvas.html layouts.
+   Loaded after the preview stylesheet; scoped so previews stay unchanged. */
+.bound-canvas {
+  font-family: var(--resume-font-body, var(--primitive-font-sans));
+  font-size: var(--resume-font-size-body, 9.2pt);
+  line-height: var(--resume-line-height-body, 1.45);
+  overflow: visible;
+  overflow-wrap: anywhere;
+}
+.bound-canvas main, .bound-canvas aside { min-width: 0; }
+.bound-canvas .resume-header { display: block; text-align: left; }
+.bound-canvas .candidate-name { display: block; font-size: var(--resume-font-size-name, 22pt); }
+.bound-canvas .job-target { display: block; margin-left: 0; }
+.bound-canvas .contact-grid { display: flex; flex-wrap: wrap; gap: 3pt 10pt; margin-top: 5pt; }
+.bound-canvas .contact-item { white-space: pre-wrap; }
+.bound-canvas .resume-section { margin-bottom: var(--resume-space-section, 12pt); }
+.bound-canvas .section-title { font-size: var(--resume-font-size-h2, 12pt); margin-bottom: 6pt; }
+.bound-canvas .item-header { display: flex; flex-wrap: wrap; gap: 3pt 8pt; align-items: baseline; }
+.bound-canvas .date-range { white-space: normal; margin-left: auto; }
+.bound-canvas .role-badge, .bound-canvas .tech-tag { white-space: normal; }
+.bound-canvas .experience-item, .bound-canvas .project-item, .bound-canvas .education-item {
+  margin-bottom: var(--resume-space-item, 8pt);
+}
+.bound-canvas .fact-text, .bound-canvas .fact-bullet, .bound-canvas .value-prop { white-space: pre-wrap; }
+.bound-canvas .skill-row { display: flex; flex-wrap: wrap; gap: 4pt; margin-bottom: 4pt; }
+.bound-canvas .skill-category { font-weight: 600; }
+.bound-canvas .canvas-columns { display: grid; grid-template-columns: 2fr 1fr; gap: 8mm; }
+.canvas-executive .canvas-columns { grid-template-columns: 1fr 2fr; padding: 10mm 16mm; }
+.canvas-executive .executive-banner .resume-header { margin: 0; border: 0; }
+.canvas-executive .canvas-columns .value-prop { color: var(--resume-color-secondary, #334155); }
+.canvas-modern .resume-sidebar .section-title { color: var(--resume-color-sidebar-accent); }
+.canvas-modern .resume-sidebar .org-name,
+.canvas-modern .resume-sidebar .role-badge,
+.canvas-modern .resume-sidebar .date-range,
+.canvas-modern .resume-sidebar .skill-items,
+.canvas-modern .resume-sidebar .bullet-list { color: inherit; }
+.canvas-classic .resume-section { margin: 0; }
+.canvas-classic tr:has(td:empty) { display: none; }
+@media print {
+  .bound-canvas { break-inside: auto; page-break-inside: auto; }
+}

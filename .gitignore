@@ -62,3 +62,6 @@ workspace/*.pdf
 workspace/test_*
 !workspace/resume.html
 !workspace/.gitkeep
+
+# Isolated candidate facts and per-run delivery artifacts
+workspace/runs/

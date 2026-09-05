@@ -4,7 +4,13 @@ KnowMe CareerForge — Template Gallery Builder
 扫描验证 src/templates/ 核心模板，生成 output/templates_gallery/ 静态可视化画廊。
 """
 
-import os, sys, json, re
+import argparse
+import importlib.util
+import json
+import os
+import sys
+import tempfile
+from html import escape
 from pathlib import Path
 
 def get_project_root() -> Path:
@@ -15,61 +21,55 @@ def get_project_root() -> Path:
         curr = curr.parent
     return Path.cwd()
 
-def build_gallery():
-    base_dir = get_project_root()
-    templates_dir = base_dir / "src" / "templates"
-    gallery_dir = base_dir / "output" / "templates_gallery"
+def load_instantiator():
+    spec = importlib.util.spec_from_file_location(
+        "gallery_instantiator", get_project_root() / "scripts/template/instantiate-resume.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def build_gallery(output_dir=None, font_preset="system"):
+    """Validate and stage every preview before publishing; publish the index last."""
+    gallery_dir = Path(output_dir) if output_dir else get_project_root() / "output/templates_gallery"
     gallery_dir.mkdir(parents=True, exist_ok=True)
-    
+    with tempfile.TemporaryDirectory(prefix=".gallery-", dir=gallery_dir) as scratch:
+        stage = Path(scratch)
+        _render_gallery(stage, font_preset)
+        for preview in sorted(stage.glob("*.html")):
+            if preview.name != "index.html":
+                os.replace(preview, gallery_dir / preview.name)
+        os.replace(stage / "index.html", gallery_dir / "index.html")
+    return gallery_dir / "index.html"
+
+
+def _render_gallery(gallery_dir, font_preset):
+    templates_dir = get_project_root() / "src/templates"
+    binder = load_instantiator()
     gallery_items = []
-
-    print("==============================================================")
-    print("  KnowMe CareerForge — Template Gallery Builder")
-    print("==============================================================")
-
     for t_dir in sorted(templates_dir.iterdir()):
         if not t_dir.is_dir() or t_dir.name == "common":
             continue
-            
-        html_file = t_dir / "template.html"
-        css_file = t_dir / "style.css"
-        meta_file = t_dir / "metadata.json"
-
-        if not html_file.exists() or not css_file.exists() or not meta_file.exists():
-            print(f"[!] Skipping incomplete template: {t_dir.name}")
-            continue
-
-        try:
-            meta = json.loads(meta_file.read_text(encoding="utf-8"))
-            html_content = html_file.read_text(encoding="utf-8")
-            css_content = css_file.read_text(encoding="utf-8")
-
-            # 编译内联单文件独立预览页面
-            inlined_preview = html_content.replace(
-                '<link rel="stylesheet" href="style.css">',
-                f'<style>\n{css_content}\n  </style>'
-            )
-
-            preview_path = gallery_dir / f"{t_dir.name}.html"
-            preview_path.write_text(inlined_preview, encoding="utf-8")
-
-            gallery_items.append({
-                "id": meta.get("id", t_dir.name),
-                "name": meta.get("name", t_dir.name),
-                "style": meta.get("style", "single-column"),
-                "category": meta.get("roleCategory", "engineering-ai"),
-                "tone": meta.get("visualStyle", {}).get("tone", "modern"),
-                "accent": meta.get("visualStyle", {}).get("accentColor", "#2563eb"),
-                "pages": meta.get("layout", {}).get("targetPages", 1),
-                "density": meta.get("layout", {}).get("density", "balanced"),
-                "atsTier": meta.get("atsScoreTier", "tier-1-optimal"),
-                "previewFile": f"{t_dir.name}.html",
-                "supported": meta.get("supportedRoles", [])
-            })
-            print(f"[✓] Generated Gallery Preview -> {preview_path.name}")
-        except Exception as e:
-            print(f"[✗] Error processing {t_dir.name}: {e}")
-
+        for name in ("canvas.html", "sample-profile.json", "style.css", "metadata.json"):
+            if not (t_dir / name).is_file():
+                raise ValueError(f"Incomplete template {t_dir.name}: missing {name}")
+        meta = json.loads((t_dir / "metadata.json").read_text(encoding="utf-8"))
+        binder.instantiate_workspace(
+            t_dir.name, profile_path=t_dir / "sample-profile.json",
+            output_path=gallery_dir / f"{t_dir.name}.html", quiet=True,
+            font_preset=font_preset)
+        gallery_items.append({
+            "name": meta.get("name", t_dir.name),
+            "style": meta.get("style", "single-column"),
+            "tone": meta.get("visualStyle", {}).get("tone", "modern"),
+            "pages": meta.get("layout", {}).get("targetPages", 1),
+            "density": meta.get("layout", {}).get("density", "balanced"),
+            "atsTier": meta.get("atsScoreTier", "unspecified"),
+            "previewFile": f"{t_dir.name}.html",
+            "supported": meta.get("supportedRoles", [])
+        })
+    if not gallery_items:
+        raise ValueError("No templates found")
     # 生成主索引 index.html
     gallery_html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -217,18 +217,20 @@ def build_gallery():
   <div class="gallery-container">
     <header>
       <h1>KnowMe CareerForge — Template Gallery</h1>
-      <p class="subtitle">A4 Deterministic HTML Resume Templates with Design Tokens Calibration</p>
+      <p class="subtitle">虚构样例 · 与实际简历共用 canvas.html 和完整样式 · ATS 标签仅代表设计目标</p>
     </header>
     <div class="grid">
 """
 
-    for item in gallery_items:
+    for raw_item in gallery_items:
+        item = {k: ([escape(str(v)) for v in value] if isinstance(value, list) else escape(str(value), quote=True))
+                for k, value in raw_item.items()}
         tags_html = "".join([f'<span class="tag">{r}</span>' for r in item['supported'][:5]])
         gallery_html += f"""
       <div class="card">
         <div class="card-header">
           <span class="card-title">{item['name']}</span>
-          <span class="badge optimal">ATS Tier 1</span>
+          <span class="badge">{item['atsTier']}</span>
         </div>
         <div class="preview-frame-wrapper">
           <iframe class="preview-frame" src="{item['previewFile']}"></iframe>
@@ -255,8 +257,16 @@ def build_gallery():
 """
     gallery_index = gallery_dir / "index.html"
     gallery_index.write_text(gallery_html, encoding="utf-8")
-    print(f"\n[✓] Generated Gallery Master Index -> {gallery_index}")
-    print("==============================================================")
+
 
 if __name__ == "__main__":
-    build_gallery()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, help="Gallery output directory")
+    parser.add_argument("--font-preset", choices=("system", "arial-unicode"), default="system")
+    args = parser.parse_args()
+    try:
+        index = build_gallery(args.output, args.font_preset)
+        print(json.dumps({"status": "PASS", "index": str(index)}, ensure_ascii=False))
+    except Exception as exc:
+        print(json.dumps({"status": "FAIL", "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+        sys.exit(1)

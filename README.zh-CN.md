@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/knowme-careerforge-skill"><img src="https://img.shields.io/npm/v/knowme-careerforge-skill?style=flat&logo=npm&logoColor=white&color=CB3837" alt="npm package"></a>
-  <img src="https://img.shields.io/badge/Node.js-%3E%3D18-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Node.js-%3E%3D22.13-339933?style=flat&logo=nodedotjs&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript">
   <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/Playwright-A4_PDF-2EAD33?style=flat&logo=playwright&logoColor=white" alt="Playwright">
@@ -111,44 +111,25 @@ knowme list
 
 ---
 
-## 4. 三大运行模式 (Operational Modes)
+## 4. 用户信息与资料生命周期
 
-```text
-┌─────────────────────────────────────────────────────────────────────────────┐
-│ 模式 A：目标岗位模式 (Target-Role Mode)                                       │
-│ 用户指定职业发展方向（如“资深 AI Agent 研发工程师”）。                       │
-│ ▶ Agent 加载岗位能力树，从经历库中提取强匹配证据，派生对应 Resume Variant。  │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 模式 B：具体 JD 定制模式 (JD-Specific Mode)                                 │
-│ 用户粘贴具体的招聘需求 (Job Description)。                                   │
-│ ▶ Agent 运行 analyze-jd.py 执行差距分析，提取加分项并高亮核心招聘信号。     │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 模式 C：代码库到经历挖掘模式 (Repo-to-Resume Mode)                           │
-│ 用户提供 GitHub 仓库链接、代码目录或工程笔记。                              │
-│ ▶ Agent 审查源码与配置文件，判定 L1~L3 证据等级，重塑为高质量 FAB 论据。    │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+当前功能依靠用户描述、已有简历和明确提供的支持材料，由宿主 Agent 组织与定制内容；不支持代码仓库分析回填。目标岗位即可开始，JD 可选。
 
----
+Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录来源 Master 的摘要并派生岗位表达。缺失值省略或 null，不补示例姓名、默认荣誉和任意指标。完整规则见 [资料与验收契约](references/07-artifact-contract.md)。
 
-## 5. 端到端执行工作流 (The 6-Stage Workflow)
+## 5. 独立运行与最终验收
 
-```text
-  Know (证据分级) ──> Define (明确目标) ──> Understand (洞察JD) ──> Position (制定策略) ──> Forge (HTML修改场) ──> Review (双重QA)
-```
+每次 forge 在 `workspace/runs/<runId>/` 保存输入快照、Master、Variant、画布、QA 和运行清单。通过验收后才写入本次 PDF；失败的清单不会返回旧文件作为交付。可以用 `--output` 和 `--html-output` 指定已验收副本位置。
 
-1. **[KnowMe] 证据挖掘**：分析候选人代码库与真实经历，严格划分为 L1 (代码配置直证)、L2 (模块依赖推断) 与 L3 (合理解读)。
-2. **[Define & Understand] 信号提取**：解析目标 JD，提取必备项、加分项与团队招聘风格。
-3. **[Position] 优势对齐**：差距分析匹配真实证据，规划模块优先级。
-4. **[CareerForge] 模板检索与组装**：通过多维打分引擎检索最佳模板，实例化生成 `workspace/resume.html`。
-5. **[Review & Dual QA] 闭环自愈**：无头浏览器检测 DOM 高度溢出与 ATS 文本流，自愈调校 CSS 间距 Tokens。
-6. **[PDF Export] 确定性渲染**：通过 Playwright 导出无损矢量 `workspace/resume.pdf`。
+打印模式会检查所有页面，再解析最终 PDF 的每页尺寸与文本。PASS 表示本次检查通过；FAIL 是检查失败；UNVERIFIED 是浏览器/依赖等导致无法验收；DRAFT 只表示草稿准备完成。自动检查不等同于事实核实或通用 ATS 认证。
+
+需要 Python 3.9+、Node.js 22.13+ 和 npm 运行依赖。运行 `npm install`；没有系统 Chromium 时使用 `npx playwright install chromium`。
 
 ---
 
 ## 6. CSS Design Tokens 调优与自愈速查表
 
-所有排版参数均集中在 `workspace/resume.html` 的 `:root` 变量中，可进行全局即时微调：
+所有排版参数均集中在当前运行目录的 `resume.html` 的 `:root` 变量中，可进行全局即时微调：
 
 | CSS Token 变量名 | 默认推荐值 | 紧凑模式 (单页微调) | 宽松模式 (双页饱满) | 调优核心作用 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -175,17 +156,17 @@ knowme list
 ## 8. CLI 命令参考
 
 ```bash
-# 1. 一键全流程装配管线（代码挖掘 -> HTML画布 -> 双重质检 -> A4 PDF）
-knowme forge --repo . --role "AI Agent Engineer" --template modern --quiet
+# 1. 一键全流程装配管线（用户资料 -> HTML画布 -> 打印与PDF验收）
+knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern --quiet
 
 # 2. 智能检索最匹配的 HTML 简历模板（混合评分引擎）
 knowme search --role "AI Agent Engineer" --engine hybrid
 
-# 3. 深度抽取代码仓事实证据与可验证经历
-knowme extract --repo . --output workspace/evidence-master.json
+# 3. 从不完整资料生成草稿，不声明 PDF 已验收
+knowme forge --profile-json draft.json --draft
 
 # 4. 运行布局结构、Design Tokens 与 ATS 双重质检
-knowme validate
+knowme validate /path/to/current-run/resume.html --json
 
 # 5. 确定性导出无损矢量 A4 PDF
 knowme render --input workspace/resume.html --output output/resume.pdf

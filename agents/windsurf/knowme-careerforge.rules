@@ -1,13 +1,3 @@
-# KnowMe CareerForge — Windsurf Rules
-# Trigger: Career discovery, resume tailoring, JD analysis, repo-to-resume
+# KnowMe CareerForge
 
-When user requests resume tailoring, project analysis, or career positioning:
-1. **Evidence Mining**: Extract candidate facts using `python3 scripts/evidence/extract-evidence.py --repo .` or execute one-shot `python3 scripts/pipeline/forge.py`.
-2. **Anti-Hallucination Gate**: Tag all experience items with Evidence Level (L1~L3 only, see `references/01-evidence-mining.md`).
-3. **JD & Signal Analysis**: Analyze target JD requirements using `python3 scripts/evidence/analyze-jd.py` (see `references/03-jd-analysis.md`).
-4. **Template Search**: Recommend best template using `python3 scripts/template/search-template.py` (see `references/04-template-selection.md`).
-5. **Canvas Instantiation**: Instantiate `workspace/resume.html` using `python3 scripts/template/instantiate-resume.py` and calibrate CSS design tokens (see `references/05-html-canvas-tokens.md`).
-6. **Dual QA Verification**: Validate DOM fit ($297\text{mm} \le 1122.5\text{px}$) and ATS compatibility using `python3 scripts/validation/validate-resume.py`.
-7. **Deterministic PDF Export**: Export final vector PDF using `python3 scripts/rendering/render-pdf.py` (see `references/06-qa-and-rendering.md`).
-8. **Quiet Delivery**: Execute silently in background (`--quiet`); deliver concise value proposition and direct output file paths (`workspace/resume.pdf`).
-9. **Authoritative Guide**: Refer to root `AGENT.md` for editorial standards and `ARCHITECTURE.md` for system architecture.
+Read the installed SKILL.md and references/07-artifact-contract.md. Use user-supplied facts, preserve Draft/Master/Variant separation and write each pipeline run into its own directory. Repository mining is not supported. Only the current PASS manifest identifies verified PDF delivery; never substitute an old workspace file after failure.

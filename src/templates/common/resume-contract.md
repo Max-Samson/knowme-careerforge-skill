@@ -67,3 +67,11 @@
   * **项目条目**：`div.project-item`
   * **技能容器**：`div.skills-container`
   * **教育条目**：`div.education-item`
+
+## 3. 运行绑定与验收
+
+运行时从 canvas.html 的命名注释槽位装配内容；canvas.html 是每套模板唯一维护的 HTML 结构。sample-profile.json 仅为虚构展示数据，画廊通过同一实例化器与完整 CSS 链生成到 output/templates_gallery，不维护第二份预览结构，也不将样例作为候选人默认值。槽位格式和全集以 scripts/template/instantiate-resume.py 的 SLOTS 为准，缺失、重复或上下文错误的槽位必须失败。共享字段类型与缺失值由 scripts/contracts/profile.py 和 src/knowledge/resume-schema.json 定义。
+
+每个显式 .resume-page 对应一个 A4 页面。--expected-pages 是一页或两页的上限；两页文档需显式分页，不能靠单个超高容器自然流入下一页。验收检查所有容器，并将各页预期正文与最终 PDF 提取文本对应。隐藏、裁剪、缺页和丢字都不能放行。空白草稿不具备 PDF 交付资格。
+
+详见 references/07-artifact-contract.md。PDF 检查通过不是所有第三方 ATS 的认证。
