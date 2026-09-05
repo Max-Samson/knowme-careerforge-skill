@@ -1,7 +1,7 @@
 name: knowme-careerforge
 displayName: KnowMe CareerForge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering.
-version: 0.0.5
+version: 0.0.6
 schema: 1.0
 entrypoint: SKILL.md
 tags:

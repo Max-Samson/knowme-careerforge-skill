@@ -4,7 +4,7 @@ description: Create or refine a tailored resume from user descriptions, existing
 license: MIT
 compatibility: Requires Python 3.9+, Node.js 22.13+, the npm dependencies declared by this project, and Chromium for print/PDF checks. Explicit local font presets require the named font.
 metadata:
-  version: 0.0.5
+  version: 0.0.6
 ---
 
 # KnowMe CareerForge
