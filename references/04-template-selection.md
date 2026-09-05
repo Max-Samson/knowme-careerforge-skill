@@ -1,43 +1,30 @@
-# Reference Manual 04: Template Selection & Layout Geometries
+# Template selection and readable composition
 
-> **"Layout geometry determines information hierarchy. Select the composition that earns the candidate's strongest evidence."**
+Select for the candidate's actual amount of content, strongest evidence and explicit preference. A backend title alone does not determine the layout. The ten current IDs below are directory IDs accepted by the pipeline; metadata describes design intent, not visual or ATS certification.
 
----
+| ID | Structure | Review before choosing |
+| --- | --- | --- |
+| minimal | Single column | Straight reading order; sparse content needs breathing room rather than compression |
+| international-flow | Single column | Consider for linear prose; inspect language and line lengths |
+| modern | Sidebar, 32:68 | Keep side content short; check narrow-column wrapping |
+| creative-tech | Sidebar, 28:72 | Use only when the visual emphasis suits the user |
+| data-analyst | Sidebar, 30:70 | Do not invent metrics to match the template name |
+| executive | Banner and split columns | Needs suitable supplied leadership evidence; a title does not confer it |
+| classic | Structured table | Check sparse fields and reading order |
+| compact-dense | Dense two columns | For substantial supplied content; avoid for a short career description |
+| academic-research | Dense single column | Research content must actually be supplied |
+| startup-generalist | Modular cards | Check block balance with the actual sections |
 
-## 1. Core Template Matrix (Baseline 4)
-
-| Template ID | Layout Geometry | Tone & Accent | Target Roles | Density | ATS Tier |
-|:---|:---|:---|:---|:---|:---|
-| `minimal` (`minimal-tech`) | Single-Column Linear Flow | Geek Minimal (Tech Blue `#2563eb`) | Backend, AI/LLM, Systems, DevOps, Fullstack | High | Tier 1 (Optimal) |
-| `modern` (`modern-split-sidebar`) | Two-Column Split (32:68 Dark Sidebar) | Deep Navy (`#254665`) + Sky Blue (`#38bdf8`) | AI Agent, Frontend, Fullstack, Mobile | Balanced | Tier 1 (Optimal) |
-| `executive` (`executive-split`) | Hero Banner + Two-Column (33:67 Split) | Executive Slate (`#1e293b`) + Teal (`#0f766e`) | Tech Director, Architect, PM, CTO | Balanced | Tier 1 (Optimal) |
-| `classic` (`table-structured`) | 6-Column Structured Grid Table | Corporate Blue (`#1d4ed8`) + Slate | Enterprise, Fintech, Hardware, State-Owned | High | Tier 1 (Optimal) |
-
----
-
-## 2. Template Search Engine (`scripts/template/search-template.py`)
-
-Search for the optimal template via CLI:
-```bash
-# Hybrid Search (Default Recommended)
-python3 scripts/template/search-template.py "AI Agent Engineer" --style "two-column-split" --target-pages 1
-
-# BM25 Keyword Search
-python3 scripts/template/search-template.py "Distributed Architect" --engine bm25 --json
-
-# Weighted Multi-Criteria Rule Search
-python3 scripts/template/search-template.py "Frontend Engineer" --engine weighted
-```
-
-### Search Scoring Formulation (Weighted Scorer):
-$$\text{Score} = (\text{RoleMatch} \times 0.35) + (\text{StyleMatch} \times 0.25) + (\text{ATSTier} \times 0.20) + (\text{PageFit} \times 0.10) + (\text{Density} \times 0.10)$$
-
----
-
-## 3. Instantiating the Intermediate HTML Canvas
+Use the existing search when no template was selected:
 
 ```bash
-python3 scripts/template/instantiate-resume.py --template modern --profile workspace/evidence-master.json --keywords "Python,LLM,RAG,FastAPI" --output workspace/resume.html
+python3 <skill-root>/scripts/template/search-template.py "<target role>" --target-pages 1 --summary
 ```
 
-*The instantiator automatically inlines `src/templates/common/base.css` + `src/templates/{template}/style.css` into a single self-contained HTML file.*
+The summary returns the top three candidates with IDs and layout metadata; the existing `--json` option returns all metadata only when needed. For a simple, sparse resume, prefer a readable single-column structure from the table over a dense sidebar just because it has a higher role score. Do not load every template source or build a gallery for a single resume.
+
+The pipeline also ranks automatically if `--template` is omitted. Ranking does not inspect the final PDF's aesthetics. Inspect the selected output and report `templateUsed`; do not claim that all ten designs were visually compared if only one was rendered.
+
+For experienced candidates, work evidence should be easy to find. Keep skill lists compact; avoid paragraphs claiming proficiency in every role keyword. A summary and a project section are optional, and should not repeat the same achievement. For sparse profiles, preserve honest whitespace, use a simple layout and ask for useful details only when needed. Do not fill a page with generic qualities or fabricated projects. For dense profiles, edit repetition before reducing type size or spacing.
+
+Each template maintains `canvas.html`, `style.css`, `metadata.json`, `README.md` and a fictional `sample-profile.json`. Gallery previews use the same instantiator, combining common/base.css, template style.css and common/canvas-bindings.css. Read source only for a needed layout edit; never load gallery sample content to assemble candidate facts. Token tuning is described in 05-html-canvas-tokens.md. Multiple PDF pages require explicit page containers, regardless of metadata's maximum page count.

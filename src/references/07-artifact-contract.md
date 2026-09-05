@@ -62,3 +62,22 @@
 当前分页契约要求每个 `.resume-page` 对应一个 A4 页面，`--expected-pages` 为 1 或 2 的上限。一页文档可用上限 2；两页文档需由 Agent 显式建立两个页面容器。单个超高容器自然流入多页会被拒绝，不猜测浏览器分页后每页应有的内容。
 
 输入文档的来源说明保存在 Master 的 source.suppliedSource 中，包括 synthetic-simulation 等原始标签。它是来源元数据，不是新增候选人事实。字体预设单独记录为 Variant.source.fontPreset；不得把字体修订误记为事实变更。
+
+## 简短输入与交付入口
+
+Agent 可直接整理裸 profile；只填写用户提供的值，删除未知字段及不需要的章节。以下尖括号仅说明字段含义，不能作为候选人数据执行：
+
+```json
+{
+  "basics": {"name": "<用户姓名>", "title": "<目标岗位>"},
+  "skills": [{"category": "<分组>", "items": ["<用户提供的技能>"]}],
+  "experience": [{"company": "<公司>", "role": "<实际职务>",
+    "startDate": "<开始时间>", "endDate": "<结束时间>",
+    "bullets": [{"text": "<用户提供的职责或成果>"}]}],
+  "education": [{"degree": "<学历>", "field": "<专业>"}]
+}
+```
+
+姓名和至少一个实质章节是当前 PDF 输入门槛；联系方式、学校、专业和日期允许未知。`missingFields` 仅列出 basics.name/title/email/phone 的缺失，空列表不表示所有字段完整，更不证明事实真实。
+
+`forge.py --summary` 仅精简终端报告，包含当前状态、模板、错误、仅 html/pdf 的 outputs 和 manifest 路径；默认及 `--quiet` 仍保留完整 JSON。完整 manifest 与 QA 始终落盘。正常交付用 `--output resume/resume.pdf --html-output resume/resume.html` 创建验收副本；内部运行历史不作为用户默认交付清单。失败时副本可能仍为旧版本，不能据此报告本次成功。Draft 不使用这些验收副本选项。

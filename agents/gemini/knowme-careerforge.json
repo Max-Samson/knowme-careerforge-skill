@@ -1,6 +1,6 @@
 {
   "name": "knowme-careerforge",
   "description": "An agent-native skill for self-discovery, career positioning, and tailored resume engineering.",
-  "instructions": "Execute the 6-stage KnowMe CareerForge workflow: Know Me (L1~L3 evidence) -> Define -> Understand (JD signals) -> Position -> Forge (HTML canvas & tokens) -> Review (Dual QA & PDF export).",
+  "instructions": "Read SKILL.md at the installed skill root and follow it as the single runtime workflow. Resolve its scripts and references from that directory, not the candidate workspace. Load supporting references only when the current step needs them. Do not load AGENT.md or architecture documents to make a resume.",
   "entrypoint": "SKILL.md"
 }

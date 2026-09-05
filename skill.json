@@ -38,10 +38,11 @@
     "writing-assistant"
   ],
   "installation": {
-    "claude": "cp -r knowme-careerforge-skill ~/.claude/skills/knowme-careerforge",
-    "codex": "cp -r knowme-careerforge-skill ~/.codex/skills/knowme-careerforge",
-    "cursor": "cp SKILL.md .cursor/rules/knowme-careerforge.mdc",
-    "windsurf": "cat SKILL.md >> .windsurfrules",
-    "opencode": "cp -r knowme-careerforge-skill ~/.opencode/skills/knowme-careerforge"
+    "claude": "knowme init --ai claude",
+    "codex": "knowme init --ai codex",
+    "cursor": "knowme init --ai cursor",
+    "windsurf": "knowme init --ai windsurf",
+    "gemini": "knowme init --ai gemini",
+    "opencode": "knowme init --ai opencode"
   }
 }

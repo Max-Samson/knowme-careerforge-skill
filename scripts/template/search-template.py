@@ -382,6 +382,7 @@ def main():
     parser.add_argument("--engine", "-e", default="hybrid", choices=["hybrid", "weighted", "bm25"], help="Scoring engine")
     parser.add_argument("--json", action="store_true", help="Output raw JSON array")
     
+    parser.add_argument("--summary", action="store_true", help="Compact JSON with the top three ranked layouts; no full metadata")
     args = parser.parse_args()
     target_role = args.named_role or args.role
     if not target_role:
@@ -396,6 +397,14 @@ def main():
         engine=args.engine
     )
     
+    if args.summary:
+        print(json.dumps({"totalMatches": len(results), "candidates": [
+            {"id": item["id"], "name": item.get("name"), "score": item["matchScore"],
+             "layout": item.get("layout", {})}
+            for item in results[:3]
+        ]}, ensure_ascii=False, indent=2))
+        return
+
     if args.json:
         print(json.dumps(results, ensure_ascii=False, indent=2))
         return

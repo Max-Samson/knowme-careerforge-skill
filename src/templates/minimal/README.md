@@ -4,7 +4,7 @@
 
 - **版式风格**：单栏线性流 (Single-Column Linear Flow)
 - **视觉色系**：极客蓝 (`#2563eb`) + 板岩灰阶 (`#0f172a`, `#334155`)
-- **ATS 评级**：Tier 1 (Optimal - 100% 完美解析)
+- **ATS 评级**：Tier 1（设计意图，不代表第三方 ATS 认证）
 - **目标页数**：严格 1 页 (支持微调扩展至 2 页)
 - **核心 Tokens**：
   - `--resume-space-section`: `11pt` (默认)
@@ -19,3 +19,5 @@
 - `metadata.json`：模板选择与布局元数据。
 
 在项目根目录运行 `python3 scripts/build/build-gallery.py` 生成画廊。预览与实际简历共用实例化器及完整 CSS 链；生成的 HTML 位于 `output/templates_gallery/`，不回写到模板源目录。
+
+学历、专业和机构由公共绑定样式相邻排列，只有实际日期向右对齐；学校或日期未知时不以占位文字补齐。资料较少时应保留合理留白，不为填满高密度版式添加经历。

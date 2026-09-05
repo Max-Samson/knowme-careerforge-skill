@@ -21,24 +21,12 @@ python3 scripts/evidence/analyze-jd.py --jd "path/to/jd.md" --json
 
 ## 2. Keyword Density & Highlighting Rules
 
-In `workspace/resume.html`, inject JD keywords to pass ATS automated screening while remaining natural for human reviewers:
+Use JD terms only where the candidate has supplied matching experience. Keywords select or emphasize existing facts; they do not add skills to a Master or Variant. A technology named only by the vacancy remains a gap to discuss.
 
-- **Primary Stack (Top 3~5 Keywords)**: Wrap with `<strong>` tags inside bullet points where evidence exists;
-- **Technology Badges**: Place in `.tech-tags` or `.tech-badge` spans;
-- **Density Control**: Maintain keyword density around 2.5%~4.0% of total words to prevent ATS keyword stuffing penalties.
+Prefer a few relevant, readable terms over repetition. There is no project-validated universal ATS keyword-density threshold. Do not claim automated screening success from keyword counts.
 
----
+## 3. Writing useful bullets
 
-## 3. FAB (Feature-Advantage-Benefit) Bullet Engineering
+Describe the supplied action and its context. Add the method and outcome only when the user provided them. FAB is an optional editing aid, not a requirement that every duty acquire an invented business impact.
 
-Structure every project bullet point using the FAB formula:
-
-```
-┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-│  Feature (技术动作)│ ────> │ Advantage (技术优势)│ ────> │  Benefit (业务价值) │
-│ Exact tech & tool │       │ Architectural gain│     │ Quantified impact│
-└─────────────────┘       └─────────────────┘       └─────────────────┘
-```
-
-*Before (Weak)*: Worked on database and improved query performance.  
-*After (FAB Standard)*: Refactored PostgreSQL indexing and introduced Redis multi-tier caching (**Feature**), cutting P99 query latency from 850ms to 45ms (**Advantage**), supporting 10x traffic spike during peak sales (**Benefit**).
+For example, if the only fact is “optimized order queries”, a faithful rewrite is “Optimized order queries for the ecommerce service” only if that service context was supplied. Do not infer indexing, Redis caching, P99 latency or traffic multiples. Preserve “participated” versus “led”, and ask for consequential missing mechanisms instead of writing them as facts.

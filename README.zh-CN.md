@@ -46,7 +46,7 @@ knowme-careerforge-skill
 真实经历与证据   工程化定制交付
 ```
 
-- **KnowMe（自我认知与证据挖掘引擎）**：帮助候选人深入认知自我，系统梳理真实经历与可验证的代码/项目证据（L1~L3 分级），提炼真正具备竞争壁垒的优势点。
+- **KnowMe（自我认知与证据挖掘引擎）**：帮助候选人深入认知自我，系统梳理用户提供的真实经历与辅助材料，提炼真正具备竞争壁垒的优势点。
 - **CareerForge（职业定位与简历工程引擎）**：将候选人的真实优势精准对齐目标岗位（JD），以 **HTML 中间工作区（Intermediate Canvas）** 与 **Design Tokens（设计系统变量）** 为工作场进行微调排版，最终通过 Playwright 无头浏览器导出确定性、像素级的矢量 PDF。
 
 ---
@@ -99,21 +99,24 @@ knowme list
 
 ---
 
-### 方式 B：Agent 平台原生手动配置
+### 平台入口与运行资源
 
-| 平台 | 目标注入路径 | 配置方法 |
-| :--- | :--- | :--- |
-| **Cursor** | `.cursor/rules/knowme-careerforge.mdc` | `cp SKILL.md .cursor/rules/knowme-careerforge.mdc` |
-| **Claude Code** | `~/.claude/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.claude/skills/` |
-| **Codex** | `~/.codex/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.codex/skills/` |
-| **Windsurf** | `.windsurfrules` | `cat agents/windsurf/knowme-careerforge.rules >> .windsurfrules` |
-| **OpenCode** | `.opencode/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.opencode/skills/` |
+| 平台 | 入口位置 | 配置命令 |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills/knowme-careerforge/SKILL.md` | `knowme init --ai claude` |
+| Codex | `~/.codex/skills/knowme-careerforge/SKILL.md` | `knowme init --ai codex` |
+| Cursor | `.cursor/rules/knowme-careerforge.mdc` | `knowme init --ai cursor` |
+| Windsurf | `.windsurfrules` 的托管块 | `knowme init --ai windsurf` |
+| Gemini | `~/.gemini/skills/knowme-careerforge.json` | `knowme init --ai gemini` |
+| OpenCode | `.opencode/skills/knowme-careerforge/SKILL.md` | `knowme init --ai opencode` |
+
+Cursor/Windsurf 的运行资源位于项目 `.knowme/skills/knowme-careerforge/`，配置中写入准确入口；Gemini 配置指向同级运行目录。所有入口引用同一个 SKILL.md 工作流。安装完成表示文件已准备，宿主发现与实际行为需分别验证；不应只复制提示文件就认为工具可运行。移动安装目录后重新运行 init 更新路径。
 
 ---
 
 ## 4. 用户信息与资料生命周期
 
-当前功能依靠用户描述、已有简历和明确提供的支持材料，由宿主 Agent 组织与定制内容；不支持代码仓库分析回填。目标岗位即可开始，JD 可选。
+当前功能依靠用户描述、已有简历和明确提供的支持材料，由宿主 Agent 组织与定制内容；不支持代码仓库分析回填。目标岗位即可开始收集资料，JD 可选；没有候选人材料时先提问并等待，不生成演示履历。
 
 Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录来源 Master 的摘要并派生岗位表达。缺失值省略或 null，不补示例姓名、默认荣誉和任意指标。完整规则见 [资料与验收契约](references/07-artifact-contract.md)。
 
@@ -123,7 +126,7 @@ Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录�
 
 打印模式会检查所有页面，再解析最终 PDF 的每页尺寸与文本。PASS 表示本次检查通过；FAIL 是检查失败；UNVERIFIED 是浏览器/依赖等导致无法验收；DRAFT 只表示草稿准备完成。自动检查不等同于事实核实或通用 ATS 认证。
 
-需要 Python 3.9+、Node.js 22.13+ 和 npm 运行依赖。运行 `npm install`；没有系统 Chromium 时使用 `npx playwright install chromium`。
+在安装目录按 init 提示准备依赖（有锁文件时 `npm ci --omit=dev`，否则 `npm install --omit=dev`），再运行 `node scripts/rendering/browser-engine.js --check-runtime`。需要 Python 3.9+、Node.js 22.13+ 与可用 Chromium。运行预检 READY 不表示简历已验收。默认只交付一个版本的 PDF 和可编辑 HTML；`forge.py --summary` 精简终端输出，内部快照与诊断仍保留。
 
 ---
 

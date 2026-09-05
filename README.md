@@ -46,7 +46,7 @@ Self Discovery  Tailored Career Story
 & Evidence      & Engineering Delivery
 ```
 
-- **KnowMe (Self-Discovery & Evidence Engine)**: Helps candidates discover who they are, uncover their verifiable career evidence (L1~L3), and map their true competitive strengths.
+- **KnowMe (Self-Discovery & Evidence Engine)**: Helps candidates discover who they are, organize their supplied career experience and supporting material, and map their true competitive strengths.
 - **CareerForge (Career Positioning & Resume Engineering)**: Translates genuine strengths into targeted positioning for specific job opportunities, tailoring high-impact content inside an **HTML Intermediate Working Canvas** with **Design Tokens**, and delivering deterministic, pixel-perfect PDFs via Playwright.
 
 ---
@@ -97,21 +97,24 @@ knowme list
 
 ---
 
-### Option B: Direct Agent Integration
+### Platform entrypoints and runtime resources
 
-| Platform | Target Configuration Path | Setup Command |
-| :--- | :--- | :--- |
-| **Cursor** | `.cursor/rules/knowme-careerforge.mdc` | `cp SKILL.md .cursor/rules/knowme-careerforge.mdc` |
-| **Claude Code** | `~/.claude/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.claude/skills/` |
-| **Codex** | `~/.codex/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.codex/skills/` |
-| **Windsurf** | `.windsurfrules` | `cat agents/windsurf/knowme-careerforge.rules >> .windsurfrules` |
-| **OpenCode** | `.opencode/skills/knowme-careerforge/` | `cp -r knowme-careerforge-skill ~/.opencode/skills/` |
+| Platform | Entry location | Configuration command |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills/knowme-careerforge/SKILL.md` | `knowme init --ai claude` |
+| Codex | `~/.codex/skills/knowme-careerforge/SKILL.md` | `knowme init --ai codex` |
+| Cursor | `.cursor/rules/knowme-careerforge.mdc` | `knowme init --ai cursor` |
+| Windsurf | Managed block in `.windsurfrules` | `knowme init --ai windsurf` |
+| Gemini | `~/.gemini/skills/knowme-careerforge.json` | `knowme init --ai gemini` |
+| OpenCode | `.opencode/skills/knowme-careerforge/SKILL.md` | `knowme init --ai opencode` |
+
+Cursor/Windsurf reference a project-local `.knowme/skills/knowme-careerforge/` runtime; Gemini configuration points to its sibling runtime directory. Each routes to the same SKILL.md workflow. File installation does not certify host discovery or behavior. Copying a prompt alone is insufficient. Rerun init after relocating an installation to refresh entry paths.
 
 ---
 
 ## 4. User input and artifact lifecycle
 
-The host Agent organizes user descriptions, existing resume material and explicitly supplied supporting evidence. Repository-to-resume extraction is not supported. A target role is sufficient; a JD is optional.
+The host Agent organizes user descriptions, existing resume material and explicitly supplied supporting evidence. Repository-to-resume extraction is not supported. A target role starts intake; a JD is optional. Without candidate material, ask and wait rather than generating an example.
 
 Draft retains incomplete information, Master preserves supplied facts, and Variant records its source Master hash for a target role. Missing values stay omitted/null; sample people, default honors and invented metrics never fill gaps. See the [artifact and acceptance contract](references/07-artifact-contract.md).
 
@@ -121,7 +124,7 @@ Each forge invocation writes snapshots, Master, Variant, canvas, QA and manifest
 
 Checks run in print mode across every page, then parse the final PDF's page dimensions and extracted text. PASS means current checks passed; FAIL means a check failed; UNVERIFIED means inspection could not complete; DRAFT means draft preparation only. Automated checks do not certify factual truth or every ATS.
 
-Requires Python 3.9+, Node.js 22.13+, npm runtime dependencies and Chromium. Run `npm install`; use `npx playwright install chromium` if no system Chromium is available.
+Prepare dependencies in the installed runtime as instructed by init (`npm ci --omit=dev` with a lockfile, otherwise `npm install --omit=dev`), then run `node scripts/rendering/browser-engine.js --check-runtime`. Python 3.9+, Node.js 22.13+ and Chromium are required. READY is runtime readiness, not resume acceptance. Deliver one current PDF and editable HTML by default; `forge.py --summary` keeps stdout concise while retaining internal snapshots and diagnostics.
 
 ---
 

@@ -111,6 +111,7 @@ def main():
     parser.add_argument('--expected-pages', type=int, choices=(1, 2), default=1)
     parser.add_argument('--auto-heal', action='store_true')
     parser.add_argument('--quiet', '-q', action='store_true')
+    parser.add_argument('--summary', action='store_true', help='Compact report with manifest path; full diagnostics stay on disk')
     args = parser.parse_args()
     report = {'schemaVersion': '1.0', 'runId': uuid.uuid4().hex, 'status': 'RUNNING',
               'stage': 'input', 'errors': [], 'warnings': [], 'checks': {}, 'outputs': {}}
@@ -264,7 +265,16 @@ def main():
                 report.update(status='FAIL', outputs={})
                 report['errors'].append('Could not persist manifest: ' + str(error))
                 exit_code = 1
-        print(json.dumps(report, ensure_ascii=False, indent=None if args.quiet else 2))
+        emitted = report
+        if args.summary:
+            emitted = {key: report[key] for key in ('runId', 'status', 'stage', 'templateUsed', 'fontPreset', 'errors', 'warnings', 'outputs') if key in report}
+            emitted['outputs'] = {}
+            if report['status'] in ('PASS', 'DRAFT'):
+                emitted['outputs']['html'] = str(Path(args.html_output).resolve()) if report['status'] == 'PASS' and args.html_output else report['outputs']['htmlCanvas']
+            if report['status'] == 'PASS':
+                emitted['outputs']['pdf'] = str(Path(args.output).resolve()) if args.output else report['outputs']['pdfDelivery']
+            emitted['manifest'] = str(run / 'manifest.json') if run else None
+        print(json.dumps(emitted, ensure_ascii=False, indent=None if args.quiet else 2))
     return exit_code
 
 

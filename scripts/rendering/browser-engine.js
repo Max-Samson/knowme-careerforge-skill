@@ -148,6 +148,37 @@ async function dependencies() {
   return { pw, PDFDocument, pdfjs };
 }
 
+// Readiness does not generate candidate artifacts or certify a resume.
+async function checkRuntime() {
+  const result = { status: 'UNVERIFIED', stage: 'runtime', errors: [], checks: {} };
+  const version = process.versions.node.split('.').map(Number);
+  if (version[0] < 22 || (version[0] === 22 && version[1] < 13)) {
+    result.errors.push('Node.js 22.13+ is required');
+  }
+  for (const [name, candidates] of [
+    ['playwright', ['playwright', 'playwright-core']],
+    ['pdf-lib', ['pdf-lib']],
+    ['pdfjs-dist', ['pdfjs-dist/legacy/build/pdf.mjs']]
+  ]) {
+    const available = candidates.some(candidate => {
+      try { require.resolve(candidate); return true; } catch { return false; }
+    });
+    result.checks[name] = available ? 'AVAILABLE' : 'MISSING';
+    if (!available) result.errors.push(`Missing dependency: ${name}`);
+  }
+  if (!result.errors.length) {
+    let browser;
+    try {
+      const deps = await dependencies();
+      browser = await launchBrowser(deps.pw);
+      result.checks.browser = browser.version();
+      result.status = 'READY';
+    } catch (error) { result.errors.push(error.message); }
+    finally { if (browser) await browser.close(); }
+  }
+  return result;
+}
+
 async function systemBrowsers() {
   const home = require('node:os').homedir();
   const candidates = [
@@ -335,6 +366,17 @@ async function run(html, { expectedPages = 1, autoHeal = false, outputPdf } = {}
 }
 
 async function cli(args = process.argv.slice(2), defaults = {}) {
+  if (args.length === 1 && ['--help', '-h'].includes(args[0])) {
+    process.stdout.write('Usage: browser-engine.js <resume.html> [--output <resume.pdf>] [--expected-pages 1|2] [--auto-heal]\n       browser-engine.js --check-runtime\n');
+    process.exitCode = 0;
+    return;
+  }
+  if (args.length === 1 && args[0] === '--check-runtime') {
+    const result = await checkRuntime();
+    process.stdout.write(JSON.stringify(result) + '\n');
+    process.exitCode = result.status === 'READY' ? 0 : 2;
+    return result;
+  }
   let html = 'workspace/resume.html';
   const options = { ...defaults };
   const positional = [];

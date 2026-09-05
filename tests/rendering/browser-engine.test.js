@@ -292,3 +292,30 @@ test('an unavailable explicit local font cannot silently fall back and pass', as
   assert.equal(r.status, 'UNVERIFIED');
   assert.equal(r.checks.fonts.status, 'UNVERIFIED');
 });
+
+test('partial education stays grouped while actual dates align right', async t => {
+  const f = await fixture(t);
+  const profile = path.join(f.dir, 'profile.json');
+  await fs.writeFile(profile, JSON.stringify({language: 'en-US', basics: {name: 'Synthetic Candidate'}, education: [
+    {degree: 'Bachelor', field: 'Computer Science'},
+    {institution: 'Synthetic University', degree: 'Master', endDate: '2024'}
+  ]}));
+  const bound = spawnSync('python3', [path.resolve(__dirname, '../../scripts/template/instantiate-resume.py'),
+    '--template', 'minimal', '--profile', profile, '--output', f.html], {encoding: 'utf8'});
+  assert.equal(bound.status, 0, bound.stderr);
+  const browser = await playwright.chromium.launch({headless: true});
+  t.after(() => browser.close());
+  const tab = await browser.newPage();
+  await tab.emulateMedia({media: 'print'});
+  await tab.goto(require('node:url').pathToFileURL(f.html).href);
+  await tab.evaluate(() => document.fonts.ready);
+  const measured = await tab.evaluate(() => {
+    const rows = [...document.querySelectorAll('.education-item .item-header')];
+    const [degree, field] = [...rows[0].children].map(el => el.getBoundingClientRect());
+    const date = rows[1].querySelector('.date-range').getBoundingClientRect();
+    return {gap: field.left - degree.right, rowRight: rows[1].getBoundingClientRect().right, dateRight: date.right};
+  });
+  assert.ok(measured.gap >= 0 && measured.gap < 20, JSON.stringify(measured));
+  assert.ok(Math.abs(measured.rowRight - measured.dateRight) < 2, JSON.stringify(measured));
+  pass(await run(f.html, {outputPdf: f.pdf}));
+});

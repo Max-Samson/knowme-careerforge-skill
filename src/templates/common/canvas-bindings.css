@@ -1,5 +1,5 @@
 /* Binding components shared by the ten fact-free canvas.html layouts.
-   Loaded after the preview stylesheet; scoped so previews stay unchanged. */
+   Loaded after each template stylesheet for both gallery and candidate output. */
 .bound-canvas {
   font-family: var(--resume-font-body, var(--primitive-font-sans));
   font-size: var(--resume-font-size-body, 9.2pt);
@@ -15,7 +15,7 @@
 .bound-canvas .contact-item { white-space: pre-wrap; }
 .bound-canvas .resume-section { margin-bottom: var(--resume-space-section, 12pt); }
 .bound-canvas .section-title { font-size: var(--resume-font-size-h2, 12pt); margin-bottom: 6pt; }
-.bound-canvas .item-header { display: flex; flex-wrap: wrap; gap: 3pt 8pt; align-items: baseline; }
+.bound-canvas .item-header { display: flex; flex-wrap: wrap; gap: 3pt 8pt; align-items: baseline; justify-content: flex-start; }
 .bound-canvas .date-range { white-space: normal; margin-left: auto; }
 .bound-canvas .role-badge, .bound-canvas .tech-tag { white-space: normal; }
 .bound-canvas .experience-item, .bound-canvas .project-item, .bound-canvas .education-item {

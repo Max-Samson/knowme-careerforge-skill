@@ -6,7 +6,7 @@
 
 ## 1. Professional Seniority Signals
 
-Identify candidate level and calibrate narrative depth accordingly:
+Use these archetypes to guide questions, not to infer facts. Years alone do not establish seniority, ownership or proficiency. Preserve the user’s stated role and responsibility; omit unsupported claims from the following illustrative patterns.
 
 | Seniority Tier | Core Value Proposition | Key Narrative Signals | Section Priority |
 |:---|:---|:---|:---|
@@ -18,6 +18,8 @@ Identify candidate level and calibrate narrative depth accordingly:
 ---
 
 ## 2. Role Archetypes Knowledge Base (`src/knowledge/roles/*.json`)
+
+Read a role profile only for a specific positioning question after candidate facts are available. `mustHaveSkills`, `niceToHaveSkills` and `evidenceSignals` describe hiring expectations and question topics; they are never defaults for personal skills, mechanisms or accomplishments. A generic role name may cover several seniority levels.
 
 The skill ships with 9+ structured role profiles:
 - `ai-agent-engineer.json`: LLM Orchestration, RAG, Tool Calling, VectorDB, Prompt Engineering
@@ -31,7 +33,7 @@ The skill ships with 9+ structured role profiles:
 
 ## 3. Core Value Proposition Formulation
 
-Synthesize the 15~25 word Value Proposition headline following this formula:
+If useful, write a short headline from supplied facts. The following formula is optional: omit years, strengths or impact when unknown. The example is fictional and must never fill a candidate record.
 $$\text{Value Proposition} = [\text{Target Role}] + [\text{Years/Domain Focus}] + [\text{Top 2 Signature Strengths}] + [\text{Concrete Impact Deliverable}]$$
 
 *Example*:

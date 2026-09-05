@@ -1,3 +1,3 @@
 # KnowMe CareerForge
 
-Read the installed SKILL.md and references/07-artifact-contract.md. Use user-supplied facts, preserve Draft/Master/Variant separation and write each pipeline run into its own directory. Repository mining is not supported. Only the current PASS manifest identifies verified PDF delivery; never substitute an old workspace file after failure.
+Read SKILL.md at the installed skill root and follow it as the single runtime workflow. Resolve its scripts and references from that directory, not the candidate workspace. Load supporting references only when the current step needs them. Do not load AGENT.md or architecture documents to make a resume.
