@@ -33,7 +33,7 @@
     "build:knowledge": "python3 scripts/build/build-knowledge.py",
     "build:gallery": "python3 scripts/build/build-gallery.py",
     "release": "python3 scripts/build/release.py",
-    "version:sync": "python3 scripts/build/sync-version.py",
+    "ersion:sync": "python3 scripts/build/sync-version.py",
     "prepublishOnly": "npm test",
     "pretest": "npm run build"
   },

@@ -1,6 +1,6 @@
 name: knowme-careerforge
 description: An agent-native skill for self-discovery, career positioning, and tailored resume engineering.
-version: 0.0.6
+version: 0.0.7
 entrypoint: SKILL.md
 rules:
   - "Read SKILL.md at the installed skill root and follow it as the single runtime workflow. Resolve its scripts and references from that directory, not the candidate workspace. Load supporting references only when the current step needs them. Do not load AGENT.md or architecture documents to make a resume."

@@ -6,6 +6,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.0.7] - 2026-09-06
+
+This patch clarifies the resume workflow across Agent adapters, tightens guidance for faithful rewriting, and simplifies setup and delivery based on real Claude and Gemini usage.
+
+### Added
+
+- `browser-engine.js --check-runtime` to report missing runtime dependencies together and check browser startup without generating candidate artifacts; `READY` indicates runtime availability, not resume acceptance. Added command-line help.
+- `forge.py --summary` for a compact result containing the current HTML/PDF delivery paths and manifest location, while retaining full on-disk diagnostics.
+- `search-template.py --summary` for the top three ranked layouts without duplicated metadata. Existing full JSON output and ranking remain unchanged.
+- Regression coverage for isolated installation, adapter entry paths, repeated setup, runtime diagnostics, compact reports and education alignment.
+
+### Changed
+
+- Platform adapters now route to one `SKILL.md` workflow. Intake precedes resource exploration; drafting and rendering wait for candidate material, and optional omissions no longer mandate a Draft detour.
+- Rewriting guidance now compares claims with original user material, covering technologies, ownership, scope, implementation mechanisms, outcomes and certainty. Role knowledge and examples are not candidate facts; accepting a draft does not substantiate Agent-added claims.
+- Default delivery presents one current resume as PDF and editable HTML, with the actual template and necessary remaining gaps. Internal snapshots and QA stay separate; focused updates preserve unrelated content, template choice and delivery filenames.
+- Template guidance covers all ten layouts and prioritizes actual content and readability. Removed mandatory FAB-style outcomes and unsupported ATS keyword-density targets; clarified the separate meanings of factual review, technical PDF acceptance and visual inspection.
+
+### Fixed
+
+- Installed bundles missing runtime package metadata. Installers now include `package.json` and copy `package-lock.json` when available, with explicit dependency-preparation instructions.
+- Cursor/Windsurf configurations lacking a bundled runtime and concrete entry path; Gemini configuration now points to its installed runtime entry.
+- Installation failures being followed by an unconditional success message, and repeated Windsurf setup appending duplicate managed rules.
+- Degree and major being spread across opposite ends of an education row when school or dates are absent. Actual dates remain right-aligned.
+
+### Upgrade notes
+
+- Re-run `knowme init --ai <platform>` with the updated package to refresh installed instructions and resources. Prepare dependencies in the installed runtime using `npm ci --omit=dev` when a lockfile is present, otherwise `npm install --omit=dev`, then run the runtime check.
+- Default and `--quiet` report formats remain compatible; compact output is opt-in through `--summary`. Historical runs and verified-copy failure protections are preserved.
+- Automated checks validate tool behavior and PDF output, not candidate authenticity or every host's compliance with instructions. Real-host behavior should be verified after upgrading.
+
+---
+
 ## [0.0.6] - 2026-09-05
 
 This release expands the template collection and improves the reliability of resume generation, from preserving supplied facts to validating the final PDF.
