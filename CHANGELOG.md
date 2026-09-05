@@ -6,18 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
-## [0.0.6-planned] - Planned Roadmap
+## [0.0.6] - 2026-09-05
 
-### 🚀 Template Matrix Expansion (Direction 2)
-- Expand 6 core new templates (`academic-research`, `international-flow`, `creative-tech`, `compact-dense`, `startup-generalist`, `data-analyst`) to reach a full 10-template baseline matrix;
-- Introduce 6 official theme palette presets (Tech Blue, Deep Navy, Teal Modern, Emerald Fresh, Violet Creative, Slate Minimal) in `base.css` with one-line switching.
+This release expands the template collection and improves the reliability of resume generation, from preserving supplied facts to validating the final PDF.
 
-### 🛠️ Heuristic Token Auto-Healing Algorithm (Direction 3)
-- Implement `--auto-heal` parameter in `validate-resume.py` and `forge.py` (ADR-0005) to automatically step through spacing and font-size ladders for 100% single/two-page fit in one pass.
+### Added
 
-### 💻 Live Preview & Interactive Intake Wizard (Direction 4.1 & 4.2)
-- **Zero-Dependency Live Preview Server (`knowme preview` / `knowme serve`)**: Lightweight HTTP + SSE server auto-reloading browser view on `workspace/resume.html` change (ADR-0006);
-- **Terminal Intake Wizard (`knowme wizard`)**: Interactive 3-turn conversational profiler for Mode D non-repo candidates, producing structured `evidence-master.json`.
+- Six new templates: `academic-research`, `international-flow`, `creative-tech`, `compact-dense`, `startup-generalist`, and `data-analyst`, bringing the collection to ten templates. Six theme palette presets provide additional styling options.
+- Draft, Master and Variant profiles for incomplete drafts, reusable source facts and role-specific resumes, with source-version tracking.
+- Isolated workspaces for each generation run, including input snapshots, editable HTML, validation reports and a delivery manifest.
+- `--auto-heal` for bounded spacing and font-size adjustments. Failed adjustments preserve the original canvas; candidate facts are never rewritten to force a fit.
+- `--font-preset system|arial-unicode` with font diagnostics for PDF text extraction.
+
+### Changed
+
+- Resume generation now explicitly uses user descriptions, existing resumes and supplied supporting material. The host Agent handles content interpretation and tailoring; the toolchain handles validation, layout and export.
+- Each template has one maintained `canvas.html` structure. Gallery samples are stored separately, and previews share the same generation path and styles as actual resumes.
+- Printing and PDF export share one validation engine across Python and TypeScript entry points, checking fonts, every page's layout, A4 geometry and final PDF text before publication.
+- Generation results distinguish `DRAFT`, `PASS`, `FAIL` and `UNVERIFIED`. Delivery paths and accepted artifact hashes are recorded in the current run's manifest.
+- Updated Skill metadata, usage guidance and architecture documentation; added an `AGENTS.md` development entry and package-design guidelines aligned with Agent Skills.
+- Expanded regression coverage for profile binding, output isolation, gallery consistency and browser/PDF validation.
+
+### Fixed
+
+- Sample content leaking into incomplete profiles, and missing values being replaced with unsupported candidate facts.
+- Education records overwriting one another and supplied experience, project or education details being lost during binding.
+- Invalid template slots, unsafe text insertion and keyword highlighting corrupting generated HTML; binding failures now preserve the previous output.
+- Stale PDFs being reported as successful delivery after rendering or validation failures.
+- Incomplete or contradictory QA results being accepted, including estimate-based success when browser checks were unavailable.
+- Gallery builds silently skipping invalid templates or samples instead of failing before publication.
+
+### Upgrade notes
+
+- Use `knowme forge --profile-json <file>` for structured input. Existing raw profile JSON remains supported. Repository-to-resume extraction is not supported by this workflow.
+- Generated files now belong to `workspace/runs/<runId>/`. Read delivery paths from the returned manifest; use `--output` and `--html-output` when explicit copies are needed.
+- Requires Python 3.9+, Node.js 22.13+, the declared npm dependencies and a compatible Chromium browser. The `arial-unicode` preset additionally requires local Arial Unicode MS.
+- Each `.resume-page` represents one A4 page. `--expected-pages` sets a maximum of one or two pages; two-page layouts require explicit page containers. Automatic fitting preserves a minimum body size of 8.8pt and may report that further layout edits are needed.
+
+### Known issues
+
+- Platform setup is not yet uniform: some adapters install only prompt configuration, copied Skill bundles require separate runtime dependency setup, and the initializer may report completion after a partial failure. Verify the installed resources and dependencies before use. Automated PDF checks do not certify every ATS reader's interpretation of multi-column content.
 
 ---
 

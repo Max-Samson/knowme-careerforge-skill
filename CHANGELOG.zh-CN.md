@@ -5,18 +5,46 @@
 本日志格式严格遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，版本号遵守 [语义化版本 (Semantic Versioning)](https://semver.org/lang/zh-CN/) 标准。
 
 ---
-## [0.0.6-planned] - 规划中 (Roadmap)
+## [0.0.6] - 2026-09-05
 
-### 🚀 模板矩阵扩展 (方向二)
-- 扩展 6 套核心新模板（`academic-research` 学术科研型、`international-flow` 欧美纯文字流、`creative-tech` 创意前端型、`compact-dense` 极致紧凑型、`startup-generalist` 初创全能型、`data-analyst` 指标看板型），达到 10 套黄金模板矩阵；
-- 在 `base.css` 中引入 6 大主题调色板（Tech Blue, Deep Navy, Teal Modern, Emerald Fresh, Violet Creative, Slate Minimal），支持一键主题切换。
+本版本扩展简历模板库，完善从用户事实保留、模板装配到最终 PDF 验收的生成流程，提升简历制作与交付的可靠性。
 
-### 🛠️ 启发式 Token 自动自愈算法 (方向三)
-- 在 `validate-resume.py` 与 `forge.py` 中内置 `--auto-heal` 闭环调谐算法（ADR-0005），根据 DOM 高度溢出阶梯式自动缩紧间距与字号，实现单次执行 100% 自动收敛。
+### 新增 (Added)
 
-### 💻 实时预览与交互建档向导 (方向四-1, 4-2)
-- **本地实时热重载预览器 (`knowme preview` / `knowme serve`)**：基于标准库启动轻量 HTTP 服务并注入 SSE 监听脚本，在用户或 Agent 调整代码时实现浏览器秒级热更新（ADR-0006）；
-- **交互式终端建档向导 (`knowme wizard`)**：为非代码仓用户提供流畅的 3-Turn 交互式提问采集，自动输出结构化 `evidence-master.json`。
+- 新增 `academic-research`、`international-flow`、`creative-tech`、`compact-dense`、`startup-generalist`、`data-analyst` 六套模板，模板总数增至十套，并提供六组主题调色板预设。
+- 新增 Draft、Master、Variant 资料管理，分别支持不完整草稿、可复用事实档案与岗位定制简历，并记录来源版本。
+- 为每次生成创建独立工作区，保存输入快照、可编辑 HTML、校验报告和交付清单。
+- 新增 `--auto-heal`，在限定范围内自动调整间距和字号；调整失败保留原画布，不改写候选人事实强行适配页数。
+- 新增 `--font-preset system|arial-unicode` 及字体诊断，支持排查 PDF 文本提取问题。
+
+### 优化 (Changed)
+
+- 明确以用户描述、已有简历和提供的辅助材料制作简历，由宿主 Agent 理解内容并进行岗位定制，工具链负责校验、排版和导出。
+- 每套模板统一由 `canvas.html` 维护结构，展示样例单独存储；画廊预览与实际简历共用生成流程和样式。
+- Python、TypeScript 打印与 PDF 导出入口共用校验引擎，在交付前检查字体、所有页面布局、A4 尺寸及最终 PDF 文本。
+- 生成结果统一为 `DRAFT`、`PASS`、`FAIL`、`UNVERIFIED`，本次运行的 manifest 记录交付路径及已验收产物摘要。
+- 完善 Skill 元数据、使用指南和架构文档，新增 `AGENTS.md` 开发入口及对齐 Agent Skills 的包设计规范。
+- 扩充资料绑定、产物隔离、画廊一致性及浏览器/PDF 验收回归覆盖。
+
+### 修复 (Fixed)
+
+- 修复不完整资料混入展示样例，以及缺失字段被补成无依据候选人事实的问题。
+- 修复多条教育记录相互覆盖，以及绑定时遗漏工作、项目和教育详情的问题。
+- 修复非法模板槽位、未转义文本和关键词高亮导致的 HTML 异常；绑定失败时保留原有输出。
+- 修复渲染或校验失败后，仍将旧 PDF 误报为本次成功交付的问题。
+- 修复缺项或矛盾的 QA 结果被放行，以及浏览器检查不可用时以估算结果报告通过的问题。
+- 修复画廊构建静默跳过非法模板或样例的问题，生成失败时终止发布。
+
+### 升级说明
+
+- 使用 `knowme forge --profile-json <file>` 提供结构化资料，继续兼容已有裸 profile JSON。当前流程不支持从项目仓库提取经历生成简历。
+- 生成文件保存在 `workspace/runs/<runId>/`，请读取返回的 manifest 获取交付路径；需要指定副本位置时使用 `--output` 和 `--html-output`。
+- 运行环境要求 Python 3.9+、Node.js 22.13+、项目声明的 npm 依赖及兼容的 Chromium 浏览器；`arial-unicode` 预设另需本地 Arial Unicode MS 字体。
+- 每个 `.resume-page` 对应一张 A4 页，`--expected-pages` 设置一或二页的上限，两页布局需要显式页面容器。自动适配保留 8.8pt 最小正文字号，无法满足布局时会提示进一步调整。
+
+### 已知问题
+
+- 各平台安装流程尚未完全统一：部分适配器仅写入提示配置，复制的 Skill 包需另行准备运行依赖，安装器也可能在部分失败后提示完成。使用前请检查安装资源与依赖。自动 PDF 检查不保证所有 ATS 对多栏内容的阅读顺序解释一致。
 
 ---
 
