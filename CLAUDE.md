@@ -1,5 +1,7 @@
 # KnowMe CareerForge project guidance
 
+For repository development, read [AGENT.md](AGENT.md) first and follow its directory-specific rules. Current development priorities are in [the development roadmap](docs/dev/dev-roadmap.md). The resume workflow below applies only when producing a resume.
+
 Read SKILL.md for the user-input workflow and references/07-artifact-contract.md for Draft/Master/Variant, missing values, isolated run directories and PASS/FAIL/UNVERIFIED semantics.
 
 User information and explicitly supplied resume material are the input. Do not scan the repository to manufacture career facts. Prepare a profile internally; the user need not write JSON. Use `forge --profile-json <file>` for an isolated run and `--draft` for incomplete drafts. Never identify delivery by an old workspace/resume.pdf.

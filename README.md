@@ -207,3 +207,5 @@ See the full [NPM Publishing & Update Guide](docs/PUBLISHING.md) for step-by-ste
 ## 11. License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+Development: [guidelines](AGENT.md) · [document review and next-stage roadmap](docs/dev/dev-roadmap.md).

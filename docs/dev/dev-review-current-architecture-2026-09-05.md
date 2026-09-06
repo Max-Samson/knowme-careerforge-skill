@@ -1,6 +1,8 @@
-# KnowMe CareerForge 当前架构与功能实现审查
+> **文档状态（2026-09-06）**：旧基线问题与复现记录；后续已有修复，不将全文视为当前未解决缺陷清单。 当前优先级和状态见[开发路线图与文档导航](dev-roadmap.md)。
 
-审查日期：2026-09-05。基线：HEAD `7cf8510` 加当前未提交及未跟踪的 v0.0.6 工作树。验收依据：README.md、RESUME_ENGINEERING_SKILL_DESIGN.md、ITERATION_PLAN_V0.0.6_EXPERIENCE_EXPANSION.md；同时核对 SKILL.md、CLAUDE.md、AGENT.md、ARCHITECTURE.md 与 ADR。
+# KnowMe CareerForge — 2026-09-05 架构与功能实现审查（历史基线）
+
+审查日期：2026-09-05。基线：HEAD `7cf8510` 加当前未提交及未跟踪的 v0.0.6 工作树。验收依据：README.md、dev-resume-engineering-skill-design.md、dev-iteration-plan-v0.0.6-experience-expansion.md；同时核对 SKILL.md、CLAUDE.md、AGENT.md、ARCHITECTURE.md 与 ADR。
 
 本次审查未修改实现或候选人资料。全量测试在临时副本运行；反例使用合成资料。上游项目的价值继承依据本项目文档判断，未进行上游源码逐项比较。P1 表示应在可靠交付前修复，P2 表示影响完整性、兼容性或可维护性。
 

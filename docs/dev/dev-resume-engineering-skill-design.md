@@ -1,6 +1,8 @@
+> **文档状态（2026-09-06）**：历史产品与架构设计；保留设计依据。代码仓采集、旧 Schema、旧命令和里程碑不代表当前功能或当前待办。 当前优先级和状态见[开发路线图与文档导航](dev-roadmap.md)。
+
 > 当前实现说明：每套模板仅维护 `canvas.html` 结构与 `style.css` 样式；`sample-profile.json` 只保存虚构展示数据。画廊与真实简历共用实例化器。本文下方 `template.html` 示例属于早期设计，不再作为当前文件契约；以 `src/templates/common/resume-contract.md` 为准。
 
-# Resume Engineering Skill — 产品与技术架构设计文档 (PRD & Architecture Spec)
+# KnowMe CareerForge — 简历工程产品与架构设计（历史方案）
 
 > **定位：面向主流 AI Agent（Claude Code / Codex / Cursor / Windsurf / Gemini CLI / Copilot / OpenCode 等）的岗位定制型 HTML 简历设计、证据链编排与确定性 PDF 生成 Skill。**
 >
@@ -395,7 +397,7 @@ knowme-careerforge-skill/
 │   │   ├── 0003-two-tier-tokens-architecture.md
 │   │   └── 0004-decentralized-json-with-bm25-index.md
 │   └── dev/
-│       └── RESUME_ENGINEERING_SKILL_DESIGN.md # 本技术全景设计手册
+│       └── dev-resume-engineering-skill-design.md # 本技术全景设计手册
 │
 ├── references/                        # 【6 阶段深度运行时规范手册 (L3)】
 │   ├── 01-evidence-mining.md          # L1~L3 证据分级与代码仓/Git 挖掘

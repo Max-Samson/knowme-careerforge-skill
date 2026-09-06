@@ -209,3 +209,5 @@ npm publish --access public
 ## 11. 开源协议
 
 本项目采用 **MIT 开源协议**，详情请参阅 [LICENSE](LICENSE) 文件。
+
+项目开发：[开发规范](AGENT.md) · [文档审查与下一阶段规划](docs/dev/dev-roadmap.md)。

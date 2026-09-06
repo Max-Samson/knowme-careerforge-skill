@@ -198,7 +198,7 @@ Key architectural choices are formally documented in `docs/decisions/`. ADRs rec
 
 Detailed iteration specifications and roadmap tasks are governed in:
 
-- [v0.0.6 Iteration Plan & Engineering Specification](docs/dev/ITERATION_PLAN_V0.0.6_EXPERIENCE_EXPANSION.md)
+- [v0.0.6 Iteration Plan & Engineering Specification](docs/dev/dev-iteration-plan-v0.0.6-experience-expansion.md)
 
 
 ### Current implementation and verification
@@ -214,7 +214,7 @@ Tests use temporary directories and cover sparse/invalid facts, multiple educati
 
 Discovery metadata, activated instructions and conditional resources have separate loading costs. Keep development governance in `AGENT.md` and detailed runtime rules in `references/`. Package verification must cover dependencies and execution from outside the source checkout, separately from source-tree tests and Agent behavior evaluation.
 
-The initializer now copies runtime package metadata for full bundles, reports dependency preparation separately, and returns a nonzero exit on platform failures. Source installations retain package-lock.json when available; npm archives omit it and require npm install rather than npm ci. Cursor/Windsurf adapters now point to a project-local `.knowme/skills/knowme-careerforge` bundle; Gemini configuration points to its sibling runtime bundle by absolute entrypoint. Windsurf replaces its managed block on subsequent installs. Native-platform compatibility is not established by copying a prompt or passing local PDF tests. See [Agent Skills design review](docs/dev/AGENT_SKILLS_DESIGN_REVIEW.md) for evidence, target boundaries and acceptance criteria, and `AGENT.md` section 7 for maintenance rules.
+The initializer now copies runtime package metadata for full bundles, reports dependency preparation separately, and returns a nonzero exit on platform failures. Source installations retain package-lock.json when available; npm archives omit it and require npm install rather than npm ci. Cursor/Windsurf adapters now point to a project-local `.knowme/skills/knowme-careerforge` bundle; Gemini configuration points to its sibling runtime bundle by absolute entrypoint. Windsurf replaces its managed block on subsequent installs. Native-platform compatibility is not established by copying a prompt or passing local PDF tests. See [Agent Skills design review](docs/dev/dev-agent-skills-design-review.md) for evidence, target boundaries and acceptance criteria, and `AGENT.md` section 7 for maintenance rules.
 
 Runtime readiness is exposed by `browser-engine.js --check-runtime` (READY/UNVERIFIED); it does not certify a resume. `forge.py` defaults to compact stdout and temporary staging; explicit archives preserve the full report and support `--summary`. A null manifest denotes clean mode, not a missing artifact. See [the clean-output decision](docs/decisions/0007-clean-delivery-and-optional-archives.md) for compatibility and recovery boundaries.
 
