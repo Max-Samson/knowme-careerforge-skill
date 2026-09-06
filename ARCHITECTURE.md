@@ -85,31 +85,32 @@ sequenceDiagram
     participant Browser as Shared Browser Engine
 
     User->>Agent: Experience, existing resume, supporting material, target JD
-    Agent->>Agent: Organize Draft, clarify needed facts, prepare Master
+    Agent->>Agent: Organize supplied facts, clarify consequential gaps
     Agent->>Engine: Analyze JD and select template
-    Agent->>Engine: forge.py --profile-json master.json
+    Agent->>Engine: forge.py --profile-json - (facts on stdin)
     Engine->>Engine: Create unique run, snapshot input, validate profile
-    Engine->>Engine: Save Master and source-linked Variant
+    Engine->>Engine: Prepare Master and source-linked Variant in private staging
     Engine->>Engine: Bind canvas.html with full CSS chain
     Engine->>Browser: Measure print DOM for all pages
     Browser->>Browser: Generate fresh PDF; inspect geometry and per-page text
     alt Required checks and final PDF acceptance pass
         Browser-->>Engine: Publish accepted bytes and hashes
-        Engine-->>Agent: PASS manifest and current-run artifacts
+        Engine->>Engine: Publish current HTML/PDF pair; clean temporary staging
+        Engine-->>Agent: PASS, delivery paths and accepted hashes
         Agent->>Agent: Review facts, typography and reading order
         Agent-->>User: Deliver artifact links and review outcome
     else Validation fails or cannot complete
         Browser-->>Engine: FAIL or UNVERIFIED with diagnostics
-        Engine-->>Agent: Retained run and error manifest; no delivery outputs
+        Engine-->>Agent: Error diagnostics; no delivery outputs (archive only if requested)
         Agent-->>User: Actual status and corrective next step
     end
 ```
 
 The host Agent owns semantic editing and evidence selection. The current forge script preserves supplied entries and applies explicit basic-field/title overrides; it does not autonomously infer a career narrative from repositories. Draft mode produces a draft canvas without final PDF acceptance. Manual canvas edits remain editable artifacts; do not overwrite them by replaying stale input.
 
-Each invocation creates `workspace/runs/<runId>/` containing the input snapshot, Master/Variant (or Draft), HTML, QA, manifest and an accepted PDF when successful. `--workspace` changes the parent, not run isolation. Master and Variant are independent documents linked by a normalized profile hash, which tracks versions rather than truth. Missing/null optional fields remain unknown; malformed types and unknown fields fail. Supplied education, work and project arrays are preserved independently.
+Each invocation creates private staging containing the input snapshot, Master/Variant (or Draft), HTML, QA and an accepted PDF when successful. Staging is temporary by default: only the current HTML/PDF pair is published, and intermediates are removed on ordinary success or failure. Explicit `--keep-workspace` or `--workspace <dir>` retains a unique archive; the latter preserves the old explicit-workspace behavior. `--profile-json -` avoids a permanent input file; `--html-input -` lets edited HTML pass through the same acceptance and paired-publication path without reconstructing profiles. Master and Variant are independent documents linked by a normalized profile hash, which tracks versions rather than truth. Missing/null optional fields remain unknown; malformed types and unknown fields fail. Supplied education, work and project arrays are preserved independently.
 
-The current manifest is authoritative: `RUNNING` is intermediate, `DRAFT` is not PDF acceptance, `PASS` records accepted artifacts, `FAIL` denotes a rejected operation, and `UNVERIFIED` denotes unavailable or incomplete checking. Old output existence cannot imply success. See the artifact contract for exit codes and required report fields.
+The current invocation result (and manifest when archived) is authoritative: `RUNNING` is intermediate, `DRAFT` is not PDF acceptance, `PASS` records accepted artifacts, `FAIL` denotes a rejected operation, and `UNVERIFIED` denotes unavailable or incomplete checking. Old output existence cannot imply success. See the artifact contract for exit codes and required report fields.
 
 
 ---
@@ -134,8 +135,8 @@ Following the **Codebase Design (Deep Modules)** philosophy, complex logic is en
 ### 4.3 Profile & Run Orchestration Seam
 
 - **Contract**: `scripts/contracts/profile.py` and `src/knowledge/resume-schema.json` define normalization shared across Draft, Master and Variant. Raw legacy profile JSON remains accepted as explicit Master input; wrapped documents carry lifecycle and provenance.
-- **Orchestration**: `scripts/pipeline/forge.py` snapshots input, creates the isolated run, binds the Variant, checks QA protocol/status consistency and accepted-file hashes, then records delivery in the manifest.
-- **Publication**: Requested output copies are staged only after acceptance. Ordinary copy failures roll back, and destination locks prevent tool processes from interleaving copies. Cross-file publication is not a crash-safe filesystem transaction; canonical run artifacts and the manifest remain authoritative.
+- **Orchestration**: `scripts/pipeline/forge.py` snapshots input, creates the isolated run, binds the Variant, checks QA protocol/status consistency and accepted-file hashes, then returns delivery paths and hashes. Full manifests are retained only for explicit archives.
+- **Publication**: Requested output copies are staged only after acceptance. Ordinary copy failures roll back, and destination locks prevent tool processes from interleaving copies. Cross-file publication is not a crash-safe filesystem transaction; the current result identifies accepted bytes; an explicit archive additionally retains canonical run artifacts and its manifest.
 
 ### 4.4 Rendering & Acceptance Seam
 
@@ -215,6 +216,6 @@ Discovery metadata, activated instructions and conditional resources have separa
 
 The initializer now copies runtime package metadata for full bundles, reports dependency preparation separately, and returns a nonzero exit on platform failures. Source installations retain package-lock.json when available; npm archives omit it and require npm install rather than npm ci. Cursor/Windsurf adapters now point to a project-local `.knowme/skills/knowme-careerforge` bundle; Gemini configuration points to its sibling runtime bundle by absolute entrypoint. Windsurf replaces its managed block on subsequent installs. Native-platform compatibility is not established by copying a prompt or passing local PDF tests. See [Agent Skills design review](docs/dev/AGENT_SKILLS_DESIGN_REVIEW.md) for evidence, target boundaries and acceptance criteria, and `AGENT.md` section 7 for maintenance rules.
 
-Runtime readiness is exposed by `browser-engine.js --check-runtime` (READY/UNVERIFIED); it does not certify a resume. `forge.py --summary` provides compact stdout with the canonical manifest path while retaining full on-disk diagnostics and the existing default JSON interface.
+Runtime readiness is exposed by `browser-engine.js --check-runtime` (READY/UNVERIFIED); it does not certify a resume. `forge.py` defaults to compact stdout and temporary staging; explicit archives preserve the full report and support `--summary`. A null manifest denotes clean mode, not a missing artifact. See [the clean-output decision](docs/decisions/0007-clean-delivery-and-optional-archives.md) for compatibility and recovery boundaries.
 
 For interactive layout selection, `search-template.py --summary` exposes only the top three IDs, names, scores and layouts. Full `--json` output and the programmatic ranking interface are unchanged. Source-to-claim review in `references/01-evidence-mining.md` remains an Agent responsibility and is distinct from deterministic profile/PDF text consistency.

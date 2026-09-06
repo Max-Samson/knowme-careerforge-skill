@@ -122,11 +122,13 @@ Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录�
 
 ## 5. 独立运行与最终验收
 
-每次 forge 在 `workspace/runs/<runId>/` 保存输入快照、Master、Variant、画布、QA 和运行清单。通过验收后才写入本次 PDF；失败的清单不会返回旧文件作为交付。可以用 `--output` 和 `--html-output` 指定已验收副本位置。
+默认生成在系统临时目录完成装配与验收，只在用户目录保留 `resume/resume.html` 和 `resume/resume.pdf`。`--profile-json -` 从标准输入接收资料，不必新建 profile 文件；`--html-input -` 接收编辑后的 HTML，经同一验收流程一起更新当前 HTML/PDF。失败保留旧交付，正常结束清理本次临时文件。`--output` 和 `--html-output` 可指定交付位置。
+
+需要诊断归档时显式使用 `--keep-workspace`；旧的显式 `--workspace <dir>` 调用仍保留完整运行记录。默认报告中的 `manifest: null` 是预期行为，`--summary` 不再是控制文件数量的方式。工具不清理用户已有输入或旧版工作区。
 
 打印模式会检查所有页面，再解析最终 PDF 的每页尺寸与文本。PASS 表示本次检查通过；FAIL 是检查失败；UNVERIFIED 是浏览器/依赖等导致无法验收；DRAFT 只表示草稿准备完成。自动检查不等同于事实核实或通用 ATS 认证。
 
-在安装目录按 init 提示准备依赖（有锁文件时 `npm ci --omit=dev`，否则 `npm install --omit=dev`），再运行 `node scripts/rendering/browser-engine.js --check-runtime`。需要 Python 3.9+、Node.js 22.13+ 与可用 Chromium。运行预检 READY 不表示简历已验收。默认只交付一个版本的 PDF 和可编辑 HTML；`forge.py --summary` 精简终端输出，内部快照与诊断仍保留。
+在安装目录按 init 提示准备依赖（有锁文件时 `npm ci --omit=dev`，否则 `npm install --omit=dev`），再运行 `node scripts/rendering/browser-engine.js --check-runtime`。需要 Python 3.9+、Node.js 22.13+ 与可用 Chromium。运行预检 READY 不表示简历已验收。默认只交付一个版本的 PDF 和可编辑 HTML；`forge.py` 默认精简终端输出；完整快照与诊断仅在显式归档模式保留。
 
 ---
 

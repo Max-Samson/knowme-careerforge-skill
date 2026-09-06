@@ -33,13 +33,27 @@
 - 缺失联系方式和目标岗位记录为待补信息。正式交付至少需要非空姓名及实质内容，打印与 PDF 验收进一步判断内容有效性。
 - 旧版 L1/L2/L3 元数据可保留；用户陈述不因为来自对话就自动降级为“参与”。
 
-## 每次运行独立
+## 独立运行与产物保留
 
-`forge --profile-json <file>` 在 `workspace/runs/<唯一运行ID>/` 下创建私有目录，包含 `input.json` 原始输入快照、`master.json`、`variant.json`、`resume.html`、`qa.json`、通过验收后写入的 `resume.pdf` 和 `manifest.json`。Draft 运行保存 `draft.json` 和草稿画布，不生成正式 PDF。
+运行隔离不等于永久保存每次运行。默认模式在系统私有临时目录中完成输入快照、Master/Variant、模板装配及完整 QA；正常成功或失败后清理本次临时目录。默认不会在用户目录创建 `workspace/`、隐藏事实档案或历史快照。
 
-`--workspace` 仅改变运行目录的父目录，不复用已有运行。失败现场保留供诊断，不自动删除或继续使用其他运行的文件。目录包含个人资料，不提交到 Git；可由用户按需删除。测试必须使用临时目录。
+| 调用模式 | 用户目录新增产物 | 终端结果 |
+| --- | --- | --- |
+| 默认 `--profile-json -` | `resume/resume.html`、`resume/resume.pdf` | 简短报告，`retention: temporary`、`manifest: null`，仅当前交付路径及摘要 |
+| 默认 `--draft` | `resume/draft.html` | DRAFT，仅 HTML，不修改已有 PDF |
+| `--html-input -` | 验收后的当前 HTML/PDF 对 | 复用同一 QA 与发布机制，`templateUsed: existing-canvas`，不重建事实档案 |
+| `--keep-workspace` | `workspace/runs/<runId>/` 完整归档 | `retention: archived`，默认完整报告；可用 `--summary` |
+| 显式 `--workspace <dir>` | 指定父目录下的完整归档 | 保留原有归档行为，等同显式开启保留 |
 
-`--html-output` 和 `--output` 是可选的已验收副本路径。先在独立运行中完成验证，再一起准备副本；写入失败时回滚普通错误，目标锁阻止两个本工具进程交错写入。跨文件复制不具备操作系统崩溃下的事务保证，因此运行目录和 manifest 始终是交付判据。发现遗留锁时报告冲突，不擅自删除其他运行的锁。
+`--profile-json` 接受已有文件或 `-`（从 stdin 读取 JSON）。`--html-input` 接受已有画布或 `-`（从 stdin 读取 HTML），与 profile 输入互斥；不能同时传岗位、模板、字体或基础字段覆盖参数，相关修改应先在画布中完成。文件输入只读；输出路径不得与输入文件冲突。为了更新同一份简历，读取当前 HTML 并在内存中修改后通过 stdin 提交，避免提前破坏当前交付。
+
+默认输出可由 `--output`、`--html-output` 显式指定；只指定一项时，另一项使用相同主文件名与对应扩展名。归档模式不指定输出副本时，交付路径仍在归档目录。Draft 支持 `--html-output`，拒绝 PDF `--output`。
+
+只有完成本次完整验收的 HTML/PDF 才一起准备发布；普通复制或替换失败回滚，目标锁阻止两个本工具进程交错写入。跨文件发布不具备操作系统崩溃下的事务保证。默认不读取旧文件判定成功，也不创建 `latest.json` 等额外成功标记；当前调用状态、输出路径及摘要是交付依据。不要擅自删除遗留锁。
+
+归档模式保存原有输入、Master/Variant 或 Draft、HTML、QA、manifest 和通过验收的 PDF；HTML 输入不生成虚假的 Master/Variant，保存输入 HTML 与检查记录。失败现场仅在归档模式保留。纯净模式返回错误和必要诊断（含文本失败的缺字片段/码点、DOM 失败的页码/选择器/边界及 PDF 页数/尺寸；DOM 每类问题最多返回 20 条并附总数，不输出完整 DOM 正文），不返回已删除临时文件作为产物；需要深入诊断时显式保留下一次运行。进程被强制终止可能留下系统临时文件，不承诺强制终止时自动清理。
+
+清理范围仅为本次工具创建的临时目录，不删除用户输入、旧版 `workspace/`、用户指定的记录文件或已有交付文件。目录中已有内容不会因升级而被“清空”。资料属于用户隐私，不提交到 Git。
 
 ## 运行与检查状态
 
@@ -51,7 +65,7 @@
 | FAIL | 1 | 输入、绑定、布局、PDF 内容或输出写入不符合要求 |
 | UNVERIFIED | 2 | 浏览器、依赖、超时或检查协议故障，无法完成验收 |
 
-`manifest.json` 包含 `runId`、`stage`、`errors`、`warnings`、`checks`、`outputs`。失败的 `outputs` 为空，即使目录或显式输出位置存在旧 PDF，也不能返回它作为本次交付。只有 PASS 的清单记录本次输出路径及 HTML/PDF SHA-256。JSON 模式与人读模式使用同一退出语义。
+归档模式的 `manifest.json` 包含 `runId`、`stage`、`errors`、`warnings`、`checks`、`outputs`。失败的 `outputs` 为空，即使目录或显式输出位置存在旧 PDF，也不能返回它作为本次交付。PASS 报告记录本次 HTML/PDF 输出路径及 SHA-256；DRAFT 可记录 HTML 路径与摘要，但不表示 PDF 通过。JSON 模式与人读模式使用同一退出语义。
 
 ## 打印与最终 PDF
 
@@ -80,4 +94,4 @@ Agent 可直接整理裸 profile；只填写用户提供的值，删除未知字
 
 姓名和至少一个实质章节是当前 PDF 输入门槛；联系方式、学校、专业和日期允许未知。`missingFields` 仅列出 basics.name/title/email/phone 的缺失，空列表不表示所有字段完整，更不证明事实真实。
 
-`forge.py --summary` 仅精简终端报告，包含当前状态、模板、错误、仅 html/pdf 的 outputs 和 manifest 路径；默认及 `--quiet` 仍保留完整 JSON。完整 manifest 与 QA 始终落盘。正常交付用 `--output resume/resume.pdf --html-output resume/resume.html` 创建验收副本；内部运行历史不作为用户默认交付清单。失败时副本可能仍为旧版本，不能据此报告本次成功。Draft 不使用这些验收副本选项。
+默认纯净模式已经返回简短报告；`--summary` 在归档模式下精简终端报告。`--quiet` 只控制 JSON 格式，不决定是否留存文件。需要完整历史的旧调用应显式传 `--workspace` 或 `--keep-workspace`；没有这些参数的调用改为纯净输出，不再默认保存完整报告。失败的 outputs 始终为空，不能把路径下残留的旧 PDF 当成本次成功。

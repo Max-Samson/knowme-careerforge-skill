@@ -50,17 +50,21 @@ Commands:
   help                  Show this help message
 
 Options (for forge):
-  --profile-json <file> User/Agent prepared facts or Master document
-  --workspace <dir>    Parent for isolated run directories (default: workspace/runs)
+  --profile-json <file> Facts file, or - for JSON on stdin
+  --html-input <file>  Existing edited HTML, or - for HTML on stdin
+  --keep-workspace     Retain diagnostic archive (default: temporary staging)
+  --workspace <dir>    Explicit archive parent; enables retention
   --draft              Create a draft canvas without PDF delivery
   --role <title>        Target role title
   --jd <file|text>      Target job description
   --template, -t <id>   Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst)
   --name <name>         Candidate name override
-  --output, -o <path>   Optional verified PDF copy (default: isolated run)
+  --output, -o <path>   Verified PDF destination (default: resume/resume.pdf)
   --font-preset <name>  system or arial-unicode (requires local Arial Unicode MS)
   --auto-heal           Enable heuristic token auto-healing to eliminate A4 height overflow
-  --quiet, -q           Quiet execution (compact JSON output)
+  --html-output <path> HTML destination (default: beside the PDF)
+  --summary            Compact report; default in clean mode
+  --quiet, -q           Single-line JSON; does not change file retention
 Examples:
   knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern
   knowme render workspace/resume.html workspace/resume.pdf

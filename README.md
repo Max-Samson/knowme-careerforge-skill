@@ -120,11 +120,13 @@ Draft retains incomplete information, Master preserves supplied facts, and Varia
 
 ## 5. Isolated runs and final acceptance
 
-Each forge invocation writes snapshots, Master, Variant, canvas, QA and manifest to `workspace/runs/<runId>/`. Only an accepted fresh PDF is published. Failed manifests never identify an old output as delivery. Optional `--output` and `--html-output` create verified copies.
+Default generation uses private temporary staging and leaves only `resume/resume.html` and `resume/resume.pdf` in the candidate directory. `--profile-json -` accepts facts on stdin without a permanent input file; `--html-input -` accepts edited HTML through the same acceptance and paired-publication path. Failure preserves old delivery files; ordinary completion cleans temporary staging. Use `--output` and `--html-output` for explicit destinations.
+
+Request `--keep-workspace` for diagnostic archives; existing explicit `--workspace <dir>` calls still retain full runs. `manifest: null` is expected in default clean output, and `--summary` is not a file-retention switch. Existing user inputs and old workspaces are never swept or deleted.
 
 Checks run in print mode across every page, then parse the final PDF's page dimensions and extracted text. PASS means current checks passed; FAIL means a check failed; UNVERIFIED means inspection could not complete; DRAFT means draft preparation only. Automated checks do not certify factual truth or every ATS.
 
-Prepare dependencies in the installed runtime as instructed by init (`npm ci --omit=dev` with a lockfile, otherwise `npm install --omit=dev`), then run `node scripts/rendering/browser-engine.js --check-runtime`. Python 3.9+, Node.js 22.13+ and Chromium are required. READY is runtime readiness, not resume acceptance. Deliver one current PDF and editable HTML by default; `forge.py --summary` keeps stdout concise while retaining internal snapshots and diagnostics.
+Prepare dependencies in the installed runtime as instructed by init (`npm ci --omit=dev` with a lockfile, otherwise `npm install --omit=dev`), then run `node scripts/rendering/browser-engine.js --check-runtime`. Python 3.9+, Node.js 22.13+ and Chromium are required. READY is runtime readiness, not resume acceptance. Deliver one current PDF and editable HTML by default; `forge.py` defaults to concise stdout; full snapshots and diagnostics remain only in explicit archive mode.
 
 ---
 
