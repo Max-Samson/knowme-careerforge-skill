@@ -28,8 +28,9 @@ def run_command(cmd, cwd, desc):
 def main():
     parser = argparse.ArgumentParser(description="KnowMe CareerForge — Release & NPM Publish Helper")
     parser.add_argument("version", nargs="?", help="New semantic version to release (e.g. 1.0.1, 1.1.0)")
-    parser.add_argument("--dry-run", action="store_true", help="Perform build and test verification without publishing")
-    parser.add_argument("--publish", action="store_true", help="Directly trigger npm publish --access public after verification")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--dry-run", action="store_true", help="Perform build and test verification without publishing")
+    mode.add_argument("--publish", action="store_true", help="Directly trigger npm publish --access public after verification")
 
     args = parser.parse_args()
     base_dir = get_project_root()

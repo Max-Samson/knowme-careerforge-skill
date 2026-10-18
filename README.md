@@ -47,7 +47,7 @@ Self Discovery  Tailored Career Story
 ```
 
 - **KnowMe (Self-Discovery & Evidence Engine)**: Helps candidates discover who they are, organize their supplied career experience and supporting material, and map their true competitive strengths.
-- **CareerForge (Career Positioning & Resume Engineering)**: Translates genuine strengths into targeted positioning for specific job opportunities, tailoring high-impact content inside an **HTML Intermediate Working Canvas** with **Design Tokens**, and delivering deterministic, pixel-perfect PDFs via Playwright.
+- **CareerForge (Career Positioning & Resume Engineering)**: Translates genuine strengths into targeted positioning for specific job opportunities, tailoring high-impact content inside an **HTML Intermediate Working Canvas** with **Design Tokens**, and delivering PDFs checked for print layout and text integrity via Playwright.
 
 ---
 
@@ -132,7 +132,7 @@ Prepare dependencies in the installed runtime as instructed by init (`npm ci --o
 
 ## 6. Token Self-Healing & Visual Tuning Cheat Sheet
 
-All visual parameters are concentrated in `:root` variables inside the current run’s `resume.html`:
+All visual parameters are concentrated in `:root` variables inside the current delivery `resume/resume.html`:
 
 | CSS Token | Default | Compact (1-Page Squeeze) | Relaxed (2-Page Flow) | Purpose |
 | :--- | :--- | :--- | :--- | :--- |
@@ -147,6 +147,8 @@ All visual parameters are concentrated in `:root` variables inside the current r
 
 ## 7. Core Templates Matrix
 
+The four core templates below are a subset of thirteen available layouts. ATS tiers are internal design categories, not external certification. PDF appearance depends on the browser and installed fonts; cross-machine pixel identity is not guaranteed.
+
 | Template ID | Style | Category | ATS Tier | Best For | Target Pages |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **`minimal`** | Single-Column Minimal | Tech / AI | Tier 1 (Optimal) | Backend, Algorithms, AI Research, Systems | 1 Page |
@@ -154,29 +156,31 @@ All visual parameters are concentrated in `:root` variables inside the current r
 | **`executive`** | Executive Banner + 33:67 | Leadership / Product | Tier 1 (Optimal) | Tech Director, Chief Architect, Tech Lead | 1~2 Pages |
 | **`classic`** | Structured Table Grid | Corporate / Gov | Tier 1 (Optimal) | State Enterprises, Finance, Hardware, Civil | 1 Page |
 
+Content-led additions: `editorial` (experience first, section rail), `graduate` (education and projects first), and `project-focus` (projects first). Each uses an explicit single A4 page with 9.5pt body text. Select for actual supplied content, not assumed qualifications.
+
+
 ---
 
 ## 8. CLI & Script Reference
 
 ```bash
-# 1. One-shot resume engineering pipeline (user facts -> canvas -> QA -> PDF)
-knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern --quiet
+# 1. Generate from an existing user-provided facts file
+knowme forge --profile-json candidate.json --role "AI Agent Engineer"
 
-# 2. Search best template for target role (hybrid engine)
-knowme search --role "AI Agent Engineer" --engine hybrid
+# 2. Update the current pair: supply complete edited HTML on stdin
+knowme forge --html-input -
 
-# 3. Prepare an incomplete draft without PDF delivery
+# 3. Explicitly requested draft; no PDF
 knowme forge --profile-json draft.json --draft
 
-# 4. Validate working canvas layout & ATS compliance
-knowme validate /path/to/current-run/resume.html --json
+# 4. Optional template search
+knowme search --role "AI Agent Engineer" --engine hybrid --summary
 
-# 5. Render deterministic pixel-perfect PDF
-knowme render --input workspace/resume.html --output output/resume.pdf
-
-# 6. Build & view static HTML Template Gallery
+# 5. Development gallery, using fictional data
 knowme gallery
 ```
+Use forge for normal generation and updates. Feed stdin through the host command tool; never interpolate candidate text into shell code. Files above are existing inputs, not required new artifacts. Independent `knowme validate` / `knowme render` commands are diagnostic tools; they do not publish a verified HTML/PDF pair. `knowme extract`, `npm run extract` and the legacy Python entry all reject repository extraction without reading repositories or writing profiles.
+
 ---
 
 ## Automated Test Suite

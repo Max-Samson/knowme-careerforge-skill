@@ -60,7 +60,7 @@
             "string",
             "null"
           ],
-          "description": "Core Value Proposition (15-30 words)"
+          "description": "Optional concise synthesis of supported experience; length follows the language and content, not a fixed word count"
         }
       },
       "additionalProperties": false

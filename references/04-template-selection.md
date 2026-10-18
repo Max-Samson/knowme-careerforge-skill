@@ -1,9 +1,12 @@
 # Template selection and readable composition
 
-Select for the candidate's actual amount of content, strongest evidence and explicit preference. A backend title alone does not determine the layout. The ten current IDs below are directory IDs accepted by the pipeline; metadata describes design intent, not visual or ATS certification.
+Select for the candidate's actual amount of content, strongest evidence and explicit preference. A backend title alone does not determine the layout. The thirteen current IDs below are directory IDs accepted by the pipeline; metadata describes design intent, not visual or ATS certification.
 
 | ID | Structure | Review before choosing |
 | --- | --- | --- |
+| editorial | Single column with section rail | Experience first; medium-length professional histories |
+| graduate | Single column, education first | Students and internships; preserve actual project setting |
+| project-focus | Single column, projects first | Distinct project evidence; do not duplicate employment bullets |
 | minimal | Single column | Straight reading order; sparse content needs breathing room rather than compression |
 | international-flow | Single column | Consider for linear prose; inspect language and line lengths |
 | modern | Sidebar, 32:68 | Keep side content short; check narrow-column wrapping |
@@ -23,7 +26,7 @@ python3 <skill-root>/scripts/template/search-template.py "<target role>" --targe
 
 The summary returns the top three candidates with IDs and layout metadata; the existing `--json` option returns all metadata only when needed. For a simple, sparse resume, prefer a readable single-column structure from the table over a dense sidebar just because it has a higher role score. Do not load every template source or build a gallery for a single resume.
 
-The pipeline also ranks automatically if `--template` is omitted. Ranking does not inspect the final PDF's aesthetics. Inspect the selected output and report `templateUsed`; do not claim that all ten designs were visually compared if only one was rendered.
+The pipeline also ranks automatically if `--template` is omitted. Ranking does not inspect the final PDF's aesthetics. Inspect the selected output and report `templateUsed`; do not claim that all designs were visually compared if only one was rendered.
 
 For experienced candidates, work evidence should be easy to find. Keep skill lists compact; avoid paragraphs claiming proficiency in every role keyword. A summary and a project section are optional, and should not repeat the same achievement. For sparse profiles, preserve honest whitespace, use a simple layout and ask for useful details only when needed. Do not fill a page with generic qualities or fabricated projects. For dense profiles, edit repetition before reducing type size or spacing.
 

@@ -6,7 +6,7 @@
 
 ---
 
-The host Agent collects and interprets user-supplied experience, existing resumes and explicitly supplied supporting material, then tailors wording to the target role. Tools validate structured data, bind HTML, measure print output and accept the final PDF. Repository analysis is not a supported resume input path. Optional legacy L1~L3 labels describe provenance, not independent verification.
+The host Agent collects and interprets user-supplied experience, existing resumes and explicitly supplied supporting material, expands terse descriptions into supported professional claims, and selects evidence for the target role. Role knowledge and writing patterns guide ability synthesis and focused questions; they do not provide candidate facts. Content-only requests end with polished prose without invoking the rendering pipeline. Tools validate structured data, bind HTML, measure print output and accept the final PDF. Repository analysis is not a supported resume input path. Optional legacy L1~L3 labels describe provenance, not independent verification.
 
 This document preserves the system design and module boundaries. `AGENT.md` governs AI development and architecture changes in this repository; `SKILL.md` governs using the Skill to create resumes. Current lifecycle, field and error semantics are defined in [references/07-artifact-contract.md](references/07-artifact-contract.md); roadmap documents describe planned work and must not be treated as implemented capabilities.
 
@@ -18,7 +18,7 @@ KnowMe CareerForge adopts a progressive 4-tier documentation architecture to ens
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
 │                        KnowMe CareerForge 4-Tier Documentation Pyramid                 │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ L0: Platform Distribution │ SKILL.md (Agent 6-Stage Reasoning Contract) + skill.json   │
+│ L0: Platform Distribution │ SKILL.md (User Facts & Delivery Workflow) + skill.json   │
 ├───────────────────────────┼────────────────────────────────────────────────────────────┤
 │ L1: Agent & Dev Contracts │ CLAUDE.md (Developer Command Cheat Sheet & Guidelines)     │
 │                           │ AGENT.md (AI Development & Architecture Guidelines)│
@@ -44,7 +44,7 @@ KnowMe CareerForge adopts a progressive 4-tier documentation architecture to ens
                                        │ CLI Dynamic Config Injection
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
 │ 2. Skill Execution Core Layer (Agent Reasoning Contract)                     │
-│    SKILL.md (6-Stage Pipeline) │ AGENT.md (Development & Architecture Rules)│
+│    SKILL.md (Intake → Facts → Forge → Review → Delivery)│
 └──────────────────────────────────────┬──────────────────────────────────────┘
                                        │ Python Toolchain / CLI Invocation
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
@@ -219,3 +219,5 @@ The initializer now copies runtime package metadata for full bundles, reports de
 Runtime readiness is exposed by `browser-engine.js --check-runtime` (READY/UNVERIFIED); it does not certify a resume. `forge.py` defaults to compact stdout and temporary staging; explicit archives preserve the full report and support `--summary`. A null manifest denotes clean mode, not a missing artifact. See [the clean-output decision](docs/decisions/0007-clean-delivery-and-optional-archives.md) for compatibility and recovery boundaries.
 
 For interactive layout selection, `search-template.py --summary` exposes only the top three IDs, names, scores and layouts. Full `--json` output and the programmatic ranking interface are unchanged. Source-to-claim review in `references/01-evidence-mining.md` remains an Agent responsibility and is distinct from deterministic profile/PDF text consistency.
+
+Retired extraction entrypoints (`knowme extract`, `npm run extract`, and `scripts/evidence/extract-evidence.py`) share a fail-only compatibility entry: no repository scan or profile publication. Unknown CLI commands fail; interactive stdin without a payload is rejected before staging.

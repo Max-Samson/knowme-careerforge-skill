@@ -2,7 +2,7 @@
 
 - contracts/: shared Draft/Master/Variant normalization and missing-value rules.
 - pipeline/: isolated temporary staging by default, explicit retained archives, immutable input snapshots, Master/Variant lineage, and atomic verified delivery pairs.
-- evidence/: optional JD helpers; legacy extract-evidence.py is not a supported candidate input path.
+- evidence/: optional JD helpers; legacy extract-evidence.py is a fail-only compatibility entry shared by CLI/npm/direct callers; it must not read repositories or write candidate profiles.
 - template/: template ranking and deterministic fact-only canvas binding.
 - validation/: print-mode geometry and content checks through the shared browser engine; no estimate-based PASS.
 - rendering/: final PDF page/text validation and atomic write, preserving old outputs on failure.

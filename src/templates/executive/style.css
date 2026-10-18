@@ -41,36 +41,65 @@
 .executive-banner {
   background-color: var(--resume-color-banner-bg);
   color: var(--resume-color-banner-text);
-  padding: 12mm 16mm 10mm 16mm;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 10mm 16mm 8mm 16mm;
   border-bottom: 3.5px solid var(--resume-color-accent);
+}
+
+.executive-banner .resume-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name contacts"
+    "target contacts";
+  row-gap: 2pt;
+  column-gap: 16pt;
+  align-items: center;
+}
+
+.executive-banner .candidate-name, .candidate-name {
+  grid-area: name;
+  font-size: var(--resume-font-size-name);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  margin: 0;
+}
+
+.executive-banner .job-target, .candidate-title {
+  grid-area: target;
+  font-size: var(--resume-font-size-target);
+  color: var(--primitive-color-sky-400);
+  font-weight: 600;
+  margin: 0;
+}
+
+.executive-banner .contact-grid {
+  grid-area: contacts;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3pt;
+  font-size: 8.5pt;
+  color: var(--resume-color-banner-muted, #cbd5e1);
+  margin: 0;
+}
+
+.executive-banner .contact-item {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  white-space: nowrap;
 }
 
 .banner-left {
   flex: 1;
 }
 
-.candidate-name {
-  font-size: var(--resume-font-size-name);
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-
-.candidate-title {
-  font-size: var(--resume-font-size-title);
-  color: var(--primitive-color-sky-400);
-  font-weight: 600;
-  margin-top: 2pt;
-}
-
 .value-prop {
-  font-size: 8.5pt;
-  color: var(--resume-color-banner-muted);
-  margin-top: 4pt;
-  max-width: 480pt;
-  line-height: 1.4;
+  font-size: 8.8pt;
+  color: var(--resume-color-secondary);
+  line-height: 1.45;
 }
 
 .banner-right {
@@ -81,7 +110,6 @@
   font-size: 8pt;
   color: var(--resume-color-banner-muted);
 }
-
 .badge-item {
   display: flex;
   align-items: center;
@@ -121,7 +149,7 @@
   gap: var(--resume-space-section);
 }
 
-.sub-title, .main-title {
+.section-title, .sub-title, .main-title {
   font-size: 11pt;
   font-weight: 700;
   color: var(--resume-color-accent);
@@ -241,4 +269,10 @@
 
 .education-item {
   margin-bottom: var(--resume-space-item);
+}
+.edu-detail {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin-top: 2pt;
 }

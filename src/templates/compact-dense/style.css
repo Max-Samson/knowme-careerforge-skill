@@ -117,13 +117,17 @@
 }
 
 .skill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5pt;
+  margin-bottom: 5pt;
   font-size: var(--resume-font-size-body);
   line-height: var(--resume-line-height-body);
 }
 
 .skill-category {
   font-weight: 700;
-  color: var(--resume-color-primary);
+  color: var(--resume-color-accent);
 }
 
 .skill-items {

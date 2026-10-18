@@ -1,0 +1,60 @@
+{
+  "language": "zh-CN",
+  "basics": {
+    "name": "示例候选人",
+    "title": "软件开发实习生",
+    "email": "candidate@example.com",
+    "phone": "138-0000-0000",
+    "location": "示例城市",
+    "summary": "虚构排版样例，机构和经历均为演示内容。通过课程项目实践接口开发、数据处理和测试。"
+  },
+  "skills": [
+    {
+      "category": "工程实践",
+      "items": [
+        "Python",
+        "TypeScript",
+        "SQL"
+      ]
+    },
+    {
+      "category": "协作与交付",
+      "items": [
+        "需求分析",
+        "质量验证",
+        "技术文档"
+      ]
+    }
+  ],
+  "experience": [],
+  "projects": [
+    {
+      "name": "课程协作平台（虚构课程项目）",
+      "role": "课程项目成员",
+      "techStack": [
+        "TypeScript",
+        "Python",
+        "PostgreSQL"
+      ],
+      "startDate": "2024.01",
+      "endDate": "2024.10",
+      "bullets": [
+        {
+          "text": "实现任务分配、进度记录与报表导出，建立可复用的数据访问接口。"
+        },
+        {
+          "text": "补充自动化校验和部署说明，支持团队复现开发环境。"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "示例大学（虚构）",
+      "degree": "学士",
+      "field": "计算机科学",
+      "startDate": "2022.09",
+      "endDate": "2026.06"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 {
+  "usage": "按用户实际动作选择动词；分类不代表职级或熟练度，不为了增强语气升级职责。中文优先具体表达，如实现、排查、协调；不用赋能、突破等词替代可描述的行动。",
   "categories": {
     "leadership": [
-      "主导", "统筹", "规划", "搭建", "驱动", "赋能", "重构", "制定",
+      "主导", "统筹", "规划", "搭建", "协调", "组织", "重构", "制定",
       "Spearheaded", "Led", "Architected", "Orchestrated", "Formulated", "Pioneered"
     ],
     "engineering_architecture": [
@@ -9,7 +10,7 @@
       "Designed", "Engineered", "Implemented", "Refactored", "Decoupled", "Migrated"
     ],
     "optimization_performance": [
-      "优化", "缩减", "压榨", "降本", "提速", "消除", "治理", "排查",
+      "优化", "缩减", "分析", "降本", "提速", "消除", "治理", "排查",
       "Optimized", "Reduced", "Accelerated", "Mitigated", "Eliminated", "Benchmarked"
     ],
     "business_impact": [

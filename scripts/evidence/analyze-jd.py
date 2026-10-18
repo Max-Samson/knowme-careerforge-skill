@@ -16,6 +16,53 @@ COMMON_TECH_STACKS = [
     "Docker", "Kubernetes", "K8s", "CI/CD", "AWS", "Aliyun", "Linux"
 ]
 
+# ASCII identifier boundaries allow Chinese prose next to technology names.
+SKILL_PATTERNS = {
+    skill: re.compile(rf'(?<![A-Za-z0-9_+]){re.escape(skill)}(?![A-Za-z0-9_+])', re.IGNORECASE)
+    for skill in COMMON_TECH_STACKS
+}
+REQUIREMENT_MARKERS = {
+    'must': re.compile(r'必备(?:技能)?|必须|任职要求|岗位要求|基本要求|(?<![A-Za-z])(?:required|requirements|must[- ]have|mandatory)(?![A-Za-z])', re.I),
+    'nice': re.compile(r'加分(?:项)?|优先|非必需|非必须|不要求|无需|(?<![A-Za-z])(?:nice[- ]to[- ]have|preferred|optional|not required)(?![A-Za-z])', re.I),
+}
+
+
+def classify_skills(jd_text, detected_skills):
+    """Classify only explicit requirements; ambiguous or conflicting mentions stay unclassified."""
+    evidence = {skill: set() for skill in detected_skills}
+    section = None
+    for line in jd_text.splitlines():
+        markdown_heading = bool(re.match(r'^\s*#{1,6}\s+', line))
+        line = line.strip().strip('#* ').strip()
+        if not line:
+            continue
+        heading = line.rstrip(':：').strip()
+        kinds = [kind for kind, pattern in REQUIREMENT_MARKERS.items() if pattern.fullmatch(heading)]
+        if kinds:
+            section = kinds[0]
+            continue
+        # A different heading terminates an explicit requirements section.
+        if markdown_heading or (line.endswith((':', '：')) and not any(p.search(line) for p in SKILL_PATTERNS.values())):
+            section = None
+            continue
+        local_kind = section
+        for clause in re.split(r'([。；;，,!?！？]|\.(?=\s|$))', line):
+            if clause in ('。', '；', ';', '.', '!', '?', '！', '？'):
+                local_kind = section
+                continue
+            markers = {kind for kind, pattern in REQUIREMENT_MARKERS.items() if pattern.search(clause)}
+            # Negated requirements must not also count as positive "required".
+            if re.search(r'not required|非必须', clause, re.I):
+                markers.discard('must')
+            kind = next(iter(markers)) if len(markers) == 1 else local_kind if not markers else None
+            local_kind = kind
+            for skill in detected_skills:
+                if SKILL_PATTERNS[skill].search(clause) and kind:
+                    evidence[skill].add(kind)
+    return ([s for s in detected_skills if evidence[s] == {'must'}],
+            [s for s in detected_skills if evidence[s] == {'nice'}])
+
+
 def analyze_jd_text(jd_text: str) -> dict:
     seniority = "mid"
     if any(k in jd_text for k in ["资深", "专家", "架构师", "总监", "Lead", "Senior", "Principal"]):
@@ -27,14 +74,8 @@ def analyze_jd_text(jd_text: str) -> dict:
     if any(k in jd_text for k in ["产品经理", "Product Manager", "总监", "Director", "业务负责人"]):
         category = "management-product"
 
-    detected_skills = []
-    for skill in COMMON_TECH_STACKS:
-        pattern = re.compile(rf'(?:^|[^\w]){re.escape(skill)}(?:[^\w]|$)', re.IGNORECASE)
-        if pattern.search(jd_text):
-            detected_skills.append(skill)
-
-    must_haves = detected_skills[:6] if len(detected_skills) >= 6 else detected_skills
-    nice_to_haves = detected_skills[6:] if len(detected_skills) > 6 else []
+    detected_skills = [skill for skill, pattern in SKILL_PATTERNS.items() if pattern.search(jd_text)]
+    must_haves, nice_to_haves = classify_skills(jd_text, detected_skills)
 
     responsibilities = []
     for line in jd_text.splitlines():

@@ -1,0 +1,38 @@
+{
+  "id": "graduate",
+  "name": "Graduate · 校园起点",
+  "version": "1.0.0",
+  "style": "single-column-education-first",
+  "roleCategory": "early-career",
+  "description": "教育与项目优先，宽松单栏；适合应届生、实习申请和较少工作经历。",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 1,
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "editorial-readable",
+    "accentColor": "#0f766e",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "graduate",
+    "intern",
+    "应届",
+    "实习"
+  ],
+  "languages": [
+    "zh-CN",
+    "en-US"
+  ],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

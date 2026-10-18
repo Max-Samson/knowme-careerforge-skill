@@ -1,0 +1,36 @@
+{
+  "id": "project-focus",
+  "name": "Project Focus · 项目实践",
+  "version": "1.0.0",
+  "style": "single-column-project-first",
+  "roleCategory": "portfolio",
+  "description": "项目优先，项目条目以细边线分隔；适合项目证据比工作履历更突出的候选人。",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 1,
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "editorial-readable",
+    "accentColor": "#334155",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "project-engineer",
+    "portfolio"
+  ],
+  "languages": [
+    "zh-CN",
+    "en-US"
+  ],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

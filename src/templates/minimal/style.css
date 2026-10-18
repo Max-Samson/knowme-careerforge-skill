@@ -199,3 +199,9 @@
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
 }
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin-bottom: 4pt;
+}

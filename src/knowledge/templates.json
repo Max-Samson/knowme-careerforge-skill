@@ -317,6 +317,63 @@
       ]
     },
     {
+      "id": "editorial",
+      "name": "Editorial · 经历叙事",
+      "version": "1.0.0",
+      "style": "single-column-editorial",
+      "roleCategory": "professional",
+      "description": "经历优先，左侧章节索引与右侧正文对齐；适合已有连续工作经历的候选人。",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "editorial-readable",
+        "accentColor": "#254665",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "professional",
+        "consultant"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/editorial",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
       "id": "executive",
       "name": "Executive Modern Split",
       "version": "1.0.0",
@@ -370,10 +427,70 @@
         "--resume-font-size-body",
         "--resume-font-size-meta",
         "--resume-font-size-name",
+        "--resume-font-size-target",
         "--resume-font-size-title",
         "--resume-left-col-width",
         "--resume-line-height-body",
         "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "graduate",
+      "name": "Graduate · 校园起点",
+      "version": "1.0.0",
+      "style": "single-column-education-first",
+      "roleCategory": "early-career",
+      "description": "教育与项目优先，宽松单栏；适合应届生、实习申请和较少工作经历。",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "editorial-readable",
+        "accentColor": "#0f766e",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "graduate",
+        "intern",
+        "应届",
+        "实习"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/graduate",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
         "--resume-space-item",
         "--resume-space-section"
       ]
@@ -563,6 +680,63 @@
         "--resume-line-height-body",
         "--resume-sidebar-width",
         "--resume-space-bullet",
+        "--resume-space-item",
+        "--resume-space-section"
+      ]
+    },
+    {
+      "id": "project-focus",
+      "name": "Project Focus · 项目实践",
+      "version": "1.0.0",
+      "style": "single-column-project-first",
+      "roleCategory": "portfolio",
+      "description": "项目优先，项目条目以细边线分隔；适合项目证据比工作履历更突出的候选人。",
+      "layout": {
+        "type": "single-column",
+        "targetPages": 1,
+        "maxPages": 1,
+        "density": "balanced"
+      },
+      "visualStyle": {
+        "tone": "editorial-readable",
+        "accentColor": "#334155",
+        "fontFamily": "System Sans-Serif"
+      },
+      "atsScoreTier": "tier-1-optimal",
+      "supportedRoles": [
+        "project-engineer",
+        "portfolio"
+      ],
+      "languages": [
+        "zh-CN",
+        "en-US"
+      ],
+      "customizableTokens": [
+        "--resume-font-size-body",
+        "--resume-line-height-body",
+        "--resume-space-section",
+        "--resume-space-item",
+        "--resume-space-bullet",
+        "--resume-color-accent"
+      ],
+      "directory": "src/templates/project-focus",
+      "detectedTokens": [
+        "--resume-color-accent",
+        "--resume-color-border",
+        "--resume-color-muted",
+        "--resume-color-primary",
+        "--resume-color-secondary",
+        "--resume-color-tag-bg",
+        "--resume-font-body",
+        "--resume-font-size-body",
+        "--resume-font-size-h2",
+        "--resume-font-size-meta",
+        "--resume-font-size-name",
+        "--resume-font-size-target",
+        "--resume-line-height-body",
+        "--resume-page-padding",
+        "--resume-space-bullet",
+        "--resume-space-header-bottom",
         "--resume-space-item",
         "--resume-space-section"
       ]

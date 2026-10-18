@@ -51,25 +51,6 @@
   gap: 14pt;
 }
 
-.sidebar-avatar-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 4pt;
-}
-
-.avatar-placeholder {
-  width: 76pt;
-  height: 98pt;
-  border-radius: 4pt;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px dashed rgba(255, 255, 255, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8.5pt;
-  color: var(--resume-color-sidebar-muted);
-}
-
 .sidebar-title {
   font-size: 11pt;
   font-weight: 700;
@@ -94,37 +75,6 @@
   color: var(--resume-color-sidebar-muted);
 }
 
-.skill-meter-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6pt;
-}
-
-.skill-meter-item {
-  font-size: 8pt;
-}
-
-.skill-meter-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2pt;
-  color: var(--resume-color-sidebar-text);
-}
-
-.meter-bar {
-  width: 100%;
-  height: 4pt;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2pt;
-  overflow: hidden;
-}
-
-.meter-fill {
-  height: 100%;
-  background: var(--resume-color-sidebar-accent);
-  border-radius: 2pt;
-}
-
 .sidebar-tags-list {
   list-style: none;
   font-size: 8.5pt;
@@ -141,10 +91,10 @@
   color: var(--resume-color-primary);
 }
 
-.main-header {
-  margin-bottom: 12pt;
+.main-header, .resume-header {
+  margin-bottom: 10pt;
   border-bottom: 2px solid var(--resume-color-border);
-  padding-bottom: 8pt;
+  padding-bottom: 7pt;
 }
 
 .candidate-name {
@@ -161,6 +111,22 @@
   margin-top: 2pt;
 }
 
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt 12pt;
+  margin-top: 4pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2pt;
+  white-space: nowrap;
+}
+
 .resume-section {
   margin-bottom: var(--resume-space-section);
 }
@@ -175,6 +141,21 @@
   margin-bottom: 6pt;
 }
 
+.resume-main .section-title::before {
+  content: "";
+  display: inline-block;
+  width: 3.5pt;
+  height: 11pt;
+  background-color: var(--resume-color-accent);
+  border-radius: 1pt;
+  margin-right: 2pt;
+  flex-shrink: 0;
+}
+
+.resume-sidebar .section-title::before {
+  display: none;
+}
+
 .title-bar {
   display: inline-block;
   width: 3.5pt;
@@ -182,7 +163,6 @@
   background-color: var(--resume-color-accent);
   border-radius: 1pt;
 }
-
 .timeline-item {
   margin-bottom: var(--resume-space-item);
 }
@@ -232,10 +212,18 @@
   margin-bottom: var(--resume-space-bullet);
 }
 
-.edu-desc {
+.edu-desc, .edu-detail {
   font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
+  margin-top: 2pt;
+}
+
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  color: var(--resume-color-secondary);
+  line-height: var(--resume-line-height-body);
+  margin-bottom: 6pt;
 }
 
 /* === GENERATED HTML COMPONENT CLASSES ===

@@ -160,12 +160,14 @@ def render_profile_into_html(html_str, profile, keywords=None, *, css=""):
             heading += "".join(field(item, k, "role-badge", "span") for k in ("role", "degree", "field"))
             heading += dates(item)
             content = f'<div class="item-header">{heading}</div>' if heading else ""
-            content += field(item, "location") + field(item, "summary")
+            content += field(item, "location", "item-location fact-text") + field(item, "summary", "item-summary fact-text")
             gpa = item.get("gpa")
             if gpa is not None and gpa != "":
                 content += element("p", "edu-detail", f"GPA: {gpa}")
-            content += field(item, "repoUrl") + field(item, "demoUrl")
-            content += "".join(element("span", "tech-tag", t) for t in strings(item, "techStack"))
+            content += field(item, "repoUrl", "project-url fact-text") + field(item, "demoUrl", "project-url fact-text")
+            tags = "".join(element("span", "tech-tag", t) for t in strings(item, "techStack"))
+            if tags:
+                content += f'<div class="tech-stack-tags">{tags}</div>'
             content += "".join(element("p", "edu-detail", honor) for honor in strings(item, "honors"))
             content += bullets(item)
             if content:

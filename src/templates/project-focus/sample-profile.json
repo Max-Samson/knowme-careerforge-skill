@@ -1,0 +1,93 @@
+{
+  "language": "zh-CN",
+  "basics": {
+    "name": "示例候选人",
+    "title": "AI 应用开发工程师",
+    "email": "candidate@example.com",
+    "phone": "138-0000-0000",
+    "location": "示例城市",
+    "summary": "虚构排版样例，机构和经历均为演示内容。实践涵盖文档问答流程、工具开发与回答质量检查。"
+  },
+  "skills": [
+    {
+      "category": "工程实践",
+      "items": [
+        "Python",
+        "TypeScript",
+        "SQL"
+      ]
+    },
+    {
+      "category": "协作与交付",
+      "items": [
+        "需求分析",
+        "质量验证",
+        "技术文档"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "company": "示例科技公司（虚构）",
+      "role": "应用开发工程师",
+      "startDate": "2022.07",
+      "endDate": "2025.06",
+      "bullets": [
+        {
+          "text": "负责示例业务模块的需求分析、实现与交付，整理接口约定和验收标准。"
+        },
+        {
+          "text": "与产品和测试协作完成版本迭代，补充异常场景验证及使用文档。"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "内部文档问答（虚构项目）",
+      "role": "开发成员",
+      "startDate": "2025.01",
+      "endDate": "2025.06",
+      "techStack": [
+        "Python",
+        "RAG"
+      ],
+      "bullets": [
+        {
+          "text": "实现文档分段、向量化与检索流程，将相关文档内容组织为模型回答的上下文。"
+        },
+        {
+          "text": "整理常见问题并检查回答依据，根据检查结果调整文档分段方式。"
+        }
+      ]
+    },
+    {
+      "name": "业务协作平台（虚构项目）",
+      "role": "核心开发",
+      "techStack": [
+        "TypeScript",
+        "Python",
+        "PostgreSQL"
+      ],
+      "startDate": "2024.01",
+      "endDate": "2024.10",
+      "bullets": [
+        {
+          "text": "实现任务分配、进度记录与报表导出，建立可复用的数据访问接口。"
+        },
+        {
+          "text": "补充自动化校验和部署说明，支持团队复现开发环境。"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "示例大学（虚构）",
+      "degree": "学士",
+      "field": "计算机科学",
+      "startDate": "2016.09",
+      "endDate": "2020.06"
+    }
+  ]
+}

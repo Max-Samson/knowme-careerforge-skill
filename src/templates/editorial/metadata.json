@@ -1,0 +1,36 @@
+{
+  "id": "editorial",
+  "name": "Editorial · 经历叙事",
+  "version": "1.0.0",
+  "style": "single-column-editorial",
+  "roleCategory": "professional",
+  "description": "经历优先，左侧章节索引与右侧正文对齐；适合已有连续工作经历的候选人。",
+  "layout": {
+    "type": "single-column",
+    "targetPages": 1,
+    "maxPages": 1,
+    "density": "balanced"
+  },
+  "visualStyle": {
+    "tone": "editorial-readable",
+    "accentColor": "#254665",
+    "fontFamily": "System Sans-Serif"
+  },
+  "atsScoreTier": "tier-1-optimal",
+  "supportedRoles": [
+    "professional",
+    "consultant"
+  ],
+  "languages": [
+    "zh-CN",
+    "en-US"
+  ],
+  "customizableTokens": [
+    "--resume-font-size-body",
+    "--resume-line-height-body",
+    "--resume-space-section",
+    "--resume-space-item",
+    "--resume-space-bullet",
+    "--resume-color-accent"
+  ]
+}

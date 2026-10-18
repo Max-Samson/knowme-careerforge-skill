@@ -40,11 +40,11 @@ Usage:
 
 Commands:
   forge                 Isolated user facts -> variant -> canvas -> verified PDF
-  render                Multi-strategy deterministic A4 PDF export
+  render                Diagnostic PDF export; use forge for paired delivery
   init                  Install and configure Skill for AI Agent platforms (cursor, claude, codex, windsurf, gemini, opencode)
   list                  Display all available role profiles and HTML templates
   search <role>         Search and rank templates for a specific role (e.g. knowme search "AI Agent Engineer")
-  validate              Validate working canvas HTML layout & ATS compliance
+  validate              Diagnostic print/PDF checks; does not publish a delivery pair
   gallery               Build & refresh static HTML template gallery
   test                  Run full automated test suite
   help                  Show this help message
@@ -57,17 +57,17 @@ Options (for forge):
   --draft              Create a draft canvas without PDF delivery
   --role <title>        Target role title
   --jd <file|text>      Target job description
-  --template, -t <id>   Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst)
+  --template, -t <id>   Template ID (minimal, modern, executive, classic, academic-research, international-flow, creative-tech, compact-dense, startup-generalist, data-analyst, editorial, graduate, project-focus)
   --name <name>         Candidate name override
   --output, -o <path>   Verified PDF destination (default: resume/resume.pdf)
   --font-preset <name>  system or arial-unicode (requires local Arial Unicode MS)
-  --auto-heal           Enable heuristic token auto-healing to eliminate A4 height overflow
+  --auto-heal           Attempt bounded spacing/type tuning; unresolved overflow fails
   --html-output <path> HTML destination (default: beside the PDF)
   --summary            Compact report; default in clean mode
   --quiet, -q           Single-line JSON; does not change file retention
 Examples:
   knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern
-  knowme render workspace/resume.html workspace/resume.pdf
+  knowme forge --html-input -  # Supply complete edited HTML on stdin
   knowme init --ai codex
   knowme init --all
 `);
@@ -88,8 +88,9 @@ export function main(): void {
       break;
     }
     case 'extract': {
-      console.error('Repository-to-resume extraction is not supported. Use user-provided facts with forge --profile-json.');
-      process.exitCode = 1;
+      const scriptPath = path.join(rootDir, 'scripts', 'evidence', 'extract-evidence.py');
+      const proc = child_process.spawnSync('python3', [scriptPath, ...args.slice(1)], { stdio: 'inherit' });
+      process.exitCode = proc.status || 1;
       break;
     }
     case 'render': {
@@ -162,8 +163,11 @@ export function main(): void {
     case 'help':
     case '--help':
     case '-h':
-    default:
       showHelp();
+      break;
+    default:
+      console.error(`Unknown command: ${command}. Run knowme help for supported commands.`);
+      process.exitCode = 1;
       break;
   }
 }

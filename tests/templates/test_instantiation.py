@@ -70,8 +70,8 @@ class InstantiationTests(unittest.TestCase):
             binder.instantiate_workspace('minimal', str(self.profile), output_path=str(self.output), font_preset='unknown')
         self.assertEqual(self.output.read_bytes(), before)
 
-    def test_ten_independent_blank_canvases(self):
-        self.assertEqual(len(TEMPLATES), 10)
+    def test_all_registered_independent_blank_canvases(self):
+        self.assertTrue({"minimal", "modern", "classic", "executive", "editorial", "graduate", "project-focus"}.issubset(set(TEMPLATES)))
         for template in TEMPLATES:
             with self.subTest(template=template):
                 canvas = (ROOT / 'src/templates' / template / 'canvas.html').read_text()

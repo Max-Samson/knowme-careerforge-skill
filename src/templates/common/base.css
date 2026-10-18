@@ -9,8 +9,9 @@
  */
 
 :root {
-  /* === 1. PRIMITIVE TOKENS === */
+  color-scheme: light;
 
+  /* === 1. PRIMITIVE TOKENS === */
   /* 1.1 Physical A4 Page Constants */
   --primitive-page-width: 210mm;
   --primitive-page-min-height: 297mm;
@@ -96,12 +97,17 @@
   padding: 0;
 }
 
+::selection {
+  background-color: var(--primitive-color-blue-50, #eff6ff);
+  color: var(--primitive-color-slate-900, #0f172a);
+}
+
 body {
+  color-scheme: light;
   background-color: #e2e8f0;
   font-family: var(--primitive-font-sans);
   display: flex;
   justify-content: center;
-  padding: 24px 0;
   color: var(--primitive-color-slate-900);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -137,9 +143,17 @@ body {
     margin: 0 !important;
     width: var(--primitive-page-width) !important;
     min-height: var(--primitive-page-min-height) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
     page-break-after: always;
     page-break-inside: avoid;
     break-inside: avoid;
+  }
+
+  .resume-page:last-child,
+  .resume-page:last-of-type {
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 
   .avoid-break {
@@ -164,12 +178,14 @@ body {
   font-size: var(--resume-font-size-meta, var(--primitive-font-size-meta));
   color: var(--resume-color-muted, var(--primitive-color-slate-500));
   font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  font-weight: 500;
   white-space: nowrap;
 }
 
 /* === 5. INSTANTIATOR HTML CONTRACT ===
  * The following classes are emitted by instantiate-resume.py at runtime.
- * Every template MUST define these in its own style.css.
+ * Templates define these in style.css or reuse scoped components in canvas-bindings.css.
  * Base layer provides NO default rules — templates own the visual implementation.
  *
  * Required classes:

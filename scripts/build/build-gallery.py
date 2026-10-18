@@ -226,11 +226,12 @@ def _render_gallery(gallery_dir, font_preset):
         item = {k: ([escape(str(v)) for v in value] if isinstance(value, list) else escape(str(value), quote=True))
                 for k, value in raw_item.items()}
         tags_html = "".join([f'<span class="tag">{r}</span>' for r in item['supported'][:5]])
+        badge_cls = "badge optimal" if "optimal" in str(raw_item.get("atsTier", "")).lower() else "badge"
         gallery_html += f"""
       <div class="card">
         <div class="card-header">
           <span class="card-title">{item['name']}</span>
-          <span class="badge">{item['atsTier']}</span>
+          <span class="{badge_cls}">{item['atsTier']}</span>
         </div>
         <div class="preview-frame-wrapper">
           <iframe class="preview-frame" src="{item['previewFile']}"></iframe>

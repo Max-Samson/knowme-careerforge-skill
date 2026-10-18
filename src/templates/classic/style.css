@@ -40,18 +40,36 @@
   margin-bottom: 8pt;
 }
 
-.resume-main-title {
+.candidate-name, .resume-main-title {
   font-size: var(--resume-font-size-title);
   font-weight: 800;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   color: var(--resume-color-primary);
+  margin-bottom: 2pt;
 }
 
-.resume-sub-title {
-  font-size: 8pt;
-  letter-spacing: 2px;
-  color: var(--resume-color-muted);
-  margin-top: 1pt;
+.job-target, .resume-sub-title {
+  font-size: 9.5pt;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--resume-color-accent);
+  margin-bottom: 4pt;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4pt 14pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-secondary);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2pt;
+  white-space: nowrap;
 }
 
 /* 结构化表格 */
@@ -65,7 +83,7 @@
 .resume-grid-table td {
   border: 1px solid var(--resume-color-border);
   padding: var(--resume-cell-padding);
-  vertical-align: middle;
+  vertical-align: top;
   line-height: var(--resume-line-height-body);
 }
 
@@ -81,14 +99,6 @@
   color: var(--resume-color-primary);
 }
 
-.candidate-name {
-  font-weight: 700;
-  color: var(--resume-color-primary);
-}
-
-.job-target {
-  color: var(--resume-color-accent);
-}
 .cell-highlight-bg {
   background-color: var(--primitive-color-blue-50);
   color: var(--resume-color-accent);
@@ -110,7 +120,10 @@
   font-size: 10pt;
   font-weight: 700;
   color: var(--resume-color-accent);
-  margin: 0;
+  background-color: var(--resume-color-header-bg);
+  border-left: 3.5px solid var(--resume-color-accent);
+  padding: 3pt 8pt;
+  margin: -4.5pt -7pt 5pt -7pt;
   display: flex;
   align-items: center;
 }
@@ -121,25 +134,74 @@
   margin-right: 4pt;
 }
 
-.cell-content {
-  color: var(--resume-color-secondary);
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2pt;
 }
 
-.exp-header {
-  margin-bottom: 2pt;
+.org-name, .project-name {
+  font-size: 9.8pt;
+  font-weight: 700;
   color: var(--resume-color-primary);
 }
 
-.exp-bullets {
-  margin-left: 12pt;
-  margin-top: 2pt;
+.role-badge {
+  font-size: 8.8pt;
+  font-weight: 600;
+  color: var(--resume-color-accent);
 }
-.exp-bullets li {
-  margin-bottom: var(--resume-space-bullet);
+
+.date-range {
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.tech-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt;
+  margin: 2pt 0 4pt;
+}
+
+.tech-tag {
+  font-size: 7.5pt;
+  color: var(--resume-color-secondary);
+  background-color: var(--resume-color-label-bg);
+  padding: 1pt 4.5pt;
+  border-radius: 2pt;
+  border: 1px solid var(--resume-color-border);
+}
+
+.bullet-list {
+  margin: 0 0 0 12pt;
+  padding: 0;
+  font-size: var(--resume-font-size-body);
   line-height: var(--resume-line-height-body);
+  color: var(--resume-color-secondary);
 }
-.project-desc {
+
+.bullet-list li {
+  margin-bottom: var(--resume-space-bullet);
+}
+
+.bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+.edu-detail {
   font-size: 8.5pt;
   color: var(--resume-color-secondary);
-  line-height: 1.38;
+  line-height: var(--resume-line-height-body);
+  margin-top: 2pt;
+}
+
+.value-prop {
+  font-size: var(--resume-font-size-body);
+  line-height: var(--resume-line-height-body);
+  color: var(--resume-color-secondary);
 }

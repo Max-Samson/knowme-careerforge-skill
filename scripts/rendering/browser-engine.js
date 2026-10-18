@@ -74,13 +74,17 @@ function inspectDOM() {
         continue;
       }
       if (e !== p) for (const r of e.getClientRects()) check(r, e.parentElement);
+      const tt = window.getComputedStyle(e).textTransform;
       for (const node of e.childNodes) {
         if (node.nodeType !== Node.TEXT_NODE || !node.textContent.trim()) continue;
         const range = document.createRange();
         range.selectNodeContents(node);
         const rs = [...range.getClientRects()];
         if (!rs.length) continue;
-        text.push(node.textContent);
+        const transformed = tt === 'uppercase' ? node.textContent.toUpperCase() :
+                            tt === 'lowercase' ? node.textContent.toLowerCase() :
+                            node.textContent;
+        text.push(transformed);
         for (const r of rs) check(r, e);
       }
     }

@@ -87,7 +87,11 @@
   font-size: var(--resume-font-size-body);
   color: var(--resume-color-secondary);
   line-height: var(--resume-line-height-body);
-  margin: 5pt 0 0 0;
+  background-color: var(--resume-color-card-bg);
+  border: 1px solid var(--resume-color-card-border);
+  border-radius: 4pt;
+  padding: 5pt 9pt;
+  margin: 0;
 }
 
 /* 章节通用样式 */
@@ -117,24 +121,27 @@
 }
 
 /* 技能模块 */
+#skills .skill-row,
 .skills-content {
   display: flex;
-  flex-direction: column;
-  gap: 3pt;
+  flex-wrap: wrap;
+  gap: 4pt 8pt;
   background-color: var(--resume-color-card-bg);
   border: 1px solid var(--resume-color-card-border);
   border-radius: 4pt;
-  padding: 6pt 10pt;
-}
-
-.skill-row {
+  padding: 4.5pt 9pt;
+  margin-bottom: 4.5pt;
   font-size: var(--resume-font-size-body);
   line-height: var(--resume-line-height-body);
 }
 
+#skills .skill-row:last-child {
+  margin-bottom: 0;
+}
+
 .skill-category {
   font-weight: 700;
-  color: var(--resume-color-primary);
+  color: var(--resume-color-accent);
 }
 
 .skill-items {

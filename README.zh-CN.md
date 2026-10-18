@@ -47,7 +47,7 @@ knowme-careerforge-skill
 ```
 
 - **KnowMe（自我认知与证据挖掘引擎）**：帮助候选人深入认知自我，系统梳理用户提供的真实经历与辅助材料，提炼真正具备竞争壁垒的优势点。
-- **CareerForge（职业定位与简历工程引擎）**：将候选人的真实优势精准对齐目标岗位（JD），以 **HTML 中间工作区（Intermediate Canvas）** 与 **Design Tokens（设计系统变量）** 为工作场进行微调排版，最终通过 Playwright 无头浏览器导出确定性、像素级的矢量 PDF。
+- **CareerForge（职业定位与简历工程引擎）**：将候选人的真实优势精准对齐目标岗位（JD），以 **HTML 中间工作区（Intermediate Canvas）** 与 **Design Tokens（设计系统变量）** 为工作场进行微调排版，最终通过 Playwright 无头浏览器导出经过打印布局与文本验收的矢量 PDF。
 
 ---
 
@@ -134,7 +134,7 @@ Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录�
 
 ## 6. CSS Design Tokens 调优与自愈速查表
 
-所有排版参数均集中在当前运行目录的 `resume.html` 的 `:root` 变量中，可进行全局即时微调：
+所有排版参数均集中在当前交付文件 `resume/resume.html` 的 `:root` 变量中，可进行全局即时微调：
 
 | CSS Token 变量名 | 默认推荐值 | 紧凑模式 (单页微调) | 宽松模式 (双页饱满) | 调优核心作用 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -149,6 +149,8 @@ Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录�
 
 ## 7. 首期 4 款黄金基准模板
 
+下表列出十三套现有布局中的四套核心模板。ATS 等级属于内部设计分类，不代表外部认证；PDF 视觉效果取决于浏览器和本机字体，不保证跨机器像素一致。
+
 | 模板 ID | 版式风格 | 岗位分类 | ATS 评级 | 适用人群与设计特质 | 目标页数 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **`minimal`** | 单栏极简线性流 | 研发 / AI | Tier 1 (极佳) | 后端、算法、系统、AI 工程师；强调技术胶囊与代码证据 | 1 页 |
@@ -156,29 +158,31 @@ Draft 保留不完整资料，Master 保存本次已知事实，Variant 记录�
 | **`executive`** | 墨黑顶栏 + 33:67 双栏 | 管理 / 产品 | Tier 1 (极佳) | 技术总监、首席架构师、Team Lead；突出领导力与重大项目 | 1~2 页 |
 | **`classic`** | 现代结构化表格网格 | 综合 / 政企 | Tier 1 (极佳) | 国企、金融科技、政企合规岗位；6列矩阵，最高信息密度 | 1 页 |
 
+新增内容导向模板：`editorial`（经历优先与章节侧标）、`graduate`（教育与项目优先）、`project-focus`（项目优先）。三套均为显式单页 A4，正文默认 9.5pt；选择以实际内容和用户偏好为准，不能根据岗位名称补造经历。
+
+
 ---
 
 ## 8. CLI 命令参考
 
 ```bash
-# 1. 一键全流程装配管线（用户资料 -> HTML画布 -> 打印与PDF验收）
-knowme forge --profile-json candidate.json --role "AI Agent Engineer" --template modern --quiet
+# 1. 使用已有的用户事实文件生成简历
+knowme forge --profile-json candidate.json --role "AI Agent Engineer"
 
-# 2. 智能检索最匹配的 HTML 简历模板（混合评分引擎）
-knowme search --role "AI Agent Engineer" --engine hybrid
+# 2. 更新当前文件对：通过 stdin 提交完整修改后 HTML
+knowme forge --html-input -
 
-# 3. 从不完整资料生成草稿，不声明 PDF 已验收
+# 3. 明确请求的草稿，不生成 PDF
 knowme forge --profile-json draft.json --draft
 
-# 4. 运行布局结构、Design Tokens 与 ATS 双重质检
-knowme validate /path/to/current-run/resume.html --json
+# 4. 按需检索模板
+knowme search --role "AI Agent Engineer" --engine hybrid --summary
 
-# 5. 确定性导出无损矢量 A4 PDF
-knowme render --input workspace/resume.html --output output/resume.pdf
-
-# 6. 编译生成可视化模板画廊
+# 5. 开发画廊，使用虚构资料
 knowme gallery
 ```
+默认制作和更新统一使用 forge。stdin 通过宿主工具传入，不将候选人文本拼入 shell 代码；上面的文件是已有输入，不要求额外建档。独立的 `knowme validate` / `knowme render` 仅用于诊断，不发布已验收的 HTML/PDF 文件对。`knowme extract`、`npm run extract` 和旧 Python 入口均拒绝仓库提取，不读取仓库或写入资料。
+
 ---
 
 ## 自动化测试与持续集成

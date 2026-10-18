@@ -65,6 +65,20 @@
   margin-bottom: 6pt;
 }
 
+.resume-sidebar .section-title {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--resume-color-accent-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1.5px solid var(--resume-color-accent);
+  padding-bottom: 2pt;
+  margin-bottom: 6pt;
+}
+
+.resume-sidebar .section-title::after {
+  display: none;
+}
 .sidebar-info-list {
   list-style: none;
   padding: 0;
@@ -143,7 +157,7 @@
   box-sizing: border-box;
 }
 
-.main-header {
+.main-header, .resume-header {
   border-bottom: 1.5px solid var(--resume-color-accent);
   padding-bottom: 7pt;
   margin-bottom: var(--resume-space-section);
@@ -162,6 +176,22 @@
   color: var(--resume-color-secondary);
   font-weight: 600;
   margin: 0 0 3pt 0;
+}
+
+.contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3pt 12pt;
+  margin-top: 4pt;
+  font-size: var(--resume-font-size-meta);
+  color: var(--resume-color-muted);
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2pt;
+  white-space: nowrap;
 }
 
 .value-prop {

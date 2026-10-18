@@ -116,6 +116,8 @@ def main():
     parser.add_argument('--quiet', '-q', action='store_true')
     parser.add_argument('--summary', action='store_true', help='Compact report (default in clean mode); manifest exists only for archived runs')
     args = parser.parse_args()
+    if (args.profile_json == '-' or args.html_input == '-') and sys.stdin.isatty():
+        parser.error('Stdin input is required; pipe the prepared JSON/HTML or provide an input file')
     if args.draft and args.output:
         parser.error('--output is a PDF destination and cannot be used with --draft')
     if args.html_input is not None and (any(getattr(args, key) is not None for key in ('role', 'jd', 'template', 'name', 'email', 'phone')) or args.font_preset != 'system'):

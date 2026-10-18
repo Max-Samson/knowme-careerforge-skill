@@ -1,6 +1,6 @@
 {
   "model": "FAB (Feature - Advantage - Benefit)",
-  "description": "结构化叙事模型，将经历转化为具有商业与技术说服力的量化论据",
+  "description": "可选写作辅助：组织已有动作、方法与结果；缺失部分省略，不要求量化，不补写经历。",
   "components": {
     "F": {
       "name": "Feature (功能/动作)",
@@ -9,14 +9,15 @@
     },
     "A": {
       "name": "Advantage (优势/技术亮点)",
-      "meaning": "采用了什么先进架构、技术选型或创新解法",
+      "meaning": "用户实际采用的方法、技术或协作方式，不要求先进或创新",
       "example": "基于 LangGraph 状态图与动态路由剪枝机制进行状态流转"
     },
     "B": {
       "name": "Benefit (成效/量化价值)",
-      "meaning": "达成了什么业务提升、延迟降低、成本节约或团队赋能",
+      "meaning": "用户提供的结果，可以是定性变化、交付事实或有依据的指标",
       "example": "实现端到端任务成功率从 68% 提升至 94%，并缩减 Token 成本 35%"
     }
   },
-  "standardBulletFormula": "[强动词] + [Feature 核心系统/项目] + [Advantage 核心技术选型/创新解法] + [Benefit 量化业务/技术成效]"
+  "standardBulletFormula": "[实际职责动词] + [已知动作与对象] + [已知方法，可省略] + [已知结果，可省略]",
+  "usage": "示例为虚构写法，不是候选人事实。依据用户材料选择适合的结构，不把所有条目强制扩成完整 FAB。"
 }
