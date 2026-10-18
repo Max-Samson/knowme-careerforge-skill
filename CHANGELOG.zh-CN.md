@@ -5,6 +5,37 @@
 本日志格式严格遵循 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/) 规范，版本号遵守 [语义化版本 (Semantic Versioning)](https://semver.org/lang/zh-CN/) 标准。
 
 ---
+## [0.0.8] - 2026-10-18
+
+本版本全面提升全量 13 套简历模板的视觉效果、版式布局、显示配色与微排版质感，新增 3 套内容导向型阅读模板，修复底层浏览器验收对 CSS 大写变换的识别缺陷，并加固标准 A4 单页物理打印契约。
+
+### 新增 (Added)
+
+- 新增 3 套内容导向型阅读模板（`editorial` · 经历叙事、`graduate` · 校园起点、`project-focus` · 项目实践），扩展全量模板至 13 套。
+- 新增 `<div class="tech-stack-tags">` 容器包裹技术标签，赋予 500 中等字重、2.5pt 圆角、微边框药丸与 `max-width: 100%` 防破框保护（实测 0 像素重叠）。
+- 新增 `.item-location.fact-text` 与 `.item-summary.fact-text`，将经历地点与条目导语同普通正文解耦。
+- 新增 `.project-url.fact-text`，为代码仓库与在线演示链接提供等宽字体与自动折行保护。
+- 新增纯 CSS 矢量细线联系方式分割线（`border-right`），零文本字符插入，保护 ATS 文本提取。
+- 为双栏模板（`executive`、`compact-dense`）增加 1px 栏间实体分界线；为 Executive 顶部深色横幅引入双栏 CSS Grid 布局。
+- 基础层全局注入 `color-scheme: light`，隔绝宿主深色模式（Dark Mode）反色干扰。
+- 打印媒体注入尾页断点重置（`page-break-after: auto !important`）与条目级 `break-inside: avoid` 防撕裂保护。
+
+### 优化 (Changed)
+
+- 大标题行高收敛至 `1.15`，求职目标收敛至 `1.3`，二级标题收敛至 `1.25`，释放纵向有效版面。
+- 校准阅读系模板（`graduate`、`editorial`、`project-focus`）Token 梯队至标准范围（`9.2pt` 字号、`1.45` 行高、`14mm 16mm` 内边距），高密资深经历 100% 自然单页容纳。
+- 列表圆点（`::marker`）采用中性灰（`#94a3b8`）标点化引导，消除左侧黑点阵列视觉阻断。
+- 成果数据、百分比与列表数字全局开启 `tabular-nums` 等宽对齐。
+- 清理 `modern/style.css` 历史原型残留代码（头像占位符、百分比进度条）。
+
+### 修复 (Fixed)
+
+- 修复 `browser-engine.js` 文本提取管道中的 `textTransform`（大写变换）识别，彻底根除英文大写标题在底层 PDF 验收中的误报。
+- 修复 `classic`、`international-flow` 与 `academic-research` 居中头部被公共绑定样式左移的缺陷。
+- 修复 `classic` 表格单元格垂直居中悬空问题，拆分教育与证书为独立语义行，结合 `:has(td:empty)` 实现无证书自动隐藏。
+- 修复 CLI 帮助文档中的模板列表，完整同步至全量 13 套模板。
+
+---
 ## [0.0.7] - 2026-09-06
 
 本修复版本结合 Claude 与 Gemini 的真实使用过程，统一跨 Agent 简历制作流程，收紧事实改写边界，并简化安装准备与最终交付。

@@ -6,6 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.0.8] - 2026-10-18
+
+This release elevates visual design, typography, color harmony, and layout across all 13 resume templates, adds 3 new content-oriented reading layouts, fixes CSS textTransform support in browser validation, and reinforces deterministic single-page A4 printing.
+
+### Added
+
+- Added 3 content-oriented reading templates (`editorial`, `graduate`, `project-focus`), expanding the template library to 13 layouts.
+- Added `<div class="tech-stack-tags">` wrapper container around all technology tags for adaptive flex wrapping, 500 medium font weight, subtle borders, and `max-width: 100%` defensive overflow bounds (0-pixel overlap).
+- Added `.item-location.fact-text` and `.item-summary.fact-text` to separate metadata and introductory summaries from body descriptions.
+- Added `.project-url.fact-text` with monospaced typography, accent coloring, and word-break protection for repository and demo URLs.
+- Added hairline CSS vector dividers (`border-right`) between contact items, eliminating text-character pollution in ATS parsing streams.
+- Added column divider lines to two-column templates (`executive`, `compact-dense`) and CSS Grid 2-column layout to the Executive hero banner.
+- Added `color-scheme: light` to `:root` and `body` to isolate print canvases from host dark mode inversion.
+- Added `@media print` trailing page break reset (`page-break-after: auto !important`) and per-item `break-inside: avoid` protection.
+
+### Changed
+
+- Tightened heading line heights across templates: candidate name to `1.15`, job target to `1.3`, section titles to `1.25`, reducing dead vertical whitespace.
+- Calibrated reading template design tokens (`graduate`, `editorial`, `project-focus`) to standard design ladder (`9.2pt` body font, `1.45` line height, `14mm 16mm` padding), enabling dense profiles to fit on a single A4 page.
+- Bullet point markers (`::marker`) now use muted slate (`#94a3b8`) for smooth reading flow without black visual roadblocks.
+- Numerical metrics, percentages, and dates in lists now inherit `tabular-nums` and `font-feature-settings: "tnum" 1`.
+- Cleaned unused prototype CSS rules in `modern/style.css` (avatar placeholders, meter bars).
+
+### Fixed
+
+- Fixed DOM text extraction in `browser-engine.js` to compute CSS `textTransform` (`uppercase`/`lowercase`), resolving false-positive text missing errors on English uppercase resumes.
+- Fixed centered headers in `classic`, `international-flow`, and `academic-research` being inadvertently shifted left by binder rules.
+- Fixed `classic` table layout with top-aligned cells and split education/certifications rows with `:has(td:empty)` auto-hiding.
+- Updated `cli/src/index.ts` command-line help to include all 13 template identifiers.
+
+---
 ## [0.0.7] - 2026-09-06
 
 This patch clarifies the resume workflow across Agent adapters, tightens guidance for faithful rewriting, and simplifies setup and delivery based on real Claude and Gemini usage.

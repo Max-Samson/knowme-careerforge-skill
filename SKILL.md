@@ -4,7 +4,7 @@ description: Draft, expand or refine high-quality resume content from user descr
 license: MIT
 compatibility: Content drafting needs only the host Agent. PDF export requires Python 3.9+, Node.js 22.13+, the npm dependencies declared by this project, and Chromium for print/PDF checks. Explicit local font presets require the named font.
 metadata:
-  version: 0.0.7
+  version: 0.0.8
 ---
 
 # KnowMe CareerForge
